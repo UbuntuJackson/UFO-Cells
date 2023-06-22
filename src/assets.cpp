@@ -11,7 +11,7 @@ Assets::~Assets(){
 
 void
 Assets::LoadAssets(){
-    sprPin = new olc::Sprite("../res/pin.png");
+    sprPin = new olc::Sprite("../res/pin_pill.png");
     decPin = new olc::Decal(sprPin);
     sprMap = new olc::Sprite("../res/map.png");
     decMap = new olc::Decal(sprMap);

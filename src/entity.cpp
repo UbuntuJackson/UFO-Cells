@@ -47,11 +47,12 @@ Entity::Update(){
         std::cout << HeightUntilGround(program->asset_manager.decPin) << std::endl;
         position.y = floor(position.y);
         if(HeightUntilGround(program->asset_manager.decPin) < snap_to_ground){
-            while(HeightUntilGround(program->asset_manager.decPin) != 0){
+            while(!IsOverlapping(program->asset_manager.decPin)){
                 
                 position.y += 1.0f;
 
             }
+            position.y -= 1.0f;
             is_grounded = true;
             //
         }
