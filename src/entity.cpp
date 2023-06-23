@@ -15,8 +15,8 @@ Entity::Update(){
     //if(program->GetKey(olc::Key::DOWN).bHeld) velocity.y += 0.1f;
     //if(program->GetKey(olc::Key::UP).bHeld) velocity.y -= 0.1f;
     
-    velocity.y += 0.9f;
-    velocity.x *= 0.99f;
+    velocity.y += 0.8f;
+    velocity.y *= 0.99f;
 
     is_grounded = false;
 
@@ -45,7 +45,7 @@ Entity::Update(){
 
     if(was_grounded == true && is_grounded == false && velocity.y > 0.0f){
         std::cout << HeightUntilGround(program->asset_manager.decPin) << std::endl;
-        position.y = floor(position.y);
+        position.y = std::floor(position.y);
         if(HeightUntilGround(program->asset_manager.decPin) < snap_to_ground){
             while(!IsOverlapping(program->asset_manager.decPin)){
                 
@@ -60,14 +60,14 @@ Entity::Update(){
 
     was_grounded = is_grounded;
 
-    if(program->GetKey(olc::Key::RIGHT).bHeld) velocity.x += 0.1f;
-    if(program->GetKey(olc::Key::LEFT).bHeld) velocity.x -= 0.1f;
+    if(program->GetKey(olc::Key::RIGHT).bHeld) velocity.x += 0.2f;
+    if(program->GetKey(olc::Key::LEFT).bHeld) velocity.x -= 0.2f;
 
     position.x += velocity.x;
-    velocity.x *= 0.99f;
+    velocity.x *= 0.95f;
 
     if(IsOverlapping(program->asset_manager.decPin)){
-        if(IsOverlappingHeight(program->asset_manager.decPin) > int(position.y) +24){
+        if(IsOverlappingHeight(program->asset_manager.decPin) > int(position.y) +22 && (is_grounded || was_grounded)){
             position.y = std::floor(position.y);
             while(IsOverlapping(program->asset_manager.decPin)){
                 position.y -= 1.0f;
