@@ -2,6 +2,16 @@
 #include "colour_utils.h"
 #include "program.h"
 
+CellActor::CellActor(Program *_program,olc::vf2d _position) :
+    program{_program},
+    position{_position},
+    is_grounded{false},
+    was_grounded{false},
+    snap_to_ground{8},
+    snap_up_range{24}
+{
+}
+
 int
 CellActor::IsOverlappingHeight(olc::Decal *_decal){
     for(int y = position.y; y < position.y + _decal->sprite->Size().y; y++){

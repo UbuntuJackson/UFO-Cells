@@ -1,20 +1,12 @@
-#include "entity.h"
+#include "dummy.h"
+#include "olcPixelGameEngine.h"
+#include "cell_actor.h"
 #include "program.h"
-#include "colour_utils.h"
-#include <cmath>
 
-Entity::Entity(Program *_program,olc::vf2d _position) : program{_program}, position{_position}{
-    is_grounded = false;
-    was_grounded = false;
-    snap_to_ground = 10;
-}
+Dummy::Dummy(Program *_program,olc::vf2d _position) : CellActor(_program,_position){}
 
 void
-Entity::Update(){
-    
-    //if(program->GetKey(olc::Key::DOWN).bHeld) velocity.y += 0.1f;
-    //if(program->GetKey(olc::Key::UP).bHeld) velocity.y -= 0.1f;
-    
+Dummy::Update(){
     velocity.y += 0.8f;
     velocity.y *= 0.99f;
 
@@ -67,7 +59,7 @@ Entity::Update(){
     velocity.x *= 0.95f;
 
     if(IsOverlapping(program->asset_manager.decPin)){
-        if(IsOverlappingHeight(program->asset_manager.decPin) > int(position.y) +22 && (is_grounded || was_grounded)){
+        if(IsOverlappingHeight(program->asset_manager.decPin) > int(position.y) + snap_up_range && (is_grounded || was_grounded)){
             position.y = std::floor(position.y);
             while(IsOverlapping(program->asset_manager.decPin)){
                 position.y -= 1.0f;
@@ -90,52 +82,10 @@ Entity::Update(){
         }
 
     }
-
-    
-}
-
-int
-Entity::IsOverlappingHeight(olc::Decal *_decal){
-    for(int y = position.y; y < position.y + _decal->sprite->Size().y; y++){
-        for(int x = position.x; x < position.x + _decal->sprite->Size().x; x++){
-            if(CompareColour(_decal->sprite->GetPixel(x- position.x, y- position.y), olc::WHITE)
-                && CompareColour(program->asset_manager.decMap->sprite->GetPixel(x, y), olc::WHITE)
-            ){
-                return y;
-            }
-        }
-    }
-    return position.y + _decal->sprite->Size().y;
-}
-
-int
-Entity::HeightUntilGround(olc::Decal *_decal){
-    for(int y = position.y + _decal->sprite->Size().y; y < position.y + _decal->sprite->Size().y + snap_to_ground; y++){
-        for(int x = position.x; x < position.x + _decal->sprite->Size().x; x++){
-            if(CompareColour(program->asset_manager.decMap->sprite->GetPixel(x,y), olc::WHITE)){
-                return y -(position.y + _decal->sprite->Size().y);
-            }
-        }
-    }
-    return snap_to_ground;
-}
-
-bool
-Entity::IsOverlapping(olc::Decal *_decal){
-    for(int y = position.y; y < position.y + _decal->sprite->Size().y; y++){
-        for(int x = position.x; x < position.x + _decal->sprite->Size().x; x++){
-            if(CompareColour(_decal->sprite->GetPixel(x- position.x, y- position.y), olc::WHITE)
-                && CompareColour(program->asset_manager.decMap->sprite->GetPixel(x, y), olc::WHITE)
-            ){
-                return true;
-            }
-        }
-    }
-    return false;
 }
 
 void
-Entity::Draw(){
+Dummy::Draw(){
     program->DrawDecal(
         position,
         program -> asset_manager.decPin, olc::vf2d(1.0f, 1.0f));
