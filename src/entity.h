@@ -1,3 +1,5 @@
+// OUTDATED //
+
 #ifndef ENTITY_H
 #define ENTITY_H
 #include "olcPixelGameEngine.h"

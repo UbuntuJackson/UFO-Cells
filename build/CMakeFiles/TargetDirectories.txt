@@ -1,0 +1,3 @@
+/home/uj/Documents/C++/cell based game/build/CMakeFiles/UFOCells.dir
+/home/uj/Documents/C++/cell based game/build/CMakeFiles/edit_cache.dir
+/home/uj/Documents/C++/cell based game/build/CMakeFiles/rebuild_cache.dir

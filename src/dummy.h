@@ -6,8 +6,8 @@
 class Dummy : public CellActor{
 public:
     Dummy(Program *_program,olc::vf2d _position);
-    virtual void Update();
-    virtual void Draw();
+    void Update();
+    void Draw();
 
 };
 

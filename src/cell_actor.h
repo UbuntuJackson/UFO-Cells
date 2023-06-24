@@ -16,6 +16,7 @@ public:
     int snap_up_range;
 
     CellActor(Program *_program,olc::vf2d _position);
+    ~CellActor();
     bool IsOverlapping(olc::Decal *_decal);
     int IsOverlappingHeight(olc::Decal *_decal);
     int HeightUntilGround(olc::Decal *_decal);

@@ -12,6 +12,11 @@ CellActor::CellActor(Program *_program,olc::vf2d _position) :
 {
 }
 
+CellActor::~CellActor(){
+    //delete mask_decal;
+    //std::cout << "Cell actor's destructor" << std::endl;
+}
+
 int
 CellActor::IsOverlappingHeight(olc::Decal *_decal){
     for(int y = position.y; y < position.y + _decal->sprite->Size().y; y++){
@@ -51,3 +56,9 @@ CellActor::IsOverlapping(olc::Decal *_decal){
     }
     return false;
 }
+
+void
+CellActor::Update(){}
+
+void
+CellActor::Draw(){}

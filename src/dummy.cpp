@@ -7,50 +7,8 @@ Dummy::Dummy(Program *_program,olc::vf2d _position) : CellActor(_program,_positi
 
 void
 Dummy::Update(){
-    velocity.y += 0.8f;
-    velocity.y *= 0.99f;
 
-    is_grounded = false;
-
-    position.y += velocity.y;
-    
-
-    if(IsOverlapping(program->asset_manager.decPin)){
-        if(velocity.y > 0.0f){
-            is_grounded = true;
-            position.y = std::floor(position.y);
-            while(IsOverlapping(program->asset_manager.decPin)){
-                position.y -= 1.0f;
-            }
-        }
-        if(velocity.y < 0.0f){
-            position.y = std::ceil(position.y);
-            while(IsOverlapping(program->asset_manager.decPin)){
-                position.y += 1.0f;
-            }
-        }
-
-        velocity.y = 0.0f;
-    }
-
-    if(program->GetKey(olc::Key::Z).bPressed && (was_grounded || is_grounded)) velocity.y = -10.0f;
-
-    if(was_grounded == true && is_grounded == false && velocity.y > 0.0f){
-        std::cout << HeightUntilGround(program->asset_manager.decPin) << std::endl;
-        position.y = std::floor(position.y);
-        if(HeightUntilGround(program->asset_manager.decPin) < snap_to_ground){
-            while(!IsOverlapping(program->asset_manager.decPin)){
-                
-                position.y += 1.0f;
-
-            }
-            position.y -= 1.0f;
-            is_grounded = true;
-            //
-        }
-    }
-
-    was_grounded = is_grounded;
+    // ADJUSTMENT ALONG X-AXIS
 
     if(program->GetKey(olc::Key::RIGHT).bHeld) velocity.x += 0.2f;
     if(program->GetKey(olc::Key::LEFT).bHeld) velocity.x -= 0.2f;
@@ -82,6 +40,51 @@ Dummy::Update(){
         }
 
     }
+
+    // ADJUSTMENT ALONG Y-AXIS
+
+    velocity.y += 0.8f;
+    velocity.y *= 0.99f;
+
+    is_grounded = false;
+
+    position.y += velocity.y;
+    
+
+    if(IsOverlapping(program->asset_manager.decPin)){
+        if(velocity.y > 0.0f){
+            is_grounded = true;
+            position.y = std::floor(position.y);
+            while(IsOverlapping(program->asset_manager.decPin)){
+                position.y -= 1.0f;
+            }
+        }
+        if(velocity.y < 0.0f){
+            position.y = std::ceil(position.y);
+            while(IsOverlapping(program->asset_manager.decPin)){
+                position.y += 1.0f;
+            }
+        }
+
+        velocity.y = 0.0f;
+    }
+
+    if(program->GetKey(olc::Key::Z).bPressed && (was_grounded || is_grounded)) velocity.y = -10.0f;
+
+    if(was_grounded == true && is_grounded == false && velocity.y > 0.0f){
+        position.y = std::floor(position.y);
+        if(HeightUntilGround(program->asset_manager.decPin) < snap_to_ground){
+            while(!IsOverlapping(program->asset_manager.decPin)){
+                
+                position.y += 1.0f;
+
+            }
+            position.y -= 1.0f;
+            is_grounded = true;
+        }
+    }
+
+    was_grounded = is_grounded;
 }
 
 void

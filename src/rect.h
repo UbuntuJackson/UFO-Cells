@@ -1,5 +1,5 @@
-#ifndef RECTANGLE_2_H
-#define RECTANGLE_2_H
+#ifndef RECT_2_H
+#define RECT_2_H
 
 #include "olcPixelGameEngine.h"
 

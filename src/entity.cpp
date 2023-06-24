@@ -1,7 +1,10 @@
+// OUTDATED //
+
 #include "entity.h"
 #include "program.h"
 #include "colour_utils.h"
 #include <cmath>
+
 
 Entity::Entity(Program *_program,olc::vf2d _position) : program{_program}, position{_position}{
     is_grounded = false;
