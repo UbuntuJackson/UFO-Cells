@@ -2,6 +2,7 @@
 #include "olcPixelGameEngine.h"
 #include "cell_actor.h"
 #include "program.h"
+#include <cmath>
 
 Dummy::Dummy(Program *_program,olc::vf2d _position) : CellActor(_program,_position){}
 
@@ -13,55 +14,133 @@ Dummy::Update(){
     if(program->GetKey(olc::Key::RIGHT).bHeld) velocity.x += 0.2f;
     if(program->GetKey(olc::Key::LEFT).bHeld) velocity.x -= 0.2f;
 
+    olc::vf2d former_position = position;
+
+    bool will_adjust_height = true;
+
     position.x += velocity.x;
+
     velocity.x *= 0.95f;
 
-    if(IsOverlapping(program->asset_manager.decPin)){
-        if(IsOverlappingHeight(program->asset_manager.decPin) > int(position.y) + snap_up_range && (is_grounded || was_grounded)){
-            position.y = std::floor(position.y);
-            while(IsOverlapping(program->asset_manager.decPin)){
-                position.y -= 1.0f;
-            }
-        }
-        else{
-            if(velocity.x > 0.0f){
-                position.x = std::floor(position.x);
-                while(IsOverlapping(program->asset_manager.decPin)){
-                    position.x -= 1.0f;
-                }
-            }
-            if(velocity.x < 0.0f){
-                position.x = std::ceil(position.x);
-                while(IsOverlapping(program->asset_manager.decPin)){
-                    position.x += 1.0f;
-                }
-            }
-            velocity.x = 0.0f;
-        }
+    if(IsOverlapping(program->asset_manager.decPin, position)){
+        former_position.y = std::floor(former_position.y);
 
+        if(velocity.x > 0.0f){
+            former_position.x = std::floor(former_position.x);
+            /*while(!IsOverlapping(program->asset_manager.decPin, former_position)){
+                former_position.x += 0.1f;
+            }*/
+        }
+        if(velocity.x < 0.0f){
+            former_position.x = std::ceil(former_position.x);
+            /*while(!IsOverlapping(program->asset_manager.decPin, former_position)){
+                former_position.x -= 0.1f;
+            }*/
+            
+        }
+        
+        if(velocity.x > 0.0f){
+            
+            if(i < 4) std::cout << former_position.x << std::endl;
+            if(i < 4) std::cout << (std::floor(position.x)+1.0f) << std::endl;
+            while(std::floor(former_position.x) != std::floor(position.x)+1.0f){
+                if(IsOverlappingHeight(program->asset_manager.decPin, former_position) > int(former_position.y) + snap_up_range /*&& (is_grounded || was_grounded)*/
+                    && IsOverlappingHeight(program->asset_manager.decPin, former_position) != former_position.y +
+                    program->asset_manager.decPin->sprite->Size().y){
+                    
+                    while(IsOverlapping(program->asset_manager.decPin, former_position)){
+                        former_position.y -= 1.0f;
+                        if(i < 4) std::cout << "does this happen at all?" << std::endl;
+                    }
+                    
+                }
+                else{
+                    will_adjust_height = false;
+                    if(i < 4) std::cout << "happens at stage:" << i << "\n";
+                }
+
+                former_position.x += 1.0f;
+                if(i < 4) std::cout<< former_position.x << std::endl;
+                i++;
+            }
+
+            if(IsOverlappingHeight(program->asset_manager.decPin, former_position) > int(former_position.y) + snap_up_range /*&& (is_grounded || was_grounded)*/){
+                while(IsOverlapping(program->asset_manager.decPin, former_position)){
+                    former_position.y -= 1.0f;
+                }
+            }
+        }
+        
+        if(velocity.x < 0.0f){
+            while(former_position.x != std::floor(position.x)){
+                
+                if(IsOverlappingHeight(program->asset_manager.decPin, former_position) > int(former_position.y) + snap_up_range /*&& (is_grounded || was_grounded)*/
+                    && IsOverlappingHeight(program->asset_manager.decPin, former_position) != former_position.y +
+                    program->asset_manager.decPin->sprite->Size().y){
+                    while(IsOverlapping(program->asset_manager.decPin, former_position)){
+                        former_position.y -= 1.0f;
+                    }
+                    
+                }
+                else{
+                    will_adjust_height = false;
+                }
+                former_position.x -= 1.0f;
+            }
+            
+            if(IsOverlappingHeight(program->asset_manager.decPin, former_position) > int(former_position.y) + snap_up_range /*&& (is_grounded || was_grounded)*/){
+                while(IsOverlapping(program->asset_manager.decPin, former_position)){
+                    former_position.y -= 1.0f;
+                }
+                
+            }
+        }
+    }
+
+    //if(i < 10) std::cout << will_adjust_height << std::endl;
+
+    
+    position.y = former_position.y;
+    
+    
+    if(IsOverlapping(program->asset_manager.decPin, position)){
+        if(velocity.x > 0.0f){
+            position.x = std::floor(position.x);
+            while(IsOverlapping(program->asset_manager.decPin, position)){
+                position.x -= 1.0f;
+            }
+        }
+        if(velocity.x < 0.0f){
+            position.x = std::ceil(position.x);
+            while(IsOverlapping(program->asset_manager.decPin, position)){
+                position.x += 1.0f;
+            }
+        }
+        velocity.x = 0.0f;
     }
 
     // ADJUSTMENT ALONG Y-AXIS
 
     velocity.y += 0.8f;
-    velocity.y *= 0.99f;
+    
 
     is_grounded = false;
 
     position.y += velocity.y;
+    velocity.y *= 0.99f;
     
 
-    if(IsOverlapping(program->asset_manager.decPin)){
+    if(IsOverlapping(program->asset_manager.decPin, position)){
         if(velocity.y > 0.0f){
             is_grounded = true;
             position.y = std::floor(position.y);
-            while(IsOverlapping(program->asset_manager.decPin)){
+            while(IsOverlapping(program->asset_manager.decPin, position)){
                 position.y -= 1.0f;
             }
         }
         if(velocity.y < 0.0f){
             position.y = std::ceil(position.y);
-            while(IsOverlapping(program->asset_manager.decPin)){
+            while(IsOverlapping(program->asset_manager.decPin, position)){
                 position.y += 1.0f;
             }
         }
@@ -73,8 +152,8 @@ Dummy::Update(){
 
     if(was_grounded == true && is_grounded == false && velocity.y > 0.0f){
         position.y = std::floor(position.y);
-        if(HeightUntilGround(program->asset_manager.decPin) < snap_to_ground){
-            while(!IsOverlapping(program->asset_manager.decPin)){
+        if(HeightUntilGround(program->asset_manager.decPin, position) < snap_to_ground){
+            while(!IsOverlapping(program->asset_manager.decPin, position)){
                 
                 position.y += 1.0f;
 

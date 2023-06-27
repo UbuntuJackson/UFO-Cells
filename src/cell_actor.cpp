@@ -7,8 +7,8 @@ CellActor::CellActor(Program *_program,olc::vf2d _position) :
     position{_position},
     is_grounded{false},
     was_grounded{false},
-    snap_to_ground{8},
-    snap_up_range{24}
+    snap_to_ground{10},
+    snap_up_range{22}
 {
 }
 
@@ -18,10 +18,10 @@ CellActor::~CellActor(){
 }
 
 int
-CellActor::IsOverlappingHeight(olc::Decal *_decal){
-    for(int y = position.y; y < position.y + _decal->sprite->Size().y; y++){
-        for(int x = position.x; x < position.x + _decal->sprite->Size().x; x++){
-            if(CompareColour(_decal->sprite->GetPixel(x- position.x, y- position.y), olc::WHITE)
+CellActor::IsOverlappingHeight(olc::Decal *_decal, olc::vf2d _position){
+    for(int y = _position.y; y < _position.y + _decal->sprite->Size().y; y++){
+        for(int x = _position.x; x < _position.x + _decal->sprite->Size().x; x++){
+            if(CompareColour(_decal->sprite->GetPixel(x- _position.x, y- _position.y), olc::WHITE)
                 && CompareColour(program->asset_manager.decMap->sprite->GetPixel(x, y), olc::WHITE)
             ){
                 return y;
@@ -32,11 +32,11 @@ CellActor::IsOverlappingHeight(olc::Decal *_decal){
 }
 
 int
-CellActor::HeightUntilGround(olc::Decal *_decal){
-    for(int y = position.y + _decal->sprite->Size().y; y < position.y + _decal->sprite->Size().y + snap_to_ground; y++){
-        for(int x = position.x; x < position.x + _decal->sprite->Size().x; x++){
+CellActor::HeightUntilGround(olc::Decal *_decal, olc::vf2d _position){
+    for(int y = _position.y + _decal->sprite->Size().y; y < _position.y + _decal->sprite->Size().y + snap_to_ground; y++){
+        for(int x = _position.x; x < _position.x + _decal->sprite->Size().x; x++){
             if(CompareColour(program->asset_manager.decMap->sprite->GetPixel(x,y), olc::WHITE)){
-                return y -(position.y + _decal->sprite->Size().y);
+                return y -(_position.y + _decal->sprite->Size().y);
             }
         }
     }
@@ -44,10 +44,10 @@ CellActor::HeightUntilGround(olc::Decal *_decal){
 }
 
 bool
-CellActor::IsOverlapping(olc::Decal *_decal){
-    for(int y = position.y; y < position.y + _decal->sprite->Size().y; y++){
-        for(int x = position.x; x < position.x + _decal->sprite->Size().x; x++){
-            if(CompareColour(_decal->sprite->GetPixel(x- position.x, y- position.y), olc::WHITE)
+CellActor::IsOverlapping(olc::Decal *_decal, olc::vf2d _position){
+    for(int y = _position.y; y < _position.y + _decal->sprite->Size().y; y++){
+        for(int x = _position.x; x < _position.x + _decal->sprite->Size().x; x++){
+            if(CompareColour(_decal->sprite->GetPixel(x- _position.x, y- _position.y), olc::WHITE)
                 && CompareColour(program->asset_manager.decMap->sprite->GetPixel(x, y), olc::WHITE)
             ){
                 return true;
