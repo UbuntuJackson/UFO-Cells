@@ -2,11 +2,22 @@
 #define CELLMAP_H
 #include <vector>
 #include "olcPixelGameEngine.h"
+#include <string>
+
+class Program;
+
 class CellMap{
 public:
-    std::vector<olc::Decal*> layers;
-    CellMap();
-    void LoadMap();
+    Program *program;
+    std::string map_path;
+    std::vector<olc::Decal*> visible_layers;
+    std::vector<olc::Decal*> collision_layers;
+    CellMap() = default;
+    CellMap(Program *_program);
+    ~CellMap();
+    void LoadMap(std::string _map_path);
+    void UnloadMap();
+    void Draw();
 
 };
 

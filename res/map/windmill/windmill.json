@@ -1,0 +1,35 @@
+{
+    "layers" : [
+        {
+            "name" : "layer1",
+            "type" : "visible",
+            "path" : "../res/map/windmill/sky.png" 
+        },
+        {
+            "name" : "layer1",
+            "type" : "visible",
+            "path" : "../res/map/windmill/bg.png" 
+        },
+        {
+            "name" : "layer1",
+            "type" : "visible",
+            "path" : "../res/map/windmill/mg.png" 
+        },
+        {
+            "name" : "layer1",
+            "type" : "visible",
+            "path" : "../res/map/windmill/fg.png" 
+        },
+        {
+            "name" : "layer1",
+            "type" : "visible",
+            "path" : "../res/map/windmill/fg2.png" 
+        },
+        {
+            "name" : "layer1",
+            "type" : "collision",
+            "path" : "../res/map/windmill/solid.png" 
+        }
+    ],
+    "actors":[]
+}

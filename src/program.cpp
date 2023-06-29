@@ -15,8 +15,10 @@ Program::~Program(){
 }
 
 bool Program::OnUserCreate(){
+    cell_map = CellMap(this);
     asset_manager.LoadAssets();
     entities.push_back(new Dummy(this, olc::vf2d(50.0f, 50.0f)));
+    cell_map.LoadMap("../res/map//windmill/windmill.json");
     
     return true;
 }
@@ -32,6 +34,7 @@ bool Program::OnUserUpdate(float fElapsedTime){
     for(auto &e : entities){
         e->Draw();
     }
+    cell_map.Draw();
     SetPixelMode(olc::Pixel::NORMAL);
     return true;
 }

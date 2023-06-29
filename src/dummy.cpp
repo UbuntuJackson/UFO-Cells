@@ -11,8 +11,8 @@ Dummy::Update(){
 
     // ADJUSTMENT ALONG X-AXIS
 
-    if(program->GetKey(olc::Key::RIGHT).bHeld) velocity.x += 0.2f;
-    if(program->GetKey(olc::Key::LEFT).bHeld) velocity.x -= 0.2f;
+    if(program->GetKey(olc::Key::RIGHT).bHeld) velocity.x += 0.5f;
+    if(program->GetKey(olc::Key::LEFT).bHeld) velocity.x -= 0.5f;
 
     olc::vf2d former_position = position;
 
@@ -20,7 +20,7 @@ Dummy::Update(){
 
     position.x += velocity.x;
 
-    velocity.x *= 0.95f;
+    velocity.x *= 0.85f;
 
     if(IsOverlapping(program->asset_manager.decPin, position)){
         former_position.y = std::floor(former_position.y);
