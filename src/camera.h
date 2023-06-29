@@ -3,15 +3,18 @@
 #include <string>
 #include "olcPixelGameEngine.h"
 #include "cell_actor.h"
+#include "mouse_control.h"
+
 class Program;
 
 enum CameraStates{
-  FOLLOW, //Camera will be set to seem like it focuses on the center point of a sprite.
-  SWITCH, //Transitions from one target to another
+    FOLLOW, //Camera will be set to seem like it focuses on the center point of a sprite.
+    SWITCH, //Transitions from one target to another
     MOVE, //Applies a movement vector to the camera position.
 	    //This state would require some parameters I guess
-    ZOOM  //Transitions into a different scaling factor. Need to give the program a scaling factor
+    ZOOM,  //Transitions into a different scaling factor. Need to give the program a scaling factor
 	    // Transition into
+    MOUSE
 };
 
 class Camera{
@@ -32,6 +35,8 @@ public:
     CellActor* new_target;
     olc::vf2d m_decal_wh_offset;
 
+    MouseControl mouse_control;
+
     Camera() = default;
     Camera(Program *_program);
     void SetTarget(CellActor *_target);
@@ -39,9 +44,14 @@ public:
     void Follow();
     void Move();
     void Switch();
+    void Mouse();
     void SetStateSwitch(CellActor *_target);
     void SetStateZoom(float _target_scale);
     void SetStateMove(olc::vf2d _vel);
-    void DrawDecal(olc::vf2d _pos, olc::Decal *_decal);
+
+    olc::vf2d ScreenToWorld(olc::vf2d _position);
+    olc::vf2d WorldToScreen(olc::vf2d _position);
+
+    void DrawDecal(olc::vf2d _position, olc::Decal *_decal);
 };
 #endif

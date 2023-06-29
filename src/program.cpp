@@ -16,7 +16,6 @@ Program::~Program(){
 
 bool Program::OnUserCreate(){
     camera = Camera(this);
-    
     cell_map = CellMap(this);
     asset_manager.LoadAssets();
     entities.push_back(new Dummy(this, olc::vf2d(50.0f, 50.0f)));
@@ -25,11 +24,9 @@ bool Program::OnUserCreate(){
     return true;
 }
 bool Program::OnUserUpdate(float fElapsedTime){
-    Clear(olc::DARK_BLUE);
+    Clear(olc::GREY);
     SetPixelMode(olc::Pixel::NORMAL);
-    //DrawDecal(
-    //    olc::vf2d(0.0f, 0.0f),
-    //    asset_manager.decMap, olc::vf2d(1.0f, 1.0f));
+
     for(auto e : entities){
         e->Update();
     }

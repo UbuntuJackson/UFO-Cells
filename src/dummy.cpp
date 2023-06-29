@@ -5,10 +5,10 @@
 #include <cmath>
 
 Dummy::Dummy(Program *_program,olc::vf2d _position) : CellActor(_program,_position){
-    //camera = Camera(_program);
-    program->camera.m_camera_state = FOLLOW;
-    program->camera.scale = 3.0f;
+    program->camera.m_camera_state = MOUSE;
+    program->camera.scale = 2.0f;
     program->camera.target = this;
+    //program->camera.SetStateZoom(3.0f);
 }
 
 void
@@ -20,8 +20,6 @@ Dummy::Update(){
     if(program->GetKey(olc::Key::LEFT).bHeld) velocity.x -= 0.5f;
 
     olc::vf2d former_position = position;
-
-    bool will_adjust_height = true;
 
     position.x += velocity.x;
 
@@ -51,9 +49,6 @@ Dummy::Update(){
                     }
                     
                 }
-                else{
-                    will_adjust_height = false;
-                }
 
                 former_position.x += 1.0f;
             }
@@ -76,9 +71,7 @@ Dummy::Update(){
                     }
                     
                 }
-                else{
-                    will_adjust_height = false;
-                }
+                
                 former_position.x -= 1.0f;
             }
             

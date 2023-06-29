@@ -2,8 +2,9 @@
 #include <string>
 #include "olcPixelGameEngine.h"
 #include "program.h"
+#include "mouse_control.h"
 
-Camera::Camera(Program *_program) : program{_program}{
+Camera::Camera(Program *_program) : program{_program}, mouse_control{MouseControl(_program)}{
     scale = 1.0f;
     vel = {200.0f, 200.0f};
 }
@@ -78,7 +79,23 @@ Camera::Move(){
 }
 
 void
-Camera::DrawDecal(olc::vf2d _pos, olc::Decal *_decal){
+Camera::Mouse(){
+    position += mouse_control.GetDeltaMousePosition();
+}
+
+olc::vf2d Camera::ScreenToWorld(olc::vf2d _position){
+    olc::vf2d unscaled_offset_position = _position / scale;
+    olc::vf2d world_position = unscaled_offset_position + target->position;
+    return world_position;
+}
+olc::vf2d Camera::WorldToScreen(olc::vf2d _position){
+    olc::vf2d offset_position = _position - target->position;
+    olc::vf2d scaled_offset_position = offset_position * scale;
+    return scaled_offset_position;
+}
+
+void
+Camera::DrawDecal(olc::vf2d _position, olc::Decal *_decal){
 
     switch(m_camera_state){
         case ZOOM:
@@ -93,9 +110,12 @@ Camera::DrawDecal(olc::vf2d _pos, olc::Decal *_decal){
         case MOVE:
             Move();
             break;
+        case MOUSE:
+            Mouse();
+            break;
     }
 
-    olc::vf2d offset_position = _pos - target->position - program->asset_manager.decPin->sprite->Size()/2;
+    olc::vf2d offset_position = _position - target->position - program->asset_manager.decPin->sprite->Size()/2;
     olc::vf2d scaled_offset_position = offset_position * scale;
     scaled_offset_position += program->GetScreenSize()/2;
 
