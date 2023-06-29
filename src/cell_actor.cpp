@@ -8,8 +8,8 @@ CellActor::CellActor(Program *_program,olc::vf2d _position) :
     position{_position},
     is_grounded{false},
     was_grounded{false},
-    snap_to_ground{10},
-    snap_up_range{22}
+    snap_to_ground{4},
+    snap_up_range{16}
 {
 }
 
@@ -67,8 +67,5 @@ CellActor::IsOverlapping(olc::Decal *_decal, std::string _layer, olc::vf2d _posi
     return false;
 }
 
-void
-CellActor::Update(){}
-
-void
-CellActor::Draw(){}
+void CellActor::Update(){}
+void CellActor::Draw(){}

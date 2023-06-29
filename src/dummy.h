@@ -10,7 +10,10 @@ public:
     Dummy(Program *_program,olc::vf2d _position);
     void Update();
     void Draw();
-
+    void AdjustCollisionX();
+    void AdjustCollisionY();
+    void AdjustSnapToGround();
+    void AdjustHeightOverlap();
 };
 
 #endif

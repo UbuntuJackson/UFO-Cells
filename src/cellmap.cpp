@@ -55,10 +55,15 @@ CellMap::~CellMap(){UnloadMap();}
 
 void
 CellMap::Draw(){
-    for(auto dec : visible_layers){
+    for(int d = 0; d < visible_layers.size(); d++){
+        
+        for(auto &e : program->entities){
+            if(e->draw_layer == d) e->Draw();
+        }
+        
         program->DrawDecal(
             olc::vf2d(0.0f, 0.0f),
-            dec, olc::vf2d(1.0f, 1.0f));
+            visible_layers[d], olc::vf2d(1.0f, 1.0f));
     }
     
 }

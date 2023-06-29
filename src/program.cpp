@@ -33,9 +33,7 @@ bool Program::OnUserUpdate(float fElapsedTime){
     }
     
     cell_map.Draw();
-    for(auto &e : entities){
-        e->Draw();
-    }
+    
     SetPixelMode(olc::Pixel::NORMAL);
     return true;
 }
