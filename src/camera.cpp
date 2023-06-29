@@ -113,6 +113,8 @@ Camera::DrawDecal(olc::vf2d _position, olc::Decal *_decal){
         case MOUSE:
             Mouse();
             break;
+        case MULTIPLAYER:
+            break;
     }
 
     olc::vf2d offset_position = _position - target->position - program->asset_manager.decPin->sprite->Size()/2;

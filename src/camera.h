@@ -8,13 +8,18 @@
 class Program;
 
 enum CameraStates{
+    BASIC_FOLLOW,
+    RESTRICTED_FOLLOW,
+    CLAMPED_FOLLOW,
     FOLLOW, //Camera will be set to seem like it focuses on the center point of a sprite.
     SWITCH, //Transitions from one target to another
     MOVE, //Applies a movement vector to the camera position.
 	    //This state would require some parameters I guess
     ZOOM,  //Transitions into a different scaling factor. Need to give the program a scaling factor
 	    // Transition into
-    MOUSE
+    MOUSE,
+    MULTIPLAYER,
+    ALL_CONTAINED
 };
 
 class Camera{
