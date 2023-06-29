@@ -28,7 +28,7 @@ CellMap::LoadMap(std::string _map_path){
             std::cout << "true" << std::endl;
             olc::Sprite *spr = new olc::Sprite(path);
             olc::Decal *dec = new olc::Decal(spr);
-            collision_layers.push_back(dec);
+            collision_layers[name] = dec;
         }
         if(type == "visible"){
             
@@ -45,7 +45,7 @@ void CellMap::UnloadMap(){
         delete dec;
     }
     visible_layers.clear();
-    for(auto dec : collision_layers){
+    for(auto [key, dec] : collision_layers){
         delete dec;
     }
     collision_layers.clear();

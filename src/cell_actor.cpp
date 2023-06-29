@@ -1,6 +1,7 @@
 #include "cell_actor.h"
 #include "colour_utils.h"
 #include "program.h"
+#include <string>
 
 CellActor::CellActor(Program *_program,olc::vf2d _position) :
     program{_program},
@@ -18,11 +19,14 @@ CellActor::~CellActor(){
 }
 
 int
-CellActor::IsOverlappingHeight(olc::Decal *_decal, olc::vf2d _position){
+CellActor::IsOverlappingHeight(olc::Decal *_decal, std::string _layer, olc::vf2d _position){
+
+    olc::Decal* collision_layer = program->cell_map.collision_layers[_layer];
+
     for(int y = _position.y; y < _position.y + _decal->sprite->Size().y; y++){
         for(int x = _position.x; x < _position.x + _decal->sprite->Size().x; x++){
             if(CompareColour(_decal->sprite->GetPixel(x- _position.x, y- _position.y), olc::WHITE)
-                && CompareColour(program->asset_manager.decMap->sprite->GetPixel(x, y), olc::WHITE)
+                && CompareColour(collision_layer->sprite->GetPixel(x, y), olc::WHITE)
             ){
                 return y;
             }
@@ -32,10 +36,13 @@ CellActor::IsOverlappingHeight(olc::Decal *_decal, olc::vf2d _position){
 }
 
 int
-CellActor::HeightUntilGround(olc::Decal *_decal, olc::vf2d _position){
+CellActor::HeightUntilGround(olc::Decal *_decal, std::string _layer, olc::vf2d _position){
+
+    olc::Decal* collision_layer = program->cell_map.collision_layers[_layer];
+
     for(int y = _position.y + _decal->sprite->Size().y; y < _position.y + _decal->sprite->Size().y + snap_to_ground; y++){
         for(int x = _position.x; x < _position.x + _decal->sprite->Size().x; x++){
-            if(CompareColour(program->asset_manager.decMap->sprite->GetPixel(x,y), olc::WHITE)){
+            if(CompareColour(collision_layer->sprite->GetPixel(x,y), olc::WHITE)){
                 return y -(_position.y + _decal->sprite->Size().y);
             }
         }
@@ -44,11 +51,14 @@ CellActor::HeightUntilGround(olc::Decal *_decal, olc::vf2d _position){
 }
 
 bool
-CellActor::IsOverlapping(olc::Decal *_decal, olc::vf2d _position){
+CellActor::IsOverlapping(olc::Decal *_decal, std::string _layer, olc::vf2d _position){
+
+    olc::Decal* collision_layer = program->cell_map.collision_layers[_layer];
+
     for(int y = _position.y; y < _position.y + _decal->sprite->Size().y; y++){
         for(int x = _position.x; x < _position.x + _decal->sprite->Size().x; x++){
             if(CompareColour(_decal->sprite->GetPixel(x- _position.x, y- _position.y), olc::WHITE)
-                && CompareColour(program->asset_manager.decMap->sprite->GetPixel(x, y), olc::WHITE)
+                && CompareColour(collision_layer->sprite->GetPixel(x, y), olc::WHITE)
             ){
                 return true;
             }

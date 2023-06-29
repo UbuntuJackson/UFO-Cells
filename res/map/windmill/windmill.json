@@ -26,7 +26,7 @@
             "path" : "../res/map/windmill/fg2.png" 
         },
         {
-            "name" : "layer1",
+            "name" : "solid",
             "type" : "collision",
             "path" : "../res/map/windmill/solid.png" 
         }

@@ -25,16 +25,17 @@ bool Program::OnUserCreate(){
 bool Program::OnUserUpdate(float fElapsedTime){
     Clear(olc::DARK_BLUE);
     SetPixelMode(olc::Pixel::NORMAL);
-    DrawDecal(
-        olc::vf2d(0.0f, 0.0f),
-        asset_manager.decMap, olc::vf2d(1.0f, 1.0f));
+    //DrawDecal(
+    //    olc::vf2d(0.0f, 0.0f),
+    //    asset_manager.decMap, olc::vf2d(1.0f, 1.0f));
     for(auto e : entities){
         e->Update();
     }
+    
+    cell_map.Draw();
     for(auto &e : entities){
         e->Draw();
     }
-    cell_map.Draw();
     SetPixelMode(olc::Pixel::NORMAL);
     return true;
 }
