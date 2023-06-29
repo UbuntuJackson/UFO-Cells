@@ -8,7 +8,7 @@ CellActor::CellActor(Program *_program,olc::vf2d _position) :
     position{_position},
     is_grounded{false},
     was_grounded{false},
-    snap_to_ground{4},
+    snap_to_ground{6},
     snap_up_range{16}
 {
 }

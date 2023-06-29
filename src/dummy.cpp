@@ -4,7 +4,12 @@
 #include "program.h"
 #include <cmath>
 
-Dummy::Dummy(Program *_program,olc::vf2d _position) : CellActor(_program,_position){}
+Dummy::Dummy(Program *_program,olc::vf2d _position) : CellActor(_program,_position){
+    //camera = Camera(_program);
+    program->camera.m_camera_state = FOLLOW;
+    program->camera.scale = 3.0f;
+    program->camera.target = this;
+}
 
 void
 Dummy::Update(){
@@ -165,7 +170,7 @@ Dummy::AdjustCollisionY(){
 
 void
 Dummy::Draw(){
-    program->DrawDecal(
+    program->camera.DrawDecal(
         position,
-        program -> asset_manager.decPin, olc::vf2d(1.0f, 1.0f));
+        program -> asset_manager.decPin);
 }

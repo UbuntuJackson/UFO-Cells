@@ -61,9 +61,9 @@ CellMap::Draw(){
             if(e->draw_layer == d) e->Draw();
         }
         
-        program->DrawDecal(
+        program->camera.DrawDecal(
             olc::vf2d(0.0f, 0.0f),
-            visible_layers[d], olc::vf2d(1.0f, 1.0f));
+            visible_layers[d]);
     }
     
 }

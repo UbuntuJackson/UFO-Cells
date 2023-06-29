@@ -15,6 +15,8 @@ Program::~Program(){
 }
 
 bool Program::OnUserCreate(){
+    camera = Camera(this);
+    
     cell_map = CellMap(this);
     asset_manager.LoadAssets();
     entities.push_back(new Dummy(this, olc::vf2d(50.0f, 50.0f)));
@@ -33,7 +35,7 @@ bool Program::OnUserUpdate(float fElapsedTime){
     }
     
     cell_map.Draw();
-    
+
     SetPixelMode(olc::Pixel::NORMAL);
     return true;
 }
