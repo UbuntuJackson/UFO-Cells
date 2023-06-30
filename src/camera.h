@@ -35,6 +35,11 @@ public:
     float m_delta_scale;
     float m_slow_down_target;
 
+    float up_sensor;
+    float down_sensor;
+    float left_sensor;
+    float right_sensor;
+
     olc::vf2d m_delta_pos;
     olc::vf2d pos_diff;
     CellActor* new_target;
@@ -49,10 +54,12 @@ public:
     void Follow(olc::vf2d _position, olc::Decal *_decal);
     void Move();
     void Switch();
-    void Mouse(olc::vf2d _position, olc::Decal *_decal);
+    void MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal);
     void SetStateSwitch(CellActor *_target);
     void SetStateZoom(float _target_scale);
     void SetStateMove(olc::vf2d _vel);
+
+    void FollowPlatformer(olc::vf2d _position, olc::Decal *_decal);
 
     olc::vf2d ScreenToWorld(olc::vf2d _position);
     olc::vf2d WorldToScreen(olc::vf2d _position);

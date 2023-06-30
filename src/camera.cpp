@@ -4,9 +4,12 @@
 #include "program.h"
 #include "mouse_control.h"
 
-Camera::Camera(Program *_program) : program{_program}, mouse_control{MouseControl(_program)}{
-    scale = 1.0f;
-    vel = {200.0f, 200.0f};
+Camera::Camera(Program *_program) :
+    program{_program},
+    mouse_control{MouseControl(_program)},
+    scale{1.0f},
+    vel{olc::vf2d(200.0f, 200.0f)}
+{
 }
 
 void Camera::SetTarget(CellActor *_target){
@@ -17,7 +20,39 @@ void
 Camera::Follow(olc::vf2d _position, olc::Decal *_decal){
     position = target->position;
 
-    olc::vf2d offset_position = _position - target->position - program->asset_manager.decPin->sprite->Size()/2;
+    std::cout << position.x << std::endl;
+
+    olc::vf2d offset_camera_position = position + program->asset_manager.decPin->sprite->Size()/2;
+
+    if(offset_camera_position.x < 800.0f/scale) offset_camera_position.x = 800.0f/scale;
+    if(offset_camera_position.x > 1600.0f-800.0f/scale) offset_camera_position.x = 1600.0f-800.0f/scale;
+    if(offset_camera_position.y < 400.0f/scale) offset_camera_position.y = 400.0f/scale;
+    if(offset_camera_position.y > 800.0f-400.0f/scale) offset_camera_position.y = 800.0f-400.0f/scale;
+
+
+    olc::vf2d offset_position = _position - offset_camera_position;
+    olc::vf2d scaled_offset_position = offset_position * scale;
+    scaled_offset_position += program->GetScreenSize()/2;
+
+    program->DrawDecal(
+        scaled_offset_position,
+        _decal,
+        olc::vf2d(scale, scale));
+}
+
+void
+Camera::FollowPlatformer(olc::vf2d _position, olc::Decal *_decal){
+    
+    position = target->position;
+
+    olc::vf2d offset_camera_position = position + program->asset_manager.decPin->sprite->Size()/2;
+
+    if(offset_camera_position.x < 800.0f/scale) offset_camera_position.x = 800.0f/scale;
+    if(offset_camera_position.x > 1600.0f-800.0f/scale) offset_camera_position.x = 1600.0f-800.0f/scale;
+    if(offset_camera_position.y < 400.0f/scale) offset_camera_position.y = 400.0f/scale;
+    if(offset_camera_position.y > 800.0f-400.0f/scale) offset_camera_position.y = 800.0f-400.0f/scale;
+
+    olc::vf2d offset_position = _position - offset_camera_position;
     olc::vf2d scaled_offset_position = offset_position * scale;
     scaled_offset_position += program->GetScreenSize()/2;
 
@@ -88,10 +123,26 @@ Camera::Move(){
 }
 
 void
-Camera::Mouse(olc::vf2d _position, olc::Decal *_decal){
+Camera::MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal){
     olc::vf2d delta_pos = mouse_control.GetDeltaMousePosition();
-    if(program->GetMouse(0).bHeld) position -= delta_pos;
-    olc::vf2d draw_pos = _position - position + program->GetScreenSize()/2;
+    std::cout << program->GetMouseWheel() << std::endl;
+    
+    //if(program->GetMouseWheel()/240 >= 1) scale *= 2.0f;
+    //if(program->GetMouseWheel()/240 <= -1) scale *= 0.5f;
+
+    if(program->GetKey(olc::RIGHT).bHeld) position.x += 2.2f/scale;
+    if(program->GetKey(olc::LEFT).bHeld) position.x -= 2.2f/scale;
+    if(program->GetKey(olc::UP).bHeld) position.y -= 2.2f/scale;
+    if(program->GetKey(olc::DOWN).bHeld) position.y += 2.2f/scale;
+
+    if(program->GetMouse(0).bHeld) position -= delta_pos/scale;
+    if(position.x < 0.0f) position.x = 0.0f;
+    if(position.x > 1600 - 1600 / scale) position.x = 1600 - 1600 / scale;
+    if(position.y < 0.0f) position.y = 0.0f;
+    if(position.y > 800 - 800 / scale) position.y = 800 - 800 / scale;
+
+    olc::vf2d draw_pos = scale*(_position - position);
+
     program->DrawDecal(
         draw_pos,
         _decal,
@@ -100,13 +151,15 @@ Camera::Mouse(olc::vf2d _position, olc::Decal *_decal){
 }
 
 olc::vf2d Camera::ScreenToWorld(olc::vf2d _position){
+    _position -= program->GetScreenSize()/2;
     olc::vf2d unscaled_offset_position = _position / scale;
-    olc::vf2d world_position = unscaled_offset_position + target->position;
+    olc::vf2d world_position = unscaled_offset_position + position;
     return world_position;
 }
 olc::vf2d Camera::WorldToScreen(olc::vf2d _position){
-    olc::vf2d offset_position = _position - target->position;
+    olc::vf2d offset_position = _position - position;
     olc::vf2d scaled_offset_position = offset_position * scale;
+    scaled_offset_position += program->GetScreenSize()/2;
     return scaled_offset_position;
 }
 
@@ -127,7 +180,7 @@ Camera::DrawDecal(olc::vf2d _position, olc::Decal *_decal){
             Move();
             break;
         case MOUSE:
-            Mouse(_position, _decal);
+            MouseAndArrowKeys(_position, _decal);
             break;
         case MULTIPLAYER:
             break;

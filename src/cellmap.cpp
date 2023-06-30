@@ -23,9 +23,9 @@ CellMap::LoadMap(std::string _map_path){
         std::string name = cJSON_GetObjectItemCaseSensitive(item, "name") -> valuestring;
         std::string type = cJSON_GetObjectItemCaseSensitive(item, "type") -> valuestring;
         std::string path = cJSON_GetObjectItemCaseSensitive(item, "path") -> valuestring;
-        std::cout << (type == "collision") << std::endl;
+
         if(type == "collision"){
-            std::cout << "true" << std::endl;
+
             olc::Sprite *spr = new olc::Sprite(path);
             olc::Decal *dec = new olc::Decal(spr);
             collision_layers[name] = dec;

@@ -47,7 +47,6 @@ Entity::Update(){
     if(program->GetKey(olc::Key::Z).bPressed && (was_grounded || is_grounded)) velocity.y = -10.0f;
 
     if(was_grounded == true && is_grounded == false && velocity.y > 0.0f){
-        std::cout << HeightUntilGround(program->asset_manager.decPin) << std::endl;
         position.y = std::floor(position.y);
         if(HeightUntilGround(program->asset_manager.decPin) < snap_to_ground){
             while(!IsOverlapping(program->asset_manager.decPin)){
