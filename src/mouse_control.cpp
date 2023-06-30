@@ -1,5 +1,5 @@
 #include "mouse_control.h"
-#include "../../external/olcPixelGameEngine.h"
+#include "../external/olcPixelGameEngine.h"
 #include "../program/program.h"
 
 MouseControl::MouseControl(Program *_program): program{_program}, former_mouse_position{_program->GetMousePos()}{}

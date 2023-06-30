@@ -1,7 +1,7 @@
 #include "dummy.h"
 #include "../../external/olcPixelGameEngine.h"
-#include "cell_actor.h"
-#include "program.h"
+#include "../ufo/cell_actor.h"
+#include "../program/program.h"
 #include <cmath>
 
 Dummy::Dummy(Program *_program,olc::vf2d _position) : CellActor(_program,_position){

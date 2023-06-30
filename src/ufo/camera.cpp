@@ -1,7 +1,7 @@
 #include "camera.h"
 #include <string>
 #include "../../external/olcPixelGameEngine.h"
-#include "program.h"
+#include "../program/program.h"
 #include "mouse_control.h"
 
 Camera::Camera(Program *_program) :

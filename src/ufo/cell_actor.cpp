@@ -1,6 +1,6 @@
 #include "cell_actor.h"
 #include "colour_utils.h"
-#include "program.h"
+#include "../program/program.h"
 #include <string>
 
 CellActor::CellActor(Program *_program,olc::vf2d _position) :

@@ -1,8 +1,7 @@
 #define OLC_PGE_APPLICATION
 #include "program.h"
-#include "entity.h"
 #include <iostream>
-#include "dummy.h"
+#include "../dummy_test/dummy.h"
 
 Program::Program(){
     sAppName = "cell";

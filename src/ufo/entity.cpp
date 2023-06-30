@@ -1,7 +1,7 @@
 // OUTDATED //
 
 #include "entity.h"
-#include "program.h"
+#include "../program/program.h"
 #include "colour_utils.h"
 #include <cmath>
 

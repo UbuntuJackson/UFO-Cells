@@ -5,7 +5,7 @@
 #include "../../external/cJSON.h"
 #include "file_utils.h"
 #include "../../external/olcPixelGameEngine.h"
-#include "program.h"
+#include "../program/program.h"
 
 CellMap::CellMap(Program *_program) : program{_program},map_path {""}{}
 

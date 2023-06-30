@@ -1,10 +1,10 @@
 #ifndef PROGRAM_H
 #define PROGRAM_H
 #include "../../external/olcPixelGameEngine.h"
-#include "assets.h"
-#include "cell_actor.h"
-#include "cellmap.h"
-#include "camera.h"
+#include "../ufo/assets.h"
+#include "../ufo/cell_actor.h"
+#include "../ufo/cellmap.h"
+#include "../ufo/camera.h"
 
 class Program : public olc::PixelGameEngine{
 public:
