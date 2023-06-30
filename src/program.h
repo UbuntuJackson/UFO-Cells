@@ -8,6 +8,7 @@
 
 class Program : public olc::PixelGameEngine{
 public:
+    float dt;
     Assets asset_manager;
     std::vector<CellActor*> entities;
     CellMap cell_map;

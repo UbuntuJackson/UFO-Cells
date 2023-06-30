@@ -6,7 +6,7 @@
 
 Dummy::Dummy(Program *_program,olc::vf2d _position) : CellActor(_program,_position){
     program->camera.m_camera_state = MOUSE;
-    program->camera.scale = 2.0f;
+    program->camera.scale = 1.0f;
     program->camera.target = this;
     //program->camera.SetStateZoom(3.0f);
 }

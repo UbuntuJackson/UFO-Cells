@@ -46,10 +46,10 @@ public:
     Camera(Program *_program);
     void SetTarget(CellActor *_target);
     void Zoom();
-    void Follow();
+    void Follow(olc::vf2d _position, olc::Decal *_decal);
     void Move();
     void Switch();
-    void Mouse();
+    void Mouse(olc::vf2d _position, olc::Decal *_decal);
     void SetStateSwitch(CellActor *_target);
     void SetStateZoom(float _target_scale);
     void SetStateMove(olc::vf2d _vel);

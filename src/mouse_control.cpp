@@ -9,8 +9,9 @@ MouseControl::GetDeltaMouseWheel(){
     return program->GetMouseWheel();
 }
 olc::vf2d MouseControl::GetDeltaMousePosition(){
-    return program->GetMousePos() - former_mouse_position;
+    olc::vf2d delta_pos = program->GetMousePos() - former_mouse_position;
     former_mouse_position = program->GetMousePos();
+    return delta_pos;
 }
 
 MouseControl::~MouseControl(){}

@@ -14,8 +14,17 @@ void Camera::SetTarget(CellActor *_target){
 }
 
 void
-Camera::Follow(){
+Camera::Follow(olc::vf2d _position, olc::Decal *_decal){
     position = target->position;
+
+    olc::vf2d offset_position = _position - target->position - program->asset_manager.decPin->sprite->Size()/2;
+    olc::vf2d scaled_offset_position = offset_position * scale;
+    scaled_offset_position += program->GetScreenSize()/2;
+
+    program->DrawDecal(
+        scaled_offset_position,
+        _decal,
+        olc::vf2d(scale, scale));
 }
 
 void
@@ -79,8 +88,15 @@ Camera::Move(){
 }
 
 void
-Camera::Mouse(){
-    position += mouse_control.GetDeltaMousePosition();
+Camera::Mouse(olc::vf2d _position, olc::Decal *_decal){
+    olc::vf2d delta_pos = mouse_control.GetDeltaMousePosition();
+    if(program->GetMouse(0).bHeld) position -= delta_pos;
+    olc::vf2d draw_pos = _position - position + program->GetScreenSize()/2;
+    program->DrawDecal(
+        draw_pos,
+        _decal,
+        olc::vf2d(scale, scale));
+
 }
 
 olc::vf2d Camera::ScreenToWorld(olc::vf2d _position){
@@ -102,7 +118,7 @@ Camera::DrawDecal(olc::vf2d _position, olc::Decal *_decal){
             Zoom();
             break;
         case FOLLOW:
-            Follow();
+            Follow(_position, _decal);
             break;
         case SWITCH:
             Switch();
@@ -111,18 +127,18 @@ Camera::DrawDecal(olc::vf2d _position, olc::Decal *_decal){
             Move();
             break;
         case MOUSE:
-            Mouse();
+            Mouse(_position, _decal);
             break;
         case MULTIPLAYER:
             break;
     }
 
-    olc::vf2d offset_position = _position - target->position - program->asset_manager.decPin->sprite->Size()/2;
+    /*olc::vf2d offset_position = _position - target->position - program->asset_manager.decPin->sprite->Size()/2;
     olc::vf2d scaled_offset_position = offset_position * scale;
     scaled_offset_position += program->GetScreenSize()/2;
 
     program->DrawDecal(
         scaled_offset_position,
         _decal,
-        olc::vf2d(scale, scale));
+        olc::vf2d(scale, scale));*/
 }
