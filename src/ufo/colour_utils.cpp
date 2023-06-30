@@ -1,4 +1,4 @@
-#include "../external/olcPixelGameEngine.h"
+#include "../../external/olcPixelGameEngine.h"
 
 bool CompareColour(olc::Pixel colour_a, olc::Pixel colour_b){
     if(colour_a.r == colour_b.r && colour_a.g == colour_b.g && colour_a.b == colour_b.b &&

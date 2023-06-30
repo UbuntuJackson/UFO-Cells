@@ -1,7 +1,7 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 #include <string>
-#include "../external/olcPixelGameEngine.h"
+#include "../../external/olcPixelGameEngine.h"
 #include "cell_actor.h"
 #include "mouse_control.h"
 

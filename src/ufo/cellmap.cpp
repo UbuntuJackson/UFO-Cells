@@ -2,9 +2,9 @@
 #include "cellmap.h"
 #include <string>
 #include <fstream>
-#include "../external/cJSON.h"
+#include "../../external/cJSON.h"
 #include "file_utils.h"
-#include "../external/olcPixelGameEngine.h"
+#include "../../external/olcPixelGameEngine.h"
 #include "program.h"
 
 CellMap::CellMap(Program *_program) : program{_program},map_path {""}{}

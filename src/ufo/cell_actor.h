@@ -1,6 +1,6 @@
 #ifndef CELL_ACTOR_H
 #define CELL_ACTOR_H
-#include "../external/olcPixelGameEngine.h"
+#include "../../external/olcPixelGameEngine.h"
 
 class Program;
 

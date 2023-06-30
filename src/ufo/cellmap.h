@@ -1,7 +1,7 @@
 #ifndef CELLMAP_H
 #define CELLMAP_H
 #include <vector>
-#include "../external/olcPixelGameEngine.h"
+#include "../../external/olcPixelGameEngine.h"
 #include <string>
 
 class Program;
