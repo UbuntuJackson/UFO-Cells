@@ -11,6 +11,7 @@ enum CameraStates{
     BASIC_FOLLOW,
     RESTRICTED_FOLLOW,
     CLAMPED_FOLLOW,
+    FOLLOW_PLATFORMER,
     FOLLOW, //Camera will be set to seem like it focuses on the center point of a sprite.
     SWITCH, //Transitions from one target to another
     MOVE, //Applies a movement vector to the camera position.
@@ -60,6 +61,9 @@ public:
     void SetStateMove(olc::vf2d _vel);
 
     void FollowPlatformer(olc::vf2d _position, olc::Decal *_decal);
+
+    void
+    SetStateFollowPlatfomer(CellActor *_target);
 
     olc::vf2d ScreenToWorld(olc::vf2d _position);
     olc::vf2d WorldToScreen(olc::vf2d _position);

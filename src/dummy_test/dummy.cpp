@@ -5,9 +5,9 @@
 #include <cmath>
 
 Dummy::Dummy(Program *_program,olc::vf2d _position) : CellActor(_program,_position){
-    program->camera.m_camera_state = FOLLOW;
     program->camera.scale = 3.0f;
-    program->camera.target = this;
+    program->camera.SetStateFollowPlatfomer(this);
+    
     //program->camera.SetStateZoom(3.0f);
 }
 

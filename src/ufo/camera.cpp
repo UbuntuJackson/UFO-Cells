@@ -43,7 +43,23 @@ Camera::Follow(olc::vf2d _position, olc::Decal *_decal){
 void
 Camera::FollowPlatformer(olc::vf2d _position, olc::Decal *_decal){
     
-    position = target->position;
+    position.x = target->position.x;
+
+    std::cout << up_sensor << std::endl;
+    std::cout << target->position.y << std::endl;
+    std::cout << down_sensor << std::endl;
+
+    if(target->position.y < up_sensor){
+        up_sensor = target->position.y-1.0f;
+        down_sensor = up_sensor+100.0f;
+    }
+    if(target->position.y > down_sensor){
+        down_sensor = target->position.y+1.0f;
+        up_sensor = down_sensor-100.0f;
+        
+    }
+
+    position.y = up_sensor+75;
 
     olc::vf2d offset_camera_position = position + program->asset_manager.decPin->sprite->Size()/2;
 
@@ -150,6 +166,16 @@ Camera::MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal){
 
 }
 
+void
+Camera::SetStateFollowPlatfomer(CellActor *_target){
+    program->camera.m_camera_state = FOLLOW_PLATFORMER;
+    target = _target;
+    up_sensor = target->position.y - 75.0f;
+    down_sensor = target->position.y + 75.0f;
+    left_sensor = target->position.x + 75.0f;
+    right_sensor = target->position.x - 75.0f;
+}
+
 olc::vf2d Camera::ScreenToWorld(olc::vf2d _position){
     _position -= program->GetScreenSize()/2;
     olc::vf2d unscaled_offset_position = _position / scale;
@@ -183,6 +209,9 @@ Camera::DrawDecal(olc::vf2d _position, olc::Decal *_decal){
             MouseAndArrowKeys(_position, _decal);
             break;
         case MULTIPLAYER:
+            break;
+        case FOLLOW_PLATFORMER:
+            FollowPlatformer(_position, _decal);
             break;
     }
 

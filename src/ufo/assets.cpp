@@ -11,6 +11,8 @@ Assets::~Assets(){
 
 void
 Assets::LoadAssets(){
+    //sprLoadingScreen = new olc::Sprite("../res/masks/pill_small.png");
+    //decLoadingScreen = new olc::Decal(sprLoadingScreen);
     sprPin = new olc::Sprite("../res/masks/pill_small.png");
     decPin = new olc::Decal(sprPin);
     sprMap = new olc::Sprite("../res/map.png");

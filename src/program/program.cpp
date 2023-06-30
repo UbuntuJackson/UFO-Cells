@@ -17,7 +17,7 @@ bool Program::OnUserCreate(){
     camera = Camera(this);
     cell_map = CellMap(this);
     asset_manager.LoadAssets();
-    entities.push_back(new Dummy(this, olc::vf2d(50.0f, 50.0f)));
+    entities.push_back(new Dummy(this, olc::vf2d(450.0f, 50.0f)));
     cell_map.LoadMap("../res/map/windmill/windmill.json");
     
     return true;

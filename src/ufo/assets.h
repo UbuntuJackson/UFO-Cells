@@ -4,6 +4,8 @@
 
 class Assets{
 public:
+    //olc::Sprite* sprLoadingScreen;
+    //olc::Decal *decLoadingScreen;
     olc::Sprite* sprPin;
     olc::Decal *decPin;
     olc::Sprite* sprMap;
