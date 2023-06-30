@@ -1,5 +1,5 @@
 #include "assets.h"
-#include "olcPixelGameEngine.h"
+#include "../external/olcPixelGameEngine.h"
 
 Assets::Assets(){
     

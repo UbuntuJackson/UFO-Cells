@@ -1,6 +1,6 @@
 #ifndef PROGRAM_H
 #define PROGRAM_H
-#include "olcPixelGameEngine.h"
+#include "../external/olcPixelGameEngine.h"
 #include "assets.h"
 #include "cell_actor.h"
 #include "cellmap.h"

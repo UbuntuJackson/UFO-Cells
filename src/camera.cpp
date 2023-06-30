@@ -1,6 +1,6 @@
 #include "camera.h"
 #include <string>
-#include "olcPixelGameEngine.h"
+#include "../external/olcPixelGameEngine.h"
 #include "program.h"
 #include "mouse_control.h"
 

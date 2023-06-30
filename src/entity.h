@@ -2,7 +2,7 @@
 
 #ifndef ENTITY_H
 #define ENTITY_H
-#include "olcPixelGameEngine.h"
+#include "../external/olcPixelGameEngine.h"
 
 class Program;
 

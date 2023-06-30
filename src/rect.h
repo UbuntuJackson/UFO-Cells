@@ -1,7 +1,7 @@
 #ifndef RECT_2_H
 #define RECT_2_H
 
-#include "olcPixelGameEngine.h"
+#include "../external/olcPixelGameEngine.h"
 
 class Rect{
 public:

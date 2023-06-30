@@ -1,5 +1,5 @@
 #include "dummy.h"
-#include "olcPixelGameEngine.h"
+#include "../external/olcPixelGameEngine.h"
 #include "cell_actor.h"
 #include "program.h"
 #include <cmath>

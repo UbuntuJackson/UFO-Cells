@@ -1,6 +1,6 @@
 #ifndef MOUSE_CONTROL_H
 #define MOUSE_CONTROL_H
-#include "olcPixelGameEngine.h"
+#include "../external/olcPixelGameEngine.h"
 
 class Program;
 
