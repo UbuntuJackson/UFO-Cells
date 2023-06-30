@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+
+CMakeLists.txt
+
+/build
+
+/build old
+
+/build_old
