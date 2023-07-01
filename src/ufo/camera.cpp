@@ -42,29 +42,24 @@ Camera::Follow(olc::vf2d _position, olc::Decal *_decal){
 
 void
 Camera::FollowPlatformer(olc::vf2d _position, olc::Decal *_decal){
-    
-    position.x = target->position.x;
 
-    std::cout << up_sensor << std::endl;
-    std::cout << target->position.y << std::endl;
-    std::cout << down_sensor << std::endl;
+    position.x = target->position.x;
 
     if(target->position.y < up_sensor){
         up_sensor = target->position.y-1.0f;
-        down_sensor = up_sensor+100.0f;
+        down_sensor = up_sensor+135.0f;
     }
     if(target->position.y > down_sensor){
         down_sensor = target->position.y+1.0f;
-        up_sensor = down_sensor-100.0f;
-        
+        up_sensor = down_sensor-135.0f;
     }
 
-    position.y = up_sensor+75;
+    position.y = up_sensor+80.0f;
 
     olc::vf2d offset_camera_position = position + program->asset_manager.decPin->sprite->Size()/2;
 
     if(offset_camera_position.x < 800.0f/scale) offset_camera_position.x = 800.0f/scale;
-    if(offset_camera_position.x > 1600.0f-800.0f/scale) offset_camera_position.x = 1600.0f-800.0f/scale;
+    if(offset_camera_position.x > 2200.0f-800.0f/scale) offset_camera_position.x = 2200.0f-800.0f/scale;
     if(offset_camera_position.y < 400.0f/scale) offset_camera_position.y = 400.0f/scale;
     if(offset_camera_position.y > 800.0f-400.0f/scale) offset_camera_position.y = 800.0f-400.0f/scale;
 
@@ -80,13 +75,13 @@ Camera::FollowPlatformer(olc::vf2d _position, olc::Decal *_decal){
 
 void
 Camera::Zoom(){
-    
+
     if(std::abs(scale - target_scale) < std::abs(m_delta_scale/5.0f)){
-    
+
         m_delta_scale /= 1.1f;
     }
     scale += m_delta_scale;
-    
+
 }
 void
 Camera::SetStateZoom(float _target_scale){
@@ -101,7 +96,7 @@ Camera::SetStateZoom(float _target_scale){
 
 void
 Camera::Switch(){
-    
+
     if(std::sqrt(std::abs((new_target -> position - position).x)*std::abs((new_target -> position - position).x) +
         std::abs((new_target -> position - position).y)*std::abs((new_target -> position - position).y))
         < std::sqrt(std::abs((m_delta_pos).x)*std::abs((m_delta_pos).x) +
@@ -142,7 +137,7 @@ void
 Camera::MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal){
     olc::vf2d delta_pos = mouse_control.GetDeltaMousePosition();
     std::cout << program->GetMouseWheel() << std::endl;
-    
+
     //if(program->GetMouseWheel()/240 >= 1) scale *= 2.0f;
     //if(program->GetMouseWheel()/240 <= -1) scale *= 0.5f;
 
@@ -170,8 +165,8 @@ void
 Camera::SetStateFollowPlatfomer(CellActor *_target){
     program->camera.m_camera_state = FOLLOW_PLATFORMER;
     target = _target;
-    up_sensor = target->position.y - 75.0f;
-    down_sensor = target->position.y + 75.0f;
+    up_sensor = target->position.y - 125.0f;
+    down_sensor = target->position.y + 10.0f;
     left_sensor = target->position.x + 75.0f;
     right_sensor = target->position.x - 75.0f;
 }
