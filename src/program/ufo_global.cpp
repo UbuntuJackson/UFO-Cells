@@ -1,5 +1,5 @@
-#include "program.h"
+#include "ufo_global.h"
 
 namespace UfoGlobal{
-    Program* program_ptr = new Program();
+    Program program;
 };

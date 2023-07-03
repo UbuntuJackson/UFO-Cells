@@ -26,7 +26,6 @@ enum CameraStates{
 class Camera{
 public:
     float scale;
-    Program *program;
     olc::vf2d position;
     olc::vf2d vel;
     int m_camera_state;
@@ -48,8 +47,7 @@ public:
 
     MouseControl mouse_control;
 
-    Camera() = default;
-    Camera(Program *_program);
+    Camera();
     void SetTarget(CellActor *_target);
     void Zoom();
     void Follow(olc::vf2d _position, olc::Decal *_decal);

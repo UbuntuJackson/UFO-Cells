@@ -1,4 +1,5 @@
 #define OLC_PGE_APPLICATION
+
 #include "program.h"
 #include <iostream>
 #include "../dummy_test/dummy.h"
@@ -14,10 +15,10 @@ Program::~Program(){
 }
 
 bool Program::OnUserCreate(){
-    camera = Camera(this);
-    cell_map = CellMap(this);
+    camera = Camera();
+    cell_map = CellMap();
     asset_manager.LoadAssets();
-    entities.push_back(new Dummy(this, olc::vf2d(450.0f, 50.0f)));
+    entities.push_back(new Dummy(olc::vf2d(450.0f, 50.0f)));
     cell_map.LoadMap("../res/map/windmill/windmill.json");
     
     return true;

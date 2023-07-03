@@ -2,9 +2,9 @@
 #include "colour_utils.h"
 #include "../program/program.h"
 #include <string>
+#include "../program/ufo_global.h"
 
-CellActor::CellActor(Program *_program,olc::vf2d _position) :
-    program{_program},
+CellActor::CellActor(olc::vf2d _position) :
     position{_position},
     is_grounded{false},
     was_grounded{false},
@@ -21,7 +21,7 @@ CellActor::~CellActor(){
 int
 CellActor::IsOverlappingHeight(olc::Decal *_decal, std::string _layer, olc::vf2d _position){
 
-    olc::Decal* collision_layer = program->cell_map.collision_layers[_layer];
+    olc::Decal* collision_layer = UfoGlobal::program.cell_map.collision_layers[_layer];
 
     for(int y = _position.y; y < _position.y + _decal->sprite->Size().y; y++){
         for(int x = _position.x; x < _position.x + _decal->sprite->Size().x; x++){
@@ -38,7 +38,7 @@ CellActor::IsOverlappingHeight(olc::Decal *_decal, std::string _layer, olc::vf2d
 int
 CellActor::HeightUntilGround(olc::Decal *_decal, std::string _layer, olc::vf2d _position){
 
-    olc::Decal* collision_layer = program->cell_map.collision_layers[_layer];
+    olc::Decal* collision_layer = UfoGlobal::program.cell_map.collision_layers[_layer];
 
     for(int y = _position.y + _decal->sprite->Size().y; y < _position.y + _decal->sprite->Size().y + snap_to_ground; y++){
         for(int x = _position.x; x < _position.x + _decal->sprite->Size().x; x++){
@@ -53,7 +53,7 @@ CellActor::HeightUntilGround(olc::Decal *_decal, std::string _layer, olc::vf2d _
 bool
 CellActor::IsOverlapping(olc::Decal *_decal, std::string _layer, olc::vf2d _position){
 
-    olc::Decal* collision_layer = program->cell_map.collision_layers[_layer];
+    olc::Decal* collision_layer = UfoGlobal::program.cell_map.collision_layers[_layer];
 
     for(int y = _position.y; y < _position.y + _decal->sprite->Size().y; y++){
         for(int x = _position.x; x < _position.x + _decal->sprite->Size().x; x++){

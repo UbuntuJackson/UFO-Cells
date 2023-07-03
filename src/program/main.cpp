@@ -1,11 +1,11 @@
 
+#include "ufo_global.h"
 #include "program.h"
 
 int main()
 {
-	Program demo;
-	if (demo.Construct(1600, 800, 1, 1, false, true, true))
-		demo.Start();
+	if (UfoGlobal::program.Construct(1600, 800, 1, 1, false, true, true))
+		UfoGlobal::program.Start();
 
 	return 0;
 }

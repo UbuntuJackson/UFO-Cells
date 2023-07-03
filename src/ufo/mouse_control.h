@@ -6,10 +6,8 @@ class Program;
 
 class MouseControl{
 public:
-    MouseControl() = default;
-    MouseControl(Program *_program);
+    MouseControl();
     ~MouseControl();
-    Program* program;
     olc::vf2d former_mouse_position;
     //olc::Decal cursor_decal;
     int GetDeltaMouseWheel();
