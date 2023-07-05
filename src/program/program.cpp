@@ -2,7 +2,7 @@
 
 #include "program.h"
 #include <iostream>
-#include "../dummy_test/dummy.h"
+#include "../../games/dummy_test/dummy.h"
 #include "../scripting/wrapper.h"
 #include <string>
 #include <squirrel.h>

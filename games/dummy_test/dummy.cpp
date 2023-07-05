@@ -1,9 +1,9 @@
 #include "dummy.h"
 #include "../../external/olcPixelGameEngine.h"
-#include "../ufo/cell_actor.h"
-#include "../program/program.h"
+#include "../../src/ufo/cell_actor.h"
+#include "../../src/program/program.h"
 #include <cmath>
-#include "../program/ufo_global.h"
+#include "../../src/program/ufo_global.h"
 
 Dummy::Dummy(olc::vf2d _position) : CellActor(_position){
     UfoGlobal::program.camera.scale = 2.0f;

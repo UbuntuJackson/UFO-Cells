@@ -1,7 +1,7 @@
 #ifndef DUMMY_H
 #define DUMMY_H
-#include "../ufo/camera.h"
-#include "../ufo/cell_actor.h"
+#include "../../src/ufo/camera.h"
+#include "../../src/ufo/cell_actor.h"
 #include <string>
 class Dummy : public CellActor{
 public:
