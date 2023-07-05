@@ -5,9 +5,10 @@
 #include "../ufo/cell_actor.h"
 #include "../ufo/cellmap.h"
 #include "../ufo/camera.h"
-
+#include <squirrel.h>
 class Program : public olc::PixelGameEngine{
 public:
+    HSQUIRRELVM vm;
     float dt;
     Assets asset_manager;
     std::vector<CellActor*> entities;

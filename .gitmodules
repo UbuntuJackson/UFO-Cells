@@ -1,0 +1,9 @@
+[submodule "miniswig"]
+	path = miniswig
+	url = https://github.com/WindstilleTeam/miniswig.git
+[submodule "external/miniswig"]
+	path = external/miniswig
+	url = https://github.com/WindstilleTeam/miniswig.git
+[submodule "external/squirrel"]
+	path = external/squirrel
+	url = https://github.com/albertodemichelis/squirrel.git
