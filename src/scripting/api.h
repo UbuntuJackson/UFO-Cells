@@ -12,6 +12,8 @@ namespace UfoAPI{
     //olc::HWButton GetKey(){}
     void GetMousePos();
     void GetMouseWheel();
+    void NewDummyTestGame();
+    void UpdateDummyTestGame();
 }
 
 //#endif API_H

@@ -8,8 +8,6 @@
 Dummy::Dummy(olc::vf2d _position) : CellActor(_position){
     UfoGlobal::program.camera.scale = 2.0f;
     UfoGlobal::program.camera.SetStateFollowPlatfomer(this);
-
-    //program->camera.SetStateZoom(3.0f);
 }
 
 void

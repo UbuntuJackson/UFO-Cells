@@ -2,7 +2,7 @@
 #include "../../external/olcPixelGameEngine.h"
 
 Assets::Assets(){
-    
+
 }
 
 Assets::~Assets(){

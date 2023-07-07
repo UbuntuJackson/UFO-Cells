@@ -13,7 +13,7 @@ CellMap::CellMap() : map_path {""}{}
 void
 CellMap::LoadMap(std::string _map_path){
     UnloadMap();
-    
+
     std::ifstream ifs;
     ifs.open(_map_path, std::ifstream::in);
     std::string sl = PutFileIntoString(ifs);
@@ -32,7 +32,7 @@ CellMap::LoadMap(std::string _map_path){
             collision_layers[name] = dec;
         }
         if(type == "visible"){
-            
+
             olc::Sprite *spr = new olc::Sprite(path);
             olc::Decal *dec = new olc::Decal(spr);
             visible_layers.push_back(dec);
@@ -57,14 +57,14 @@ CellMap::~CellMap(){UnloadMap();}
 void
 CellMap::Draw(){
     for(int d = 0; d < visible_layers.size(); d++){
-        
+
         for(auto &e : UfoGlobal::program.entities){
             if(e->draw_layer == d) e->Draw();
         }
-        
+
         UfoGlobal::program.camera.DrawDecal(
             olc::vf2d(0.0f, 0.0f),
             visible_layers[d]);
     }
-    
+
 }

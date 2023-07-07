@@ -131,6 +131,44 @@ static SQInteger GetMouseWheel_wrapper(HSQUIRRELVM vm)
 
 }
 
+static SQInteger NewDummyTestGame_wrapper(HSQUIRRELVM vm)
+{
+  (void) vm;
+
+  try {
+    UfoAPI::NewDummyTestGame();
+
+    return 0;
+
+  } catch(std::exception& e) {
+    sq_throwerror(vm, e.what());
+    return SQ_ERROR;
+  } catch(...) {
+    sq_throwerror(vm, _SC("Unexpected exception while executing function 'NewDummyTestGame'"));
+    return SQ_ERROR;
+  }
+
+}
+
+static SQInteger UpdateDummyTestGame_wrapper(HSQUIRRELVM vm)
+{
+  (void) vm;
+
+  try {
+    UfoAPI::UpdateDummyTestGame();
+
+    return 0;
+
+  } catch(std::exception& e) {
+    sq_throwerror(vm, e.what());
+    return SQ_ERROR;
+  } catch(...) {
+    sq_throwerror(vm, _SC("Unexpected exception while executing function 'UpdateDummyTestGame'"));
+    return SQ_ERROR;
+  }
+
+}
+
 } // namespace wrapper
 void register_ufo_wrapper(HSQUIRRELVM v)
 {
@@ -169,6 +207,20 @@ void register_ufo_wrapper(HSQUIRRELVM v)
   sq_setparamscheck(v, SQ_MATCHTYPEMASKSTRING, ".");
   if(SQ_FAILED(sq_createslot(v, -3))) {
     throw SquirrelError(v, "Couldn't register function 'GetMouseWheel'");
+  }
+
+  sq_pushstring(v, "NewDummyTestGame", -1);
+  sq_newclosure(v, &NewDummyTestGame_wrapper, 0);
+  sq_setparamscheck(v, SQ_MATCHTYPEMASKSTRING, ".");
+  if(SQ_FAILED(sq_createslot(v, -3))) {
+    throw SquirrelError(v, "Couldn't register function 'NewDummyTestGame'");
+  }
+
+  sq_pushstring(v, "UpdateDummyTestGame", -1);
+  sq_newclosure(v, &UpdateDummyTestGame_wrapper, 0);
+  sq_setparamscheck(v, SQ_MATCHTYPEMASKSTRING, ".");
+  if(SQ_FAILED(sq_createslot(v, -3))) {
+    throw SquirrelError(v, "Couldn't register function 'UpdateDummyTestGame'");
   }
 
 }

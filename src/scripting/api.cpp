@@ -3,6 +3,7 @@
 #include <string>
 #include "api.h"
 #include <iostream>
+#include "../../games/dummy_test/dummy_test_game.h"
 
 namespace UfoAPI{
     void TestFunction(){std::cout << "hello world" << std::endl;}
@@ -11,4 +12,10 @@ namespace UfoAPI{
     //olc::HWButton GetKey(){}
     void GetMousePos(){}
     void GetMouseWheel(){}
+    void NewDummyTestGame(){
+        UfoGlobal::program.game = new DummyTestGame();
+    }
+    void UpdateDummyTestGame(){
+        UfoGlobal::program.game->game_state->Update();
+    }
 }

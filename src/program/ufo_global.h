@@ -4,6 +4,6 @@
 
 namespace UfoGlobal{
     extern Program program;
-};
+}
 #endif
 

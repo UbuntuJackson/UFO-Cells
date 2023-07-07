@@ -6,8 +6,11 @@
 #include "../ufo/cellmap.h"
 #include "../ufo/camera.h"
 #include <squirrel.h>
+#include "../ufo/game.h"
+
 class Program : public olc::PixelGameEngine{
 public:
+    Game* game;
     HSQUIRRELVM vm;
     float dt;
     Assets asset_manager;

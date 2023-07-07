@@ -2,4 +2,4 @@
 
 namespace UfoGlobal{
     Program program;
-};
+}

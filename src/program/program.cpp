@@ -22,12 +22,13 @@ Program::Program(){
     sqstd_register_stringlib(vm);
 
     UfoAPI::register_ufo_wrapper(vm);
-
-    std::string path = "../src/dummy_test/scripts/test.nut";
+    std::string path = "../games/dummy_test/scripts/new.nut";
     sqstd_dofile(vm, path.c_str(), 0, 1);
+
 }
 
 Program::~Program(){
+    delete game;
     for(auto ent : entities){
         delete ent;
     }
@@ -47,11 +48,9 @@ bool Program::OnUserUpdate(float fElapsedTime){
     Clear(olc::GREY);
     SetPixelMode(olc::Pixel::NORMAL);
 
-    for(auto e : entities){
-        e->Update();
-    }
+    std::string path = "../games/dummy_test/scripts/update.nut";
 
-    cell_map.Draw();
+    sqstd_dofile(vm, path.c_str(), 0, 1);
 
     SetPixelMode(olc::Pixel::NORMAL);
     return true;

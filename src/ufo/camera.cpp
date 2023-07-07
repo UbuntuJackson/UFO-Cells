@@ -20,8 +20,6 @@ void
 Camera::Follow(olc::vf2d _position, olc::Decal *_decal){
     position = target->position;
 
-    std::cout << position.x << std::endl;
-
     olc::vf2d offset_camera_position = position + UfoGlobal::program.asset_manager.decPin->sprite->Size()/2;
 
     if(offset_camera_position.x < 800.0f/scale) offset_camera_position.x = 800.0f/scale;
