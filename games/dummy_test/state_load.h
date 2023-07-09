@@ -9,6 +9,7 @@ class StateLoad : public State{
 private:
     int asset_index;
     const cJSON *l1;
+    std::string loading_screen_dir;
 public:
     StateLoad();
     void SetLoad(std::string _map);

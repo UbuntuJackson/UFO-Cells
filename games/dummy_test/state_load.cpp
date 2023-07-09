@@ -13,6 +13,7 @@
 StateLoad::StateLoad() : State(){}
 
 void StateLoad::SetLoad(std::string _map){
+
     UfoGlobal::program.cell_map.UnloadMap();
     std::ifstream ifs;
     ifs.open(_map, std::ifstream::in);
@@ -42,9 +43,9 @@ void StateLoad::Update(){
             UfoGlobal::program.cell_map.visible_layers.push_back(dec);
         }
         asset_index++;
-        UfoGlobal::program.DrawDecal(olc::vf2d(0.0f, 0.0f), UfoGlobal::program.asset_manager.decLoad);
     }
     else{
         UfoGlobal::program.game->game_state = UfoGlobal::program.game->game_states["play"];
     }
+    UfoGlobal::program.DrawDecal(olc::vf2d(0.0f, 0.0f), UfoGlobal::program.asset_manager.decLoad);
 }

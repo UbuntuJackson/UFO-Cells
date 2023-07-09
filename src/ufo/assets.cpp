@@ -1,5 +1,6 @@
 #include "assets.h"
 #include "../../external/olcPixelGameEngine.h"
+#include <string>
 
 Assets::Assets(){
 
@@ -7,6 +8,13 @@ Assets::Assets(){
 
 Assets::~Assets(){
     DeleteAssets();
+}
+
+void
+Assets::LoadDecal(std::string _path, std::string _name){
+    olc::Sprite *spr = new olc::Sprite(_path);
+    olc::Decal *dec = new olc::Decal(spr);
+    decals[_name] = dec;
 }
 
 void
@@ -27,4 +35,8 @@ Assets::DeleteAssets(){
     delete decPin;
     delete sprMap;
     delete decMap;
+
+    for(auto &[a, i] : decals){
+        delete i;
+    }
 }
