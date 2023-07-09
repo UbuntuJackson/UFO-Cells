@@ -17,6 +17,8 @@ Assets::LoadAssets(){
     decPin = new olc::Decal(sprPin);
     sprMap = new olc::Sprite("../res/map.png");
     decMap = new olc::Decal(sprMap);
+    sprLoad = new olc::Sprite("../res/loading_screen/loading_screen.png");
+    decLoad = new olc::Decal(sprLoad);
 }
 
 void

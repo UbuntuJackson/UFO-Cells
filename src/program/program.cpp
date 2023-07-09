@@ -13,6 +13,7 @@
 
 Program::Program(){
     sAppName = "UFO-Cells";
+    game_dir_name = "dummy_test";
     vm = sq_open(1024);
 
     sq_pushroottable(vm);
@@ -22,9 +23,6 @@ Program::Program(){
     sqstd_register_stringlib(vm);
 
     UfoAPI::register_ufo_wrapper(vm);
-    std::string path = "../games/dummy_test/scripts/new.nut";
-    sqstd_dofile(vm, path.c_str(), 0, 1);
-
 }
 
 Program::~Program(){
@@ -36,20 +34,16 @@ Program::~Program(){
 }
 
 bool Program::OnUserCreate(){
-    camera = Camera();
-    cell_map = CellMap();
     asset_manager.LoadAssets();
-    entities.push_back(new Dummy(olc::vf2d(450.0f, 50.0f)));
-    cell_map.LoadMap("../res/map/windmill/windmill.json");
-
+    std::string path = "../games/" + game_dir_name + "/scripts/new.nut";
+    sqstd_dofile(vm, path.c_str(), 0, 1);
     return true;
 }
 bool Program::OnUserUpdate(float fElapsedTime){
     Clear(olc::GREY);
     SetPixelMode(olc::Pixel::NORMAL);
 
-    std::string path = "../games/dummy_test/scripts/update.nut";
-
+    std::string path = "../games/" + game_dir_name + "/scripts/update.nut";
     sqstd_dofile(vm, path.c_str(), 0, 1);
 
     SetPixelMode(olc::Pixel::NORMAL);

@@ -11,6 +11,7 @@
 class Program : public olc::PixelGameEngine{
 public:
     Game* game;
+    std::string game_dir_name;
     HSQUIRRELVM vm;
     float dt;
     Assets asset_manager;

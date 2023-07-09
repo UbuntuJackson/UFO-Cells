@@ -1,6 +1,7 @@
 #ifndef STATE_H
 #define STATE_H
 #include <string>
+#include "state.h"
 
 class State{
 public:

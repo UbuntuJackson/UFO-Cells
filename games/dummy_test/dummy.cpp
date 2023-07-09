@@ -4,16 +4,17 @@
 #include "../../src/program/program.h"
 #include <cmath>
 #include "../../src/program/ufo_global.h"
+#include <iostream>
 
 Dummy::Dummy(olc::vf2d _position) : CellActor(_position){
-    UfoGlobal::program.camera.scale = 2.0f;
     UfoGlobal::program.camera.SetStateFollowPlatfomer(this);
 }
 
 void
 Dummy::Update(){
-
     // INPUT X-AXIS
+
+    std::cout << &UfoGlobal::program << std::endl;
 
     if(UfoGlobal::program.GetKey(olc::Key::RIGHT).bHeld) velocity.x += 0.5f;
     if(UfoGlobal::program.GetKey(olc::Key::LEFT).bHeld) velocity.x -= 0.5f;
@@ -82,6 +83,8 @@ Dummy::Update(){
             }
         }
     }
+
+    std::cout << "dummy.cpp" << std::endl;
 
     position.y = former_position.y;
 

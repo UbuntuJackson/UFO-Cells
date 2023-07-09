@@ -1,6 +1,7 @@
 #include "state.h"
 #include <string>
 #include <iostream>
+#include "game.h"
 
 State::State(){}
 State::~State(){}

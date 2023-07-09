@@ -3,6 +3,8 @@
 #include "../program/program.h"
 #include <string>
 #include "../program/ufo_global.h"
+#include "../../external/olcPixelGameEngine.h"
+#include <iostream>
 
 CellActor::CellActor(olc::vf2d _position) :
     position{_position},
@@ -51,7 +53,7 @@ bool
 CellActor::IsOverlapping(olc::Decal *_decal, std::string _layer, olc::vf2d _position){
 
     olc::Decal* collision_layer = UfoGlobal::program.cell_map.collision_layers[_layer];
-
+    
     for(int y = _position.y; y < _position.y + _decal->sprite->Size().y; y++){
         for(int x = _position.x; x < _position.x + _decal->sprite->Size().x; x++){
             if(CompareColour(_decal->sprite->GetPixel(x- _position.x, y- _position.y), olc::WHITE)

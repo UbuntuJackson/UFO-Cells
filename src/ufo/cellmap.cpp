@@ -2,6 +2,7 @@
 #include "cellmap.h"
 #include <string>
 #include <fstream>
+#include <iostream>
 #include "../../external/cJSON.h"
 #include "file_utils.h"
 #include "../../external/olcPixelGameEngine.h"

@@ -3,6 +3,7 @@
 
 #include "../../src/ufo/state.h"
 #include <string>
+#include "../../src/ufo/game.h"
 
 class StateMenu : public State{
 public:

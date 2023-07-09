@@ -10,6 +10,8 @@ public:
     olc::Decal *decPin;
     olc::Sprite* sprMap;
     olc::Decal *decMap;
+    olc::Sprite* sprLoad;
+    olc::Decal *decLoad;
     Assets();
     ~Assets();
     void LoadAssets();
