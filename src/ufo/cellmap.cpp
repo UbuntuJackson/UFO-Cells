@@ -30,6 +30,9 @@ CellMap::LoadMap(std::string _map_path){
 
             olc::Sprite *spr = new olc::Sprite(path);
             olc::Decal *dec = new olc::Decal(spr);
+
+            map_size = spr->Size();
+
             collision_layers[name] = dec;
         }
         if(type == "visible"){

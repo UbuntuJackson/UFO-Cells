@@ -63,8 +63,8 @@ public:
     void
     SetStateFollowPlatfomer(CellActor *_target);
 
-    olc::vf2d ScreenToWorld(olc::vf2d _position);
-    olc::vf2d WorldToScreen(olc::vf2d _position);
+    olc::vf2d ScreenToWorld(olc::vf2d _screen_position, olc::vf2d _shape_offset);
+    olc::vf2d WorldToScreen(olc::vf2d _position, olc::vf2d _shape_offset);
 
     void DrawDecal(olc::vf2d _position, olc::Decal *_decal);
 };

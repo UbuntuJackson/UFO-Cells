@@ -8,6 +8,7 @@ class Program;
 
 class CellMap{
 public:
+    olc::vf2d map_size;
     std::string map_path;
     std::vector<olc::Decal*> visible_layers;
     std::map<std::string, olc::Decal*> collision_layers;

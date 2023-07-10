@@ -54,19 +54,21 @@ Camera::FollowPlatformer(olc::vf2d _position, olc::Decal *_decal){
 
     position.y = up_sensor+80.0f;
 
+    //Feed this value to WorldToScreen()
+
     olc::vf2d offset_camera_position = position + UfoGlobal::program.asset_manager.decPin->sprite->Size()/2;
 
-    if(offset_camera_position.x < 800.0f/scale) offset_camera_position.x = 800.0f/scale;
-    if(offset_camera_position.x > 2200.0f-800.0f/scale) offset_camera_position.x = 2200.0f-800.0f/scale;
-    if(offset_camera_position.y < 400.0f/scale) offset_camera_position.y = 400.0f/scale;
-    if(offset_camera_position.y > 800.0f-400.0f/scale) offset_camera_position.y = 800.0f-400.0f/scale;
+    if(offset_camera_position.x < UfoGlobal::program.ScreenWidth()*0.5f/scale) offset_camera_position.x = UfoGlobal::program.ScreenWidth()*0.5f/scale;
+    if(offset_camera_position.x > UfoGlobal::program.cell_map.map_size.x-UfoGlobal::program.ScreenWidth()*0.5f/scale) offset_camera_position.x = UfoGlobal::program.cell_map.map_size.x-UfoGlobal::program.ScreenWidth()*0.5f/scale;
+    if(offset_camera_position.y < UfoGlobal::program.ScreenHeight()*0.5f/scale) offset_camera_position.y = UfoGlobal::program.ScreenHeight()*0.5f/scale;
+    if(offset_camera_position.y > UfoGlobal::program.cell_map.map_size.y-UfoGlobal::program.ScreenHeight()*0.5f/scale) offset_camera_position.y = UfoGlobal::program.cell_map.map_size.y-UfoGlobal::program.ScreenHeight()*0.5f/scale;
 
     olc::vf2d offset_position = _position - offset_camera_position;
-    olc::vf2d scaled_offset_position = offset_position * scale;
-    scaled_offset_position += UfoGlobal::program.GetScreenSize()/2;
+    olc::vf2d screen_position = offset_position * scale;
+    screen_position += UfoGlobal::program.GetScreenSize()/2;
 
     UfoGlobal::program.DrawDecal(
-        scaled_offset_position,
+        screen_position,
         _decal,
         olc::vf2d(scale, scale));
 }
@@ -134,7 +136,7 @@ Camera::Move(){
 void
 Camera::MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal){
     olc::vf2d delta_pos = mouse_control.GetDeltaMousePosition();
-    std::cout << UfoGlobal::program.GetMouseWheel() << std::endl;
+    //std::cout << UfoGlobal::program.GetMouseWheel() << std::endl;
 
     //if(program->GetMouseWheel()/240 >= 1) scale *= 2.0f;
     //if(program->GetMouseWheel()/240 <= -1) scale *= 0.5f;
@@ -145,15 +147,26 @@ Camera::MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal){
     if(UfoGlobal::program.GetKey(olc::DOWN).bHeld) position.y += 2.2f/scale;
 
     if(UfoGlobal::program.GetMouse(0).bHeld) position -= delta_pos/scale;
-    if(position.x < 0.0f) position.x = 0.0f;
-    if(position.x > 1600 - 1600 / scale) position.x = 1600 - 1600 / scale;
-    if(position.y < 0.0f) position.y = 0.0f;
-    if(position.y > 800 - 800 / scale) position.y = 800 - 800 / scale;
 
-    olc::vf2d draw_pos = scale*(_position - position);
+    //Feed this value to world to screen
+
+    olc::vf2d offset_camera_position = position;
+
+    //We wanna clamp the position, not the offset_camera_position
+
+    if(offset_camera_position.x < UfoGlobal::program.ScreenWidth()*0.5f/scale) offset_camera_position.x = UfoGlobal::program.ScreenWidth()*0.5f/scale;
+    if(offset_camera_position.x > UfoGlobal::program.cell_map.map_size.x-UfoGlobal::program.ScreenWidth()*0.5f/scale) offset_camera_position.x = UfoGlobal::program.cell_map.map_size.x-UfoGlobal::program.ScreenWidth()*0.5f/scale;
+    if(offset_camera_position.y < UfoGlobal::program.ScreenHeight()*0.5f/scale) offset_camera_position.y = UfoGlobal::program.ScreenHeight()*0.5f/scale;
+    if(offset_camera_position.y > UfoGlobal::program.cell_map.map_size.y-UfoGlobal::program.ScreenHeight()*0.5f/scale) offset_camera_position.y = UfoGlobal::program.cell_map.map_size.y-UfoGlobal::program.ScreenHeight()*0.5f/scale;
+
+    olc::vf2d offset_position = _position - offset_camera_position;
+
+    olc::vf2d screen_position = scale * offset_position;
+
+    screen_position += UfoGlobal::program.GetScreenSize()/2;
 
     UfoGlobal::program.DrawDecal(
-        draw_pos,
+        screen_position,
         _decal,
         olc::vf2d(scale, scale));
 
@@ -169,17 +182,24 @@ Camera::SetStateFollowPlatfomer(CellActor *_target){
     right_sensor = target->position.x - 75.0f;
 }
 
-olc::vf2d Camera::ScreenToWorld(olc::vf2d _position){
-    _position -= UfoGlobal::program.GetScreenSize()/2;
-    olc::vf2d unscaled_offset_position = _position / scale;
-    olc::vf2d world_position = unscaled_offset_position + position;
+olc::vf2d Camera::ScreenToWorld(olc::vf2d _screen_position, olc::vf2d _shape_offset){
+    
+    //_screen_position -= UfoGlobal::program.GetScreenSize()/2;
+    olc::vf2d offset_position = _screen_position/scale;
+    olc::vf2d offset_camera_position = position + _shape_offset;
+    olc::vf2d world_position = offset_position + offset_camera_position;
+
     return world_position;
 }
-olc::vf2d Camera::WorldToScreen(olc::vf2d _position){
-    olc::vf2d offset_position = _position - position;
-    olc::vf2d scaled_offset_position = offset_position * scale;
-    scaled_offset_position += UfoGlobal::program.GetScreenSize()/2;
-    return scaled_offset_position;
+olc::vf2d Camera::WorldToScreen(olc::vf2d _position, olc::vf2d _shape_offset){
+    olc::vf2d offset_camera_position = position + _shape_offset;
+
+    olc::vf2d offset_position = _position - offset_camera_position;
+
+    olc::vf2d screen_position = scale * offset_position;
+
+    screen_position += UfoGlobal::program.GetScreenSize()/2;
+    return screen_position;
 }
 
 void

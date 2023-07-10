@@ -17,7 +17,6 @@ namespace UfoAPI{
     void GetMouseWheel(){}
     void NewDummyTestGame(){
         DummyTestGame *game = new DummyTestGame();
-        std::cout << &UfoGlobal::program << std::endl;
     }
     void UpdateDummyTestGame(){
         UfoGlobal::program.game->game_state->Update();

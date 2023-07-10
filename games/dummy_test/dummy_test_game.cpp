@@ -17,11 +17,10 @@ DummyTestGame::DummyTestGame() :
         UfoGlobal::program.game->game_states["load"] = state_load;
         UfoGlobal::program.game->game_states["menu"] = state_menu;
         UfoGlobal::program.game->game_states["play"] = state_play;
-        std::cout << "test_game.cpp" << std::endl;
 
         UfoGlobal::program.cell_map.LoadMap("../res/map/windmill/windmill.json");
         UfoGlobal::program.entities.push_back(new Dummy(olc::vf2d(450.0f, 50.0f)));
-        UfoGlobal::program.camera.scale = 2.0f;
+        UfoGlobal::program.camera.scale = 1.0f;
         game_state = state_load;
         state_load->SetLoad("../res/map/windmill/windmill.json");
     }
