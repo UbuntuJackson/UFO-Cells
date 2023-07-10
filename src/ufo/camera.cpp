@@ -157,9 +157,9 @@ Camera::MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal){
 
     //We wanna clamp the position, not the offset_camera_position
     olc::vf2d camera_clamp_min = f_screen_size*0.5f/scale;
-    std::cout << camera_clamp_min.x << ", " << camera_clamp_min.y << std::endl;
+    //std::cout << camera_clamp_min.x << ", " << camera_clamp_min.y << std::endl;
     olc::vf2d camera_clamp_max = UfoGlobal::program.cell_map.map_size-f_screen_size*0.5f/scale;
-    std::cout << camera_clamp_max.x << ", " << camera_clamp_max.y << std::endl;
+    //std::cout << camera_clamp_max.x << ", " << camera_clamp_max.y << std::endl;
 
     if(position.x < camera_clamp_min.x) position.x = camera_clamp_min.x;
     if(position.y < camera_clamp_min.y) position.y = camera_clamp_min.y;
@@ -191,7 +191,7 @@ Camera::SetStateFollowPlatfomer(CellActor *_target){
 
 olc::vf2d Camera::ScreenToWorld(olc::vf2d _screen_position, olc::vf2d _shape_offset){
     
-    //_screen_position -= UfoGlobal::program.GetScreenSize()/2;
+    _screen_position -= olc::vf2d(float(UfoGlobal::program.GetScreenSize().x)*0.5f, float(UfoGlobal::program.GetScreenSize().y)*0.5f);
     olc::vf2d offset_position = _screen_position/scale;
     olc::vf2d offset_camera_position = position + _shape_offset;
     olc::vf2d world_position = offset_position + offset_camera_position;
