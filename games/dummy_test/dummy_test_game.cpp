@@ -20,7 +20,7 @@ DummyTestGame::DummyTestGame() :
 
         UfoGlobal::program.cell_map.LoadMap("../res/map/windmill/windmill.json");
         UfoGlobal::program.entities.push_back(new Dummy(olc::vf2d(450.0f, 50.0f)));
-        UfoGlobal::program.camera.scale = 1.0f;
+        UfoGlobal::program.camera.scale = 3.0f;
         game_state = state_load;
         state_load->SetLoad("../res/map/windmill/windmill.json");
     }

@@ -40,6 +40,7 @@ bool Program::OnUserCreate(){
     return true;
 }
 bool Program::OnUserUpdate(float fElapsedTime){
+    dt = fElapsedTime;
     Clear(olc::GREY);
     SetPixelMode(olc::Pixel::NORMAL);
 
