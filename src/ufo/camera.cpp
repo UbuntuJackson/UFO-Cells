@@ -1,5 +1,6 @@
 #include "camera.h"
 #include <string>
+#include <iostream>
 #include "../../external/olcPixelGameEngine.h"
 #include "../program/program.h"
 #include "mouse_control.h"
@@ -139,7 +140,7 @@ Camera::MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal){
     //std::cout << UfoGlobal::program.GetMouseWheel() << std::endl;
 
     if(UfoGlobal::program.GetMouseWheel() >= 1) scale *= 1.05f;
-    if(UfoGlobal::program.GetMouseWheel() <= -1) scale *= 0.95f;
+    if(UfoGlobal::program.GetMouseWheel() <= -1) scale *= (1.0f/1.05f);
 
     if(UfoGlobal::program.GetKey(olc::RIGHT).bHeld) position.x += 2.2f/scale;
     if(UfoGlobal::program.GetKey(olc::LEFT).bHeld) position.x -= 2.2f/scale;
@@ -150,20 +151,26 @@ Camera::MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal){
 
     //Feed this value to world to screen
 
-    //We wanna clamp the position, not the offset_camera_position
+    olc::vf2d f_screen_size;
+    f_screen_size.x = float(UfoGlobal::program.GetScreenSize().x);
+    f_screen_size.y = float(UfoGlobal::program.GetScreenSize().y);
 
-    if(position.x < 0.0f) position.x = 0.0f;
-    if(position.x > UfoGlobal::program.cell_map.map_size.x-UfoGlobal::program.ScreenWidth()/scale) position.x = UfoGlobal::program.cell_map.map_size.x-UfoGlobal::program.ScreenWidth()/scale;
-    if(position.y < 0.0f) position.y = 0.0f;
-    if(position.y > UfoGlobal::program.cell_map.map_size.y-UfoGlobal::program.ScreenHeight()/scale) position.y = UfoGlobal::program.cell_map.map_size.y-UfoGlobal::program.ScreenHeight()/scale;
+    //We wanna clamp the position, not the offset_camera_position
+    olc::vf2d camera_clamp_min = f_screen_size*0.5f/scale;
+    std::cout << camera_clamp_min.x << ", " << camera_clamp_min.y << std::endl;
+    olc::vf2d camera_clamp_max = UfoGlobal::program.cell_map.map_size-f_screen_size*0.5f/scale;
+    std::cout << camera_clamp_max.x << ", " << camera_clamp_max.y << std::endl;
+
+    if(position.x < camera_clamp_min.x) position.x = camera_clamp_min.x;
+    if(position.y < camera_clamp_min.y) position.y = camera_clamp_min.y;
+    if(position.x > camera_clamp_max.x) position.x = camera_clamp_max.x;
+    if(position.y > camera_clamp_max.y) position.y = camera_clamp_max.y;
 
     olc::vf2d offset_camera_position = position;
 
     olc::vf2d offset_position = _position - offset_camera_position;
-
-    olc::vf2d screen_position = scale * offset_position;
-
-    //screen_position += UfoGlobal::program.GetScreenSize()/2;
+    olc::vf2d screen_position = offset_position * scale;
+    screen_position += f_screen_size*0.5f;
 
     UfoGlobal::program.DrawDecal(
         screen_position,
