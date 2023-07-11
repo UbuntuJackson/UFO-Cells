@@ -9,11 +9,19 @@
 #include "../../games/dummy_test/dummy.h"
 
 namespace UfoAPI{
-    void TestFunction(){std::cout << "hello world" << std::endl;}
+    void PrintFunction(std::string s){std::cout << s << std::endl;}
     void LoadDecal(std::string _path){}
     void DrawDecal(int _x, int _y, std::string _decal_key){}
     //olc::HWButton GetKey(){}
-    void GetMousePos(){}
+    int GetMousePosX(){
+        return UfoGlobal::program.GetMousePos().x;
+    }
+    int GetMousePosY(){
+        return UfoGlobal::program.GetMousePos().y;
+    }
+    bool MouseLeftPressed(){
+        return UfoGlobal::program.GetMouse(0).bPressed;
+    }
     void GetMouseWheel(){}
     void NewDummyTestGame(){
         DummyTestGame *game = new DummyTestGame();

@@ -6,11 +6,13 @@
 #endif
 
 namespace UfoAPI{
-    void TestFunction();
+    void PrintFunction(std::string s);
     void LoadDecal(std::string _path);
     void DrawDecal(int _x, int _y, std::string _decal_key);
     //olc::HWButton GetKey(){}
-    void GetMousePos();
+    int GetMousePosX();
+    int GetMousePosY();
+    bool MouseLeftPressed();
     void GetMouseWheel();
     void NewDummyTestGame();
     void UpdateDummyTestGame();

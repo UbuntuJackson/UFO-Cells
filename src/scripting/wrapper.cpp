@@ -18,12 +18,16 @@
 namespace UfoAPI {
 namespace wrapper {
 
-static SQInteger TestFunction_wrapper(HSQUIRRELVM vm)
+static SQInteger PrintFunction_wrapper(HSQUIRRELVM vm)
 {
-  (void) vm;
+  const SQChar* arg0;
+  if(SQ_FAILED(sq_getstring(vm, 2, &arg0))) {
+    sq_throwerror(vm, _SC("Argument 1 not a string"));
+    return SQ_ERROR;
+  }
 
   try {
-    UfoAPI::TestFunction();
+    UfoAPI::PrintFunction(arg0);
 
     return 0;
 
@@ -31,7 +35,7 @@ static SQInteger TestFunction_wrapper(HSQUIRRELVM vm)
     sq_throwerror(vm, e.what());
     return SQ_ERROR;
   } catch(...) {
-    sq_throwerror(vm, _SC("Unexpected exception while executing function 'TestFunction'"));
+    sq_throwerror(vm, _SC("Unexpected exception while executing function 'PrintFunction'"));
     return SQ_ERROR;
   }
 
@@ -93,20 +97,58 @@ static SQInteger DrawDecal_wrapper(HSQUIRRELVM vm)
 
 }
 
-static SQInteger GetMousePos_wrapper(HSQUIRRELVM vm)
+static SQInteger GetMousePosX_wrapper(HSQUIRRELVM vm)
 {
-  (void) vm;
 
   try {
-    UfoAPI::GetMousePos();
+    int return_value = UfoAPI::GetMousePosX();
 
-    return 0;
+    sq_pushinteger(vm, return_value);
+    return 1;
 
   } catch(std::exception& e) {
     sq_throwerror(vm, e.what());
     return SQ_ERROR;
   } catch(...) {
-    sq_throwerror(vm, _SC("Unexpected exception while executing function 'GetMousePos'"));
+    sq_throwerror(vm, _SC("Unexpected exception while executing function 'GetMousePosX'"));
+    return SQ_ERROR;
+  }
+
+}
+
+static SQInteger GetMousePosY_wrapper(HSQUIRRELVM vm)
+{
+
+  try {
+    int return_value = UfoAPI::GetMousePosY();
+
+    sq_pushinteger(vm, return_value);
+    return 1;
+
+  } catch(std::exception& e) {
+    sq_throwerror(vm, e.what());
+    return SQ_ERROR;
+  } catch(...) {
+    sq_throwerror(vm, _SC("Unexpected exception while executing function 'GetMousePosY'"));
+    return SQ_ERROR;
+  }
+
+}
+
+static SQInteger MouseLeftPressed_wrapper(HSQUIRRELVM vm)
+{
+
+  try {
+    bool return_value = UfoAPI::MouseLeftPressed();
+
+    sq_pushbool(vm, return_value);
+    return 1;
+
+  } catch(std::exception& e) {
+    sq_throwerror(vm, e.what());
+    return SQ_ERROR;
+  } catch(...) {
+    sq_throwerror(vm, _SC("Unexpected exception while executing function 'MouseLeftPressed'"));
     return SQ_ERROR;
   }
 
@@ -174,11 +216,11 @@ void register_ufo_wrapper(HSQUIRRELVM v)
 {
   using namespace wrapper;
 
-  sq_pushstring(v, "TestFunction", -1);
-  sq_newclosure(v, &TestFunction_wrapper, 0);
-  sq_setparamscheck(v, SQ_MATCHTYPEMASKSTRING, ".");
+  sq_pushstring(v, "PrintFunction", -1);
+  sq_newclosure(v, &PrintFunction_wrapper, 0);
+  sq_setparamscheck(v, SQ_MATCHTYPEMASKSTRING, ".s");
   if(SQ_FAILED(sq_createslot(v, -3))) {
-    throw SquirrelError(v, "Couldn't register function 'TestFunction'");
+    throw SquirrelError(v, "Couldn't register function 'PrintFunction'");
   }
 
   sq_pushstring(v, "LoadDecal", -1);
@@ -195,11 +237,25 @@ void register_ufo_wrapper(HSQUIRRELVM v)
     throw SquirrelError(v, "Couldn't register function 'DrawDecal'");
   }
 
-  sq_pushstring(v, "GetMousePos", -1);
-  sq_newclosure(v, &GetMousePos_wrapper, 0);
+  sq_pushstring(v, "GetMousePosX", -1);
+  sq_newclosure(v, &GetMousePosX_wrapper, 0);
   sq_setparamscheck(v, SQ_MATCHTYPEMASKSTRING, ".");
   if(SQ_FAILED(sq_createslot(v, -3))) {
-    throw SquirrelError(v, "Couldn't register function 'GetMousePos'");
+    throw SquirrelError(v, "Couldn't register function 'GetMousePosX'");
+  }
+
+  sq_pushstring(v, "GetMousePosY", -1);
+  sq_newclosure(v, &GetMousePosY_wrapper, 0);
+  sq_setparamscheck(v, SQ_MATCHTYPEMASKSTRING, ".");
+  if(SQ_FAILED(sq_createslot(v, -3))) {
+    throw SquirrelError(v, "Couldn't register function 'GetMousePosY'");
+  }
+
+  sq_pushstring(v, "MouseLeftPressed", -1);
+  sq_newclosure(v, &MouseLeftPressed_wrapper, 0);
+  sq_setparamscheck(v, SQ_MATCHTYPEMASKSTRING, ".");
+  if(SQ_FAILED(sq_createslot(v, -3))) {
+    throw SquirrelError(v, "Couldn't register function 'MouseLeftPressed'");
   }
 
   sq_pushstring(v, "GetMouseWheel", -1);

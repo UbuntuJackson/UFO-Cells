@@ -1,10 +1,18 @@
-::menu_state <- null;
+::CurrentMenu <- null;
 ::MainMenu <- null;
 ::SaveMenu <- null;
 ::LoadMenu <- null;
 ::OptionsMenu <- null;
 
-::Quit <-function(){}
+//::Quit <-function(){}
+
+::NoMenu <- {
+    get_clicked_button = function(){
+        return {func = function(){if(MouseLeftPressed()) PrintFunction(GetMousePosX().tostring() + ", " + GetMousePosX().tostring());}};
+    }
+}
+
+CurrentMenu = NoMenu;
 
 ::MainMenu <- {
 
@@ -14,19 +22,19 @@
             position = {x = null, y = null}
             size = {x = null, y = null}
             name = "New Savefile"
-            func = function(){menu_state = SaveMenu;}
+            func = function(){CurrentMenu = SaveMenu;}
         },
         {
             position = {x = null, y = null}
             size = {x = null, y = null}
             name = "Load Savefile"
-            func = function(){menu_state = LoadMenu;}
+            func = function(){CurrentMenu = LoadMenu;}
         },
         {
             position = {x = null, y = null}
             size = {x = null, y = null}
             name = "Options"
-            func = function(){menu_state = OptionsMenu;}
+            func = function(){CurrentMenu = OptionsMenu;}
         },
         {
             position = {x = null, y = null}
@@ -39,11 +47,17 @@
     offset_positions = function(_x, _y){}
     get_clicked_button = function(){
         foreach (button in buttons) {
-            if(RectVsPoint(Rect(button.position, button.size), GetMousePos())){
+            if(/*RectVsPoint(Rect(button.position, button.size), GetMousePos())*/ true){
                 return button;
             }
         }
-        return null;
+        return {func = function(){}};
     }
-    draw = function(){/*Enter drawing-call here*/}
+    draw = function(){}
 }
+
+::UpdateMenus <- function(){
+    CurrentMenu.get_clicked_button().func();
+}
+
+UpdateMenus();
