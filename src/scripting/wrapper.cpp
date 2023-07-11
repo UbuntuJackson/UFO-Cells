@@ -97,6 +97,185 @@ static SQInteger DrawDecal_wrapper(HSQUIRRELVM vm)
 
 }
 
+static SQInteger DrawRectangleDecal_wrapper(HSQUIRRELVM vm)
+{
+  SQInteger arg0;
+  if(SQ_FAILED(sq_getinteger(vm, 2, &arg0))) {
+    sq_throwerror(vm, _SC("Argument 1 not an integer"));
+    return SQ_ERROR;
+  }
+  SQInteger arg1;
+  if(SQ_FAILED(sq_getinteger(vm, 3, &arg1))) {
+    sq_throwerror(vm, _SC("Argument 2 not an integer"));
+    return SQ_ERROR;
+  }
+  SQInteger arg2;
+  if(SQ_FAILED(sq_getinteger(vm, 4, &arg2))) {
+    sq_throwerror(vm, _SC("Argument 3 not an integer"));
+    return SQ_ERROR;
+  }
+  SQInteger arg3;
+  if(SQ_FAILED(sq_getinteger(vm, 5, &arg3))) {
+    sq_throwerror(vm, _SC("Argument 4 not an integer"));
+    return SQ_ERROR;
+  }
+  SQInteger arg4;
+  if(SQ_FAILED(sq_getinteger(vm, 6, &arg4))) {
+    sq_throwerror(vm, _SC("Argument 5 not an integer"));
+    return SQ_ERROR;
+  }
+  SQInteger arg5;
+  if(SQ_FAILED(sq_getinteger(vm, 7, &arg5))) {
+    sq_throwerror(vm, _SC("Argument 6 not an integer"));
+    return SQ_ERROR;
+  }
+  SQInteger arg6;
+  if(SQ_FAILED(sq_getinteger(vm, 8, &arg6))) {
+    sq_throwerror(vm, _SC("Argument 7 not an integer"));
+    return SQ_ERROR;
+  }
+  SQInteger arg7;
+  if(SQ_FAILED(sq_getinteger(vm, 9, &arg7))) {
+    sq_throwerror(vm, _SC("Argument 8 not an integer"));
+    return SQ_ERROR;
+  }
+
+  try {
+    UfoAPI::DrawRectangleDecal(static_cast<int> (arg0), static_cast<int> (arg1), static_cast<int> (arg2), static_cast<int> (arg3), static_cast<int> (arg4), static_cast<int> (arg5), static_cast<int> (arg6), static_cast<int> (arg7));
+
+    return 0;
+
+  } catch(std::exception& e) {
+    sq_throwerror(vm, e.what());
+    return SQ_ERROR;
+  } catch(...) {
+    sq_throwerror(vm, _SC("Unexpected exception while executing function 'DrawRectangleDecal'"));
+    return SQ_ERROR;
+  }
+
+}
+
+static SQInteger FillRectangleDecal_wrapper(HSQUIRRELVM vm)
+{
+  SQInteger arg0;
+  if(SQ_FAILED(sq_getinteger(vm, 2, &arg0))) {
+    sq_throwerror(vm, _SC("Argument 1 not an integer"));
+    return SQ_ERROR;
+  }
+  SQInteger arg1;
+  if(SQ_FAILED(sq_getinteger(vm, 3, &arg1))) {
+    sq_throwerror(vm, _SC("Argument 2 not an integer"));
+    return SQ_ERROR;
+  }
+  SQInteger arg2;
+  if(SQ_FAILED(sq_getinteger(vm, 4, &arg2))) {
+    sq_throwerror(vm, _SC("Argument 3 not an integer"));
+    return SQ_ERROR;
+  }
+  SQInteger arg3;
+  if(SQ_FAILED(sq_getinteger(vm, 5, &arg3))) {
+    sq_throwerror(vm, _SC("Argument 4 not an integer"));
+    return SQ_ERROR;
+  }
+  SQInteger arg4;
+  if(SQ_FAILED(sq_getinteger(vm, 6, &arg4))) {
+    sq_throwerror(vm, _SC("Argument 5 not an integer"));
+    return SQ_ERROR;
+  }
+  SQInteger arg5;
+  if(SQ_FAILED(sq_getinteger(vm, 7, &arg5))) {
+    sq_throwerror(vm, _SC("Argument 6 not an integer"));
+    return SQ_ERROR;
+  }
+  SQInteger arg6;
+  if(SQ_FAILED(sq_getinteger(vm, 8, &arg6))) {
+    sq_throwerror(vm, _SC("Argument 7 not an integer"));
+    return SQ_ERROR;
+  }
+  SQInteger arg7;
+  if(SQ_FAILED(sq_getinteger(vm, 9, &arg7))) {
+    sq_throwerror(vm, _SC("Argument 8 not an integer"));
+    return SQ_ERROR;
+  }
+
+  try {
+    UfoAPI::FillRectangleDecal(static_cast<int> (arg0), static_cast<int> (arg1), static_cast<int> (arg2), static_cast<int> (arg3), static_cast<int> (arg4), static_cast<int> (arg5), static_cast<int> (arg6), static_cast<int> (arg7));
+
+    return 0;
+
+  } catch(std::exception& e) {
+    sq_throwerror(vm, e.what());
+    return SQ_ERROR;
+  } catch(...) {
+    sq_throwerror(vm, _SC("Unexpected exception while executing function 'FillRectangleDecal'"));
+    return SQ_ERROR;
+  }
+
+}
+
+static SQInteger DrawStringDecal_wrapper(HSQUIRRELVM vm)
+{
+  SQInteger arg0;
+  if(SQ_FAILED(sq_getinteger(vm, 2, &arg0))) {
+    sq_throwerror(vm, _SC("Argument 1 not an integer"));
+    return SQ_ERROR;
+  }
+  SQInteger arg1;
+  if(SQ_FAILED(sq_getinteger(vm, 3, &arg1))) {
+    sq_throwerror(vm, _SC("Argument 2 not an integer"));
+    return SQ_ERROR;
+  }
+  const SQChar* arg2;
+  if(SQ_FAILED(sq_getstring(vm, 4, &arg2))) {
+    sq_throwerror(vm, _SC("Argument 3 not a string"));
+    return SQ_ERROR;
+  }
+  SQInteger arg3;
+  if(SQ_FAILED(sq_getinteger(vm, 5, &arg3))) {
+    sq_throwerror(vm, _SC("Argument 4 not an integer"));
+    return SQ_ERROR;
+  }
+  SQInteger arg4;
+  if(SQ_FAILED(sq_getinteger(vm, 6, &arg4))) {
+    sq_throwerror(vm, _SC("Argument 5 not an integer"));
+    return SQ_ERROR;
+  }
+  SQInteger arg5;
+  if(SQ_FAILED(sq_getinteger(vm, 7, &arg5))) {
+    sq_throwerror(vm, _SC("Argument 6 not an integer"));
+    return SQ_ERROR;
+  }
+  SQInteger arg6;
+  if(SQ_FAILED(sq_getinteger(vm, 8, &arg6))) {
+    sq_throwerror(vm, _SC("Argument 7 not an integer"));
+    return SQ_ERROR;
+  }
+  SQFloat arg7;
+  if(SQ_FAILED(sq_getfloat(vm, 9, &arg7))) {
+    sq_throwerror(vm, _SC("Argument 8 not a float"));
+    return SQ_ERROR;
+  }
+  SQFloat arg8;
+  if(SQ_FAILED(sq_getfloat(vm, 10, &arg8))) {
+    sq_throwerror(vm, _SC("Argument 9 not a float"));
+    return SQ_ERROR;
+  }
+
+  try {
+    UfoAPI::DrawStringDecal(static_cast<int> (arg0), static_cast<int> (arg1), arg2, static_cast<int> (arg3), static_cast<int> (arg4), static_cast<int> (arg5), static_cast<int> (arg6), arg7, arg8);
+
+    return 0;
+
+  } catch(std::exception& e) {
+    sq_throwerror(vm, e.what());
+    return SQ_ERROR;
+  } catch(...) {
+    sq_throwerror(vm, _SC("Unexpected exception while executing function 'DrawStringDecal'"));
+    return SQ_ERROR;
+  }
+
+}
+
 static SQInteger GetMousePosX_wrapper(HSQUIRRELVM vm)
 {
 
@@ -173,6 +352,74 @@ static SQInteger GetMouseWheel_wrapper(HSQUIRRELVM vm)
 
 }
 
+static SQInteger RectangleVsPoint_wrapper(HSQUIRRELVM vm)
+{
+  SQFloat arg0;
+  if(SQ_FAILED(sq_getfloat(vm, 2, &arg0))) {
+    sq_throwerror(vm, _SC("Argument 1 not a float"));
+    return SQ_ERROR;
+  }
+  SQFloat arg1;
+  if(SQ_FAILED(sq_getfloat(vm, 3, &arg1))) {
+    sq_throwerror(vm, _SC("Argument 2 not a float"));
+    return SQ_ERROR;
+  }
+  SQFloat arg2;
+  if(SQ_FAILED(sq_getfloat(vm, 4, &arg2))) {
+    sq_throwerror(vm, _SC("Argument 3 not a float"));
+    return SQ_ERROR;
+  }
+  SQFloat arg3;
+  if(SQ_FAILED(sq_getfloat(vm, 5, &arg3))) {
+    sq_throwerror(vm, _SC("Argument 4 not a float"));
+    return SQ_ERROR;
+  }
+  SQFloat arg4;
+  if(SQ_FAILED(sq_getfloat(vm, 6, &arg4))) {
+    sq_throwerror(vm, _SC("Argument 5 not a float"));
+    return SQ_ERROR;
+  }
+  SQFloat arg5;
+  if(SQ_FAILED(sq_getfloat(vm, 7, &arg5))) {
+    sq_throwerror(vm, _SC("Argument 6 not a float"));
+    return SQ_ERROR;
+  }
+
+  try {
+    bool return_value = UfoAPI::RectangleVsPoint(arg0, arg1, arg2, arg3, arg4, arg5);
+
+    sq_pushbool(vm, return_value);
+    return 1;
+
+  } catch(std::exception& e) {
+    sq_throwerror(vm, e.what());
+    return SQ_ERROR;
+  } catch(...) {
+    sq_throwerror(vm, _SC("Unexpected exception while executing function 'RectangleVsPoint'"));
+    return SQ_ERROR;
+  }
+
+}
+
+static SQInteger Quit_wrapper(HSQUIRRELVM vm)
+{
+  (void) vm;
+
+  try {
+    UfoAPI::Quit();
+
+    return 0;
+
+  } catch(std::exception& e) {
+    sq_throwerror(vm, e.what());
+    return SQ_ERROR;
+  } catch(...) {
+    sq_throwerror(vm, _SC("Unexpected exception while executing function 'Quit'"));
+    return SQ_ERROR;
+  }
+
+}
+
 static SQInteger NewDummyTestGame_wrapper(HSQUIRRELVM vm)
 {
   (void) vm;
@@ -237,6 +484,27 @@ void register_ufo_wrapper(HSQUIRRELVM v)
     throw SquirrelError(v, "Couldn't register function 'DrawDecal'");
   }
 
+  sq_pushstring(v, "DrawRectangleDecal", -1);
+  sq_newclosure(v, &DrawRectangleDecal_wrapper, 0);
+  sq_setparamscheck(v, SQ_MATCHTYPEMASKSTRING, ".b|nb|nb|nb|nb|nb|nb|nb|n");
+  if(SQ_FAILED(sq_createslot(v, -3))) {
+    throw SquirrelError(v, "Couldn't register function 'DrawRectangleDecal'");
+  }
+
+  sq_pushstring(v, "FillRectangleDecal", -1);
+  sq_newclosure(v, &FillRectangleDecal_wrapper, 0);
+  sq_setparamscheck(v, SQ_MATCHTYPEMASKSTRING, ".b|nb|nb|nb|nb|nb|nb|nb|n");
+  if(SQ_FAILED(sq_createslot(v, -3))) {
+    throw SquirrelError(v, "Couldn't register function 'FillRectangleDecal'");
+  }
+
+  sq_pushstring(v, "DrawStringDecal", -1);
+  sq_newclosure(v, &DrawStringDecal_wrapper, 0);
+  sq_setparamscheck(v, SQ_MATCHTYPEMASKSTRING, ".b|nb|nsb|nb|nb|nb|nb|nb|n");
+  if(SQ_FAILED(sq_createslot(v, -3))) {
+    throw SquirrelError(v, "Couldn't register function 'DrawStringDecal'");
+  }
+
   sq_pushstring(v, "GetMousePosX", -1);
   sq_newclosure(v, &GetMousePosX_wrapper, 0);
   sq_setparamscheck(v, SQ_MATCHTYPEMASKSTRING, ".");
@@ -263,6 +531,20 @@ void register_ufo_wrapper(HSQUIRRELVM v)
   sq_setparamscheck(v, SQ_MATCHTYPEMASKSTRING, ".");
   if(SQ_FAILED(sq_createslot(v, -3))) {
     throw SquirrelError(v, "Couldn't register function 'GetMouseWheel'");
+  }
+
+  sq_pushstring(v, "RectangleVsPoint", -1);
+  sq_newclosure(v, &RectangleVsPoint_wrapper, 0);
+  sq_setparamscheck(v, SQ_MATCHTYPEMASKSTRING, ".b|nb|nb|nb|nb|nb|n");
+  if(SQ_FAILED(sq_createslot(v, -3))) {
+    throw SquirrelError(v, "Couldn't register function 'RectangleVsPoint'");
+  }
+
+  sq_pushstring(v, "Quit", -1);
+  sq_newclosure(v, &Quit_wrapper, 0);
+  sq_setparamscheck(v, SQ_MATCHTYPEMASKSTRING, ".");
+  if(SQ_FAILED(sq_createslot(v, -3))) {
+    throw SquirrelError(v, "Couldn't register function 'Quit'");
   }
 
   sq_pushstring(v, "NewDummyTestGame", -1);

@@ -48,5 +48,5 @@ bool Program::OnUserUpdate(float fElapsedTime){
     sqstd_dofile(vm, path.c_str(), 0, 1);
 
     SetPixelMode(olc::Pixel::NORMAL);
-    return true;
+    return running;
 }

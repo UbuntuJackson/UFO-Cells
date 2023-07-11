@@ -45,7 +45,7 @@ void StateLoad::Update(){
         asset_index++;
     }
     else{
-        UfoGlobal::program.game->game_state = UfoGlobal::program.game->game_states["menu"];
+        UfoGlobal::program.game->game_state = UfoGlobal::program.game->game_states["play"];
     }
     UfoGlobal::program.DrawDecal(olc::vf2d(0.0f, 0.0f), UfoGlobal::program.asset_manager.decLoad);
 }

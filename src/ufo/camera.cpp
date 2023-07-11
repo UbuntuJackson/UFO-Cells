@@ -57,16 +57,26 @@ Camera::FollowPlatformer(olc::vf2d _position, olc::Decal *_decal){
 
     //Feed this value to WorldToScreen()
 
-    if(position.x < 0.0f) position.x = 0.0f;
-    if(position.x > UfoGlobal::program.cell_map.map_size.x-UfoGlobal::program.ScreenWidth()/scale) position.x = UfoGlobal::program.cell_map.map_size.x-UfoGlobal::program.ScreenWidth()/scale;
-    if(position.y < 0.0f) position.y = 0.0f;
-    if(position.y > UfoGlobal::program.cell_map.map_size.y-UfoGlobal::program.ScreenHeight()/scale) position.y = UfoGlobal::program.cell_map.map_size.y-UfoGlobal::program.ScreenHeight()/scale;
+    olc::vf2d f_screen_size;
+    f_screen_size.x = float(UfoGlobal::program.GetScreenSize().x);
+    f_screen_size.y = float(UfoGlobal::program.GetScreenSize().y);
+
+    //We wanna clamp the position, not the offset_camera_position
+    olc::vf2d camera_clamp_min = f_screen_size*0.5f/scale - UfoGlobal::program.asset_manager.decPin->sprite->Size()/2;
+    //std::cout << camera_clamp_min.x << ", " << camera_clamp_min.y << std::endl;
+    olc::vf2d camera_clamp_max = UfoGlobal::program.cell_map.map_size-f_screen_size*0.5f/scale - UfoGlobal::program.asset_manager.decPin->sprite->Size()/2;
+    //std::cout << camera_clamp_max.x << ", " << camera_clamp_max.y << std::endl;
+
+    if(position.x < camera_clamp_min.x) position.x = camera_clamp_min.x;
+    if(position.y < camera_clamp_min.y) position.y = camera_clamp_min.y;
+    if(position.x > camera_clamp_max.x) position.x = camera_clamp_max.x;
+    if(position.y > camera_clamp_max.y) position.y = camera_clamp_max.y;
 
     olc::vf2d offset_camera_position = position + UfoGlobal::program.asset_manager.decPin->sprite->Size()/2;
 
     olc::vf2d offset_position = _position - offset_camera_position;
     olc::vf2d screen_position = offset_position * scale;
-    screen_position += UfoGlobal::program.GetScreenSize()/2;
+    screen_position += f_screen_size*0.5f;
 
     UfoGlobal::program.DrawDecal(
         screen_position,
@@ -190,7 +200,7 @@ Camera::SetStateFollowPlatfomer(CellActor *_target){
 }
 
 olc::vf2d Camera::ScreenToWorld(olc::vf2d _screen_position, olc::vf2d _shape_offset){
-    
+
     _screen_position -= olc::vf2d(float(UfoGlobal::program.GetScreenSize().x)*0.5f, float(UfoGlobal::program.GetScreenSize().y)*0.5f);
     olc::vf2d offset_position = _screen_position/scale;
     olc::vf2d offset_camera_position = position + _shape_offset;
