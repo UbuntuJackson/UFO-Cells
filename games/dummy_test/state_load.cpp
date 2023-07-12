@@ -14,6 +14,7 @@
 StateLoad::StateLoad() : State(){}
 
 void StateLoad::Set(std::string _data){
+    asset_index = 0;
     UfoGlobal::program.cell_map.UnloadMap();
 
     std::ifstream ifs;

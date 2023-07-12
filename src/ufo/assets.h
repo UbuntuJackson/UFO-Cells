@@ -9,6 +9,7 @@ public:
     olc::Decal *decLoad;
 
     std::map<std::string, olc::Decal*> decals;
+    std::map<std::string, olc::Sprite*> sprites;
 
     Assets();
     ~Assets();

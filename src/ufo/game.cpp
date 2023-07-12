@@ -6,7 +6,6 @@ game_state{_game_state}
 {}
 
 Game::~Game(){
-    delete game_state;
 }
 
 void Game::SetState(std::string _state, std::string _data){
