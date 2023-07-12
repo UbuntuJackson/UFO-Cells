@@ -278,6 +278,77 @@ Menus["OptionsMenu"] <- {
     }
 }
 
+Menus["PauseOptions"] <- {
+
+    position = {x = 600, y = 200}
+    size = {x = 400, y = 400}
+    buttons = [
+        {
+            position = {x = null, y = null}
+            size = {x = null, y = null}
+            name = "Audio"
+            func = function(){}
+        },
+        {
+            position = {x = null, y = null}
+            size = {x = null, y = null}
+            name = "Input"
+            func = function(){}
+        },
+        {
+            position = {x = null, y = null}
+            size = {x = null, y = null}
+            name = "Language"
+            func = function(){}
+        },
+        {
+            position = {x = null, y = null}
+            size = {x = null, y = null}
+            name = "Advanced"
+            func = function(){}
+        },
+        {
+            position = {x = null, y = null}
+            size = {x = null, y = null}
+            name = "Back"
+            func = function(){
+                SetMenu("PauseMenu");
+            }
+        }
+    ]
+    set_positions = function(){
+        foreach(index, button in buttons){
+            button.size.x = 400
+            button.size.y = 100;
+        }
+        foreach(index, button in buttons){
+            button.position.x = position.x
+            button.position.y = position.y + index * button.size.y + index * 5;
+        }
+    }
+    offset_positions = function(_x, _y){}
+    get_clicked_button = function(){
+        foreach (button in buttons) {
+            if(RectangleVsPoint(button.position.x, button.position.y, button.size.x, button.size.y, GetMousePosX(), GetMousePosY())){
+                return button;
+            }
+        }
+        return {func = function(){}};
+    }
+    draw = function(){
+        DrawMap();
+        foreach (button in buttons) {
+            if(RectangleVsPoint(button.position.x, button.position.y, button.size.x, button.size.y, GetMousePosX(), GetMousePosY())){
+                FillRectangleDecal(button.position.x, button.position.y, button.size.x, button.size.y, 230, 170, 130, 225);
+            }
+            else{
+                FillRectangleDecal(button.position.x, button.position.y, button.size.x, button.size.y, 200, 150, 100, 225);
+            }
+            DrawStringDecal(button.position.x + 20, button.position.y + 20, button.name, 255, 255, 255, 255, 3.0, 3.0);
+        }
+    }
+}
+
 Menus["PauseMenu"] <- {
 
     position = {x = 600, y = 200}
@@ -296,7 +367,7 @@ Menus["PauseMenu"] <- {
             size = {x = null, y = null}
             name = "Options"
             func = function(){
-                SetMenu("OptionsMenu");
+                SetMenu("PauseOptions");
             }
         },
         {
@@ -346,6 +417,7 @@ Menus.OptionsMenu.set_positions();
 Menus.LoadMenu.set_positions();
 Menus.NewGameMenu.set_positions();
 Menus.PauseMenu.set_positions();
+Menus.PauseOptions.set_positions();
 
 //CurrentMenu = Menus[GetStateData()];
 
@@ -354,6 +426,7 @@ Menus.PauseMenu.set_positions();
 }
 
 ::UpdateMenus <- function(){
-    if(MouseLeftPressed()) Menus[GetStateData()].get_clicked_button().func();
     Menus[GetStateData()].draw();
+    if(MouseLeftPressed()) Menus[GetStateData()].get_clicked_button().func();
+    //Menus[GetStateData()].draw();
 }

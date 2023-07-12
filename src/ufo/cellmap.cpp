@@ -44,7 +44,10 @@ CellMap::LoadMap(std::string _map_path){
 }
 
 void CellMap::UnloadMap(){
-
+    for(auto &[key, spr] : map_sprites){
+        delete spr;
+    }
+    map_sprites.clear();
     for(auto &dec : visible_layers){
         delete dec;
     }

@@ -25,7 +25,6 @@ std::string StateMenu::GetData(){
 }
 
 void StateMenu::Update(){
-    std::cout << "hello world" << std::endl;
     std::string path = "../games/dummy_test/scripts/update_menus.nut";
     sqstd_dofile(UfoGlobal::program.vm, path.c_str(), 0, 1);
 }

@@ -16,6 +16,7 @@ StateLoad::StateLoad() : State(){}
 void StateLoad::Set(std::string _data){
     asset_index = 0;
     UfoGlobal::program.cell_map.UnloadMap();
+    layer_information.clear();
 
     std::ifstream ifs;
     ifs.open(_data, std::ifstream::in);
@@ -31,20 +32,18 @@ void StateLoad::Set(std::string _data){
 
         layer_information.push_back(LayerInfo{name, type, path});
     }
-    for(auto &i : layer_information){
-        std::cout << i.path << std::endl;
-    }
 
     cJSON_Delete(j);
 }
 
 void StateLoad::Update(){
-    std::cout << "state_load.cpp" << std::endl;
     if(asset_index < layer_information.size()){
 
         if(layer_information[asset_index].type == "collision"){
 
             olc::Sprite *spr = new olc::Sprite(layer_information[asset_index].path);
+            UfoGlobal::program.cell_map.map_sprites[layer_information[asset_index].name] = spr;
+
             olc::Decal *dec = new olc::Decal(spr);
             UfoGlobal::program.cell_map.collision_layers[layer_information[asset_index].name] = dec;
             UfoGlobal::program.cell_map.map_size = spr->Size();
@@ -52,17 +51,17 @@ void StateLoad::Update(){
         if(layer_information[asset_index].type == "visible"){
 
             olc::Sprite *spr = new olc::Sprite(layer_information[asset_index].path);
+            UfoGlobal::program.cell_map.map_sprites[layer_information[asset_index].name] = spr;
+
             olc::Decal *dec = new olc::Decal(spr);
             UfoGlobal::program.cell_map.visible_layers.push_back(dec);
             UfoGlobal::program.cell_map.map_size = spr->Size();
-            UfoGlobal::program.DrawDecal(olc::vf2d(0.0f, 0.0f), dec);
+            //UfoGlobal::program.DrawDecal(olc::vf2d(0.0f, 0.0f), dec);
         }
         asset_index++;
     }
     else{
         UfoGlobal::program.game->SetState("play", "...");
-        //cJSON_Delete(j);
     }
-    std::cout << "state_load.cpp" << std::endl;
-    //UfoGlobal::program.DrawDecal(olc::vf2d(0.0f, 0.0f), UfoGlobal::program.asset_manager.decLoad);
+    UfoGlobal::program.DrawDecal(olc::vf2d(0.0f, 0.0f), UfoGlobal::program.asset_manager.decLoad);
 }

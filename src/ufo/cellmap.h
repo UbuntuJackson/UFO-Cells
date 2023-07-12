@@ -10,7 +10,7 @@ class CellMap{
 public:
     olc::vf2d map_size;
     std::string map_path;
-    std::vector<olc::Sprite*> sprites;
+    std::map<std::string ,olc::Sprite*> map_sprites;
     std::vector<olc::Decal*> visible_layers;
     std::map<std::string, olc::Decal*> collision_layers;
     CellMap();
