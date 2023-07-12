@@ -7,8 +7,8 @@
 #include <iostream>
 
 Dummy::Dummy(olc::vf2d _position) : CellActor(_position){
-    //UfoGlobal::program.camera.SetStateFollowPlatfomer(this);
-    UfoGlobal::program.camera.m_camera_state = MOUSE;
+    UfoGlobal::program.camera.SetStateFollowPlatfomer(this);
+    //UfoGlobal::program.camera.m_camera_state = MOUSE;
 }
 
 void
@@ -26,7 +26,7 @@ Dummy::Update(){
 
     //HEIGHT ADJUSTMENT OVERLAP
 
-    if(IsOverlapping(UfoGlobal::program.asset_manager.decPin, solid_layer, position)){
+    if(IsOverlapping(UfoGlobal::program.asset_manager.GetDecal("decPin"), solid_layer, position)){
         former_position.y = std::floor(former_position.y);
 
         if(velocity.x > 0.0f){
@@ -39,11 +39,11 @@ Dummy::Update(){
         if(velocity.x > 0.0f){
 
             while(std::floor(former_position.x) != std::floor(position.x)+1.0f){
-                if(IsOverlappingHeight(UfoGlobal::program.asset_manager.decPin, solid_layer, former_position) > int(former_position.y) + snap_up_range
-                    && IsOverlappingHeight(UfoGlobal::program.asset_manager.decPin, solid_layer, former_position) != former_position.y +
-                    UfoGlobal::program.asset_manager.decPin->sprite->Size().y){
+                if(IsOverlappingHeight(UfoGlobal::program.asset_manager.GetDecal("decPin"), solid_layer, former_position) > int(former_position.y) + snap_up_range
+                    && IsOverlappingHeight(UfoGlobal::program.asset_manager.GetDecal("decPin"), solid_layer, former_position) != former_position.y +
+                    UfoGlobal::program.asset_manager.GetDecal("decPin")->sprite->Size().y){
 
-                    while(IsOverlapping(UfoGlobal::program.asset_manager.decPin, solid_layer, former_position)){
+                    while(IsOverlapping(UfoGlobal::program.asset_manager.GetDecal("decPin"), solid_layer, former_position)){
                         former_position.y -= 1.0f;
                     }
 
@@ -52,8 +52,8 @@ Dummy::Update(){
                 former_position.x += 1.0f;
             }
 
-            if(IsOverlappingHeight(UfoGlobal::program.asset_manager.decPin, solid_layer, former_position) > int(former_position.y) + snap_up_range){
-                while(IsOverlapping(UfoGlobal::program.asset_manager.decPin, solid_layer, former_position)){
+            if(IsOverlappingHeight(UfoGlobal::program.asset_manager.GetDecal("decPin"), solid_layer, former_position) > int(former_position.y) + snap_up_range){
+                while(IsOverlapping(UfoGlobal::program.asset_manager.GetDecal("decPin"), solid_layer, former_position)){
                     former_position.y -= 1.0f;
                 }
             }
@@ -62,10 +62,10 @@ Dummy::Update(){
         if(velocity.x < 0.0f){
             while(former_position.x != std::floor(position.x)){
 
-                if(IsOverlappingHeight(UfoGlobal::program.asset_manager.decPin, solid_layer, former_position) > int(former_position.y) + snap_up_range
-                    && IsOverlappingHeight(UfoGlobal::program.asset_manager.decPin, solid_layer, former_position) != former_position.y +
-                    UfoGlobal::program.asset_manager.decPin->sprite->Size().y){
-                    while(IsOverlapping(UfoGlobal::program.asset_manager.decPin, solid_layer, former_position)){
+                if(IsOverlappingHeight(UfoGlobal::program.asset_manager.GetDecal("decPin"), solid_layer, former_position) > int(former_position.y) + snap_up_range
+                    && IsOverlappingHeight(UfoGlobal::program.asset_manager.GetDecal("decPin"), solid_layer, former_position) != former_position.y +
+                    UfoGlobal::program.asset_manager.GetDecal("decPin")->sprite->Size().y){
+                    while(IsOverlapping(UfoGlobal::program.asset_manager.GetDecal("decPin"), solid_layer, former_position)){
                         former_position.y -= 1.0f;
                     }
 
@@ -74,8 +74,8 @@ Dummy::Update(){
                 former_position.x -= 1.0f;
             }
 
-            if(IsOverlappingHeight(UfoGlobal::program.asset_manager.decPin, solid_layer, former_position) > int(former_position.y) + snap_up_range){
-                while(IsOverlapping(UfoGlobal::program.asset_manager.decPin, solid_layer, former_position)){
+            if(IsOverlappingHeight(UfoGlobal::program.asset_manager.GetDecal("decPin"), solid_layer, former_position) > int(former_position.y) + snap_up_range){
+                while(IsOverlapping(UfoGlobal::program.asset_manager.GetDecal("decPin"), solid_layer, former_position)){
                     former_position.y -= 1.0f;
                 }
 
@@ -106,8 +106,8 @@ Dummy::Update(){
 
     if(was_grounded == true && is_grounded == false && velocity.y > 0.0f){
         position.y = std::floor(position.y);
-        if(HeightUntilGround(UfoGlobal::program.asset_manager.decPin, solid_layer, position) < snap_to_ground){
-            while(!IsOverlapping(UfoGlobal::program.asset_manager.decPin, solid_layer, position)){
+        if(HeightUntilGround(UfoGlobal::program.asset_manager.GetDecal("decPin"), solid_layer, position) < snap_to_ground){
+            while(!IsOverlapping(UfoGlobal::program.asset_manager.GetDecal("decPin"), solid_layer, position)){
 
                 position.y += 1.0f;
 
@@ -122,16 +122,16 @@ Dummy::Update(){
 
 void
 Dummy::AdjustCollisionX(){
-    if(IsOverlapping(UfoGlobal::program.asset_manager.decPin, solid_layer, position)){
+    if(IsOverlapping(UfoGlobal::program.asset_manager.GetDecal("decPin"), solid_layer, position)){
         if(velocity.x > 0.0f){
             position.x = std::floor(position.x);
-            while(IsOverlapping(UfoGlobal::program.asset_manager.decPin, solid_layer, position)){
+            while(IsOverlapping(UfoGlobal::program.asset_manager.GetDecal("decPin"), solid_layer, position)){
                 position.x -= 1.0f;
             }
         }
         if(velocity.x < 0.0f){
             position.x = std::ceil(position.x);
-            while(IsOverlapping(UfoGlobal::program.asset_manager.decPin, solid_layer, position)){
+            while(IsOverlapping(UfoGlobal::program.asset_manager.GetDecal("decPin"), solid_layer, position)){
                 position.x += 1.0f;
             }
         }
@@ -141,17 +141,17 @@ Dummy::AdjustCollisionX(){
 
 void
 Dummy::AdjustCollisionY(){
-    if(IsOverlapping(UfoGlobal::program.asset_manager.decPin, solid_layer, position)){
+    if(IsOverlapping(UfoGlobal::program.asset_manager.GetDecal("decPin"), solid_layer, position)){
         if(velocity.y > 0.0f){
             is_grounded = true;
             position.y = std::floor(position.y);
-            while(IsOverlapping(UfoGlobal::program.asset_manager.decPin, solid_layer, position)){
+            while(IsOverlapping(UfoGlobal::program.asset_manager.GetDecal("decPin"), solid_layer, position)){
                 position.y -= 1.0f;
             }
         }
         if(velocity.y < 0.0f){
             position.y = std::ceil(position.y);
-            while(IsOverlapping(UfoGlobal::program.asset_manager.decPin, solid_layer, position)){
+            while(IsOverlapping(UfoGlobal::program.asset_manager.GetDecal("decPin"), solid_layer, position)){
                 position.y += 1.0f;
             }
         }
@@ -164,5 +164,5 @@ void
 Dummy::Draw(){
     UfoGlobal::program.camera.DrawDecal(
         position,
-        UfoGlobal::program.asset_manager.decPin);
+        UfoGlobal::program.asset_manager.GetDecal("decPin"));
 }

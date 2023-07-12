@@ -18,11 +18,13 @@ DummyTestGame::DummyTestGame() :
         UfoGlobal::program.game->game_states["menu"] = state_menu;
         UfoGlobal::program.game->game_states["play"] = state_play;
 
-        UfoGlobal::program.cell_map.LoadMap("../res/map/windmill/windmill.json");
+        game_state = state_load;
+        state_load->SetLoad("../games/dummy_test/res/map/windmill/windmill.json");
+        //UfoGlobal::program.cell_map.LoadMap("../games/dummy_test/res/map/windmill/windmill.json");
+        UfoGlobal::program.asset_manager.LoadDecal("../games/dummy_test/res/masks/pill_small.png", "decPin");
         UfoGlobal::program.entities.push_back(new Dummy(olc::vf2d(450.0f, 50.0f)));
         UfoGlobal::program.camera.scale = 3.0f;
-        game_state = state_load;
-        state_load->SetLoad("../res/map/windmill/windmill.json");
+
     }
 
 DummyTestGame::~DummyTestGame(){

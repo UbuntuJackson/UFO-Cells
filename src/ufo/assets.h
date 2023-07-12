@@ -5,12 +5,6 @@
 
 class Assets{
 public:
-    //olc::Sprite* sprLoadingScreen;
-    //olc::Decal *decLoadingScreen;
-    olc::Sprite* sprPin;
-    olc::Decal *decPin;
-    olc::Sprite* sprMap;
-    olc::Decal *decMap;
     olc::Sprite* sprLoad;
     olc::Decal *decLoad;
 
@@ -19,6 +13,7 @@ public:
     Assets();
     ~Assets();
     void LoadDecal(std::string _path, std::string _name);
+    olc::Decal* GetDecal(std::string _name);
     void LoadAssets();
     void DeleteAssets();
 };

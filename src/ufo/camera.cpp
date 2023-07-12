@@ -21,7 +21,7 @@ void
 Camera::Follow(olc::vf2d _position, olc::Decal *_decal){
     position = target->position;
 
-    olc::vf2d offset_camera_position = position + UfoGlobal::program.asset_manager.decPin->sprite->Size()/2;
+    olc::vf2d offset_camera_position = position + UfoGlobal::program.asset_manager.GetDecal("decPin")->sprite->Size()/2;
 
     if(offset_camera_position.x < 800.0f/scale) offset_camera_position.x = 800.0f/scale;
     if(offset_camera_position.x > 1600.0f-800.0f/scale) offset_camera_position.x = 1600.0f-800.0f/scale;
@@ -62,9 +62,9 @@ Camera::FollowPlatformer(olc::vf2d _position, olc::Decal *_decal){
     f_screen_size.y = float(UfoGlobal::program.GetScreenSize().y);
 
     //We wanna clamp the position, not the offset_camera_position
-    olc::vf2d camera_clamp_min = f_screen_size*0.5f/scale - UfoGlobal::program.asset_manager.decPin->sprite->Size()/2;
+    olc::vf2d camera_clamp_min = f_screen_size*0.5f/scale - UfoGlobal::program.asset_manager.GetDecal("decPin")->sprite->Size()/2;
     //std::cout << camera_clamp_min.x << ", " << camera_clamp_min.y << std::endl;
-    olc::vf2d camera_clamp_max = UfoGlobal::program.cell_map.map_size-f_screen_size*0.5f/scale - UfoGlobal::program.asset_manager.decPin->sprite->Size()/2;
+    olc::vf2d camera_clamp_max = UfoGlobal::program.cell_map.map_size-f_screen_size*0.5f/scale - UfoGlobal::program.asset_manager.GetDecal("decPin")->sprite->Size()/2;
     //std::cout << camera_clamp_max.x << ", " << camera_clamp_max.y << std::endl;
 
     if(position.x < camera_clamp_min.x) position.x = camera_clamp_min.x;
@@ -72,7 +72,7 @@ Camera::FollowPlatformer(olc::vf2d _position, olc::Decal *_decal){
     if(position.x > camera_clamp_max.x) position.x = camera_clamp_max.x;
     if(position.y > camera_clamp_max.y) position.y = camera_clamp_max.y;
 
-    olc::vf2d offset_camera_position = position + UfoGlobal::program.asset_manager.decPin->sprite->Size()/2;
+    olc::vf2d offset_camera_position = position + UfoGlobal::program.asset_manager.GetDecal("decPin")->sprite->Size()/2;
 
     olc::vf2d offset_position = _position - offset_camera_position;
     olc::vf2d screen_position = offset_position * scale;

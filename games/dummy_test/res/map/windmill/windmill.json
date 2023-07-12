@@ -3,32 +3,32 @@
         {
             "name" : "sky",
             "type" : "visible",
-            "path" : "../res/map/windmill/sky.png"
+            "path" : "../games/dummy_test/res/map/windmill/sky.png"
         },
         {
             "name" : "bg",
             "type" : "visible",
-            "path" : "../res/map/windmill/bg.png"
+            "path" : "../games/dummy_test/res/map/windmill/bg.png"
         },
         {
             "name" : "mg",
             "type" : "visible",
-            "path" : "../res/map/windmill/mg.png"
+            "path" : "../games/dummy_test/res/map/windmill/mg.png"
         },
         {
             "name" : "fg2",
             "type" : "visible",
-            "path" : "../res/map/windmill/fg2.png"
+            "path" : "../games/dummy_test/res/map/windmill/fg2.png"
         },
         {
             "name" : "fg",
             "type" : "visible",
-            "path" : "../res/map/windmill/fg.png"
+            "path" : "../games/dummy_test/res/map/windmill/fg.png"
         },
         {
             "name" : "solid",
             "type" : "collision",
-            "path" : "../res/map/windmill/solid.png"
+            "path" : "../games/dummy_test/res/map/windmill/solid.png"
         }
     ],
     "actors":[]

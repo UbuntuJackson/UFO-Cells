@@ -35,12 +35,16 @@ void StateLoad::Update(){
             olc::Sprite *spr = new olc::Sprite(path);
             olc::Decal *dec = new olc::Decal(spr);
             UfoGlobal::program.cell_map.collision_layers[name] = dec;
+            UfoGlobal::program.cell_map.map_size = spr->Size();
         }
         if(type == "visible"){
 
             olc::Sprite *spr = new olc::Sprite(path);
             olc::Decal *dec = new olc::Decal(spr);
             UfoGlobal::program.cell_map.visible_layers.push_back(dec);
+            std::cout << path << std::endl;
+            UfoGlobal::program.cell_map.map_size = spr->Size();
+            //UfoGlobal::program.DrawDecal(olc::vf2d(0.0f, 0.0f), dec);
         }
         asset_index++;
     }
