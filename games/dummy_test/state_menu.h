@@ -7,8 +7,10 @@
 
 class StateMenu : public State{
 public:
+    std::string menu_string;
     StateMenu();
-    void SetMenu(std::string _map);
+    std::string GetData();
+    void Set(std::string _data);
     void Update();
 };
 

@@ -1,5 +1,6 @@
 #include "state_menu.h"
 #include <string>
+#include <iostream>
 #include "../../src/ufo/game.h"
 #include "../../src/program/ufo_global.h"
 #include <squirrel.h>
@@ -13,10 +14,18 @@ StateMenu::StateMenu(): State(){
     sqstd_dofile(UfoGlobal::program.vm, path.c_str(), 0, 1);
 }
 
-void StateMenu::SetMenu(std::string _map){
+void StateMenu::Set(std::string _data){
+    menu_string = _data;
+
+
+}
+
+std::string StateMenu::GetData(){
+    return menu_string;
 }
 
 void StateMenu::Update(){
+    std::cout << "hello world" << std::endl;
     std::string path = "../games/dummy_test/scripts/update_menus.nut";
     sqstd_dofile(UfoGlobal::program.vm, path.c_str(), 0, 1);
 }

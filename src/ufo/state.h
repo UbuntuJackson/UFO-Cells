@@ -11,6 +11,8 @@ public:
     virtual void SetLoad(std::string _map);
     virtual void SetMenu(std::string _menu);
     virtual void Update();
+    virtual void Set(std::string _data);
+    virtual std::string GetData();
 };
 
 #endif

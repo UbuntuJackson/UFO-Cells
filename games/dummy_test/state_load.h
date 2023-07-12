@@ -1,18 +1,27 @@
 #ifndef STATE_LOAD
 #define STATE_LOAD
-
+#include <vector>
 #include "../../src/ufo/state.h"
 #include <string>
 #include "../../external/cJSON.h"
+#include <memory>
 
 class StateLoad : public State{
 private:
+
+    struct LayerInfo{
+        std::string name;
+        std::string type;
+        std::string path;
+    };
+
+    std::vector<LayerInfo> layer_information;
+
     int asset_index;
-    const cJSON *l1;
     std::string loading_screen_dir;
 public:
     StateLoad();
-    void SetLoad(std::string _map);
+    void Set(std::string _data);
     void Update();
 };
 

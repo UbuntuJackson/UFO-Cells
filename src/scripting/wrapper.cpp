@@ -276,6 +276,25 @@ static SQInteger DrawStringDecal_wrapper(HSQUIRRELVM vm)
 
 }
 
+static SQInteger DrawMap_wrapper(HSQUIRRELVM vm)
+{
+  (void) vm;
+
+  try {
+    UfoAPI::DrawMap();
+
+    return 0;
+
+  } catch(std::exception& e) {
+    sq_throwerror(vm, e.what());
+    return SQ_ERROR;
+  } catch(...) {
+    sq_throwerror(vm, _SC("Unexpected exception while executing function 'DrawMap'"));
+    return SQ_ERROR;
+  }
+
+}
+
 static SQInteger GetMousePosX_wrapper(HSQUIRRELVM vm)
 {
 
@@ -420,6 +439,54 @@ static SQInteger Quit_wrapper(HSQUIRRELVM vm)
 
 }
 
+static SQInteger SetState_wrapper(HSQUIRRELVM vm)
+{
+  const SQChar* arg0;
+  if(SQ_FAILED(sq_getstring(vm, 2, &arg0))) {
+    sq_throwerror(vm, _SC("Argument 1 not a string"));
+    return SQ_ERROR;
+  }
+  const SQChar* arg1;
+  if(SQ_FAILED(sq_getstring(vm, 3, &arg1))) {
+    sq_throwerror(vm, _SC("Argument 2 not a string"));
+    return SQ_ERROR;
+  }
+
+  try {
+    UfoAPI::SetState(arg0, arg1);
+
+    return 0;
+
+  } catch(std::exception& e) {
+    sq_throwerror(vm, e.what());
+    return SQ_ERROR;
+  } catch(...) {
+    sq_throwerror(vm, _SC("Unexpected exception while executing function 'SetState'"));
+    return SQ_ERROR;
+  }
+
+}
+
+static SQInteger GetStateData_wrapper(HSQUIRRELVM vm)
+{
+
+  try {
+    std::string return_value = UfoAPI::GetStateData();
+
+    assert(return_value.size() < static_cast<size_t>(std::numeric_limits<SQInteger>::max()));
+    sq_pushstring(vm, return_value.c_str(), static_cast<SQInteger>(return_value.size()));
+    return 1;
+
+  } catch(std::exception& e) {
+    sq_throwerror(vm, e.what());
+    return SQ_ERROR;
+  } catch(...) {
+    sq_throwerror(vm, _SC("Unexpected exception while executing function 'GetStateData'"));
+    return SQ_ERROR;
+  }
+
+}
+
 static SQInteger NewDummyTestGame_wrapper(HSQUIRRELVM vm)
 {
   (void) vm;
@@ -505,6 +572,13 @@ void register_ufo_wrapper(HSQUIRRELVM v)
     throw SquirrelError(v, "Couldn't register function 'DrawStringDecal'");
   }
 
+  sq_pushstring(v, "DrawMap", -1);
+  sq_newclosure(v, &DrawMap_wrapper, 0);
+  sq_setparamscheck(v, SQ_MATCHTYPEMASKSTRING, ".");
+  if(SQ_FAILED(sq_createslot(v, -3))) {
+    throw SquirrelError(v, "Couldn't register function 'DrawMap'");
+  }
+
   sq_pushstring(v, "GetMousePosX", -1);
   sq_newclosure(v, &GetMousePosX_wrapper, 0);
   sq_setparamscheck(v, SQ_MATCHTYPEMASKSTRING, ".");
@@ -545,6 +619,20 @@ void register_ufo_wrapper(HSQUIRRELVM v)
   sq_setparamscheck(v, SQ_MATCHTYPEMASKSTRING, ".");
   if(SQ_FAILED(sq_createslot(v, -3))) {
     throw SquirrelError(v, "Couldn't register function 'Quit'");
+  }
+
+  sq_pushstring(v, "SetState", -1);
+  sq_newclosure(v, &SetState_wrapper, 0);
+  sq_setparamscheck(v, SQ_MATCHTYPEMASKSTRING, ".ss");
+  if(SQ_FAILED(sq_createslot(v, -3))) {
+    throw SquirrelError(v, "Couldn't register function 'SetState'");
+  }
+
+  sq_pushstring(v, "GetStateData", -1);
+  sq_newclosure(v, &GetStateData_wrapper, 0);
+  sq_setparamscheck(v, SQ_MATCHTYPEMASKSTRING, ".");
+  if(SQ_FAILED(sq_createslot(v, -3))) {
+    throw SquirrelError(v, "Couldn't register function 'GetStateData'");
   }
 
   sq_pushstring(v, "NewDummyTestGame", -1);

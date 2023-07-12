@@ -24,8 +24,6 @@ Assets::GetDecal(std::string _name){
 
 void
 Assets::LoadAssets(){
-    //sprLoadingScreen = new olc::Sprite("../res/masks/pill_small.png");
-    //decLoadingScreen = new olc::Decal(sprLoadingScreen);
     sprLoad = new olc::Sprite("../res/loading_screen/loading_screen.png");
     decLoad = new olc::Decal(sprLoad);
 }

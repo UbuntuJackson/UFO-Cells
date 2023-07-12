@@ -26,6 +26,7 @@ Dummy::Update(){
 
     //HEIGHT ADJUSTMENT OVERLAP
 
+
     if(IsOverlapping(UfoGlobal::program.asset_manager.GetDecal("decPin"), solid_layer, position)){
         former_position.y = std::floor(former_position.y);
 
@@ -82,6 +83,7 @@ Dummy::Update(){
             }
         }
     }
+
 
     position.y = former_position.y;
 

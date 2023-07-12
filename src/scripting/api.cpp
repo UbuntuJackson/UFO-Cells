@@ -26,6 +26,10 @@ namespace UfoAPI{
         UfoGlobal::program.DrawStringDecal(olc::vf2d(x, y), _text, olc::Pixel(r,g,b,a), olc::vf2d(_scale_x, _scale_y));
     }
 
+    void DrawMap(){
+        UfoGlobal::program.cell_map.Draw();
+    }
+
     //olc::HWButton GetKey(){}
     int GetMousePosX(){
         return UfoGlobal::program.GetMousePos().x;
@@ -45,6 +49,14 @@ namespace UfoAPI{
     //game control
     void Quit(){
         UfoGlobal::program.running = false;
+    }
+
+    void SetState(std::string _state, std::string _data){
+        UfoGlobal::program.game->SetState(_state, _data);
+    }
+
+    std::string GetStateData(){
+        return UfoGlobal::program.game->game_state->GetData();
     }
 
     void NewDummyTestGame(){

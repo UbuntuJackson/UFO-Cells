@@ -12,6 +12,7 @@ namespace UfoAPI{
     void DrawRectangleDecal(int x, int y, int w, int h, int r, int g, int b, int a);
     void FillRectangleDecal(int x, int y, int w, int h, int r, int g, int b, int a);
     void DrawStringDecal(int x, int y, std::string _text, int r, int g, int b, int a, float _scale_x, float _scale_y);
+    void DrawMap();
     //olc::HWButton GetKey(){}
     int GetMousePosX();
     int GetMousePosY();
@@ -20,6 +21,8 @@ namespace UfoAPI{
     bool RectangleVsPoint(float rx, float ry, float rw, float rh, float px, float py);
     //Game control
     void Quit();
+    void SetState(std::string _state, std::string _data);
+    std::string GetStateData();
     //Game-specific
     void NewDummyTestGame();
     void UpdateDummyTestGame();

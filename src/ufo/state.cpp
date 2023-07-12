@@ -9,3 +9,5 @@ void State::SetPlay(std::string _map){}
 void State::SetLoad(std::string _map){}
 void State::SetMenu(std::string _menu){}
 void State::Update(){}
+void State::Set(std::string _data){}
+std::string State::GetData(){}

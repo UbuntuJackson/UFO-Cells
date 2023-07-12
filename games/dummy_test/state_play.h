@@ -8,7 +8,7 @@ class StatePlay : public State{
 public:
     std::string current_map;
     StatePlay();
-    void SetPlay(std::string _map);
+    void Set(std::string _data);
     void Update();
 };
 

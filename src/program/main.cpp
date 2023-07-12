@@ -4,7 +4,7 @@
 
 int main()
 {
-	if (UfoGlobal::program.Construct(1600, 800, 1, 1, false, true, true))
+	if (UfoGlobal::program.Construct(1600, 800, 1, 1))
 		UfoGlobal::program.Start();
 
 	return 0;
