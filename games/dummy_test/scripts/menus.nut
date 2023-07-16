@@ -131,10 +131,10 @@ Menus["LoadMenu"] <- {
     draw = function(){
         foreach (button in buttons) {
             if(RectangleVsPoint(button.position.x, button.position.y, button.size.x, button.size.y, GetMousePosX(), GetMousePosY())){
-                FillRectangleDecal(button.position.x, button.position.y, button.size.x, button.size.y, 50, 200, 200, 255);
+                FillRectangleDecal(button.position.x, button.position.y, button.size.x, button.size.y, 50, 195, 140, 255);
             }
             else{
-                FillRectangleDecal(button.position.x, button.position.y, button.size.x, button.size.y, 20, 170, 180, 255);
+                FillRectangleDecal(button.position.x, button.position.y, button.size.x, button.size.y, 20, 180, 110, 255);
             }
             DrawStringDecal(button.position.x + 20, button.position.y + 20, button.name, 255, 255, 255, 255, 3.0, 3.0);
         }
@@ -198,10 +198,10 @@ Menus["NewGameMenu"] <- {
     draw = function(){
         foreach (button in buttons) {
             if(RectangleVsPoint(button.position.x, button.position.y, button.size.x, button.size.y, GetMousePosX(), GetMousePosY())){
-                FillRectangleDecal(button.position.x, button.position.y, button.size.x, button.size.y, 50, 200, 200, 255);
+                FillRectangleDecal(button.position.x, button.position.y, button.size.x, button.size.y, 50, 195, 140, 255);
             }
             else{
-                FillRectangleDecal(button.position.x, button.position.y, button.size.x, button.size.y, 20, 170, 180, 255);
+                FillRectangleDecal(button.position.x, button.position.y, button.size.x, button.size.y, 20, 180, 110, 255);
             }
             DrawStringDecal(button.position.x + 20, button.position.y + 20, button.name, 255, 255, 255, 255, 3.0, 3.0);
         }
