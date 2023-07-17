@@ -21,6 +21,7 @@ public:
     Camera camera;
     Program();
     ~Program();
+    void SetGame(Game* _game);
     bool OnUserCreate();
     bool OnUserUpdate(float fElapsedTime);
 };

@@ -26,17 +26,19 @@ Program::Program(){
 }
 
 Program::~Program(){
-    delete game;
     for(auto ent : entities){
         delete ent;
     }
     sq_close(vm);
 }
+void Program::SetGame(Game* _game){
+    game = _game;
+}
 
 bool Program::OnUserCreate(){
     asset_manager.LoadAssets();
-    std::string path = "../games/" + game_dir_name + "/scripts/new.nut";
-    sqstd_dofile(vm, path.c_str(), 0, 1);
+    //std::string path = "../games/" + game_dir_name + "/scripts/new.nut";
+    //sqstd_dofile(vm, path.c_str(), 0, 1);
     return true;
 }
 bool Program::OnUserUpdate(float fElapsedTime){
@@ -44,8 +46,10 @@ bool Program::OnUserUpdate(float fElapsedTime){
     Clear(olc::GREY);
     SetPixelMode(olc::Pixel::NORMAL);
 
-    std::string path = "../games/" + game_dir_name + "/scripts/update.nut";
-    sqstd_dofile(vm, path.c_str(), 0, 1);
+    game->game_state->Update();
+
+    //std::string path = "../games/" + game_dir_name + "/scripts/update.nut";
+    //sqstd_dofile(vm, path.c_str(), 0, 1);
 
     SetPixelMode(olc::Pixel::NORMAL);
     return running;

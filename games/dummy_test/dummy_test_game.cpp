@@ -13,15 +13,11 @@ DummyTestGame::DummyTestGame() :
     state_menu{new StateMenu()},
     state_play{new StatePlay()}
     {
-        UfoGlobal::program.game = this;
-        UfoGlobal::program.game->game_states["load"] = state_load;
-        UfoGlobal::program.game->game_states["menu"] = state_menu;
-        UfoGlobal::program.game->game_states["play"] = state_play;
+        game_states["load"] = state_load;
+        game_states["menu"] = state_menu;
+        game_states["play"] = state_play;
 
         SetState("menu", "MainMenu");
-        UfoGlobal::program.asset_manager.LoadDecal("../games/dummy_test/res/masks/pill_small.png", "decPin");
-        UfoGlobal::program.entities.push_back(new Dummy(olc::vf2d(450.0f, 50.0f)));
-        UfoGlobal::program.camera.scale = 3.0f;
 
     }
 
