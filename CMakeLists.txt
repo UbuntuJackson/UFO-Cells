@@ -4,9 +4,6 @@ project(UFOCells)
 
 option(HAS_TERMINAL "Show a terminal window for STDOUT/STDERR" ON)
 
-#Packaging debug and release
-#set(CMAKE_DEBUG_POSTFIX d)
-
 # Set C++ Standards
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -49,9 +46,6 @@ file(
 
 # Executable aka binary output
 add_executable(UFOCells ${SRCFILES})
-
-#Packaging debug and release
-#set_target_properties(UFOCells PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 
 target_link_libraries(UFOCells PUBLIC LibSquirrel)
 target_link_libraries(UFOCells PUBLIC LibSqstdlib)
