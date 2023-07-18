@@ -152,7 +152,6 @@ Menus["NewGameMenu"] <- {
             name = "File 1"
             func = function(){
                 SetState("load", "../games/dummy_test/res/map/windmill/windmill.json");
-                PrintFunction("test");
             }
         },
         {

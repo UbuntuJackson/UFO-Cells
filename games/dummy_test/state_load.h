@@ -21,6 +21,7 @@ private:
     std::string loading_screen_dir;
 public:
     StateLoad();
+    void LoadActors();
     void Set(std::string _data);
     void Update();
 };

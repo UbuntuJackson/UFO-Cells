@@ -8,6 +8,7 @@
 #include "../../src/ufo/file_utils.h"
 #include "../../src/ufo/game.h"
 #include "dummy_test_game.h"
+#include "dummy.h"
 #include "../../external/olcPixelGameEngine.h"
 
 
@@ -36,6 +37,10 @@ void StateLoad::Set(std::string _data){
     cJSON_Delete(j);
 }
 
+void StateLoad::LoadActors(){
+
+}
+
 void StateLoad::Update(){
     if(asset_index < layer_information.size()){
 
@@ -49,7 +54,6 @@ void StateLoad::Update(){
             UfoGlobal::program.cell_map.map_size = spr->Size();
         }
         if(layer_information[asset_index].type == "visible"){
-
             olc::Sprite *spr = new olc::Sprite(layer_information[asset_index].path);
             UfoGlobal::program.cell_map.map_sprites[layer_information[asset_index].name] = spr;
 
@@ -61,6 +65,9 @@ void StateLoad::Update(){
         asset_index++;
     }
     else{
+        UfoGlobal::program.entities.push_back(new Dummy(olc::vf2d(450.0f, 50.0f)));
+        UfoGlobal::program.camera.scale = 3.0f;
+        UfoGlobal::program.asset_manager.LoadDecal("../games/dummy_test/res/masks/pill_small.png", "decPin");
         UfoGlobal::program.game->SetState("play", "...");
     }
     UfoGlobal::program.DrawDecal(olc::vf2d(0.0f, 0.0f), UfoGlobal::program.asset_manager.decLoad);

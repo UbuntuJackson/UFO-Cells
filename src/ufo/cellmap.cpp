@@ -52,7 +52,7 @@ void CellMap::UnloadMap(){
         delete dec;
     }
     visible_layers.clear();
-    std::cout << visible_layers.size();
+
     for(auto &[key, dec] : collision_layers){
         delete dec;
     }
