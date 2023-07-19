@@ -7,10 +7,12 @@
 class LayerBackground : public Layer{
 public:
     olc::vf2d parallax;
+    std::string path;
     std::string decal;
     LayerBackground() = default;
-    LayerBackground(std::string _decal);
+    LayerBackground(std::string _name, std::string _type, std::string _path);
     ~LayerBackground();
+    void LoadLayer();
     void Draw();
 };
 
