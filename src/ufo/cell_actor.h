@@ -18,9 +18,9 @@ public:
 
     CellActor(olc::vf2d _position);
     ~CellActor();
-    bool IsOverlapping(olc::Decal *_decal, std::string _layer, olc::vf2d _position);
-    int IsOverlappingHeight(olc::Decal *_decal, std::string _layer, olc::vf2d _position);
-    int HeightUntilGround(olc::Decal *_decal, std::string _layer, olc::vf2d _position);
+    bool IsOverlapping(olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);
+    int IsOverlappingHeight(olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);
+    int HeightUntilGround(olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);
 
     virtual void Update();
     virtual void Draw();

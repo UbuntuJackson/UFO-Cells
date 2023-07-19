@@ -7,6 +7,7 @@ class Dummy : public CellActor{
 public:
     int i = 0;
     std::string solid_layer = "solid";
+    bool is_already_in_semi_solid = false;
     Dummy(olc::vf2d _position);
     void Update();
     void Draw();

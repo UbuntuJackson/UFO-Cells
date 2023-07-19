@@ -17,7 +17,7 @@ LayerActor::AddActorInfo(std::string _actor, int _x, int _y){
 }
 
 void
-LayerActor::LoadLayer(){
+LayerActor::LoadLayer(){ //Maybe people can derive from this class and make their own LoadLayer function
     for(auto act : actors_to_create){
         if(act.actor == "Dummy"){
             actors.push_back(new Dummy(olc::vf2d(act.x, act.y))); //temporary solution
