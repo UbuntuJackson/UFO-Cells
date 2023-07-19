@@ -27,11 +27,11 @@ void StateLoad::Set(std::string _data){
     const cJSON *l1 = cJSON_GetObjectItemCaseSensitive(j, "layers");
     for(int i = 0; i < cJSON_GetArraySize(l1); i++){
         const cJSON *item = cJSON_GetArrayItem(l1, i);
-        std::string name = cJSON_GetObjectItemCaseSensitive(item, "name") -> valuestring;
-        std::string type = cJSON_GetObjectItemCaseSensitive(item, "type") -> valuestring;
-        std::string path = cJSON_GetObjectItemCaseSensitive(item, "path") -> valuestring;
+        std::string name = cJSON_GetObjectItemCaseSensitive(item, "name") -> valuestring; //All layers have a name
+        std::string type = cJSON_GetObjectItemCaseSensitive(item, "type") -> valuestring; //All layers have a type
+        std::string path = cJSON_GetObjectItemCaseSensitive(item, "path") -> valuestring; //Not all have a path, this one applies not to actor layers
 
-        layer_information.push_back(LayerInfo{name, type, path});
+        layer_information.push_back(LayerInfo{name, type, path}); //What if we created actual layers and give it more specifications in the update function
     }
 
     cJSON_Delete(j);

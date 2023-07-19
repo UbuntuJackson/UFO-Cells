@@ -151,7 +151,7 @@ Menus["NewGameMenu"] <- {
             size = {x = null, y = null}
             name = "File 1"
             func = function(){
-                SetState("load", "../games/dummy_test/res/map/windmill/windmill.json");
+                SetState("load", "../games/dummy_test/res/map/zen/zen.json");
             }
         },
         {

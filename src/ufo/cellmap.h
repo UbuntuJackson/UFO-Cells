@@ -3,6 +3,7 @@
 #include <vector>
 #include "../../external/olcPixelGameEngine.h"
 #include <string>
+#include "layer.h"
 
 class Program;
 
@@ -11,6 +12,7 @@ public:
     olc::vf2d map_size;
     std::string map_path;
     std::map<std::string ,olc::Sprite*> map_sprites;
+    std::vector<Layer*> layers;
     std::vector<olc::Decal*> visible_layers;
     std::map<std::string, olc::Decal*> collision_layers;
     CellMap();
