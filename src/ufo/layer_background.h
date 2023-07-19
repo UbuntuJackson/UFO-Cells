@@ -13,6 +13,7 @@ public:
     LayerBackground(std::string _name, std::string _type, std::string _path);
     ~LayerBackground();
     void LoadLayer();
+    void Update();
     void Draw();
 };
 

@@ -1,5 +1,6 @@
 #include "layer_terrain.h"
 #include "../program/ufo_global.h"
+#include "layer.h"
 
 LayerTerrain::LayerTerrain(std::string _name, std::string _type, std::string _path) : Layer(_name, _type), path{_path}{}
 
