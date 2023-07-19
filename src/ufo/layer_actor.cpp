@@ -2,8 +2,14 @@
 #include <string>
 #include "../../games/dummy_test/dummy.h" //temporary solution
 #include "../../external/olcPixelGameEngine.h"
+#include <iostream>
 
-//LayerActor::LayerActor(){}
+LayerActor::~LayerActor(){
+    std::cout << "destructor" << std::endl;
+    for(auto i : actors){
+        delete i;
+    }
+}
 
 void
 LayerActor::AddActorInfo(std::string _actor, int _x, int _y){

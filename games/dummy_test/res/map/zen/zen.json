@@ -2,22 +2,33 @@
     "layers" : [
         {
             "name" : "sky",
-            "type" : "visible",
+            "type" : "background",
             "path" : "../games/dummy_test/res/map/zen/sky.png"
         },
         {
             "name" : "bg",
-            "type" : "visible",
+            "type" : "terrain",
             "path" : "../games/dummy_test/res/map/zen/bg.png"
         },
         {
             "name" : "mg",
-            "type" : "visible",
+            "type" : "terrain",
             "path" : "../games/dummy_test/res/map/zen/mg.png"
         },
         {
+            "name" : "actors",
+            "type" :"actor",
+            "actors" : [
+                {
+                    "actor" : "Dummy",
+                    "x" : 50,
+                    "y" : 50
+                }
+            ]
+        },
+        {
             "name" : "fg",
-            "type" : "visible",
+            "type" : "terrain",
             "path" : "../games/dummy_test/res/map/zen/fg.png"
         },
         {
@@ -25,6 +36,5 @@
             "type" : "collision",
             "path" : "../games/dummy_test/res/map/zen/solid.png"
         }
-    ],
-    "actors":[]
+    ]
 }

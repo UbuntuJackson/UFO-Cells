@@ -51,7 +51,12 @@ void CellMap::UnloadMap(){
      for(auto &[key, dec] : map_decals){
         delete dec;
     }
+    std::cout << "unloads map" << std::endl;
     map_decals.clear();
+    for(auto layer : layers){
+        delete layer;
+    }
+    layers.clear();
     /*map_sprites.clear();
     for(auto &dec : visible_layers){
         delete dec;

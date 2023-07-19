@@ -80,7 +80,6 @@ void StateLoad::Update(){
         asset_index++;
     }
     else{
-        //UfoGlobal::program.entities.push_back(new Dummy(olc::vf2d(450.0f, 50.0f)));
         UfoGlobal::program.camera.scale = 3.0f;
         UfoGlobal::program.game->SetState("play", "...");
     }
