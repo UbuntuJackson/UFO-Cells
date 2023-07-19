@@ -3,7 +3,7 @@
 #include "../../games/dummy_test/dummy.h" //temporary solution
 #include "../../external/olcPixelGameEngine.h"
 
-LayerActor::LayerActor(){}
+//LayerActor::LayerActor(){}
 
 void
 LayerActor::AddActorInfo(std::string _actor, int _x, int _y){

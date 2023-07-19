@@ -34,6 +34,11 @@ file(
     src/ufo/mouse_control.cpp
     src/ufo/state.cpp
     src/ufo/game.cpp
+    src/ufo/layer.cpp
+    src/ufo/layer_actor.cpp
+    src/ufo/layer_background.cpp
+    src/ufo/layer_terrain.cpp
+    src/ufo/layer_solid.cpp
     src/program/program.cpp
     src/program/main.cpp
     src/program/ufo_global.cpp

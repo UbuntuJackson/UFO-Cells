@@ -48,6 +48,11 @@ void CellMap::UnloadMap(){
         delete spr;
     }
     map_sprites.clear();
+     for(auto &[key, dec] : map_decals){
+        delete dec;
+    }
+    map_decals.clear();
+    /*map_sprites.clear();
     for(auto &dec : visible_layers){
         delete dec;
     }
@@ -56,14 +61,14 @@ void CellMap::UnloadMap(){
     for(auto &[key, dec] : collision_layers){
         delete dec;
     }
-    collision_layers.clear();
+    collision_layers.clear();*/
 }
 
 CellMap::~CellMap(){UnloadMap();}
 
 void
 CellMap::Draw(){
-    for(int d = 0; d < visible_layers.size(); d++){
+    /*for(int d = 0; d < visible_layers.size(); d++){
 
         for(auto &e : UfoGlobal::program.entities){
             if(e->draw_layer == d) e->Draw();
@@ -72,6 +77,9 @@ CellMap::Draw(){
         UfoGlobal::program.camera.DrawDecal(
             olc::vf2d(0.0f, 0.0f),
             visible_layers[d]);
+    }*/
+    for(auto layer : layers){
+        layer->Draw();
     }
 
 }

@@ -9,7 +9,7 @@ public:
     std::string visible;
     Layer() = default;
     Layer(std::string _name, std::string _type);
-    ~Layer();
+    //~Layer();
     virtual void LoadLayer();
     virtual void Update();
     virtual void Draw();

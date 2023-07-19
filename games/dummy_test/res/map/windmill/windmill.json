@@ -2,27 +2,43 @@
     "layers" : [
         {
             "name" : "sky",
-            "type" : "visible",
+            "type" : "background",
             "path" : "../games/dummy_test/res/map/windmill/sky.png"
         },
         {
             "name" : "bg",
-            "type" : "visible",
+            "type" : "terrain",
             "path" : "../games/dummy_test/res/map/windmill/bg.png"
         },
         {
             "name" : "mg",
-            "type" : "visible",
+            "type" : "terrain",
             "path" : "../games/dummy_test/res/map/windmill/mg.png"
         },
         {
+            "name" : "actors",
+            "type" :"actor",
+            "actors" : [
+                {
+                    "actor" : "Dummy",
+                    "x" : 50,
+                    "y" : 50
+                },
+                {
+                    "actor" : "Dummy",
+                    "x" : 100,
+                    "y" : 50
+                }
+            ]
+        },
+        {
             "name" : "fg2",
-            "type" : "visible",
+            "type" : "terrain",
             "path" : "../games/dummy_test/res/map/windmill/fg2.png"
         },
         {
             "name" : "fg",
-            "type" : "visible",
+            "type" : "terrain",
             "path" : "../games/dummy_test/res/map/windmill/fg.png"
         },
         {
@@ -30,6 +46,5 @@
             "type" : "collision",
             "path" : "../games/dummy_test/res/map/windmill/solid.png"
         }
-    ],
-    "actors":[]
+    ]
 }

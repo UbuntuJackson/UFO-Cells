@@ -19,7 +19,7 @@ LayerSolid::Update(){}
 
 void
 LayerSolid::Draw(){
-    UfoGlobal::program.camera.DrawDecal(
-            olc::vf2d(0.0f, 0.0f),
-            UfoGlobal::program.cell_map.map_decals[name]);
+    //UfoGlobal::program.camera.DrawDecal(
+    //        olc::vf2d(0.0f, 0.0f),
+    //        UfoGlobal::program.cell_map.map_decals[name]);
 }

@@ -11,7 +11,7 @@ public:
     std::string decal;
     LayerSolid() = default;
     LayerSolid(std::string _name, std::string _type, std::string _path);
-    ~LayerSolid();
+    //~LayerSolid();
     void LoadLayer();
     void Update();
     void Draw();

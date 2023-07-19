@@ -9,6 +9,7 @@
 Dummy::Dummy(olc::vf2d _position) : CellActor(_position){
     UfoGlobal::program.camera.SetStateFollowPlatfomer(this);
     //UfoGlobal::program.camera.m_camera_state = MOUSE;
+    std::cout << "dummy.cpp" << std::endl;
 }
 
 void

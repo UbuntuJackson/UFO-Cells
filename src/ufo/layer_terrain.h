@@ -11,7 +11,7 @@ public:
     std::string decal;
     LayerTerrain() = default;
     LayerTerrain(std::string _name, std::string _type, std::string _path);
-    ~LayerTerrain();
+    //~LayerTerrain();
     void LoadLayer();
     void Update();
     void Draw();

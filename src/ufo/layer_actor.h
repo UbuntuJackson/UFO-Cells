@@ -17,7 +17,7 @@ public:
 
     std::vector<CellActor*> actors; //How about I instantiate it, call AddActorInfo and THEN add it to the vector?
     LayerActor() = default;
-    ~LayerActor();
+    //~LayerActor();
     void LoadLayer();
     void AddActorInfo(std::string _actor, int _x, int _y);
     void Update();

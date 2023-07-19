@@ -13,6 +13,7 @@ DummyTestGame::DummyTestGame() :
     state_menu{new StateMenu()},
     state_play{new StatePlay()}
     {
+        //UfoGlobal::program.camera.m_camera_state = MOUSE;
         game_states["load"] = state_load;
         game_states["menu"] = state_menu;
         game_states["play"] = state_play;
