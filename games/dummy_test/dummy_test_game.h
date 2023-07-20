@@ -13,6 +13,7 @@ public:
     StateLoad *state_load;
     StateMenu *state_menu;
     StatePlay *state_play;
+    void LoadResources();
     DummyTestGame();
     ~DummyTestGame();
 

@@ -14,7 +14,7 @@ DummyTestGame::DummyTestGame() :
     state_play{new StatePlay()}
     {
         //UfoGlobal::program.camera.m_camera_state = MOUSE;
-        game_states["load"] = state_load;
+        game_states["load"] = state_load; //maybe have an addstate function
         game_states["menu"] = state_menu;
         game_states["play"] = state_play;
 
@@ -26,4 +26,10 @@ DummyTestGame::~DummyTestGame(){
     delete state_load;
     delete state_menu;
     delete state_play;
+}
+
+void
+DummyTestGame::LoadResources(){
+    UfoGlobal::program.asset_manager.LoadDecal("../games/dummy_test/res/masks/pill_small.png", "decPin");
+    UfoGlobal::program.asset_manager.LoadDecal("../res/loading_screen/loading_screen.png", "load");
 }

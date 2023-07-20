@@ -36,7 +36,8 @@ void Program::SetGame(Game* _game){
 }
 
 bool Program::OnUserCreate(){
-    asset_manager.LoadAssets();
+    asset_manager.LoadAssets(); //game is set when getting to this point
+    game->LoadResources();
     //std::string path = "../games/" + game_dir_name + "/scripts/new.nut";
     //sqstd_dofile(vm, path.c_str(), 0, 1);
     return true;
