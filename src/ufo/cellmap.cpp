@@ -12,7 +12,7 @@
 CellMap::CellMap() : map_path {""}{}
 
 void
-CellMap::LoadMap(std::string _map_path){
+CellMap::LoadMap(std::string _map_path){ //OUTDATED
     UnloadMap();
 
     std::ifstream ifs;

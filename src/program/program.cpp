@@ -36,10 +36,7 @@ void Program::SetGame(Game* _game){
 }
 
 bool Program::OnUserCreate(){
-    asset_manager.LoadAssets(); //game is set when getting to this point
     game->LoadResources();
-    //std::string path = "../games/" + game_dir_name + "/scripts/new.nut";
-    //sqstd_dofile(vm, path.c_str(), 0, 1);
     return true;
 }
 bool Program::OnUserUpdate(float fElapsedTime){
@@ -48,9 +45,6 @@ bool Program::OnUserUpdate(float fElapsedTime){
     SetPixelMode(olc::Pixel::NORMAL);
 
     game->game_state->Update();
-
-    //std::string path = "../games/" + game_dir_name + "/scripts/update.nut";
-    //sqstd_dofile(vm, path.c_str(), 0, 1);
 
     SetPixelMode(olc::Pixel::NORMAL);
     return running;

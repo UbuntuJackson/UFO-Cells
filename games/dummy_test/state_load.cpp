@@ -34,7 +34,9 @@ void StateLoad::Set(std::string _data){ //this needs to be simplified somehow
     cJSON *j = cJSON_Parse(sl.c_str());
     const cJSON *l1 = cJSON_GetObjectItemCaseSensitive(j, "layers");
     for(int i = 0; i < cJSON_GetArraySize(l1); i++){
-        const cJSON *item = cJSON_GetArrayItem(l1, i); //Would need to pass item, could parse item from htere, but would require
+        const cJSON *item = cJSON_GetArrayItem(l1, i); //Would need to pass item, could parse item from here. The function would be called
+                                                        //void StateLoad::AddLayers(const cJson _item); Alternatively we could get the whole
+                                                        //Json object cJson *j and iterate through it
         std::string name = cJSON_GetObjectItemCaseSensitive(item, "name") -> valuestring;
         std::string type = cJSON_GetObjectItemCaseSensitive(item, "type") -> valuestring;
         if(type == "background"){
@@ -67,19 +69,13 @@ void StateLoad::Set(std::string _data){ //this needs to be simplified somehow
     cJSON_Delete(j);
 }
 
-void StateLoad::LoadActors(){
-
-}
-
 void StateLoad::Update(){ //this can be generalised and put in some kind of class that we derive from
     if(asset_index < UfoGlobal::program.cell_map.layers.size()){
-
         UfoGlobal::program.cell_map.layers[asset_index]->LoadLayer();
         asset_index++;
     }
     else{
-        //might need to downcast here to call some kind of StartPlay function
-        //^scrap that, we can just add another state and then set that state, as they are mapped with strings
+        //we can just add another state and then set that state, as they are mapped with strings
         UfoGlobal::program.camera.scale = 3.0f;
         UfoGlobal::program.game->SetState("play", "...");
     }

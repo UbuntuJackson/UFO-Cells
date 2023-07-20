@@ -1,6 +1,5 @@
 #include "layer_actor.h"
 #include <string>
-#include "../../games/dummy_test/dummy.h" //temporary solution
 #include "../../external/olcPixelGameEngine.h"
 #include <iostream>
 
@@ -17,7 +16,7 @@ LayerActor::AddActorInfo(std::string _actor, int _x, int _y){
 }
 
 void
-LayerActor::LoadLayer(){ //Maybe people can derive from this class and make their own LoadLayer function
+LayerActor::LoadLayer(){ //Will be overwritten by a game for a custom LoadLayer function
     std::cout << "load layer on parent was called" << std::endl;
 }
 
