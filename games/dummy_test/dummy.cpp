@@ -25,7 +25,6 @@ Dummy::Update(){
 
     //HEIGHT ADJUSTMENT OVERLAP
 
-
     if(IsOverlapping(UfoGlobal::program.asset_manager.GetDecal("decPin"), solid_layer, position)){
         former_position.y = std::floor(former_position.y);
 
@@ -51,7 +50,7 @@ Dummy::Update(){
 
                 former_position.x += 1.0f;
             }
-
+            //if you're still in collision after moving +=1.0f, then you move up again
             if(IsOverlappingHeight(UfoGlobal::program.asset_manager.GetDecal("decPin"), solid_layer, former_position) > int(former_position.y) + snap_up_range){
                 while(IsOverlapping(UfoGlobal::program.asset_manager.GetDecal("decPin"), solid_layer, former_position)){
                     former_position.y -= 1.0f;
@@ -73,7 +72,7 @@ Dummy::Update(){
 
                 former_position.x -= 1.0f;
             }
-
+    
             if(IsOverlappingHeight(UfoGlobal::program.asset_manager.GetDecal("decPin"), solid_layer, former_position) > int(former_position.y) + snap_up_range){
                 while(IsOverlapping(UfoGlobal::program.asset_manager.GetDecal("decPin"), solid_layer, former_position)){
                     former_position.y -= 1.0f;

@@ -15,6 +15,7 @@
 #include "../../src/ufo/layer_solid.h"
 #include "../../src/ufo/layer_actor.h"
 #include "../../src/ufo/layer_terrain.h"
+#include "dummy_test_layer_actor.h"
 
 StateLoad::StateLoad() : State(){
 
@@ -53,7 +54,7 @@ void StateLoad::Set(std::string _data){
             std::cout << "actor" << std::endl;
             //std::string path = cJSON_GetObjectItemCaseSensitive(item, "path") -> valuestring; //Not all have a path, this one applies not to actor layers
             const cJSON *actor_layer = cJSON_GetObjectItemCaseSensitive(item, "actors");
-            LayerActor* layer_actor = new LayerActor();
+            DummyTestLayerActor* layer_actor = new DummyTestLayerActor();
             for(int j = 0; j < cJSON_GetArraySize(actor_layer); j++){
                 const cJSON *act = cJSON_GetArrayItem(actor_layer, j);
                 std::string actor_string = cJSON_GetObjectItemCaseSensitive(act, "actor") -> valuestring;
