@@ -46,14 +46,14 @@ Camera::FollowPlatformer(olc::vf2d _position, olc::Decal *_decal){
 
     if(target->position.y < up_sensor){
         up_sensor = target->position.y;
-        down_sensor = up_sensor+135.0f;
+        down_sensor = up_sensor+90.0f/scale;
     }
     if(target->position.y > down_sensor){
         down_sensor = target->position.y;
-        up_sensor = down_sensor-135.0f;
+        up_sensor = down_sensor-90.0f/scale;
     }
 
-    position.y = up_sensor + 80.0f;
+    position.y = up_sensor;
 
     //Feed this value to WorldToScreen()
 
@@ -193,7 +193,7 @@ void
 Camera::SetStateFollowPlatfomer(CellActor *_target){
     UfoGlobal::program.camera.m_camera_state = FOLLOW_PLATFORMER;
     target = _target;
-    up_sensor = target->position.y - 115.0f;
+    up_sensor = target->position.y - 95.0f;
     down_sensor = target->position.y + 20.0f;
     left_sensor = target->position.x + 75.0f;
     right_sensor = target->position.x - 75.0f;
