@@ -2,6 +2,8 @@
 #include "ufo_global.h"
 #include "program.h"
 #include "../../games/dummy_test/dummy_test_game.h"
+//#include "../../external/olcPGEX_SplashScreen.h"
+//#define OLC_PGEX_SPLASHSCREEN
 
 int main()
 {
