@@ -1,0 +1,37 @@
+Important classes:
+
+######## class Program ######
+
+The Program class is deriving from the graphics toolkit I am using called olcPixelGameEngine.
+olcPixelGameEngine makes use of OpenGl so it is a powerful graphical toolkit.
+
+Program is equipped with a few functions. One is called OnUserCreate(), and another one is called OnUserUpdate().
+OnUserCreate is called as you call the start function on an instance of Program. I have put out one global instance of Program in UFO-Cells,
+with that exception UFO-Cells makes no use of global variables so far.
+
+virtual bool OnUserCreate();
+It is adviced that you don't load graphics until OnUserCreate has been called.
+
+After OnUserCreate() has been called, OnUserUpdate() starts running.
+
+bool Program::OnUserUpdate(float fElapsedTime){
+    dt = fElapsedTime;
+    Clear(olc::GREY);
+    SetPixelMode(olc::Pixel::NORMAL);
+
+    game->game_state->Update();
+
+    SetPixelMode(olc::Pixel::NORMAL);
+    return running;
+}
+
+As you see it
+-Assigns dt to fElapsedTime (more on that another time)
+-Clears the creen and fills a buffer with grey.
+-Sets the pixelmode to make use of transparent pixles (unsure of the full set of features, but pretty sure this is one thing it does)
+-Updates the active gamestate.
+-Sets pixelmode to normal (Again. I don't remember why I did this or if I need to set it twice)
+-returns a boolean telling the game if it should quit or keep running.
+
+
+
