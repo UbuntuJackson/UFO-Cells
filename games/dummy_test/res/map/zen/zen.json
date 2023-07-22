@@ -1,16 +1,6 @@
 {
     "layers" : [
         {
-            "name" : "sky",
-            "type" : "background",
-            "path" : "../games/dummy_test/res/map/zen/sky.png"
-        },
-        {
-            "name" : "bg",
-            "type" : "terrain",
-            "path" : "../games/dummy_test/res/map/zen/bg.png"
-        },
-        {
             "name" : "mg",
             "type" : "terrain",
             "path" : "../games/dummy_test/res/map/zen/mg.png"
