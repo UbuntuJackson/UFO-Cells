@@ -57,16 +57,6 @@ void CellMap::UnloadMap(){
         delete layer;
     }
     layers.clear();
-    /*map_sprites.clear();
-    for(auto &dec : visible_layers){
-        delete dec;
-    }
-    visible_layers.clear();
-
-    for(auto &[key, dec] : collision_layers){
-        delete dec;
-    }
-    collision_layers.clear();*/
 }
 
 CellMap::~CellMap(){UnloadMap();}
