@@ -2,7 +2,14 @@
 #include "layer_solid.h"
 #include "../program/ufo_global.h"
 
+//maybe put strings in layer vector instead that refers to keys in a map with <string, Layer>
+
 LayerSolid::LayerSolid(std::string _name, std::string _type, std::string _path) : Layer(_name, _type), path{_path}{}
+
+void
+LayerSolid::GetPixel(olc::vf2d _position){
+    
+}
 
 void
 LayerSolid::LoadLayer(){

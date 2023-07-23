@@ -25,7 +25,7 @@ CellActor::IsOverlappingHeight(olc::Decal *_decal, std::string _layer, olc::vf2d
     for(int y = _position.y; y < _position.y + _decal->sprite->Size().y; y++){
         for(int x = _position.x; x < _position.x + _decal->sprite->Size().x; x++){
             if(CompareColour(_decal->sprite->GetPixel(x- _position.x, y- _position.y), olc::WHITE)
-                && CompareColour(collision_layer->sprite->GetPixel(x, y), _colour)
+                && CompareColour(collision_layer->sprite->GetPixel(x, y), _colour) //I'm gonna need a downcast or access the name from the asset manager
             ){
                 return y;
             }
