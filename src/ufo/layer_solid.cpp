@@ -1,14 +1,23 @@
 #include "layer.h"
 #include "layer_solid.h"
 #include "../program/ufo_global.h"
+#include <cmath>
+#include <string>
+#include "../program/ufo_global.h"
 
 //maybe put strings in layer vector instead that refers to keys in a map with <string, Layer>
 
 LayerSolid::LayerSolid(std::string _name, std::string _type, std::string _path) : Layer(_name, _type), path{_path}{}
 
-void
+olc::Pixel
 LayerSolid::GetPixel(olc::vf2d _position){
-    
+    int chunk_x = std::floor(_position.x / 800);
+    int chunk_y = std::floor(_position.y / 800);
+    int pixel_x = int(std::floor(_position.x)) % 800;
+    int pixel_y = int(std::floor(_position.y)) % 800;
+
+    std::string dec = decal_layout[chunk_x][chunk_y];
+    return UfoGlobal::program.asset_manager.GetDecal(dec)->sprite->GetPixel(olc::vf2d(pixel_x, pixel_y));
 }
 
 void

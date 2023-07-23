@@ -16,7 +16,7 @@ public:
     LayerSolid() = default;
     LayerSolid(std::string _name, std::string _type, std::string _path);
     //~LayerSolid();
-    virtual void GetPixel(olc::vf2d _position);
+    virtual olc::Pixel GetPixel(olc::vf2d _position);
     void LoadLayer();
     void Update();
     void Draw();
