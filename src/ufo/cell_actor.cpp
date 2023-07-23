@@ -34,6 +34,9 @@ CellActor::IsOverlappingHeight(olc::Decal *_decal, std::string _layer, olc::vf2d
     return position.y + _decal->sprite->Size().y;
 }
 
+//HeightUntilGround
+//Used to make platforming type actors snap to ground as if they are walking down a slope, or stairs.
+//Do a comparison between the value returned by this function and snap_to_ground
 int
 CellActor::HeightUntilGround(olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour){
 
@@ -42,10 +45,13 @@ CellActor::HeightUntilGround(olc::Decal *_decal, std::string _layer, olc::vf2d _
     for(int y = _position.y + _decal->sprite->Size().y; y < _position.y + _decal->sprite->Size().y + snap_to_ground; y++){
         for(int x = _position.x; x < _position.x + _decal->sprite->Size().x; x++){
             if(CompareColour(collision_layer->sprite->GetPixel(x,y), _colour)){
+
+                //Difference between player bottom and highest collision cell
                 return y -(_position.y + _decal->sprite->Size().y);
             }
         }
     }
+    //This is returned to consider it a non-snap case, too much space between actor and ground
     return snap_to_ground;
 }
 

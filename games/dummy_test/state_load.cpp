@@ -22,7 +22,7 @@ StateLoad::StateLoad() : State(){
 }
 
 void StateLoad::Set(std::string _data){ //this needs to be simplified somehow
-
+    
     asset_index = 0;
     UfoGlobal::program.cell_map.UnloadMap();
     layer_information.clear();

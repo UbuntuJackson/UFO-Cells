@@ -9,9 +9,11 @@ public:
     std::string path;
     std::string visible;
     std::string decal;
+    std::vector<std::vector<std::string>> decal_layout;
     LayerTerrain() = default;
     LayerTerrain(std::string _name, std::string _type, std::string _path);
     //~LayerTerrain();
+    virtual olc::Pixel GetPixel(olc::vf2d _position);
     void LoadLayer();
     void Update();
     void Draw();

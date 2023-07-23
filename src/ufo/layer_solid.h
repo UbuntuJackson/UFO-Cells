@@ -12,7 +12,7 @@ public:
     std::string visible;
     std::string decal;
     std::map<olc::vf2d, std::string> decals;
-    std::vector<std::vector<std::string>> decal_layout;
+    std::vector<std::vector<std::string>> decal_layout; //add this to each class instead of using unnecessary inheritence
     LayerSolid() = default;
     LayerSolid(std::string _name, std::string _type, std::string _path);
     //~LayerSolid();

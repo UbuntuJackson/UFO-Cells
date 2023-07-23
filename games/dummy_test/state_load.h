@@ -18,6 +18,9 @@ private:
     std::vector<LayerInfo> layer_information;
 
     int asset_index;
+    //std::string current_data = "";
+    //std::string former_data = "";
+    //bool layers_are_added = false;
     std::string loading_screen_dir;
 public:
     StateLoad();
