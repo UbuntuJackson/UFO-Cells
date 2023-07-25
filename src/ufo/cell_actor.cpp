@@ -55,6 +55,8 @@ CellActor::HeightUntilGround(olc::Decal *_decal, std::string _layer, olc::vf2d _
     return snap_to_ground;
 }
 
+//should be IsOverlapping(olc::Decal *_decal, olc::vf2d _position, std::string _other_decal, olc::vf2d _other_position, olc::Pixel _colour)
+//can make a function that iterates through actor layers and makes use of this function
 bool
 CellActor::IsOverlapping(olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour){
 
