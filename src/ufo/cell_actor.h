@@ -9,6 +9,7 @@ public:
     olc::vf2d position;
     olc::vf2d velocity;
     olc::vf2d size;
+    std::string mask;
     bool is_grounded;
     bool was_grounded;
     int snap_to_ground;
