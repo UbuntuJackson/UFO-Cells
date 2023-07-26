@@ -74,5 +74,20 @@ CellActor::IsOverlapping(olc::Decal *_decal, std::string _layer, olc::vf2d _posi
     return false;
 }
 
+bool
+CellActor::IsOverlappingOtherDecal(olc::Decal *_decal, olc::vf2d _position, olc::Decal *_other_decal, olc::vf2d _other_position, olc::Pixel _colour){
+
+    for(int y = _position.y; y < _position.y + _decal->sprite->Size().y; y++){
+        for(int x = _position.x; x < _position.x + _decal->sprite->Size().x; x++){
+            if(CompareColour(_decal->sprite->GetPixel(x- _position.x, y- _position.y), olc::WHITE)
+                && CompareColour(_other_decal->sprite->GetPixel(x - _other_position.x, y - _other_position.y), _colour)
+            ){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 void CellActor::Update(){}
 void CellActor::Draw(){}
