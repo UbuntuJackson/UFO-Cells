@@ -15,10 +15,10 @@ public:
     std::string game_dir_name;
     HSQUIRRELVM vm;
     float dt;
-    Assets asset_manager;
-    std::vector<CellActor*> entities;
-    CellMap cell_map;
-    Camera camera;
+    Assets asset_manager; //Move to game baseclass
+    std::vector<CellActor*> entities; //Move to game baseclass
+    CellMap cell_map; //Cellmap should not either be instantiated as a member of the Program class
+    Camera camera; //Camera instance should not be built in, it should just exist as a class
     Program();
     ~Program();
     void SetGame(Game* _game);

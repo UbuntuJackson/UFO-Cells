@@ -9,6 +9,7 @@ public:
     std::string solid_layer = "solid";
     bool is_already_in_semi_solid = false;
     olc::vf2d former_position;
+    std::string mask;
     olc::Decal* mask_decal;
     Dummy(olc::vf2d _position);
     void Update();

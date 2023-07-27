@@ -15,30 +15,28 @@ Dummy::Dummy(olc::vf2d _position) : CellActor(_position){
 void
 Dummy::Update(){
     // INPUT X-AXIS
-
     if(UfoGlobal::program.GetKey(olc::Key::RIGHT).bHeld) velocity.x += 0.5f;
     if(UfoGlobal::program.GetKey(olc::Key::LEFT).bHeld) velocity.x -= 0.5f;
 
     former_position = position;
 
     position.x += velocity.x;
-
     velocity.x *= 0.85f;
+
+    for(auto layer : UfoGlobal::program.cell_map.layers){
+        std::cout << layer->name << std::endl;
+    }
 
     //HEIGHT ADJUSTMENT OVERLAP
     AdjustUpSlope();
-
     // COLLISION ADJUSTMENT X-AXIS
     AdjustCollisionX();
-
     // ADJUSTMENT ALONG Y-AXIS
     is_already_in_semi_solid = false;
     is_already_in_semi_solid = IsOverlapping(mask_decal, solid_layer, position, olc::RED);
 
     velocity.y += 0.7f;
-
     is_grounded = false;
-
     position.y += velocity.y;
     velocity.y *= 0.99f;
 

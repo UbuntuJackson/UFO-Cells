@@ -3,6 +3,8 @@
 #include "../../external/olcPixelGameEngine.h"
 #include <iostream>
 
+LayerActor::LayerActor(std::string _name, std::string _type) : Layer(_name, _type){}
+
 LayerActor::~LayerActor(){
     std::cout << "destructor" << std::endl;
     for(auto i : actors){

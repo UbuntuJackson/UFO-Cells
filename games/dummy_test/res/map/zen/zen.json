@@ -17,6 +17,17 @@
             ]
         },
         {
+            "name" : "dynamic_solids",
+            "type" :"actor",
+            "actors" : [
+                {
+                    "actor" : "DynamicSolid",
+                    "x" : 1000,
+                    "y" : 5700
+                }
+            ]
+        },
+        {
             "name" : "fg",
             "type" : "terrain",
             "path" : "../games/dummy_test/res/map/zen/fg.png"

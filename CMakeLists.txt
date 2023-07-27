@@ -24,6 +24,7 @@ file(
     GLOB SRCFILES
     src/ufo/assets.cpp
     src/ufo/cell_actor.cpp
+    src/ufo/dynamic_solid.cpp
     src/ufo/collision_utils.cpp
     src/ufo/colour_utils.cpp
     src/ufo/misc_math.cpp

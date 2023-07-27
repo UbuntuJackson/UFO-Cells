@@ -53,7 +53,7 @@ void StateLoad::Set(std::string _data){ //this needs to be simplified somehow
         }
         if(type == "actor"){
             const cJSON *actor_layer = cJSON_GetObjectItemCaseSensitive(item, "actors");
-            DummyTestLayerActor* layer_actor = new DummyTestLayerActor();
+            DummyTestLayerActor* layer_actor = new DummyTestLayerActor(name, type);
             for(int j = 0; j < cJSON_GetArraySize(actor_layer); j++){
                 const cJSON *act = cJSON_GetArrayItem(actor_layer, j);
                 std::string actor_string = cJSON_GetObjectItemCaseSensitive(act, "actor") -> valuestring;

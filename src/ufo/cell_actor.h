@@ -1,6 +1,7 @@
 #ifndef CELL_ACTOR_H
 #define CELL_ACTOR_H
 #include "../../external/olcPixelGameEngine.h"
+#include <string>
 
 class Program;
 
@@ -9,11 +10,11 @@ public:
     olc::vf2d position;
     olc::vf2d velocity;
     olc::vf2d size;
-    std::string mask;
     bool is_grounded;
     bool was_grounded;
     int snap_to_ground;
     int snap_up_range;
+    bool is_target = false;
 
     int draw_layer = 2;
 

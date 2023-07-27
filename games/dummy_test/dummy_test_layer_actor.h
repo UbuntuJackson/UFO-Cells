@@ -4,7 +4,7 @@
 
 class DummyTestLayerActor : public LayerActor{
 public:
-    DummyTestLayerActor();
+    DummyTestLayerActor(std::string _name, std::string _type);
     void LoadLayer();
 };
 
