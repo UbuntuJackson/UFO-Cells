@@ -6,7 +6,7 @@
 
 class DynamicSolid : public CellActor{
 public:
-    std::string mask;
+    //std::string mask;
     int timelapse;
     DynamicSolid(olc::vf2d _position, std::string _mask);
     void Update();

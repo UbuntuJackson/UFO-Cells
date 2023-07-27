@@ -15,6 +15,16 @@ CellActor::CellActor(olc::vf2d _position) :
 {
 }
 
+CellActor::CellActor(olc::vf2d _position, std::string _mask) :
+    position{_position},
+    mask{_mask},
+    is_grounded{false},
+    was_grounded{false},
+    snap_to_ground{6},
+    snap_up_range{16}
+{
+}
+
 CellActor::~CellActor(){}
 
 int

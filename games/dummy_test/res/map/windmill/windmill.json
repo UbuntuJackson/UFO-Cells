@@ -27,6 +27,17 @@
             ]
         },
         {
+            "name" : "dynamic_solids",
+            "type" :"actor",
+            "actors" : [
+                {
+                    "actor" : "DynamicSolid",
+                    "x" : 400,
+                    "y" : 600
+                }
+            ]
+        },
+        {
             "name" : "fg2",
             "type" : "terrain",
             "path" : "../games/dummy_test/res/map/windmill/fg2.png"

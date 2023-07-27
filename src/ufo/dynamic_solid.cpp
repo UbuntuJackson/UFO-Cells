@@ -3,16 +3,15 @@
 #include <string>
 #include "../program/ufo_global.h"
 
-DynamicSolid::DynamicSolid(olc::vf2d _position, std::string _mask) : CellActor(_position), mask{_mask}{
-    velocity = {-0.2f, 0.0f};
+DynamicSolid::DynamicSolid(olc::vf2d _position, std::string _mask) : CellActor(_position, _mask){
+    velocity = {-0.3f, -0.3f};
     timelapse = 0;
 }
 
 void DynamicSolid::Update(){
-    if(timelapse > 1000){velocity *= -1.0f; timelapse = 0;}
+    if(timelapse > 400){velocity *= -1.0f; timelapse = 0;}
     timelapse++;
-    std::cout << timelapse << std::endl;
-    position.x += velocity.x;
+    position += velocity;
 }
 void DynamicSolid::Draw(){
     UfoGlobal::program.camera.DrawDecal(
