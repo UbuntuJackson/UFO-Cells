@@ -57,9 +57,7 @@ Dummy::Update(){
                     position.x += 1.0f;
                 }
             }
-            std::cout << is_grounded << ", " << was_grounded << std::endl;
             velocity.x = 0.0f;
-            //position.x += act->velocity.x;
         }
     }
 
@@ -67,13 +65,13 @@ Dummy::Update(){
     is_already_in_semi_solid = false;
     is_already_in_semi_solid = IsOverlapping(mask_decal, solid_layer, position, olc::RED);
 
-    if(UfoGlobal::program.GetKey(olc::Key::UP).bHeld) velocity.y -= 0.5f;
-    if(UfoGlobal::program.GetKey(olc::Key::DOWN).bHeld) velocity.y += 0.5f;
+    //if(UfoGlobal::program.GetKey(olc::Key::UP).bHeld) velocity.y -= 0.5f;
+    //if(UfoGlobal::program.GetKey(olc::Key::DOWN).bHeld) velocity.y += 0.5f;
 
-    //velocity.y += 0.7f;
+    velocity.y += 0.7f;
     is_grounded = false;
     position.y += velocity.y;
-    velocity.y *= 0.85f;
+    velocity.y *= 0.99f;
 
     AdjustCollisionY();
 
@@ -97,8 +95,7 @@ Dummy::Update(){
             }
 
             velocity.y = 0.0f;
-            //if(is_grounded || was_grounded) position.x += act->velocity.x;
-            //position.y += act->velocity.y;
+            std::cout << int(act_new_position.y) << "," << int(position.y + 22) << std::endl;
         }
     }
     //both damn conditions are fulfilled, it moves in the opposite of the player, while the player is moving in the same direction
