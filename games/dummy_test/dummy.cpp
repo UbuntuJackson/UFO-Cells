@@ -19,14 +19,12 @@ Dummy::Dummy(olc::vf2d _position) : CellActor(_position){
 }
 
 Dummy::~Dummy(){
-    WriteInputJson();
+    if(UfoGlobal::program.record_input) WriteInputJson(); //Destructor should have been called as you enter MainMenu
     std::cout << "destructor_called" << std::endl;
 }
 
 void
 Dummy::Update(){
-    
-    if(input_frame+1 > player_input_play.size()) UfoGlobal::program.record_input = true;
 
     if(UfoGlobal::program.record_input){
         player_input_recorded.push_back(KeyInput{
@@ -39,6 +37,15 @@ Dummy::Update(){
             false, //left_held
             false //z_pressed
         });
+    }
+    else{
+        if(input_frame+1 > player_input_play.size()){
+            player_input_play.push_back(KeyInput{
+                false, //right_held
+                false, //left_held
+                false //z_pressed
+            });
+        }
     }
 
     /*if(!UfoGlobal::program.record_input){
@@ -81,6 +88,7 @@ Dummy::Update(){
         act_new_position.x = act->position.x + act->velocity.x;
 
         if(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
+            int a = 0;
             if(act->velocity.x < 0.0f && velocity.x > 0.0f){ //next frame
                 position.x = std::floor(position.x);
                 while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
