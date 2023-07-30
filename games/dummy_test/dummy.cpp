@@ -75,6 +75,29 @@ Dummy::Update(){
 
     former_position = position;
 
+    for(auto act : act_layer->actors){
+        olc::vf2d act_new_position = act->position;
+        act_new_position.x = act->position.x + act->velocity.x;
+
+        if(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
+            int a = 0;
+            if(act->velocity.x < 0.0f){ //next frame
+                position.x = std::floor(position.x);
+                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
+                    position.x -= 1.0f;
+                }
+            }
+            if(act->velocity.x > 0.0f){ //next frame
+                position.x = std::floor(position.x);
+                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
+                    position.x += 1.0f;
+                }
+            }
+            
+            velocity.x = 0.0f;
+        }
+    }
+
     position.x += velocity.x;
     velocity.x *= 0.85f;
 
@@ -89,37 +112,13 @@ Dummy::Update(){
 
         if(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
             int a = 0;
-            if(act->velocity.x < 0.0f && velocity.x > 0.0f){ //next frame
+            if(velocity.x > 0.0f){ //next frame
                 position.x = std::floor(position.x);
                 while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
                     position.x -= 1.0f;
                 }
             }
-            else if(act->velocity.x > 0.0f && velocity.x < 0.0f){
-                position.x = std::ceil(position.x);
-                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
-                    position.x += 1.0f;
-                }
-            }
-            else if(act->velocity.x > 0.0f && velocity.x > 0.0f){ //next frame
-                position.x = std::floor(position.x);
-                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
-                    position.x -= 1.0f;
-                }
-            }
-            else if(act->velocity.x < 0.0f && velocity.x < 0.0f){
-                position.x = std::ceil(position.x);
-                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
-                    position.x += 1.0f;
-                }
-            }
-            else if(act->velocity.x < 0.0f && velocity.x == 0.0f){
-                position.x = std::floor(position.x);
-                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
-                    position.x -= 1.0f;
-                }
-            }
-            else if(act->velocity.x > 0.0f && velocity.x == 0.0f){
+            if(velocity.x < 0.0f){
                 position.x = std::ceil(position.x);
                 while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
                     position.x += 1.0f;
@@ -136,6 +135,31 @@ Dummy::Update(){
     //if(UfoGlobal::program.GetKey(olc::Key::UP).bHeld) velocity.y -= 0.5f;
     //if(UfoGlobal::program.GetKey(olc::Key::DOWN).bHeld) velocity.y += 0.5f;
 
+    //Checking before we intend to move
+
+    for(auto act : act_layer->actors){
+        olc::vf2d act_new_position = act->position;
+        act_new_position = act->position + act->velocity;
+
+        if(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
+            int a = 0;
+            if(act->velocity.y < 0.0f){ //next frame
+                position.y = std::floor(position.y);
+                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
+                    position.y -= 1.0f;
+                }
+            }
+            if(act->velocity.y > 0.0f){ //next frame
+                position.y = std::floor(position.y);
+                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
+                    position.y += 1.0f;
+                }
+            }
+            
+            velocity.y = 0.0f;
+        }
+    }
+
     velocity.y += 0.7f;
     is_grounded = false;
     position.y += velocity.y;
@@ -149,44 +173,20 @@ Dummy::Update(){
 
         if(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
             if(velocity.y > 0.0f) is_grounded = true;
-            if((act->velocity.y < 0.0f && velocity.y > 0.0f)){ //next frame
+            if(velocity.y > 0.0f){ //next frame
                 position.y = std::floor(position.y);
                 while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
                     position.y -= 1.0f;
                 }
             }
-            else if((act->velocity.y > 0.0f && velocity.y < 0.0f)){
-                position.y = std::ceil(position.y);
-                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
-                    position.y += 1.0f;
-                }
-            }
-            else if((act->velocity.y > 0.0f && velocity.y > 0.0f)){ //next frame
+            if(velocity.y < 0.0f){ //next frame
                 position.y = std::floor(position.y);
                 while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
-                    position.y -= 1.0f;
-                }
-            }
-            else if((act->velocity.y < 0.0f && velocity.y < 0.0f)){
-                position.y = std::ceil(position.y);
-                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
                     position.y += 1.0f;
                 }
             }
-            else if((act->velocity.y < 0.0f && velocity.y == 0.0f)){ //next frame
-                position.y = std::floor(position.y);
-                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
-                    position.y -= 1.0f;
-                }
-            }
-            else if((act->velocity.y > 0.0f && velocity.y == 0.0f)){
-                position.y = std::ceil(position.y);
-                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
-                    position.y += 1.0f;
-                }
-            }
+            
             velocity.y = 0.0f;
-            std::cout << int(act_new_position.y) << "," << int(position.y + 22) << std::endl;
             if(is_grounded) position.x += act->velocity.x; //maybe store this velocity, store important data and use it later
         }
     }
