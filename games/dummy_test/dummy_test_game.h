@@ -8,6 +8,8 @@
 
 class DummyTestGame : public Game{
 public:
+    //bool record_input = false;
+    //bool play_input = false;
     const olc::Pixel SEMI_SOLID_COLOUR = olc::Pixel(255, 0, 255, 255);
     const olc::Pixel SOLID_COLOUR = olc::Pixel(255, 255, 255, 255);
     StateLoad *state_load;

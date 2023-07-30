@@ -11,13 +11,29 @@ public:
     olc::vf2d former_position;
     std::string mask;
     olc::Decal* mask_decal;
+
+    bool record_input;
+    int input_frame;
+    bool play_input;
+    struct KeyInput{
+        bool left_held;
+        bool right_held;
+        bool z_pressed;
+    };
+
+    std::vector<KeyInput> player_input_recorded;
+    std::vector<KeyInput> player_input_play;
     Dummy(olc::vf2d _position);
+    ~Dummy();
     void Update();
     void Draw();
     void AdjustCollisionX();
     void AdjustCollisionY();
     void AdjustDownSlope();
     void AdjustUpSlope();
+
+    void WriteInputJson();
+    void ParseInputJson();
 };
 
 #endif

@@ -12,6 +12,9 @@ public:
     olc::vf2d size;
     bool is_grounded;
     bool was_grounded;
+    bool is_grounded_dynamic = false;
+    bool was_grounded_dynamic = false;
+    olc::vf2d correct_dynamic;
     int snap_to_ground;
     int snap_up_range;
     bool is_target = false;
@@ -21,7 +24,7 @@ public:
 
     CellActor(olc::vf2d _position);
     CellActor(olc::vf2d _position, std::string _mask);
-    ~CellActor();
+    virtual ~CellActor();
     bool IsOverlapping(olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);
     int IsOverlappingHeight(olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);
     int HeightUntilGround(olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);

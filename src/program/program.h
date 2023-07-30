@@ -10,6 +10,9 @@
 
 class Program : public olc::PixelGameEngine{
 public:
+    bool record_input = true;
+    bool play_input = false;
+
     Game* game;
     bool running = true;
     std::string game_dir_name;

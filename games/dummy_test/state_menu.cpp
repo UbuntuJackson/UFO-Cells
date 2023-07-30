@@ -25,6 +25,12 @@ std::string StateMenu::GetData(){
 }
 
 void StateMenu::Update(){
+    if(UfoGlobal::program.GetKey(olc::Key::R).bPressed){
+        UfoGlobal::program.record_input = !UfoGlobal::program.record_input;
+        if(UfoGlobal::program.record_input) std::cout << "input recording enabled" << std::endl;
+        else std::cout << "input recording disabled" << std::endl;
+    }
+    //if(UfoGlobal::program.GetKey(olc::Key::S).bPressed) UfoGlobal::program.record_input = true;
     std::string path = "../games/dummy_test/scripts/update_menus.nut";
     sqstd_dofile(UfoGlobal::program.vm, path.c_str(), 0, 1);
 }
