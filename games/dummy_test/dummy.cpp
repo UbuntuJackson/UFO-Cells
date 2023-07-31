@@ -135,14 +135,13 @@ Dummy::Update(){
     //if(UfoGlobal::program.GetKey(olc::Key::UP).bHeld) velocity.y -= 0.5f;
     //if(UfoGlobal::program.GetKey(olc::Key::DOWN).bHeld) velocity.y += 0.5f;
 
-    //Checking before we intend to move
+    //Checking before we intend to move along the Y-Axis
 
     for(auto act : act_layer->actors){
         olc::vf2d act_new_position = act->position;
         act_new_position = act->position + act->velocity;
 
         if(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
-            int a = 0;
             if(act->velocity.y < 0.0f){ //next frame
                 position.y = std::floor(position.y);
                 while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
@@ -155,7 +154,7 @@ Dummy::Update(){
                     position.y += 1.0f;
                 }
             }
-            
+            if(velocity.y > 0.0f) is_grounded = true;
             velocity.y = 0.0f;
         }
     }
@@ -172,7 +171,6 @@ Dummy::Update(){
         act_new_position = act->position + act->velocity;
 
         if(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
-            if(velocity.y > 0.0f) is_grounded = true;
             if(velocity.y > 0.0f){ //next frame
                 position.y = std::floor(position.y);
                 while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
@@ -185,26 +183,20 @@ Dummy::Update(){
                     position.y += 1.0f;
                 }
             }
-            
+            if(velocity.y > 0.0f) is_grounded = true;
             velocity.y = 0.0f;
-            if(is_grounded) position.x += act->velocity.x; //maybe store this velocity, store important data and use it later
+            if(is_grounded) position.x += act->velocity.x;
         }
     }
-    //both damn conditions are fulfilled, it moves in the opposite of the player, while the player is moving in the same direction
-
-    int j = 1;
 
     if((UfoGlobal::program.GetKey(olc::Key::Z).bPressed || player_input_play[input_frame].z_pressed == true) && (was_grounded || is_grounded)){
         velocity.y = -10.0f;
     }
 
-    input_frame++;
-
-    //std::cout << input_frame << std::endl;
-
     AdjustDownSlope();
-
     was_grounded = is_grounded;
+
+    input_frame++;
 }
 
 void

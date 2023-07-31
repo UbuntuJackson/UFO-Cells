@@ -78,6 +78,9 @@ Camera::FollowPlatformer(olc::vf2d _position, olc::Decal *_decal){
     olc::vf2d screen_position = offset_position * scale;
     screen_position += f_screen_size*0.5f;
 
+    screen_position.x = std::floor(screen_position.x/scale) * scale;
+    screen_position.y = std::floor(screen_position.y/scale) * scale;
+
     UfoGlobal::program.DrawDecal(
         screen_position,
         _decal,
