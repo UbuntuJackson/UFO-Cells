@@ -78,7 +78,7 @@ Dummy::Update(){
                 }
             }
             if(act->velocity.x > 0.0f){ //next frame
-                position.x = std::floor(position.x);
+                position.x = std::ceil(position.x);
                 while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
                     position.x += 1.0f;
                 }
@@ -151,7 +151,6 @@ Dummy::Update(){
 
     if((UfoGlobal::program.GetKey(olc::Key::Z).bPressed || player_input_play[input_frame].z_pressed == true) && (was_grounded || is_grounded)){
         velocity.y = -10.0f;
-        std::cout << "jumped" << ", " << input_frame << std::endl;
     } //I would consider putting this right after the OnEnteredCollisionY() call, which would also mean that was_grounded = is_grounded needs to be put after that
 
     was_grounded = is_grounded;

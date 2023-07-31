@@ -32,16 +32,16 @@ CellActor::IsOverlappingHeight(olc::Decal *_decal, std::string _layer, olc::vf2d
 
     olc::Decal* collision_layer = UfoGlobal::program.cell_map.map_decals[_layer];
 
-    for(int y = _position.y; y < _position.y + _decal->sprite->Size().y; y++){
-        for(int x = _position.x; x < _position.x + _decal->sprite->Size().x; x++){
-            if(CompareColour(_decal->sprite->GetPixel(x- _position.x, y- _position.y), olc::WHITE)
+    for(int y = int(_position.y); y < int(_position.y) + _decal->sprite->Size().y; y++){
+        for(int x = int(_position.x); x < int(_position.x) + _decal->sprite->Size().x; x++){
+            if(CompareColour(_decal->sprite->GetPixel(x- int(_position.x), y- int(_position.y)), olc::WHITE)
                 && CompareColour(collision_layer->sprite->GetPixel(x, y), _colour) //I'm gonna need a downcast or access the name from the asset manager
             ){
                 return y;
             }
         }
     }
-    return position.y + _decal->sprite->Size().y;
+    return int(position.y) + _decal->sprite->Size().y;
 }
 
 //HeightUntilGround
@@ -52,12 +52,12 @@ CellActor::HeightUntilGround(olc::Decal *_decal, std::string _layer, olc::vf2d _
 
     olc::Decal* collision_layer = UfoGlobal::program.cell_map.map_decals[_layer];
 
-    for(int y = _position.y + _decal->sprite->Size().y; y < _position.y + _decal->sprite->Size().y + snap_to_ground; y++){
-        for(int x = _position.x; x < _position.x + _decal->sprite->Size().x; x++){
+    for(int y = int(_position.y) + _decal->sprite->Size().y; y < int(_position.y) + _decal->sprite->Size().y + snap_to_ground; y++){
+        for(int x = int(_position.x); x < int(_position.x) + _decal->sprite->Size().x; x++){
             if(CompareColour(collision_layer->sprite->GetPixel(x,y), _colour)){
 
                 //Difference between player bottom and highest collision cell
-                return y -(_position.y + _decal->sprite->Size().y);
+                return y -(int(_position.y) + _decal->sprite->Size().y);
             }
         }
     }
@@ -72,9 +72,9 @@ CellActor::IsOverlapping(olc::Decal *_decal, std::string _layer, olc::vf2d _posi
 
     olc::Decal* collision_layer = UfoGlobal::program.cell_map.map_decals[_layer];
 
-    for(int y = _position.y; y < _position.y + _decal->sprite->Size().y; y++){
-        for(int x = _position.x; x < _position.x + _decal->sprite->Size().x; x++){
-            if(CompareColour(_decal->sprite->GetPixel(x- _position.x, y- _position.y), olc::WHITE)
+    for(int y = int(_position.y); y < int(_position.y) + _decal->sprite->Size().y; y++){
+        for(int x = int(_position.x); x < int(_position.x) + _decal->sprite->Size().x; x++){
+            if(CompareColour(_decal->sprite->GetPixel(x- int(_position.x), y- int(_position.y)), olc::WHITE)
                 && CompareColour(collision_layer->sprite->GetPixel(x, y), _colour)
             ){
                 return true;
@@ -87,10 +87,10 @@ CellActor::IsOverlapping(olc::Decal *_decal, std::string _layer, olc::vf2d _posi
 bool
 CellActor::IsOverlappingOtherDecal(olc::Decal *_decal, olc::vf2d _position, olc::Decal *_other_decal, olc::vf2d _other_position, olc::Pixel _colour){
 
-    for(int y = _position.y; y < _position.y + _decal->sprite->Size().y; y++){
-        for(int x = _position.x; x < _position.x + _decal->sprite->Size().x; x++){
-            if(CompareColour(_decal->sprite->GetPixel(x- _position.x, y- _position.y), olc::WHITE)
-                && CompareColour(_other_decal->sprite->GetPixel(x - _other_position.x, y - _other_position.y), _colour)
+    for(int y = int(_position.y); y < int(_position.y) + _decal->sprite->Size().y; y++){
+        for(int x = int(_position.x); x < int(_position.x) + _decal->sprite->Size().x; x++){
+            if(CompareColour(_decal->sprite->GetPixel(x- int(_position.x), y- int(_position.y)), olc::WHITE)
+                && CompareColour(_other_decal->sprite->GetPixel(x - int(_other_position.x), y - int(_other_position.y)), _colour)
             ){
                 return true;
             }
