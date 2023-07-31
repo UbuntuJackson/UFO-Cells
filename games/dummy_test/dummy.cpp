@@ -48,14 +48,6 @@ Dummy::Update(){
         }
     }
 
-    /*if(!UfoGlobal::program.record_input){
-        player_input_play.push_back(KeyInput{
-            false, //right_held
-            false, //left_held
-            false //z_pressed
-        });
-    }*/
-
     DummyTestLayerActor* act_layer;
 
     for(auto layer : UfoGlobal::program.cell_map.layers){
@@ -70,8 +62,6 @@ Dummy::Update(){
     // INPUT X-AXIS
     if(UfoGlobal::program.GetKey(olc::Key::RIGHT).bHeld || player_input_play[input_frame].right_held) velocity.x += 0.5f;
     if(UfoGlobal::program.GetKey(olc::Key::LEFT).bHeld || player_input_play[input_frame].left_held) velocity.x -= 0.5f;
-
-    std::cout <<  player_input_play[input_frame].right_held << std::endl;
 
     former_position = position;
 
@@ -142,13 +132,13 @@ Dummy::Update(){
         act_new_position = act->position + act->velocity;
 
         if(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
-            if(act->velocity.y < 0.0f){ //next frame
+            if(act->velocity.y < 0.0f){
                 position.y = std::floor(position.y);
                 while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
                     position.y -= 1.0f;
                 }
             }
-            if(act->velocity.y > 0.0f){ //next frame
+            if(act->velocity.y > 0.0f){
                 position.y = std::floor(position.y);
                 while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
                     position.y += 1.0f;
@@ -158,6 +148,13 @@ Dummy::Update(){
             velocity.y = 0.0f;
         }
     }
+
+    if((UfoGlobal::program.GetKey(olc::Key::Z).bPressed || player_input_play[input_frame].z_pressed == true) && (was_grounded || is_grounded)){
+        velocity.y = -10.0f;
+        std::cout << "jumped" << ", " << input_frame << std::endl;
+    } //I would consider putting this right after the OnEnteredCollisionY() call, which would also mean that was_grounded = is_grounded needs to be put after that
+
+    was_grounded = is_grounded;
 
     velocity.y += 0.7f;
     is_grounded = false;
@@ -171,13 +168,13 @@ Dummy::Update(){
         act_new_position = act->position + act->velocity;
 
         if(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
-            if(velocity.y > 0.0f){ //next frame
+            if(velocity.y > 0.0f){
                 position.y = std::floor(position.y);
                 while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
                     position.y -= 1.0f;
                 }
             }
-            if(velocity.y < 0.0f){ //next frame
+            if(velocity.y < 0.0f){
                 position.y = std::floor(position.y);
                 while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
                     position.y += 1.0f;
@@ -189,12 +186,7 @@ Dummy::Update(){
         }
     }
 
-    if((UfoGlobal::program.GetKey(olc::Key::Z).bPressed || player_input_play[input_frame].z_pressed == true) && (was_grounded || is_grounded)){
-        velocity.y = -10.0f;
-    }
-
     AdjustDownSlope();
-    was_grounded = is_grounded;
 
     input_frame++;
 }
@@ -432,7 +424,6 @@ void Dummy::WriteInputJson(){
 
     }
     std::string input_json_s = cJSON_Print(input_json);
-    std::cout << input_json_s << std::endl;
     std::ofstream my_file;
     my_file.open("inputs.json");
     my_file << input_json_s;
