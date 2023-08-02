@@ -148,7 +148,7 @@ Dummy::Update(){
             }
             if(act->velocity.y < 0.0f) is_grounded = true;
             velocity.y = 0.0f;
-            //if(is_grounded) position.x += act->velocity.x;
+            //if(is_grounded) velocity.x += act->velocity.x;
         }
     }
 
@@ -184,7 +184,7 @@ Dummy::Update(){
             }
             if(velocity.y > 0.0f) is_grounded = true;
             velocity.y = 0.0f;
-            if(is_grounded) position.x += act->velocity.x;
+            //if(is_grounded && !was_grounded) velocity.x += act->velocity.x;
         }
     }
 
