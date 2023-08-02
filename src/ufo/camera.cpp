@@ -275,13 +275,4 @@ Camera::DrawDecal(olc::vf2d _position, olc::Decal *_decal){
             Static(_position, _decal);
             break;
     }
-
-    /*olc::vf2d offset_position = _position - target->position - program->asset_manager.decPin->sprite->Size()/2;
-    olc::vf2d scaled_offset_position = offset_position * scale;
-    scaled_offset_position += program->GetScreenSize()/2;
-
-    program->DrawDecal(
-        scaled_offset_position,
-        _decal,
-        olc::vf2d(scale, scale));*/
 }
