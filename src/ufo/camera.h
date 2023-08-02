@@ -20,7 +20,8 @@ enum CameraStates{
 	    // Transition into
     MOUSE,
     MULTIPLAYER,
-    ALL_CONTAINED
+    ALL_CONTAINED,
+    STATIC
 };
 
 class Camera{
@@ -34,6 +35,8 @@ public:
     float m_initial_scale_difference;
     float m_delta_scale;
     float m_slow_down_target;
+
+    olc::vf2d offset;
 
     float up_sensor;
     float down_sensor;
@@ -53,11 +56,12 @@ public:
     void Follow(olc::vf2d _position, olc::Decal *_decal);
     void Move();
     void Switch();
+    void Static(olc::vf2d _position, olc::Decal *_decal);
     void MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal);
     void SetStateSwitch(CellActor *_target);
     void SetStateZoom(float _target_scale);
     void SetStateMove(olc::vf2d _vel);
-
+    void SetStateStatic(olc::vf2d _offset);
     void FollowPlatformer(olc::vf2d _position, olc::Decal *_decal);
 
     void

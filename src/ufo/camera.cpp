@@ -55,17 +55,17 @@ Camera::FollowPlatformer(olc::vf2d _position, olc::Decal *_decal){
 
     position.y = up_sensor;
 
+    position.x = std::floor(position.x);
+    position.y = std::floor(position.y);
+
     //Feed this value to WorldToScreen()
 
     olc::vf2d f_screen_size;
     f_screen_size.x = float(UfoGlobal::program.GetScreenSize().x);
     f_screen_size.y = float(UfoGlobal::program.GetScreenSize().y);
 
-    //We wanna clamp the position, not the offset_camera_position
     olc::vf2d camera_clamp_min = f_screen_size*0.5f/scale - UfoGlobal::program.asset_manager.GetDecal("decPin")->sprite->Size()/2;
-    //std::cout << camera_clamp_min.x << ", " << camera_clamp_min.y << std::endl;
     olc::vf2d camera_clamp_max = UfoGlobal::program.cell_map.map_size-f_screen_size*0.5f/scale - UfoGlobal::program.asset_manager.GetDecal("decPin")->sprite->Size()/2;
-    //std::cout << camera_clamp_max.x << ", " << camera_clamp_max.y << std::endl;
 
     if(position.x < camera_clamp_min.x) position.x = camera_clamp_min.x;
     if(position.y < camera_clamp_min.y) position.y = camera_clamp_min.y;
@@ -78,13 +78,32 @@ Camera::FollowPlatformer(olc::vf2d _position, olc::Decal *_decal){
     olc::vf2d screen_position = offset_position * scale;
     screen_position += f_screen_size*0.5f;
 
-    screen_position.x = std::floor(screen_position.x/scale) * scale;
-    screen_position.y = std::floor(screen_position.y/scale) * scale;
+    auto mod = [&](int a, int b){
+        if(a%b < 0.0f){
+            return a%b + b;
+        }
+        return a%b;
+    };
 
+    std::cout << screen_position.x << ": " << "unflored" << std::endl;
+    
+    std::cout << mod(int(std::floor(screen_position.x)), int(scale)) << ": " << "after" << std::endl;
+
+    screen_position.x = int(std::floor(screen_position.x)) - mod(int(std::floor(screen_position.x)), int(scale)); //This is to maintain coordinates of pixles as multiples of scale.
+    screen_position.y = int(std::floor(screen_position.y)) - mod(int(std::floor(screen_position.y)), int(scale)); //This is to maintain coordinates of pixles as multiples of scale.
+    std::cout << std::floor(screen_position.x) << ": " << "modified" << std::endl;
     UfoGlobal::program.DrawDecal(
         screen_position,
         _decal,
         olc::vf2d(scale, scale));
+}
+
+void Camera::Static(olc::vf2d _position, olc::Decal *_decal){
+    _position.x = std::floor(_position.x); //This is to maintain coordinates of pixles as multiples of scale.
+    _position.y = std::floor(_position.y); //This is to maintain coordinates of pixles as multiples of scale.
+    UfoGlobal::program.DrawDecal(
+        (_position-offset)*scale,
+        _decal, olc::vd2d(scale, scale));
 }
 
 void
@@ -202,6 +221,12 @@ Camera::SetStateFollowPlatfomer(CellActor *_target){
     right_sensor = target->position.x - 75.0f;
 }
 
+void
+Camera::SetStateStatic(olc::vf2d _offset){
+    offset = _offset;
+    UfoGlobal::program.camera.m_camera_state = STATIC;
+}
+
 olc::vf2d Camera::ScreenToWorld(olc::vf2d _screen_position, olc::vf2d _shape_offset){
 
     _screen_position -= olc::vf2d(float(UfoGlobal::program.GetScreenSize().x)*0.5f, float(UfoGlobal::program.GetScreenSize().y)*0.5f);
@@ -245,6 +270,9 @@ Camera::DrawDecal(olc::vf2d _position, olc::Decal *_decal){
             break;
         case FOLLOW_PLATFORMER:
             FollowPlatformer(_position, _decal);
+            break;
+        case STATIC:
+            Static(_position, _decal);
             break;
     }
 

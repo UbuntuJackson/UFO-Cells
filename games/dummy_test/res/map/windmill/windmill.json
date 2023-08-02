@@ -32,7 +32,7 @@
             "actors" : [
                 {
                     "actor" : "DynamicSolid",
-                    "x" : 400,
+                    "x" : 720,
                     "y" : 600
                 }
             ]

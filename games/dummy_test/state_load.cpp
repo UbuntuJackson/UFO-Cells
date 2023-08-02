@@ -76,7 +76,6 @@ void StateLoad::Update(){ //this can be generalised and put in some kind of clas
     }
     else{
         //we can just add another state and then set that state, as they are mapped with strings
-        UfoGlobal::program.camera.scale = 3.0f;
         UfoGlobal::program.game->SetState("play", "...");
     }
     UfoGlobal::program.DrawDecal(olc::vf2d(0.0f, 0.0f), UfoGlobal::program.asset_manager.GetDecal("load"));

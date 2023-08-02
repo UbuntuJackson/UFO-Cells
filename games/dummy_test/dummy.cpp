@@ -12,6 +12,8 @@
 
 Dummy::Dummy(olc::vf2d _position) : CellActor(_position){
     UfoGlobal::program.camera.SetStateFollowPlatfomer(this);
+    UfoGlobal::program.camera.scale = 4.0f;
+    UfoGlobal::program.record_input = true;
     mask = "decPin";
     mask_decal = UfoGlobal::program.asset_manager.GetDecal(mask);
     input_frame = 0;
@@ -83,7 +85,7 @@ Dummy::Update(){
                     position.x += 1.0f;
                 }
             }
-            
+
             velocity.x = 0.0f;
         }
     }
@@ -133,7 +135,7 @@ Dummy::Update(){
 
         if(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
             if(act->velocity.y < 0.0f){
-                position.y = std::floor(position.y);
+                position.y = std::ceil(position.y);
                 while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
                     position.y -= 1.0f;
                 }
@@ -144,9 +146,9 @@ Dummy::Update(){
                     position.y += 1.0f;
                 }
             }
-            if(velocity.y > 0.0f) is_grounded = true;
+            if(act->velocity.y < 0.0f) is_grounded = true;
             velocity.y = 0.0f;
-            if(is_grounded) position += act->velocity;
+            if(is_grounded) position.x += act->velocity.x;
         }
     }
 
@@ -175,14 +177,14 @@ Dummy::Update(){
                 }
             }
             if(velocity.y < 0.0f){
-                position.y = std::floor(position.y);
+                position.y = std::ceil(position.y);
                 while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
                     position.y += 1.0f;
                 }
             }
             if(velocity.y > 0.0f) is_grounded = true;
             velocity.y = 0.0f;
-            if(is_grounded) position += act->velocity;
+            if(is_grounded) position.x += act->velocity.x;
         }
     }
 

@@ -18,7 +18,7 @@ DummyTestGame::DummyTestGame() :
         game_states["menu"] = state_menu;
         game_states["play"] = state_play;
 
-        SetState("menu", "MainMenu");
+        SetState("load", "../games/dummy_test/res/map/windmill/windmill.json");
 
     }
 
