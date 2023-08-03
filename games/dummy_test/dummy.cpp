@@ -11,8 +11,9 @@
 #include "../../external/cJSON.h"
 
 Dummy::Dummy(olc::vf2d _position) : CellActor(_position){
-    UfoGlobal::program.camera.SetStateFollowPlatfomer(this);
-    UfoGlobal::program.camera.scale = 4.0f;
+    //UfoGlobal::program.camera.SetStateFollowPlatfomer(this);
+    UfoGlobal::program.camera.SetStateStatic(olc::vf2d(480.0f, 480.0f));
+    UfoGlobal::program.camera.scale = 1.0f;
     UfoGlobal::program.record_input = true;
     mask = "decPin";
     mask_decal = UfoGlobal::program.asset_manager.GetDecal(mask);
@@ -67,6 +68,10 @@ Dummy::Update(){
 
     former_position = position;
 
+    //Do a check earlier and see if there's ground 1 pixel below Dummy. That way we don't rely on a rescent collision. Add act->velocity.x to Dummy.position.x
+
+    std::cout << dynamic_ride_offset.x << std::endl;
+
     for(auto act : act_layer->actors){
         olc::vf2d act_new_position = act->position;
         act_new_position.x = act->position.x + act->velocity.x;
@@ -89,6 +94,42 @@ Dummy::Update(){
             velocity.x = 0.0f;
         }
     }
+
+    for(auto act : act_layer->actors){
+        olc::vf2d act_new_position = act->position;
+        act_new_position.x = act->position.x;
+        if(IsOverlappingOtherDecal(mask_decal, olc::vf2d(position.x, position.y + 1), UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
+            is_grounded = true;
+            dynamic_ride_offset.x = act->velocity.x;
+        }
+    }
+
+    position.x += dynamic_ride_offset.x;
+
+    for(auto act : act_layer->actors){
+        olc::vf2d act_new_position = act->position;
+        act_new_position.x = act->position.x + act->velocity.x;
+
+        if(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
+            int a = 0;
+            if(dynamic_ride_offset.x > 0.0f){ //next frame
+                position.x = std::floor(position.x);
+                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
+                    position.x -= 1.0f;
+                }
+            }
+            if(dynamic_ride_offset.x < 0.0f){ //next frame
+                position.x = std::ceil(position.x);
+                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
+                    position.x += 1.0f;
+                }
+            }
+
+            velocity.x = 0.0f;
+        }
+    }
+
+    dynamic_ride_offset = {0.0f, 0.0f};
 
     position.x += velocity.x;
     velocity.x *= 0.85f;
@@ -129,9 +170,17 @@ Dummy::Update(){
 
     //Checking before we intend to move along the Y-Axis
 
+    //Might be ideal place to check for is_grounded
+    //is_grounded = IsOverlappingOtherDecal(mask_decal, olc::vf2d(position.x, position.y + 1), ...)
+
     for(auto act : act_layer->actors){
         olc::vf2d act_new_position = act->position;
         act_new_position = act->position + act->velocity;
+
+        if(IsOverlappingOtherDecal(mask_decal, olc::vf2d(position.x, position.y + 1), UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
+            is_grounded = true;
+            //dynamic_ride_offset.x = act->velocity.x;
+        }
 
         if(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
             if(act->velocity.y < 0.0f){
@@ -146,9 +195,7 @@ Dummy::Update(){
                     position.y += 1.0f;
                 }
             }
-            if(act->velocity.y < 0.0f) is_grounded = true;
             velocity.y = 0.0f;
-            //if(is_grounded) velocity.x += act->velocity.x;
         }
     }
 
@@ -169,6 +216,11 @@ Dummy::Update(){
         olc::vf2d act_new_position = act->position;
         act_new_position = act->position + act->velocity;
 
+        if(IsOverlappingOtherDecal(mask_decal, olc::vf2d(position.x, position.y + 1), UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
+            is_grounded = true;
+            //dynamic_ride_offset.x = act->velocity.x;
+        }
+
         if(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
             if(velocity.y > 0.0f){
                 position.y = std::floor(position.y);
@@ -182,13 +234,13 @@ Dummy::Update(){
                     position.y += 1.0f;
                 }
             }
-            if(velocity.y > 0.0f) is_grounded = true;
             velocity.y = 0.0f;
-            //if(is_grounded && !was_grounded) velocity.x += act->velocity.x;
         }
     }
 
     AdjustDownSlope();
+
+    dynamic_ride_offset = {0.0f, 0.0f};
 
     input_frame++;
 }

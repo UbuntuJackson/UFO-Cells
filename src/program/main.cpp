@@ -15,7 +15,7 @@ int main()
 										//One separate idea is to give UfoGlobal::program the type olc::PixelgameEngine but then assign it
 										//an instance of DummyTestGame
 										//What if Game Inherited from PGE, and DummyTestGame inherited from Game
-	if (UfoGlobal::program.Construct(1600, 800, 1, 1, false, true, true))
+	if (UfoGlobal::program.Construct(400, 200, 4, 4, false, true, true))
 		UfoGlobal::program.SetGame(game);
 		UfoGlobal::program.Start();
 

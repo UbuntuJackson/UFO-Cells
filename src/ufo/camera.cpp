@@ -85,13 +85,9 @@ Camera::FollowPlatformer(olc::vf2d _position, olc::Decal *_decal){
         return a%b;
     };
 
-    std::cout << screen_position.x << ": " << "unflored" << std::endl;
-    
-    std::cout << mod(int(std::floor(screen_position.x)), int(scale)) << ": " << "after" << std::endl;
-
     screen_position.x = int(std::floor(screen_position.x)) - mod(int(std::floor(screen_position.x)), int(scale)); //This is to maintain coordinates of pixles as multiples of scale.
     screen_position.y = int(std::floor(screen_position.y)) - mod(int(std::floor(screen_position.y)), int(scale)); //This is to maintain coordinates of pixles as multiples of scale.
-    std::cout << std::floor(screen_position.x) << ": " << "modified" << std::endl;
+
     UfoGlobal::program.DrawDecal(
         screen_position,
         _decal,
@@ -99,10 +95,12 @@ Camera::FollowPlatformer(olc::vf2d _position, olc::Decal *_decal){
 }
 
 void Camera::Static(olc::vf2d _position, olc::Decal *_decal){
-    _position.x = std::floor(_position.x); //This is to maintain coordinates of pixles as multiples of scale.
-    _position.y = std::floor(_position.y); //This is to maintain coordinates of pixles as multiples of scale.
+    olc::vf2d screen_position;
+    screen_position.x = floor((_position.x - offset.x) * scale);
+    screen_position.y = floor((_position.y - offset.y) * scale);
+
     UfoGlobal::program.DrawDecal(
-        (_position-offset)*scale,
+        screen_position,
         _decal, olc::vd2d(scale, scale));
 }
 
