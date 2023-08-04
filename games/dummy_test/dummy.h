@@ -13,6 +13,7 @@ public:
     olc::Decal* mask_decal;
 
     olc::vf2d dynamic_ride_offset = {0.0f, 0.0f};
+    bool entered_horisontally_dynamic = false;
 
     bool record_input;
     int input_frame;

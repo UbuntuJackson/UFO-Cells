@@ -90,7 +90,7 @@ Dummy::Update(){
                     position.x += 1.0f;
                 }
             }
-
+            entered_horisontally_dynamic = true;
             velocity.x = 0.0f;
         }
     }
@@ -100,9 +100,10 @@ Dummy::Update(){
         act_new_position.x = act->position.x;
         if(IsOverlappingOtherDecal(mask_decal, olc::vf2d(position.x, position.y + 1), UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
             is_grounded = true;
-            dynamic_ride_offset.x = act->velocity.x;
+            if(!entered_horisontally_dynamic) dynamic_ride_offset.x = act->velocity.x;
         }
     }
+    entered_horisontally_dynamic = false;
 
     position.x += dynamic_ride_offset.x;
 
@@ -124,7 +125,7 @@ Dummy::Update(){
                     position.x += 1.0f;
                 }
             }
-
+            entered_horisontally_dynamic = true;
             velocity.x = 0.0f;
         }
     }
@@ -157,6 +158,7 @@ Dummy::Update(){
                     position.x += 1.0f;
                 }
             }
+            entered_horisontally_dynamic = true;
             velocity.x = 0.0f;
         }
     }
@@ -165,13 +167,7 @@ Dummy::Update(){
     is_already_in_semi_solid = false;
     is_already_in_semi_solid = IsOverlapping(mask_decal, solid_layer, position, olc::RED);
 
-    //if(UfoGlobal::program.GetKey(olc::Key::UP).bHeld) velocity.y -= 0.5f;
-    //if(UfoGlobal::program.GetKey(olc::Key::DOWN).bHeld) velocity.y += 0.5f;
-
     //Checking before we intend to move along the Y-Axis
-
-    //Might be ideal place to check for is_grounded
-    //is_grounded = IsOverlappingOtherDecal(mask_decal, olc::vf2d(position.x, position.y + 1), ...)
 
     for(auto act : act_layer->actors){
         olc::vf2d act_new_position = act->position;
