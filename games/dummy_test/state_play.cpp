@@ -15,14 +15,8 @@ void StatePlay::Update(){
 
     if(UfoGlobal::program.GetKey(olc::ESCAPE).bPressed){UfoGlobal::program.game->SetState("menu", "PauseMenu");}
 
-    //for(auto e : UfoGlobal::program.entities){ //will soon be commented out
-    //    e->Update();
-    //}
-
     for(auto layer : UfoGlobal::program.cell_map.layers){
         layer -> Update();
     }
-
-    //std::cout << world_pos.x << ", " << world_pos.y << std::endl;
     UfoGlobal::program.cell_map.Draw();
 }

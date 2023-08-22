@@ -2,9 +2,12 @@
 #define DUMMY_H
 #include "../../src/ufo/camera.h"
 #include "../../src/ufo/cell_actor.h"
+#include "dummy_test_layer_actor.h"
 #include <string>
 class Dummy : public CellActor{
 public:
+    bool on_dynamic_solid;
+
     int i = 0;
     std::string solid_layer = "solid";
     bool is_already_in_semi_solid = false;
@@ -12,7 +15,7 @@ public:
     std::string mask;
     olc::Decal* mask_decal;
 
-    olc::vf2d dynamic_ride_offset = {0.0f, 0.0f};
+    olc::vf2d dynamic_ride_velocity = {0.0f, 0.0f};
     bool entered_horisontally_dynamic = false;
 
     bool record_input;
@@ -34,7 +37,13 @@ public:
     void AdjustCollisionY();
     void AdjustDownSlope();
     void AdjustUpSlope();
-
+    void OnDynamicSolid(DummyTestLayerActor* _act_layer);
+    void AdjustEnteredDynamicSolidX(DummyTestLayerActor* _act_layer);
+    void AdjustEnteredDynamicSolidY(DummyTestLayerActor* _act_layer);
+    void AdjustEnterPseudoStaticSolidX(DummyTestLayerActor* _act_layer);
+    void AdjustEnterPseudoStaticSolidY(DummyTestLayerActor* _act_layer);
+    void AdjustEnterDynamicSolidX(DummyTestLayerActor* _act_layer);
+    void AdjustEnterDynamicSolidY(DummyTestLayerActor* _act_layer);
     void WriteInputJson();
     void ParseInputJson();
 };

@@ -1,3 +1,6 @@
+#ifndef ANIMATION_H
+#define ANIMATION_H
+
 #include "../../external/olcPixelGameEngine.h"
 #include <string>
 #include <vector>
@@ -11,3 +14,4 @@ public:
     void LoadFrames(std::string _directory);
     void UpdateDraw();
 };
+#endif

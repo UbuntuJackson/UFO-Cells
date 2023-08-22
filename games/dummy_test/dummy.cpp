@@ -11,8 +11,8 @@
 #include "../../external/cJSON.h"
 
 Dummy::Dummy(olc::vf2d _position) : CellActor(_position){
-    //UfoGlobal::program.camera.SetStateFollowPlatfomer(this);
-    UfoGlobal::program.camera.SetStateStatic(olc::vf2d(480.0f, 480.0f));
+    UfoGlobal::program.camera.SetStateFollowPlatfomer(this);
+    //UfoGlobal::program.camera.SetStateStatic(olc::vf2d(480.0f, 480.0f));
     UfoGlobal::program.camera.scale = 1.0f;
     UfoGlobal::program.record_input = true;
     mask = "decPin";
@@ -68,37 +68,152 @@ Dummy::Update(){
 
     former_position = position;
 
-    for(auto act : act_layer->actors){
-        olc::vf2d act_new_position = act->position;
-        act_new_position.x = act->position.x + act->velocity.x;
+    if(!on_dynamic_solid){
+        AdjustEnteredDynamicSolidX(act_layer);
 
-        if(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
-            int a = 0;
-            if(act->velocity.x < 0.0f){ //next frame
-                position.x = std::floor(position.x);
-                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
-                    position.x -= 1.0f;
-                }
+        for(auto act : act_layer->actors){
+
+            olc::vf2d act_new_position = act->position;
+            act_new_position.x += act->velocity.x;
+            on_dynamic_solid = IsOverlappingOtherDecal(mask_decal, olc::vf2d(position.x, position.y + 1), UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position);
+            if(on_dynamic_solid){
+                is_grounded = true;
+                dynamic_ride_velocity = act->velocity;
             }
-            if(act->velocity.x > 0.0f){ //next frame
-                position.x = std::ceil(position.x);
-                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
-                    position.x += 1.0f;
-                }
-            }
-            velocity.x = 0.0f;
         }
+
+        position.x += velocity.x;
+        velocity.x *= 0.85f;
+
+        //HEIGHT ADJUSTMENT OVERLAP
+        AdjustUpSlope();
+        // COLLISION ADJUSTMENT X-AXIS
+        AdjustCollisionX();
+        //ThisVsDynamicSolid
+        AdjustEnterDynamicSolidX(act_layer);
+
+        // ADJUSTMENT ALONG Y-AXIS
+        is_already_in_semi_solid = false;
+        is_already_in_semi_solid = IsOverlapping(mask_decal, solid_layer, position, olc::RED);
+
+        //Checking before we intend to move along the Y-Axis
+        
+        for(auto act : act_layer->actors){
+
+            olc::vf2d act_new_position = act->position+act->velocity;
+            on_dynamic_solid = IsOverlappingOtherDecal(mask_decal, olc::vf2d(position.x, position.y + 1), UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position);
+            if(on_dynamic_solid){
+                is_grounded = true;
+                dynamic_ride_velocity = act->velocity;
+            }
+        }
+
+        AdjustEnteredDynamicSolidY(act_layer);
+
+        if((UfoGlobal::program.GetKey(olc::Key::Z).bPressed || player_input_play[input_frame].z_pressed == true) && (was_grounded || is_grounded)){
+            velocity.y = -10.0f;
+        } //I would consider putting this right after the OnEnteredCollisionY() call, which would also mean that was_grounded = is_grounded needs to be put after that
+
+        was_grounded = is_grounded;
+
+        velocity.y += 0.7f;
+        is_grounded = false;
+        position.y += velocity.y;
+        velocity.y *= 0.99f;
+
+        AdjustCollisionY();
+
+        AdjustEnterDynamicSolidY(act_layer);
+
+        AdjustDownSlope();
+    }
+    else{
+        for(auto act : act_layer->actors){
+
+            olc::vf2d act_new_position = act->position;
+            on_dynamic_solid = IsOverlappingOtherDecal(mask_decal, olc::vf2d(position.x, position.y + 1), UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position);
+            if(on_dynamic_solid){
+                is_grounded = true;
+                dynamic_ride_velocity = act->velocity;
+            }
+        }
+        OnDynamicSolid(act_layer);
+    }
+
+    input_frame++;
+}
+
+void
+Dummy::OnDynamicSolid(DummyTestLayerActor* _act_layer){  
+    for(auto act : _act_layer->actors){
+        //std::cout << "act before: " << act->position.y << std::endl;
+        //std::cout << "dum before: " << position.y << std::endl;
+        //std::cout << act->position.y - position.y << std::endl;
+        if(IsOverlappingOtherDecal(mask_decal, olc::vf2d(position.x, position.y + 1.0f), UfoGlobal::program.asset_manager.GetDecal(act->mask),act->position)){
+            position.y += act->velocity.y;
+            
+            if(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), olc::vf2d(act->position.x, act->position.y+act->velocity.y))){
+                position.y = std::floor(position.y);
+                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), olc::vf2d(act->position.x, act->position.y+act->velocity.y))){
+                    position.y -= 1.0f;
+                }
+            }
+            position.x += act->velocity.x;
+            std::cout << "in collision: " << IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act->position+act->velocity) << std::endl;
+            if(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act->position+act->velocity)){
+                if(act->velocity.x < 0.0f){ //next frame
+                    position.x = std::floor(position.x);
+                    while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act->position+act->velocity)){
+                        position.x -= 1.0f;
+                        std::cout << IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act->position+act->velocity) << std::endl;
+                    }
+                }
+                if(act->velocity.x > 0.0f){
+                    position.x = std::ceil(position.x);
+                    while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act->position+act->velocity)){
+                        position.x += 1.0f;
+                    }
+                }
+            }
+            
+            /*if(act->velocity.y > 0.0f){
+                position.y = std::ceil(position.y);
+                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act->position+act->velocity)){
+                    position.y += 1.0f;
+                }
+            }*/
+            //velocity.x = 0.0f;
+            //std::cout << IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act->position+act->velocity) << std::endl;
+        }
+        /*if(IsOverlappingOtherDecal(mask_decal, olc::vf2d(position.x, position.y), UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
+            position.y -= 1;
+        }*/
+        //std::cout << "act after: " << act_new_position.y + act->velocity.y << std::endl;
+        //std::cout << "dum after: " << position.y << std::endl;
+        //std::cout << act->position.y + act->velocity.y - position.y << std::endl;
     }
 
     position.x += velocity.x;
     velocity.x *= 0.85f;
 
-    //HEIGHT ADJUSTMENT OVERLAP
-    AdjustUpSlope();
-    // COLLISION ADJUSTMENT X-AXIS
-    AdjustCollisionX();
-    //ThisVsDynamicSolid
-    for(auto act : act_layer->actors){
+    AdjustEnterPseudoStaticSolidX(_act_layer);
+
+    if((UfoGlobal::program.GetKey(olc::Key::Z).bPressed || player_input_play[input_frame].z_pressed == true) && (was_grounded || is_grounded)){
+        velocity.y = -10.0f;
+    } //I would consider putting this right after the OnEnteredCollisionY() call, which would also mean that was_grounded = is_grounded needs to be put after that
+
+    was_grounded = is_grounded;
+
+    velocity.y += 0.7f;
+    is_grounded = false;
+    position.y += velocity.y;
+    velocity.y *= 0.99f;
+    AdjustEnterPseudoStaticSolidY(_act_layer);
+}
+
+void
+Dummy::AdjustEnterDynamicSolidX(DummyTestLayerActor* _act_layer){
+    for(auto act : _act_layer->actors){
         olc::vf2d act_new_position = act->position;
         act_new_position.x = act->position.x + act->velocity.x;
 
@@ -119,26 +234,107 @@ Dummy::Update(){
             velocity.x = 0.0f;
         }
     }
+}
 
-    // ADJUSTMENT ALONG Y-AXIS
-    is_already_in_semi_solid = false;
-    is_already_in_semi_solid = IsOverlapping(mask_decal, solid_layer, position, olc::RED);
+void
+Dummy::AdjustEnterDynamicSolidY(DummyTestLayerActor* _act_layer){
+    for(auto act : _act_layer->actors){
+        olc::vf2d act_new_position = act->position + act->velocity; //Maybe check for a different position
 
-    //Checking before we intend to move along the Y-Axis
+        if(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
+            if(velocity.y > 0.0f){
+                position.y = std::floor(position.y);
+                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
+                    position.y -= 1.0f;
+                }
+            }
+            if(velocity.y < 0.0f){
+                position.y = std::ceil(position.y);
+                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
+                    position.y += 1.0f;
+                }
+            }
+            velocity.y = 0.0f;
+        }
+    }
+}
 
-    /*for(auto act : act_layer->actors){
+void
+Dummy::AdjustEnterPseudoStaticSolidX(DummyTestLayerActor* _act_layer){
+    for(auto act : _act_layer->actors){
+        olc::vf2d act_new_position = act->position + act->velocity;
 
+        if(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
+            std::cout << "help" << std::endl;
+            int a = 0;
+            if(velocity.x > 0.0f){ //next frame
+                position.x = std::floor(position.x);
+                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
+                    position.x -= 1.0f;
+                }
+            }
+            if(velocity.x < 0.0f){
+                position.x = std::ceil(position.x);
+                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
+                    position.x += 1.0f;
+                }
+            }
+            velocity.x = 0.0f;
+        }
+    }
+}
+
+void
+Dummy::AdjustEnterPseudoStaticSolidY(DummyTestLayerActor* _act_layer){
+    for(auto act : _act_layer->actors){
+        olc::vf2d act_new_position = act->position + act->velocity;
+        if(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
+            if(velocity.y > 0.0f){
+                position.y = std::floor(position.y);
+                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
+                    position.y -= 1.0f;
+                }
+            }
+            if(velocity.y < 0.0f){
+                position.y = std::ceil(position.y);
+                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
+                    position.y += 1.0f;
+                }
+            }
+            velocity.y = 0.0f;
+        }
+    }
+}
+
+void
+Dummy::AdjustEnteredDynamicSolidX(DummyTestLayerActor* _act_layer){
+    for(auto act : _act_layer->actors){
         olc::vf2d act_new_position = act->position;
         act_new_position.x = act->position.x + act->velocity.x;
-        if(IsOverlappingOtherDecal(mask_decal, olc::vf2d(position.x, position.y + 1), UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
-            is_grounded = true;
-            position.y += act->velocity.y;
-        }
-    }*/
 
-    for(auto act : act_layer->actors){
-        olc::vf2d act_new_position = act->position;
-        act_new_position = act->position + act->velocity;
+        if(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
+            int a = 0;
+            if(act->velocity.x < 0.0f){ //next frame
+                position.x = std::floor(position.x);
+                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
+                    position.x -= 1.0f;
+                }
+            }
+            if(act->velocity.x > 0.0f){ //next frame
+                position.x = std::ceil(position.x);
+                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
+                    position.x += 1.0f;
+                }
+            }
+            velocity.x = 0.0f;
+        }
+    }
+}
+
+void
+Dummy::AdjustEnteredDynamicSolidY(DummyTestLayerActor* _act_layer){
+    for(auto act : _act_layer->actors){
+        olc::vf2d act_new_position = act->position + act->velocity;
 
         if(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
             if(act->velocity.y < 0.0f){
@@ -156,55 +352,6 @@ Dummy::Update(){
             velocity.y = 0.0f;
         }
     }
-
-    if((UfoGlobal::program.GetKey(olc::Key::Z).bPressed || player_input_play[input_frame].z_pressed == true) && (was_grounded || is_grounded)){
-        velocity.y = -10.0f;
-    } //I would consider putting this right after the OnEnteredCollisionY() call, which would also mean that was_grounded = is_grounded needs to be put after that
-
-    was_grounded = is_grounded;
-
-    velocity.y += 0.7f;
-    is_grounded = false;
-    position.y += velocity.y;
-    velocity.y *= 0.99f;
-
-    AdjustCollisionY();
-
-    for(auto act : act_layer->actors){
-        olc::vf2d act_new_position = act->position;
-        act_new_position = act->position + act->velocity;
-
-        if(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
-            if(velocity.y > 0.0f){
-                position.y = std::floor(position.y);
-                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
-                    position.y -= 1.0f;
-                    std::cout << position.y << std::endl;
-                }
-            }
-            if(velocity.y < 0.0f){
-                position.y = std::ceil(position.y);
-                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
-                    position.y += 1.0f;
-                }
-            }
-            velocity.y = 0.0f;
-        }
-    }
-
-    AdjustDownSlope();
-
-    for(auto act : act_layer->actors){
-
-        olc::vf2d act_new_position = act->position;
-        act_new_position = act->position + act->velocity;
-        if(IsOverlappingOtherDecal(mask_decal, olc::vf2d(position.x, position.y + 1), UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
-            is_grounded = true;
-            position += act->velocity;
-        }
-    }
-
-    input_frame++;
 }
 
 void
