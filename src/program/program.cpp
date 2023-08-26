@@ -1,6 +1,5 @@
 #define OLC_PGE_APPLICATION
 
-#include "program.h"
 #include <iostream>
 #include "../../games/dummy_test/dummy.h"
 #include "../scripting/wrapper.h"

@@ -3,9 +3,12 @@
 #include <string>
 #include "state.h"
 
+class Game;
+
 class State{
 public:
-    State();
+    Game* game;
+    State(Game* _game);
     ~State();
     virtual void SetPlay(std::string _map);
     virtual void SetLoad(std::string _map);

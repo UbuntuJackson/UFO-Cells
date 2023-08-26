@@ -6,7 +6,6 @@
 #include "../../external/cJSON.h"
 #include "file_utils.h"
 #include "../../external/olcPixelGameEngine.h"
-#include "../program/program.h"
 #include "../program/ufo_global.h"
 
 CellMap::CellMap() : map_path {""}{}

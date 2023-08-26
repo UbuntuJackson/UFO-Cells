@@ -8,7 +8,7 @@
 class StateMenu : public State{
 public:
     std::string menu_string;
-    StateMenu();
+    StateMenu(Game* _game);
     std::string GetData();
     void Set(std::string _data);
     void Update();

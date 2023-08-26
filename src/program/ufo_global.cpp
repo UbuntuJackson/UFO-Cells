@@ -1,5 +1,6 @@
 #include "ufo_global.h"
-
+#include "../ufo/game.h"
+#include "../../games/leg0/leg0.h"
 namespace UfoGlobal{
-    Program program;
+    Game game;
 }

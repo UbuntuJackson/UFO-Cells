@@ -1,9 +1,10 @@
 #ifndef UFO_GLOBAL_H
 #define UFO_GLOBAL_H
-#include "program.h"
+
+#include "../../games/leg0/leg0.h"
 
 namespace UfoGlobal{
-    extern Program program;
+    extern Game game;
 }
 #endif
 

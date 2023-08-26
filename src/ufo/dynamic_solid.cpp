@@ -14,7 +14,7 @@ void DynamicSolid::Update(){
     if(timelapse > 400){velocity *= -1.0f; timelapse = 0;}
 }
 void DynamicSolid::Draw(){
-    UfoGlobal::program.camera.DrawDecal(
+    UfoGlobal::game->camera.DrawDecal(
         position,
-        UfoGlobal::program.asset_manager.GetDecal(mask));
+        UfoGlobal::game->asset_manager.GetDecal(mask));
 }

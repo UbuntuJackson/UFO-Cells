@@ -23,7 +23,7 @@ private:
     //bool layers_are_added = false;
     std::string loading_screen_dir;
 public:
-    StateLoad();
+    StateLoad(Game* _game);
     void Set(std::string _data);
     void Update();
 };

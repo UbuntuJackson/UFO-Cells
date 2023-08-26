@@ -11,23 +11,23 @@ LayerSolid::LayerSolid(std::string _name, std::string _type, std::string _path) 
 
 olc::Pixel
 LayerSolid::GetPixel(olc::vf2d _position){
-    int chunk_x = std::floor(_position.x / UfoGlobal::program.game->CHUNK_SIZE.x);
-    int chunk_y = std::floor(_position.y / UfoGlobal::program.game->CHUNK_SIZE.y);
-    int pixel_x = int(std::floor(_position.x)) % int(UfoGlobal::program.game->CHUNK_SIZE.x);
-    int pixel_y = int(std::floor(_position.y)) % int(UfoGlobal::program.game->CHUNK_SIZE.y);
+    int chunk_x = std::floor(_position.x / UfoGlobal::game->CHUNK_SIZE.x);
+    int chunk_y = std::floor(_position.y / UfoGlobal::game->CHUNK_SIZE.y);
+    int pixel_x = int(std::floor(_position.x)) % int(UfoGlobal::game->CHUNK_SIZE.x);
+    int pixel_y = int(std::floor(_position.y)) % int(UfoGlobal::game->CHUNK_SIZE.y);
 
     std::string dec = decal_layout[chunk_x][chunk_y];
-    return UfoGlobal::program.asset_manager.GetDecal(dec)->sprite->GetPixel(olc::vf2d(pixel_x, pixel_y));
+    return UfoGlobal::game->asset_manager.GetDecal(dec)->sprite->GetPixel(olc::vf2d(pixel_x, pixel_y));
 }
 
 void
 LayerSolid::LoadLayer(){
     olc::Sprite *spr = new olc::Sprite(path);
-    UfoGlobal::program.cell_map.map_sprites[name] = spr;
-    UfoGlobal::program.cell_map.map_size = spr->Size();
+    UfoGlobal::game->cell_map.map_sprites[name] = spr;
+    UfoGlobal::game->cell_map.map_size = spr->Size();
 
     olc::Decal *dec = new olc::Decal(spr);
-    UfoGlobal::program.cell_map.map_decals[name] = dec;
+    UfoGlobal::game->cell_map.map_decals[name] = dec;
 }
 
 void

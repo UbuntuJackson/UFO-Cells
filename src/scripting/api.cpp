@@ -11,34 +11,34 @@
 #include "../../games/dummy_test/dummy.h"
 
 namespace UfoAPI{
-    void PrintFunction(std::string s){std::cout << s << std::endl;}
+    /*void PrintFunction(std::string s){std::cout << s << std::endl;}
     void LoadDecal(std::string _path){}
     void DrawDecal(int _x, int _y, std::string _decal_key){}
 
     void DrawRectangleDecal(int x, int y, int w, int h, int r, int g, int b, int a){
-        UfoGlobal::program.DrawRectDecal(olc::vf2d(x, y), olc::vf2d(w, h), olc::Pixel(r,g,b,a));
+        UfoGlobal::game->DrawRectDecal(olc::vf2d(x, y), olc::vf2d(w, h), olc::Pixel(r,g,b,a));
     }
     void FillRectangleDecal(int x, int y, int w, int h, int r, int g, int b, int a){
-        UfoGlobal::program.FillRectDecal(olc::vf2d(x, y), olc::vf2d(w, h), olc::Pixel(r,g,b,a));
+        UfoGlobal::game->FillRectDecal(olc::vf2d(x, y), olc::vf2d(w, h), olc::Pixel(r,g,b,a));
     }
 
     void DrawStringDecal(int x, int y, std::string _text, int r, int g, int b, int a, float _scale_x, float _scale_y){
-        UfoGlobal::program.DrawStringDecal(olc::vf2d(x, y), _text, olc::Pixel(r,g,b,a), olc::vf2d(_scale_x, _scale_y));
+        UfoGlobal::game->DrawStringDecal(olc::vf2d(x, y), _text, olc::Pixel(r,g,b,a), olc::vf2d(_scale_x, _scale_y));
     }
 
     void DrawMap(){
-        UfoGlobal::program.cell_map.Draw();
+        UfoGlobal::game->cell_map.Draw();
     }
 
     //olc::HWButton GetKey(){}
     int GetMousePosX(){
-        return UfoGlobal::program.GetMousePos().x;
+        return UfoGlobal::game->GetMousePos().x;
     }
     int GetMousePosY(){
-        return UfoGlobal::program.GetMousePos().y;
+        return UfoGlobal::game->GetMousePos().y;
     }
     bool MouseLeftPressed(){
-        return UfoGlobal::program.GetMouse(0).bPressed;
+        return UfoGlobal::game->GetMouse(0).bPressed;
     }
     void GetMouseWheel(){}
 
@@ -48,21 +48,21 @@ namespace UfoAPI{
 
     //game control
     void Quit(){
-        UfoGlobal::program.running = false;
+        UfoGlobal::game->running = false;
     }
 
     void SetState(std::string _state, std::string _data){
-        UfoGlobal::program.game->SetState(_state, _data);
+        UfoGlobal::game->SetState(_state, _data);
     }
 
     std::string GetStateData(){
-        return UfoGlobal::program.game->game_state->GetData();
+        return UfoGlobal::game->game_state->GetData();
     }
 
     void NewDummyTestGame(){
         DummyTestGame *game = new DummyTestGame();
     }
     void UpdateDummyTestGame(){
-        UfoGlobal::program.game->game_state->Update();
-    }
+        UfoGlobal::game->game_state->Update();
+    }*/
 }
