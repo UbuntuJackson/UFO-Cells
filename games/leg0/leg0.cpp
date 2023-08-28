@@ -3,7 +3,7 @@
 #include <squirrel.h>
 
 Leg0::Leg0(){
-    //game_state = new State(this);
+    game_state = new State(this);
 }
 
 Leg0::~Leg0(){}

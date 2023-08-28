@@ -33,5 +33,11 @@ As you see it
 -Sets pixelmode to normal (Again. I don't remember why I did this or if I need to set it twice)
 -returns a boolean telling the game if it should quit or keep running.
 
+####### The Collision System And it's Uses (Aptly named Corn) #######
+
+Obs! Corn refers both to the Collision System AND it's use together.
+
+
+
 
 

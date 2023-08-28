@@ -29,8 +29,8 @@ Assets::LoadAssets(){
 
 void
 Assets::DeleteAssets(){
-    delete sprLoad;
-    delete decLoad;
+    //delete sprLoad;
+    //delete decLoad;
     for(auto &[a, i] : sprites){
         delete i;
     }

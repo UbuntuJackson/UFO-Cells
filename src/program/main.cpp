@@ -6,9 +6,10 @@
 
 int main()
 {
-	//UfoGlobal::game = new Leg0();
-	if (UfoGlobal::game.Construct(1600, 800, 1, 1, false, true, true))
-		UfoGlobal::game.Start();
+	Leg0 game;
+	UfoGlobal::squirrel_interface.game = &game;
+	if (game.Construct(1600, 800, 1, 1, false, true, true))
+		game.Start();
 
 	return 0;
 }

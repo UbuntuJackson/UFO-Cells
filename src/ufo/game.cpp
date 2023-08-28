@@ -58,7 +58,7 @@ bool Game::OnUserUpdate(float fElapsedTime){
     Clear(olc::GREY);
     SetPixelMode(olc::Pixel::NORMAL);
 
-    //game_state->Update();
+    game_state->Update();
 
     SetPixelMode(olc::Pixel::NORMAL);
     return running;

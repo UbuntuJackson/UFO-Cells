@@ -5,8 +5,8 @@
 
 class Assets{
 public:
-    olc::Sprite* sprLoad;
-    olc::Decal *decLoad;
+    //olc::Sprite* sprLoad;
+    //olc::Decal *decLoad;
 
     std::map<std::string, olc::Decal*> decals;
     std::map<std::string, olc::Sprite*> sprites;
