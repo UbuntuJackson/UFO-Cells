@@ -5,8 +5,9 @@
 #include <string>
 #include "../../external/cJSON.h"
 #include <memory>
+#include "game_base_state.h"
 
-class StateLoad : public State{
+class StateLoad : public GameBaseState{
 private:
 
     struct LayerInfo{
@@ -23,7 +24,7 @@ private:
     //bool layers_are_added = false;
     std::string loading_screen_dir;
 public:
-    StateLoad(Game* _game);
+    StateLoad(DummyTestGame* _game);
     void Set(std::string _data);
     void Update();
 };

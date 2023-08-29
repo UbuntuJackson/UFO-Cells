@@ -3,20 +3,22 @@
 #include <iostream>
 #include "../../src/ufo/game.h"
 #include "dummy.h"
+#include "dummy_test_game.h"
+#include "game_base_state.h"
 
-StatePlay::StatePlay(Game* _game): State(_game){}
+StatePlay::StatePlay(DummyTestGame* _game): GameBaseState(_game), map{_game}{}
 
 void StatePlay::Set(std::string _data){
 
 }
 
 void StatePlay::Update(){
-    olc::vf2d world_pos = UfoGlobal::game->camera.ScreenToWorld(UfoGlobal::game->GetMousePos(), olc::vf2d(0.0f, 0.0f));
+    olc::vf2d world_pos = game->camera.ScreenToWorld(game->GetMousePos(), olc::vf2d(0.0f, 0.0f));
 
-    if(UfoGlobal::game->GetKey(olc::ESCAPE).bPressed){UfoGlobal::game->SetState("menu", "PauseMenu");}
+    if(game->GetKey(olc::ESCAPE).bPressed){game->SetState("menu", "PauseMenu");}
 
-    for(auto layer : UfoGlobal::game->cell_map.layers){
+    for(auto layer : game->map.layers){
         layer -> Update();
     }
-    UfoGlobal::game->cell_map.Draw();
+    game->map.Draw();
 }

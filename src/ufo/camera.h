@@ -26,6 +26,8 @@ enum CameraStates{
 
 class Camera{
 public:
+    Game* game;
+
     float scale;
     olc::vf2d position;
     olc::vf2d vel;
@@ -43,6 +45,9 @@ public:
     float left_sensor;
     float right_sensor;
 
+    olc::vf2d clamp_up_left_corner;
+    olc::vf2d clamp_down_right_corner;
+
     olc::vf2d m_delta_pos;
     olc::vf2d pos_diff;
     CellActor* new_target;
@@ -50,7 +55,8 @@ public:
 
     MouseControl mouse_control;
 
-    Camera();
+    Camera() = default;
+    Camera(Game *_game);
     void SetTarget(CellActor *_target);
     void Zoom();
     void Follow(olc::vf2d _position, olc::Decal *_decal);
@@ -65,7 +71,7 @@ public:
     void FollowPlatformer(olc::vf2d _position, olc::Decal *_decal);
 
     void
-    SetStateFollowPlatfomer(CellActor *_target);
+    SetStateFollowPlatfomer(CellActor *_target, olc::vf2d top_left_corner, olc::vf2d bottom_right_corner);
 
     olc::vf2d ScreenToWorld(olc::vf2d _screen_position, olc::vf2d _shape_offset);
     olc::vf2d WorldToScreen(olc::vf2d _position, olc::vf2d _shape_offset);

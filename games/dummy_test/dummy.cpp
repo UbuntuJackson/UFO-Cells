@@ -420,6 +420,11 @@ Dummy::AdjustUpSlope(){
     //SOLID
 
     if(IsOverlapping(mask_decal, solid_layer, position)){
+        //Explanation
+        //Upon colliding in what we presume to be the x-axis, we look back on our former position to see how Dummy interacts
+        //from there with the terrain, pixel by pixel.
+        //We start by flooring former_position.y to make sure Dummy is properly aligned with the grid in case he for some reason wouldn't be.
+        //depending on velocity we do the same in the x-axis.
         former_position.y = std::floor(former_position.y);
 
         if(velocity.x > 0.0f){
@@ -430,7 +435,9 @@ Dummy::AdjustUpSlope(){
         }
 
         if(velocity.x > 0.0f){
-
+            //Explanation
+            //Until former_position.x becomes our current position, we step in the direction of our velocity in the x-axis.
+            //This works because Dummy's new position is on the same pixel as former_position.x + velocity.x
             while(std::floor(former_position.x) != std::floor(position.x)+1.0f){
                 if(IsOverlappingHeight(mask_decal, solid_layer, former_position) > int(former_position.y) + snap_up_range
                     && IsOverlappingHeight(mask_decal, solid_layer, former_position) != former_position.y +
@@ -445,6 +452,7 @@ Dummy::AdjustUpSlope(){
                 former_position.x += 1.0f;
             }
             //if you're still in collision after moving +=1.0f, then you move up again
+            //There is a possibility that Dummy entres another pixel upon the last step, so you need to readjust in the y-axis.
             if(IsOverlappingHeight(mask_decal, solid_layer, former_position) > int(former_position.y) + snap_up_range){
                 while(IsOverlapping(mask_decal, solid_layer, former_position)){
                     former_position.y -= 1.0f;

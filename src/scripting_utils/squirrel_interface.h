@@ -1,5 +1,5 @@
-#ifndef PGE_MIRROR_H
-#define PGE_MIRROR_H
+#ifndef SQUIRRE_INTERFACE_H
+#define SQUIRRE_INTERFACE_H
 
 #include "../../external/olcPixelGameEngine.h"
 #include "../ufo/game.h"

@@ -7,8 +7,7 @@ class Game;
 
 class State{
 public:
-    Game* game;
-    State(Game* _game);
+    State() = default;
     ~State();
     virtual void SetPlay(std::string _map);
     virtual void SetLoad(std::string _map);

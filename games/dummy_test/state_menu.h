@@ -5,10 +5,10 @@
 #include <string>
 #include "../../src/ufo/game.h"
 
-class StateMenu : public State{
+class StateMenu : public GameBaseState{
 public:
     std::string menu_string;
-    StateMenu(Game* _game);
+    StateMenu(DummyTestGame* _game);
     std::string GetData();
     void Set(std::string _data);
     void Update();

@@ -15,16 +15,18 @@
 #include "../../src/ufo/layer_solid.h"
 #include "../../src/ufo/layer_actor.h"
 #include "../../src/ufo/layer_terrain.h"
+#include "state_load.h"
 #include "dummy_test_layer_actor.h"
+#include "game_base_state.h"
 
-StateLoad::StateLoad(Game* _game) : State(_game){
+StateLoad::StateLoad(DummyTestGame* _game) : GameBaseState(_game){
 
 }
 
 void StateLoad::Set(std::string _data){ //this needs to be simplified somehow
     
     asset_index = 0;
-    UfoGlobal::game->cell_map.UnloadMap();
+    game->map.UnloadMap();
     layer_information.clear();
 
     std::ifstream ifs;
@@ -41,15 +43,15 @@ void StateLoad::Set(std::string _data){ //this needs to be simplified somehow
         std::string type = cJSON_GetObjectItemCaseSensitive(item, "type") -> valuestring;
         if(type == "background"){
             std::string path = cJSON_GetObjectItemCaseSensitive(item, "path") -> valuestring;
-            UfoGlobal::game->cell_map.layers.push_back(new LayerBackground(name, type, path));
+            game->map.layers.push_back(new LayerBackground(name, type, path));
         }
         if(type == "collision"){
             std::string path = cJSON_GetObjectItemCaseSensitive(item, "path") -> valuestring;
-            UfoGlobal::game->cell_map.layers.push_back(new LayerSolid(name, type, path));
+            game->map.layers.push_back(new LayerSolid(name, type, path));
         }
         if(type == "terrain"){
             std::string path = cJSON_GetObjectItemCaseSensitive(item, "path") -> valuestring;
-            UfoGlobal::game->cell_map.layers.push_back(new LayerTerrain(name, type, path));
+            game->map.layers.push_back(new LayerTerrain(name, type, path));
         }
         if(type == "actor"){
             const cJSON *actor_layer = cJSON_GetObjectItemCaseSensitive(item, "actors");
@@ -62,7 +64,7 @@ void StateLoad::Set(std::string _data){ //this needs to be simplified somehow
                 layer_actor->AddActorInfo(actor_string, x, y);
 
             }
-            UfoGlobal::game->cell_map.layers.push_back(layer_actor);
+            game->map.layers.push_back(layer_actor);
         }
     }
 
@@ -70,13 +72,13 @@ void StateLoad::Set(std::string _data){ //this needs to be simplified somehow
 }
 
 void StateLoad::Update(){ //this can be generalised and put in some kind of class that we derive from
-    if(asset_index < UfoGlobal::game->cell_map.layers.size()){
-        UfoGlobal::game->cell_map.layers[asset_index]->LoadLayer();
+    if(asset_index < game->map.layers.size()){
+        game->map.layers[asset_index]->LoadLayer();
         asset_index++;
     }
     else{
         //we can just add another state and then set that state, as they are mapped with strings
-        UfoGlobal::game->SetState("play", "...");
+        game->SetState("play", "...");
     }
-    UfoGlobal::game->DrawDecal(olc::vf2d(0.0f, 0.0f), UfoGlobal::game->asset_manager.GetDecal("load"));
+    game->DrawDecal(olc::vf2d(0.0f, 0.0f), game->asset_manager.GetDecal("load"));
 }

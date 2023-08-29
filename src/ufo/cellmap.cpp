@@ -8,7 +8,7 @@
 #include "../../external/olcPixelGameEngine.h"
 #include "../program/ufo_global.h"
 
-CellMap::CellMap() : map_path {""}{}
+CellMap::CellMap(Game* _game) : game{_game}, map_path {""}{}
 
 void
 CellMap::LoadMap(std::string _map_path){ //OUTDATED
@@ -62,18 +62,7 @@ CellMap::~CellMap(){UnloadMap();}
 
 void
 CellMap::Draw(){
-    /*for(int d = 0; d < visible_layers.size(); d++){
-
-        for(auto &e : UfoGlobal::program.entities){
-            if(e->draw_layer == d) e->Draw();
-        }
-
-        UfoGlobal::program.camera.DrawDecal(
-            olc::vf2d(0.0f, 0.0f),
-            visible_layers[d]);
-    }*/
     for(auto layer : layers){
         layer->Draw();
     }
-
 }

@@ -5,11 +5,10 @@
 #include <string>
 #include "../../src/ufo/cellmap.h"
 
-class StatePlay : public State{
+class StatePlay : public GameBaseState{
 public:
     std::string current_map; //should be in the main Game class
-    CellMap map; //Should have ptr
-    StatePlay(Game* _game);
+    StatePlay(DummyTestGame* _game);
     void Set(std::string _data);
     void Update();
 
