@@ -5,8 +5,9 @@
 #include "../../external/olcPixelGameEngine.h"
 #include <iostream>
 
-CellActor::CellActor(olc::vf2d _position) :
+CellActor::CellActor(olc::vf2d _position, Game *_game) :
     position{_position},
+    game{_game},
     is_grounded{false},
     was_grounded{false},
     snap_to_ground{6},
@@ -14,8 +15,9 @@ CellActor::CellActor(olc::vf2d _position) :
 {
 }
 
-CellActor::CellActor(olc::vf2d _position, std::string _mask) :
+CellActor::CellActor(olc::vf2d _position, Game *_game, std::string _mask) :
     position{_position},
+    game{_game},
     mask{_mask},
     is_grounded{false},
     was_grounded{false},
@@ -29,7 +31,7 @@ CellActor::~CellActor(){}
 int
 CellActor::IsOverlappingHeight(olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour){
 
-    olc::Decal* collision_layer = UfoGlobal::game->cell_map.map_decals[_layer];
+    olc::Decal* collision_layer = game->cell_map.map_decals[_layer];
 
     for(int y = int(_position.y); y < int(_position.y) + _decal->sprite->Size().y; y++){
         for(int x = int(_position.x); x < int(_position.x) + _decal->sprite->Size().x; x++){
@@ -49,7 +51,7 @@ CellActor::IsOverlappingHeight(olc::Decal *_decal, std::string _layer, olc::vf2d
 int
 CellActor::HeightUntilGround(olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour){
 
-    olc::Decal* collision_layer = UfoGlobal::game->cell_map.map_decals[_layer];
+    olc::Decal* collision_layer = game->cell_map.map_decals[_layer];
 
     for(int y = int(_position.y) + _decal->sprite->Size().y; y < int(_position.y) + _decal->sprite->Size().y + snap_to_ground; y++){
         for(int x = int(_position.x); x < int(_position.x) + _decal->sprite->Size().x; x++){
@@ -69,7 +71,7 @@ CellActor::HeightUntilGround(olc::Decal *_decal, std::string _layer, olc::vf2d _
 bool
 CellActor::IsOverlapping(olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour){
 
-    olc::Decal* collision_layer = UfoGlobal::game->cell_map.map_decals[_layer];
+    olc::Decal* collision_layer = game->cell_map.map_decals[_layer];
 
     for(int y = int(_position.y); y < int(_position.y) + _decal->sprite->Size().y; y++){
         for(int x = int(_position.x); x < int(_position.x) + _decal->sprite->Size().x; x++){

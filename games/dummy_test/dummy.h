@@ -29,7 +29,7 @@ public:
 
     std::vector<KeyInput> player_input_recorded;
     std::vector<KeyInput> player_input_play;
-    Dummy(olc::vf2d _position);
+    Dummy(olc::vf2d _position, DummyTestGame* _game);
     ~Dummy();
     void Update();
     void Draw();
