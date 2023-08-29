@@ -68,6 +68,7 @@ public:
     void SetStateZoom(float _target_scale);
     void SetStateMove(olc::vf2d _vel);
     void SetStateStatic(olc::vf2d _offset);
+    void SetStateMouseAndArrowKeys(olc::vf2d top_left_corner, olc::vf2d bottom_right_corner);
     void FollowPlatformer(olc::vf2d _position, olc::Decal *_decal);
 
     void

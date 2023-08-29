@@ -42,6 +42,18 @@ Camera::Follow(olc::vf2d _position, olc::Decal *_decal){
 }
 
 void
+Camera::SetStateFollowPlatfomer(CellActor *_target, olc::vf2d top_left_corner, olc::vf2d bottom_right_corner){
+    clamp_up_left_corner = top_left_corner;
+    clamp_down_right_corner = bottom_right_corner;
+    m_camera_state = FOLLOW_PLATFORMER;
+    target = _target;
+    up_sensor = target->position.y - 95.0f;
+    down_sensor = target->position.y + 20.0f;
+    left_sensor = target->position.x + 75.0f;
+    right_sensor = target->position.x - 75.0f;
+}
+
+void
 Camera::FollowPlatformer(olc::vf2d _position, olc::Decal *_decal){
 
     position.x = target->position.x;
@@ -63,18 +75,18 @@ Camera::FollowPlatformer(olc::vf2d _position, olc::Decal *_decal){
     //Feed this value to WorldToScreen()
 
     olc::vf2d f_screen_size;
-    f_screen_size.x = float(UfoGlobal::game->GetScreenSize().x);
-    f_screen_size.y = float(UfoGlobal::game->GetScreenSize().y);
+    f_screen_size.x = float(game->GetScreenSize().x);
+    f_screen_size.y = float(game->GetScreenSize().y);
 
-    olc::vf2d camera_clamp_min = f_screen_size*0.5f/scale - UfoGlobal::game->asset_manager.GetDecal("decPin")->sprite->Size()/2;
-    olc::vf2d camera_clamp_max = UfoGlobal::game->cell_map.map_size-f_screen_size*0.5f/scale - UfoGlobal::game->asset_manager.GetDecal("decPin")->sprite->Size()/2;
+    olc::vf2d camera_clamp_min = f_screen_size*0.5f/scale - game->asset_manager.GetDecal("decPin")->sprite->Size()/2;
+    olc::vf2d camera_clamp_max = clamp_down_right_corner-f_screen_size*0.5f/scale - game->asset_manager.GetDecal("decPin")->sprite->Size()/2;
 
     if(position.x < camera_clamp_min.x) position.x = camera_clamp_min.x;
     if(position.y < camera_clamp_min.y) position.y = camera_clamp_min.y;
     if(position.x > camera_clamp_max.x) position.x = camera_clamp_max.x;
     if(position.y > camera_clamp_max.y) position.y = camera_clamp_max.y;
 
-    olc::vf2d offset_camera_position = position + UfoGlobal::game->asset_manager.GetDecal("decPin")->sprite->Size()/2;
+    olc::vf2d offset_camera_position = position + game->asset_manager.GetDecal("decPin")->sprite->Size()/2;
 
     olc::vf2d offset_position = _position - offset_camera_position;
     olc::vf2d screen_position = offset_position * scale;
@@ -90,20 +102,21 @@ Camera::FollowPlatformer(olc::vf2d _position, olc::Decal *_decal){
     screen_position.x = int(std::floor(screen_position.x)) - mod(int(std::floor(screen_position.x)), int(scale)); //This is to maintain coordinates of pixles as multiples of scale.
     screen_position.y = int(std::floor(screen_position.y)) - mod(int(std::floor(screen_position.y)), int(scale)); //This is to maintain coordinates of pixles as multiples of scale.
 
-    UfoGlobal::game->DrawDecal(
+    game->DrawDecal(
         screen_position,
         _decal,
         olc::vf2d(scale, scale));
 }
 
-void Camera::Static(olc::vf2d _position, olc::Decal *_decal){
-    olc::vf2d screen_position;
-    screen_position.x = floor((_position.x - offset.x) * scale);
-    screen_position.y = floor((_position.y - offset.y) * scale);
+void
+Camera::SetStateZoom(float _target_scale){
+    m_camera_state = ZOOM;
+    target_scale = _target_scale;
+    position = {0.0, 0.0};
+    m_initial_scale_difference = target_scale - scale;
 
-    UfoGlobal::game->DrawDecal(
-        screen_position,
-        _decal, olc::vd2d(scale, scale));
+    m_delta_scale = (target_scale - scale) / 2.0f;
+    m_slow_down_target = m_initial_scale_difference * 0.2f;
 }
 
 void
@@ -116,15 +129,13 @@ Camera::Zoom(){
     scale += m_delta_scale;
 
 }
-void
-Camera::SetStateZoom(float _target_scale){
-    m_camera_state = ZOOM;
-    target_scale = _target_scale;
-    position = {0.0, 0.0};
-    m_initial_scale_difference = target_scale - scale;
 
-    m_delta_scale = (target_scale - scale) / 2.0f;
-    m_slow_down_target = m_initial_scale_difference * 0.2f;
+void
+Camera::SetStateSwitch(CellActor *_target){
+    m_camera_state = SWITCH;
+    new_target = _target;
+    pos_diff = new_target -> position - position;
+    m_delta_pos = pos_diff / 1.0f;
 }
 
 void
@@ -148,14 +159,6 @@ Camera::Switch(){
 }
 
 void
-Camera::SetStateSwitch(CellActor *_target){
-    m_camera_state = SWITCH;
-    new_target = _target;
-    pos_diff = new_target -> position - position;
-    m_delta_pos = pos_diff / 1.0f;
-}
-
-void
 Camera::SetStateMove(olc::vf2d _vel){
     m_camera_state = MOVE;
     vel = _vel;
@@ -164,6 +167,13 @@ Camera::SetStateMove(olc::vf2d _vel){
 void
 Camera::Move(){
     position += vel;
+}
+
+void
+Camera::SetStateMouseAndArrowKeys(olc::vf2d top_left_corner, olc::vf2d bottom_right_corner){
+    clamp_up_left_corner = top_left_corner;
+    clamp_down_right_corner = bottom_right_corner;
+    m_camera_state = MOUSE;
 }
 
 void
@@ -211,16 +221,14 @@ Camera::MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal){
 
 }
 
-void
-Camera::SetStateFollowPlatfomer(CellActor *_target, olc::vf2d top_left_corner, olc::vf2d bottom_right_corner){
-    clamp_up_left_corner = top_left_corner;
-    clamp_down_right_corner = bottom_right_corner;
-    m_camera_state = FOLLOW_PLATFORMER;
-    target = _target;
-    up_sensor = target->position.y - 95.0f;
-    down_sensor = target->position.y + 20.0f;
-    left_sensor = target->position.x + 75.0f;
-    right_sensor = target->position.x - 75.0f;
+void Camera::Static(olc::vf2d _position, olc::Decal *_decal){
+    olc::vf2d screen_position;
+    screen_position.x = floor((_position.x - offset.x) * scale);
+    screen_position.y = floor((_position.y - offset.y) * scale);
+
+    game->DrawDecal(
+        screen_position,
+        _decal, olc::vd2d(scale, scale));
 }
 
 void
