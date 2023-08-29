@@ -10,7 +10,7 @@
 #include "../../external/cJSON.h"
 #include "dummy_test_game.h"
 
-Dummy::Dummy(olc::vf2d _position, DummyTestGame* _game) : CellActor(_position, _game){ //Fix
+Dummy::Dummy(olc::vf2d _position, Game* _game) : CellActor(_position, _game){ //Fix
     game->camera.SetStateFollowPlatfomer(this);
     //UfoGlobal::program.camera.SetStateStatic(olc::vf2d(480.0f, 480.0f));
     game->camera.scale = 1.0f;
