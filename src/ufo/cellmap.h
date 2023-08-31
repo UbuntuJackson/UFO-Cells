@@ -22,7 +22,7 @@ public:
     ~CellMap();
     void LoadMap(std::string _map_path);
     void UnloadMap();
-    void Draw();
+    void Draw(Camera* _camera);
 
 };
 

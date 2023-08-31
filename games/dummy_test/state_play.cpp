@@ -1,12 +1,11 @@
 #include "state_play.h"
-#include "../../src/program/ufo_global.h"
 #include <iostream>
 #include "../../src/ufo/game.h"
 #include "dummy.h"
 #include "dummy_test_game.h"
 #include "game_base_state.h"
 
-StatePlay::StatePlay(DummyTestGame* _game): GameBaseState(_game), map{_game}{}
+StatePlay::StatePlay(DummyTestGame* _game): GameBaseState(_game){}
 
 void StatePlay::Set(std::string _data){
 
@@ -20,5 +19,5 @@ void StatePlay::Update(){
     for(auto layer : game->map.layers){
         layer -> Update();
     }
-    game->map.Draw();
+    game->map.Draw(&(game->camera));
 }

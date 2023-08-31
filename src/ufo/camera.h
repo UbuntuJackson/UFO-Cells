@@ -5,8 +5,6 @@
 #include "cell_actor.h"
 #include "mouse_control.h"
 
-class Program;
-
 enum CameraStates{
     BASIC_FOLLOW,
     RESTRICTED_FOLLOW,

@@ -2,8 +2,9 @@
 #include <string>
 #include "../../external/olcPixelGameEngine.h"
 #include <iostream>
+#include "camera.h"
 
-LayerActor::LayerActor(std::string _name, std::string _type) : Layer(_name, _type){}
+LayerActor::LayerActor(Camera* _camera, CellMap* _map, std::string _name, std::string _type) : Layer(_camera, _map ,_name, _type){}
 
 LayerActor::~LayerActor(){
     std::cout << "destructor" << std::endl;
@@ -30,8 +31,8 @@ LayerActor::Update(){
 }
 
 void
-LayerActor::Draw(){
+LayerActor::Draw(Camera* _camera){
     for(auto act : actors){
-        act->Draw();
+        act->Draw(_camera);
     }
 }

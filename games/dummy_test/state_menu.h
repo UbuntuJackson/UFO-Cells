@@ -4,6 +4,7 @@
 #include "../../src/ufo/state.h"
 #include <string>
 #include "../../src/ufo/game.h"
+#include "game_base_state.h"
 
 class StateMenu : public GameBaseState{
 public:

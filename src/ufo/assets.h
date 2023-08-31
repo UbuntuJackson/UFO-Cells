@@ -2,6 +2,7 @@
 #define ASSETS_H
 #include "../../external/olcPixelGameEngine.h"
 #include <map>
+#include <string>
 
 class Assets{
 public:

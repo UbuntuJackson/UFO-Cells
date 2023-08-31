@@ -2,8 +2,9 @@
 #include <string>
 #include <iostream>
 
-class Game;
-
+#include "game.h"
+State::State(Game* _game):
+    game{_game}{}
 State::~State(){}
 void State::SetPlay(std::string _map){}
 void State::SetLoad(std::string _map){}

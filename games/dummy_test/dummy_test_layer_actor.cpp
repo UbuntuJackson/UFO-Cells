@@ -4,8 +4,10 @@
 #include "../../src/program/ufo_global.h"
 #include <iostream>
 #include "../../src/ufo/dynamic_solid.h"
+#include "custom_dynamic_solid.h"
+#include "../../src/ufo/camera.h"
 
-DummyTestLayerActor::DummyTestLayerActor(std::string _name, std::string _type) : LayerActor(_name, _type){}
+DummyTestLayerActor::DummyTestLayerActor(DummyTestGame* _game, Camera* _camera, CellMap* _map ,std::string _name, std::string _type) : LayerActor(_camera,_map,_name, _type), game{_game}{}
 
 void
 DummyTestLayerActor::LoadLayer(){ //Maybe people can derive from this class and make their own LoadLayer function
@@ -14,13 +16,20 @@ DummyTestLayerActor::LoadLayer(){ //Maybe people can derive from this class and 
             std::cout << "loaded dummy" << std::endl;
 
             //it is safe to load decals here, tho we need some kind of game start function
-            actors.push_back(new Dummy(olc::vf2d(act.x, act.y))); //temporary solution
+            actors.push_back(new Dummy(olc::vf2d(act.x, act.y), game)); //temporary solution
         }
         if(act.actor == "DynamicSolid"){
             std::cout << "loaded dummy" << std::endl;
 
             //it is safe to load decals here, tho we need some kind of game start function
-            actors.push_back(new DynamicSolid(olc::vf2d(act.x, act.y), "dynamic_solid")); //temporary solution
+            actors.push_back(new DynamicSolid(olc::vf2d(act.x, act.y),game, "dynamic_solid")); //temporary solution
         }
+    }
+}
+
+void
+DummyTestLayerActor::Draw(Camera* _camera){
+    for(auto act : actors){
+        act->Draw(_camera);
     }
 }

@@ -23,26 +23,26 @@ include(cmake/BuildMiniswigWrapper.cmake)
 file(
     GLOB SRCFILES
     src/ufo/assets.cpp
-    #src/ufo/cell_actor.cpp
-    #src/ufo/dynamic_solid.cpp
+    src/ufo/cell_actor.cpp
+    src/ufo/dynamic_solid.cpp
     src/ufo/collision_utils.cpp
     src/ufo/colour_utils.cpp
     src/ufo/misc_math.cpp
     src/ufo/rect.cpp
-    #src/ufo/cellmap.cpp
+    src/ufo/cellmap.cpp
     src/ufo/file_utils.cpp
-    #src/ufo/camera.cpp
-    #src/ufo/mouse_control.cpp
+    src/ufo/camera.cpp
+    src/ufo/mouse_control.cpp
     src/ufo/state.cpp
     src/ufo/game.cpp
-    #src/ufo/layer.cpp
-    #src/ufo/layer_actor.cpp
-    #src/ufo/layer_background.cpp
-    #src/ufo/layer_terrain.cpp
-    #src/ufo/layer_solid.cpp
+    src/ufo/layer.cpp
+    src/ufo/layer_actor.cpp
+    src/ufo/layer_background.cpp
+    src/ufo/layer_terrain.cpp
+    src/ufo/layer_solid.cpp
     src/program/main.cpp
-    src/program/ufo_global.cpp
-    games/leg0/*.cpp
+    #src/program/ufo_global.cpp
+    games/dummy_test/*.cpp
     src/scripting/api.cpp
     src/squirrel/squirrel_error.cpp
     src/scripting/wrapper.cpp

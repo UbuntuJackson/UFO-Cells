@@ -3,13 +3,15 @@
 #include "cell_actor.h"
 #include <string>
 #include "../../external/olcPixelGameEngine.h"
+class Camera;
+class Game;
 
 class DynamicSolid : public CellActor{
 public:
     //std::string mask;
     int timelapse;
-    DynamicSolid(olc::vf2d _position, std::string _mask);
+    DynamicSolid(olc::vf2d _position, Game* _game, std::string _mask);
     void Update();
-    void Draw();
+    void Draw(Camera* _camera);
 };
 #endif

@@ -13,7 +13,8 @@ DummyTestGame::DummyTestGame() :
     state_load{new StateLoad(this)},
     state_menu{new StateMenu(this)},
     state_play{new StatePlay(this)},
-    map{CellMap(this)}
+    map{CellMap(this)},
+    camera{Camera(this)}
     {
         //UfoGlobal::program.camera.m_camera_state = MOUSE;
         game_states["load"] = state_load; //maybe have an addstate function

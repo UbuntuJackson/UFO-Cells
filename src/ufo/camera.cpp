@@ -9,7 +9,7 @@
 
 Camera::Camera(Game* _game) :
     game{_game},
-    mouse_control{MouseControl()},
+    mouse_control{MouseControl(game)},
     scale{1.0f},
     vel{olc::vf2d(200.0f, 200.0f)}
 {

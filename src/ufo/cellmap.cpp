@@ -7,6 +7,7 @@
 #include "file_utils.h"
 #include "../../external/olcPixelGameEngine.h"
 #include "../program/ufo_global.h"
+#include "camera.h"
 
 CellMap::CellMap(Game* _game) : game{_game}, map_path {""}{}
 
@@ -61,8 +62,8 @@ void CellMap::UnloadMap(){
 CellMap::~CellMap(){UnloadMap();}
 
 void
-CellMap::Draw(){
+CellMap::Draw(Camera* _camera){
     for(auto layer : layers){
-        layer->Draw();
+        layer->Draw(_camera);
     }
 }

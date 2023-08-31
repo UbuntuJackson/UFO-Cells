@@ -2,11 +2,12 @@
 #define MOUSE_CONTROL_H
 #include "../../external/olcPixelGameEngine.h"
 
-class Program;
+class Game;
 
 class MouseControl{
 public:
-    MouseControl();
+    Game* game;
+    MouseControl(Game* _game);
     ~MouseControl();
     olc::vf2d former_mouse_position;
     //olc::Decal cursor_decal;

@@ -4,6 +4,7 @@
 #include "../../src/ufo/state.h"
 #include <string>
 #include "../../src/ufo/cellmap.h"
+#include "game_base_state.h"
 
 class StatePlay : public GameBaseState{
 public:

@@ -1,6 +1,7 @@
 #include "dummy.h"
 #include "../../external/olcPixelGameEngine.h"
 #include "../../src/ufo/cell_actor.h"
+#include "../../src/ufo/camera.h"
 #include <cmath>
 #include "../../src/program/ufo_global.h"
 #include <iostream>
@@ -10,8 +11,8 @@
 #include "../../external/cJSON.h"
 #include "dummy_test_game.h"
 
-Dummy::Dummy(olc::vf2d _position, Game* _game) : CellActor(_position, _game){ //Fix
-    game->camera.SetStateFollowPlatfomer(this);
+Dummy::Dummy(olc::vf2d _position, DummyTestGame* _game) : CellActor(_position, _game), game{static_cast<DummyTestGame*>(_game)}{ //Fix
+    game->camera.SetStateFollowPlatfomer(this, {0.0f, 0.0f}, game->map.map_size);
     //UfoGlobal::program.camera.SetStateStatic(olc::vf2d(480.0f, 480.0f));
     game->camera.scale = 1.0f;
     game->record_input = true;
@@ -53,7 +54,7 @@ Dummy::Update(){
 
     DummyTestLayerActor* act_layer;
 
-    for(auto layer : game->cell_map.layers){
+    for(auto layer : game->map.layers){
         if(layer->name == "dynamic_solids"){
             act_layer = dynamic_cast<DummyTestLayerActor*>(layer);
             if(act_layer == nullptr){
@@ -94,7 +95,7 @@ Dummy::Update(){
 
         // ADJUSTMENT ALONG Y-AXIS
         is_already_in_semi_solid = false;
-        is_already_in_semi_solid = IsOverlapping(mask_decal, solid_layer, position, olc::RED);
+        is_already_in_semi_solid = IsOverlapping(&(game->map), mask_decal, solid_layer, position, olc::RED);
 
         //Checking before we intend to move along the Y-Axis
         
@@ -356,16 +357,16 @@ Dummy::AdjustEnteredDynamicSolidY(DummyTestLayerActor* _act_layer){
 
 void
 Dummy::AdjustCollisionX(){
-    if(IsOverlapping(mask_decal, solid_layer, position)){
+    if(IsOverlapping(&(game->map), mask_decal, solid_layer, position)){
         if(velocity.x > 0.0f){
             position.x = std::floor(position.x);
-            while(IsOverlapping(mask_decal, solid_layer, position)){
+            while(IsOverlapping(&(game->map),mask_decal, solid_layer, position)){
                 position.x -= 1.0f;
             }
         }
         if(velocity.x < 0.0f){
             position.x = std::ceil(position.x);
-            while(IsOverlapping(mask_decal, solid_layer, position)){
+            while(IsOverlapping(&(game->map),mask_decal, solid_layer, position)){
                 position.x += 1.0f;
             }
         }
@@ -375,17 +376,17 @@ Dummy::AdjustCollisionX(){
 
 void
 Dummy::AdjustCollisionY(){
-    if(IsOverlapping(mask_decal, solid_layer, position)){
+    if(IsOverlapping(&(game->map),mask_decal, solid_layer, position)){
         if(velocity.y > 0.0f){
             is_grounded = true;
             position.y = std::floor(position.y);
-            while(IsOverlapping(mask_decal, solid_layer, position)){
+            while(IsOverlapping(&(game->map),mask_decal, solid_layer, position)){
                 position.y -= 1.0f;
             }
         }
         if(velocity.y < 0.0f){
             position.y = std::ceil(position.y);
-            while(IsOverlapping(mask_decal, solid_layer, position)){
+            while(IsOverlapping(&(game->map),mask_decal, solid_layer, position)){
                 position.y += 1.0f;
             }
         }
@@ -395,19 +396,19 @@ Dummy::AdjustCollisionY(){
 
     //SEMI SOLID
 
-    if(IsOverlapping(mask_decal, solid_layer, position, olc::RED) &&
+    if(IsOverlapping(&(game->map),mask_decal, solid_layer, position, olc::RED) &&
         velocity.y > 0.0f &&
         !is_already_in_semi_solid){
         if(velocity.y > 0.0f){
             is_grounded = true;
             position.y = std::floor(position.y);
-            while(IsOverlapping(mask_decal, solid_layer, position, olc::RED)){
+            while(IsOverlapping(&(game->map),mask_decal, solid_layer, position, olc::RED)){
                 position.y -= 1.0f;
             }
         }
         if(velocity.y < 0.0f){
             position.y = std::ceil(position.y);
-            while(IsOverlapping(mask_decal, solid_layer, position, olc::RED)){
+            while(IsOverlapping(&(game->map),mask_decal, solid_layer, position, olc::RED)){
                 position.y += 1.0f;
             }
         }
@@ -420,7 +421,7 @@ void
 Dummy::AdjustUpSlope(){
     //SOLID
 
-    if(IsOverlapping(mask_decal, solid_layer, position)){
+    if(IsOverlapping(&(game->map),mask_decal, solid_layer, position)){
         //Explanation
         //Upon colliding in what we presume to be the x-axis, we look back on our former position to see how Dummy interacts
         //from there with the terrain, pixel by pixel.
@@ -440,11 +441,11 @@ Dummy::AdjustUpSlope(){
             //Until former_position.x becomes our current position, we step in the direction of our velocity in the x-axis.
             //This works because Dummy's new position is on the same pixel as former_position.x + velocity.x
             while(std::floor(former_position.x) != std::floor(position.x)+1.0f){
-                if(IsOverlappingHeight(mask_decal, solid_layer, former_position) > int(former_position.y) + snap_up_range
-                    && IsOverlappingHeight(mask_decal, solid_layer, former_position) != former_position.y +
+                if(IsOverlappingHeight(&(game->map), mask_decal, solid_layer, former_position) > int(former_position.y) + snap_up_range
+                    && IsOverlappingHeight(&(game->map), mask_decal, solid_layer, former_position) != former_position.y +
                     mask_decal->sprite->Size().y){
 
-                    while(IsOverlapping(mask_decal, solid_layer, former_position)){
+                    while(IsOverlapping(&(game->map), mask_decal, solid_layer, former_position)){
                         former_position.y -= 1.0f;
                     }
 
@@ -454,8 +455,8 @@ Dummy::AdjustUpSlope(){
             }
             //if you're still in collision after moving +=1.0f, then you move up again
             //There is a possibility that Dummy entres another pixel upon the last step, so you need to readjust in the y-axis.
-            if(IsOverlappingHeight(mask_decal, solid_layer, former_position) > int(former_position.y) + snap_up_range){
-                while(IsOverlapping(mask_decal, solid_layer, former_position)){
+            if(IsOverlappingHeight(&(game->map), mask_decal, solid_layer, former_position) > int(former_position.y) + snap_up_range){
+                while(IsOverlapping(&(game->map), mask_decal, solid_layer, former_position)){
                     former_position.y -= 1.0f;
                 }
             }
@@ -464,10 +465,10 @@ Dummy::AdjustUpSlope(){
         if(velocity.x < 0.0f){
             while(former_position.x != std::floor(position.x)){
 
-                if(IsOverlappingHeight(mask_decal, solid_layer, former_position) > int(former_position.y) + snap_up_range
-                    && IsOverlappingHeight(mask_decal, solid_layer, former_position) != former_position.y +
+                if(IsOverlappingHeight(&(game->map), mask_decal, solid_layer, former_position) > int(former_position.y) + snap_up_range
+                    && IsOverlappingHeight(&(game->map), mask_decal, solid_layer, former_position) != former_position.y +
                     mask_decal->sprite->Size().y){
-                    while(IsOverlapping(mask_decal, solid_layer, former_position)){
+                    while(IsOverlapping(&(game->map), mask_decal, solid_layer, former_position)){
                         former_position.y -= 1.0f;
                     }
 
@@ -476,8 +477,8 @@ Dummy::AdjustUpSlope(){
                 former_position.x -= 1.0f;
             }
 
-            if(IsOverlappingHeight(mask_decal, solid_layer, former_position) > int(former_position.y) + snap_up_range){
-                while(IsOverlapping(mask_decal, solid_layer, former_position)){
+            if(IsOverlappingHeight(&(game->map), mask_decal, solid_layer, former_position) > int(former_position.y) + snap_up_range){
+                while(IsOverlapping(&(game->map), mask_decal, solid_layer, former_position)){
                     former_position.y -= 1.0f;
                 }
 
@@ -487,7 +488,7 @@ Dummy::AdjustUpSlope(){
 
     //SEMI SOLID ADJUST_HEIGHT
 
-    if(IsOverlapping(mask_decal, solid_layer, position, olc::RED) && !is_already_in_semi_solid){
+    if(IsOverlapping(&(game->map), mask_decal, solid_layer, position, olc::RED) && !is_already_in_semi_solid){
         former_position.y = std::floor(former_position.y);
 
         if(velocity.x > 0.0f){
@@ -500,11 +501,11 @@ Dummy::AdjustUpSlope(){
         if(velocity.x > 0.0f){
 
             while(std::floor(former_position.x) != std::floor(position.x)+1.0f){
-                if(IsOverlappingHeight(mask_decal, solid_layer, former_position, olc::RED) > int(former_position.y) + snap_up_range
-                    && IsOverlappingHeight(mask_decal, solid_layer, former_position, olc::RED) != former_position.y +
+                if(IsOverlappingHeight(&(game->map), mask_decal, solid_layer, former_position, olc::RED) > int(former_position.y) + snap_up_range
+                    && IsOverlappingHeight(&(game->map), mask_decal, solid_layer, former_position, olc::RED) != former_position.y +
                     mask_decal->sprite->Size().y){
 
-                    while(IsOverlapping(mask_decal, solid_layer, former_position, olc::RED)){
+                    while(IsOverlapping(&(game->map), mask_decal, solid_layer, former_position, olc::RED)){
                         former_position.y -= 1.0f;
                     }
 
@@ -513,8 +514,8 @@ Dummy::AdjustUpSlope(){
                 former_position.x += 1.0f;
             }
 
-            if(IsOverlappingHeight(mask_decal, solid_layer, former_position, olc::RED) > int(former_position.y) + snap_up_range){
-                while(IsOverlapping(mask_decal, solid_layer, former_position, olc::RED)){
+            if(IsOverlappingHeight(&(game->map), mask_decal, solid_layer, former_position, olc::RED) > int(former_position.y) + snap_up_range){
+                while(IsOverlapping(&(game->map), mask_decal, solid_layer, former_position, olc::RED)){
                     former_position.y -= 1.0f;
                 }
             }
@@ -523,10 +524,10 @@ Dummy::AdjustUpSlope(){
         if(velocity.x < 0.0f){
             while(former_position.x != std::floor(position.x)){
 
-                if(IsOverlappingHeight(mask_decal, solid_layer, former_position, olc::RED) > int(former_position.y) + snap_up_range
-                    && IsOverlappingHeight(mask_decal, solid_layer, former_position, olc::RED) != former_position.y +
+                if(IsOverlappingHeight(&(game->map), mask_decal, solid_layer, former_position, olc::RED) > int(former_position.y) + snap_up_range
+                    && IsOverlappingHeight(&(game->map), mask_decal, solid_layer, former_position, olc::RED) != former_position.y +
                     mask_decal->sprite->Size().y){
-                    while(IsOverlapping(mask_decal, solid_layer, former_position, olc::RED)){
+                    while(IsOverlapping(&(game->map), mask_decal, solid_layer, former_position, olc::RED)){
                         former_position.y -= 1.0f;
                     }
 
@@ -535,8 +536,8 @@ Dummy::AdjustUpSlope(){
                 former_position.x -= 1.0f;
             }
 
-            if(IsOverlappingHeight(mask_decal, solid_layer, former_position, olc::RED) > int(former_position.y) + snap_up_range){
-                while(IsOverlapping(mask_decal, solid_layer, former_position, olc::RED)){
+            if(IsOverlappingHeight(&(game->map), mask_decal, solid_layer, former_position, olc::RED) > int(former_position.y) + snap_up_range){
+                while(IsOverlapping(&(game->map), mask_decal, solid_layer, former_position, olc::RED)){
                     former_position.y -= 1.0f;
                 }
 
@@ -552,8 +553,8 @@ Dummy::AdjustDownSlope(){
 
     if(was_grounded == true && is_grounded == false && velocity.y > 0.0f){
         position.y = std::floor(position.y);
-        if(HeightUntilGround(mask_decal, solid_layer, position) < snap_to_ground){
-            while(!IsOverlapping(mask_decal, solid_layer, position)){
+        if(HeightUntilGround(&(game->map), mask_decal, solid_layer, position) < snap_to_ground){
+            while(!IsOverlapping(&(game->map), mask_decal, solid_layer, position)){
 
                 position.y += 1.0f;
 
@@ -566,8 +567,8 @@ Dummy::AdjustDownSlope(){
     //SEMI SOLID HEIGHT ADJUSTMENT SNAP_TO_GROUND
     if(was_grounded == true && is_grounded == false && velocity.y > 0.0f){
         position.y = std::floor(position.y);
-        if(HeightUntilGround(mask_decal, solid_layer, position, olc::RED) < snap_to_ground){
-            while(!IsOverlapping(mask_decal, solid_layer, position, olc::RED)){
+        if(HeightUntilGround(&(game->map), mask_decal, solid_layer, position, olc::RED) < snap_to_ground){
+            while(!IsOverlapping(&(game->map), mask_decal, solid_layer, position, olc::RED)){
 
                 position.y += 1.0f;
 
@@ -625,8 +626,8 @@ void Dummy::ParseInputJson(){
 }
 
 void
-Dummy::Draw(){
-    game->camera.DrawDecal(
+Dummy::Draw(Camera* _camera){
+    _camera->DrawDecal(
         position,
         mask_decal);
 }

@@ -43,19 +43,19 @@ void StateLoad::Set(std::string _data){ //this needs to be simplified somehow
         std::string type = cJSON_GetObjectItemCaseSensitive(item, "type") -> valuestring;
         if(type == "background"){
             std::string path = cJSON_GetObjectItemCaseSensitive(item, "path") -> valuestring;
-            game->map.layers.push_back(new LayerBackground(name, type, path));
+            game->map.layers.push_back(new LayerBackground(&(game->camera), &(game->map),name, type, path));
         }
         if(type == "collision"){
             std::string path = cJSON_GetObjectItemCaseSensitive(item, "path") -> valuestring;
-            game->map.layers.push_back(new LayerSolid(name, type, path));
+            game->map.layers.push_back(new LayerSolid(&(game->camera), &(game->map),name, type, path));
         }
         if(type == "terrain"){
             std::string path = cJSON_GetObjectItemCaseSensitive(item, "path") -> valuestring;
-            game->map.layers.push_back(new LayerTerrain(name, type, path));
+            game->map.layers.push_back(new LayerTerrain(&(game->camera), &(game->map),name, type, path));
         }
         if(type == "actor"){
             const cJSON *actor_layer = cJSON_GetObjectItemCaseSensitive(item, "actors");
-            DummyTestLayerActor* layer_actor = new DummyTestLayerActor(name, type);
+            DummyTestLayerActor* layer_actor = new DummyTestLayerActor(game, &(game->camera), &(game->map),name, type);
             for(int j = 0; j < cJSON_GetArraySize(actor_layer); j++){
                 const cJSON *act = cJSON_GetArrayItem(actor_layer, j);
                 std::string actor_string = cJSON_GetObjectItemCaseSensitive(act, "actor") -> valuestring;

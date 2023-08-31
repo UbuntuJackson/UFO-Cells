@@ -2,17 +2,26 @@
 #define LAYER_H
 #include "../../external/olcPixelGameEngine.h"
 #include <string>
+
+class Game;
+class CellMap;
+class Camera;
+
 class Layer{
 public:
+    //Game* game; //Have CellMap* map instead of game
+    CellMap* map;
+    Camera* camera;
+
     std::string name;
     std::string type;
     std::string visible;
     Layer() = default;
-    Layer(std::string _name, std::string _type);
+    Layer(Camera* _camera , CellMap* _map,std::string _name, std::string _type);
     virtual ~Layer();
     virtual void LoadLayer();
     virtual void Update();
-    virtual void Draw();
+    virtual void Draw(Camera* _camera);
 };
 
 #endif

@@ -3,12 +3,17 @@
 #include "../../src/ufo/camera.h"
 #include "../../src/ufo/cell_actor.h"
 #include "dummy_test_layer_actor.h"
+#include "dummy_test_game.h"
+
 #include <string>
+
+class Camera;
+
 class Dummy : public CellActor{
 public:
-    bool on_dynamic_solid;
+    DummyTestGame* game;
 
-    int i = 0;
+    bool on_dynamic_solid;
     std::string solid_layer = "solid";
     bool is_already_in_semi_solid = false;
     olc::vf2d former_position;
@@ -18,7 +23,6 @@ public:
     olc::vf2d dynamic_ride_velocity = {0.0f, 0.0f};
     bool entered_horisontally_dynamic = false;
 
-    bool record_input;
     int input_frame;
     bool play_input;
     struct KeyInput{
@@ -29,10 +33,10 @@ public:
 
     std::vector<KeyInput> player_input_recorded;
     std::vector<KeyInput> player_input_play;
-    Dummy(olc::vf2d _position, Game* _game);
+    Dummy(olc::vf2d _position, DummyTestGame* _game);
     ~Dummy();
     void Update();
-    void Draw();
+    void Draw(Camera* _camera);
     void AdjustCollisionX();
     void AdjustCollisionY();
     void AdjustDownSlope();

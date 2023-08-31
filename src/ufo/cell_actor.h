@@ -2,8 +2,9 @@
 #define CELL_ACTOR_H
 #include "../../external/olcPixelGameEngine.h"
 #include <string>
-
-class Program;
+class Game;
+class Camera;
+class CellMap;
 
 class CellActor{
 public:
@@ -27,13 +28,13 @@ public:
     CellActor(olc::vf2d _position, Game *_game);
     CellActor(olc::vf2d _position, Game *_game, std::string _mask);
     virtual ~CellActor();
-    bool IsOverlapping(olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);
-    int IsOverlappingHeight(olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);
-    int HeightUntilGround(olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);
+    bool IsOverlapping(CellMap* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);
+    int IsOverlappingHeight(CellMap* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);
+    int HeightUntilGround(CellMap* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);
     bool IsOverlappingOtherDecal(olc::Decal *_decal, olc::vf2d _position, olc::Decal *_other_decal, olc::vf2d _other_position, olc::Pixel _colour = olc::WHITE);
 
     virtual void Update();
-    virtual void Draw();
+    virtual void Draw(Camera* _camera);
 };
 
 #endif
