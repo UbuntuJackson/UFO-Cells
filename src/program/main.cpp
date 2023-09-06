@@ -1,12 +1,12 @@
 
 //#include "ufo_global.h"
-#include "../../games/dummy_test/dummy_test_game.h"
+#include "../../games/leg0/leg0.h"
 //#include "../../external/olcPGEX_SplashScreen.h"
 //#define OLC_PGEX_SPLASHSCREEN
 
 int main()
 {
-	DummyTestGame game;
+	Leg0 game;
 	//UfoGlobal::squirrel_interface.game = &game;
 	if (game.Construct(1600, 800, 1, 1, false, true, true))
 		game.Start();

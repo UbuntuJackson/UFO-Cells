@@ -1,5 +1,6 @@
 #include "animation.h"
 #include "camera.h"
+#include "rect.h"
 
 Animation::Animation(){
     current_anim = idle_stand;
@@ -44,4 +45,17 @@ Animation::Draw(Camera* _camera){
     //Requires lists with chopped up spritesheets to exist
 
     //Maybe create a function for camera that takes both a decal and an index
+
+    //_camera->DrawPartialDecal(olc::vf2d(frame % std::floor(decal_size.x/frame_size.x), std::floor(frame*frame_size.y/decal_size.y/frame_size.y)));
+}
+
+Rect
+Animation::GetRectangle(int _x, int _y){
+    Rect rect = Rect({(float)(_x * frame_size.x), (float)(_y * frame_size.y)}, frame_size);
+    return rect;
+}
+
+Rect
+Animation::GetFrame(int _frame){
+    return GetRectangle(_frame % (int)frame_size.x, (int)_frame/(int)frame_size.y);
 }

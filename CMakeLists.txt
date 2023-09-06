@@ -42,7 +42,7 @@ file(
     src/ufo/layer_solid.cpp
     src/program/main.cpp
     #src/program/ufo_global.cpp
-    games/dummy_test/*.cpp
+    games/leg0/*.cpp
     src/scripting/api.cpp
     src/squirrel/squirrel_error.cpp
     src/scripting/wrapper.cpp

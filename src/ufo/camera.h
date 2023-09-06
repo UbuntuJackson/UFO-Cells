@@ -76,5 +76,6 @@ public:
     olc::vf2d WorldToScreen(olc::vf2d _position, olc::vf2d _shape_offset);
 
     void DrawDecal(olc::vf2d _position, olc::Decal *_decal);
+    void DrawRotatedPartialDecal(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _center, olc::vf2d _scale);
 };
 #endif

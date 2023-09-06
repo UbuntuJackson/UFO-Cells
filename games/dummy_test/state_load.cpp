@@ -34,7 +34,7 @@ void StateLoad::Set(std::string _data){ //this needs to be simplified somehow
     std::string sl = PutFileIntoString(ifs);
     ifs.close();
     cJSON *j = cJSON_Parse(sl.c_str());
-    const cJSON *l1 = cJSON_GetObjectItemCaseSensitive(j, "layers");
+    const cJSON *l1 = cJSON_GetObjectItemCaseSensitive(j, "layers"); //Make GetLayers function
     for(int i = 0; i < cJSON_GetArraySize(l1); i++){
         const cJSON *item = cJSON_GetArrayItem(l1, i); //Would need to pass item, could parse item from here. The function would be called
                                                         //void StateLoad::AddLayers(const cJson _item); Alternatively we could get the whole

@@ -7,6 +7,7 @@ class Leg0 : public Game{
 public:
     Leg0();
     ~Leg0();
+    void LoadResources();
 };
 
 #endif

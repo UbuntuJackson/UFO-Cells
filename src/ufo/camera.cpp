@@ -286,3 +286,32 @@ Camera::DrawDecal(olc::vf2d _position, olc::Decal *_decal){
             break;
     }
 }
+
+/*void
+Camera::DrawRotatedPartialDecal(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _center, olc::vf2d _scale){
+    switch(m_camera_state){
+        case ZOOM:
+            Zoom();
+            break;
+        case FOLLOW:
+            Follow(_position, _decal, _center, _scale);
+            break;
+        case SWITCH:
+            Switch();
+            break;
+        case MOVE:
+            Move();
+            break;
+        case MOUSE:
+            MouseAndArrowKeys(_position, _decal, _center, _scale);
+            break;
+        case MULTIPLAYER:
+            break;
+        case FOLLOW_PLATFORMER:
+            FollowPlatformer(_position, _decal, _center, _scale);
+            break;
+        case STATIC:
+            Static(_position, _decal, _center, _scale);
+            break;
+    }
+}*/
