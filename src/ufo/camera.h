@@ -58,16 +58,20 @@ public:
     void SetTarget(CellActor *_target);
     void Zoom();
     void Follow(olc::vf2d _position, olc::Decal *_decal);
+    void Follow(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _center, olc::vf2d _source_pos, olc::vf2d _source_size, olc::vf2d _scale);
     void Move();
     void Switch();
     void Static(olc::vf2d _position, olc::Decal *_decal);
+    void Static(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _center, olc::vf2d _source_pos, olc::vf2d _source_size, olc::vf2d _scale);
     void MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal);
+    void MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _center, olc::vf2d _source_pos, olc::vf2d _source_size, olc::vf2d _scale);
     void SetStateSwitch(CellActor *_target);
     void SetStateZoom(float _target_scale);
     void SetStateMove(olc::vf2d _vel);
     void SetStateStatic(olc::vf2d _offset);
     void SetStateMouseAndArrowKeys(olc::vf2d top_left_corner, olc::vf2d bottom_right_corner);
     void FollowPlatformer(olc::vf2d _position, olc::Decal *_decal);
+    void FollowPlatformer(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _center, olc::vf2d _source_pos, olc::vf2d _source_size, olc::vf2d _scale);
 
     void
     SetStateFollowPlatfomer(CellActor *_target, olc::vf2d top_left_corner, olc::vf2d bottom_right_corner);
@@ -76,6 +80,6 @@ public:
     olc::vf2d WorldToScreen(olc::vf2d _position, olc::vf2d _shape_offset);
 
     void DrawDecal(olc::vf2d _position, olc::Decal *_decal);
-    void DrawRotatedPartialDecal(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _center, olc::vf2d _scale);
+    void DrawRotatedPartialDecal(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _center, olc::vf2d _source_pos, olc::vf2d _source_size, olc::vf2d _scale);
 };
 #endif

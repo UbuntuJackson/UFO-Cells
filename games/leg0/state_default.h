@@ -8,9 +8,10 @@ class Leg0;
 
 class StateDefault : public State{
 public:
+    Leg0* game;
     int count = 0;
     bool flip = false;
-    StateDefault(Game* _game);
+    StateDefault(Leg0* _game);
     void Update();
 };
 #endif
