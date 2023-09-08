@@ -4,8 +4,13 @@
 #include "../../external/olcPixelGameEngine.h"
 #include <string>
 #include <vector>
+class Game;
+class Camera;
+
 class Animation{
 public:
+    Game* game;
+
     float delta_frames;
     float frame_count;
     bool is_playing;
@@ -15,7 +20,7 @@ public:
     std::vector<int> idle_stand; //example, will not remain in this class, but can be added in classes inheriting from this class
     std::vector<int> idle_wait; //example, will not remain in this class, but can be added in classes inheriting from this class
     Animation() = default;
-    Animation(std::string _sprite_sheet, olc::vf2d _frame_size);
+    Animation(Game* _game ,std::string _sprite_sheet, olc::vf2d _frame_size);
     void Play();
     void Stop();
     void ResetAndPlay();
@@ -23,6 +28,6 @@ public:
     Rect GetRectangle(int _x, int _y);
     Rect GetFrame(int _frame);
     void Update();
-    void Draw(Camera* _camera);
+    void Draw(Camera* _camera, olc::vf2d _position);
 };
 #endif

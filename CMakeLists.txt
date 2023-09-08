@@ -22,6 +22,7 @@ include(cmake/BuildMiniswigWrapper.cmake)
 # Source Files are Curated Here
 file(
     GLOB SRCFILES
+    src/ufo/animation.cpp
     src/ufo/assets.cpp
     src/ufo/cell_actor.cpp
     src/ufo/dynamic_solid.cpp

@@ -1,11 +1,17 @@
 #include "animation.h"
 #include "camera.h"
 #include "rect.h"
+#include "game.h"
 
-Animation::Animation(){
-    current_anim = idle_stand;
-    Play();
-}
+Animation::Animation(Game* _game, std::string _sprite_sheet, olc::vf2d _frame_size):
+    game{_game},
+    sprite_sheet{_sprite_sheet},
+    frame_size{_frame_size},
+    frame_count{0.0f},
+    delta_frames{0.2f},
+    is_playing{false} {
+        
+    }
 
 void
 Animation::Play(){
@@ -38,15 +44,9 @@ Animation::UpdateStateLogic(){
 }
 
 void
-Animation::Draw(Camera* _camera){
-    //partial_decal = Decal(w, h);
-    //sample bunch of pixles according to a sprite index
-    //Draw the created decal with camera
-    //Requires lists with chopped up spritesheets to exist
+Animation::Draw(Camera* _camera, olc::vf2d _position){
 
-    //Maybe create a function for camera that takes both a decal and an index
-
-    //_camera->DrawPartialDecal(olc::vf2d(frame % std::floor(decal_size.x/frame_size.x), std::floor(frame*frame_size.y/decal_size.y/frame_size.y)));
+    _camera->DrawRotatedPartialDecal(_position, game->asset_manager.GetDecal(sprite_sheet),{0.0f,0.0f}, GetFrame(int(frame_count)%10).position, frame_size, {1.0f,1.0f});
 }
 
 Rect
