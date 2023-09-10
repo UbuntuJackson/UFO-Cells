@@ -10,6 +10,7 @@ class AnimSnowman : public Animation{
 public:
     AnimSnowman() = default;
     AnimSnowman(Game* _game, std::string _sprite_sheet, olc::vf2d _frame_size);
+    void UpdateStateLogic();
 };
 
 #endif

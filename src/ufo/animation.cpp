@@ -26,8 +26,8 @@ void
 Animation::Update(){
     if(is_playing){
         frame_count += delta_frames;
-        UpdateStateLogic();
     }
+    UpdateStateLogic();
 }
 
 void

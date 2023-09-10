@@ -8,10 +8,9 @@ class Game;
 class Camera;
 
 class Animation{
-private:
-    bool is_playing;
 public:
     Game* game;
+    bool is_playing;
 
     float delta_frames;
     float frame_count;
@@ -25,10 +24,10 @@ public:
     void Play();
     void Stop();
     void ResetAndPlay();
-    void UpdateStateLogic();
+    virtual void UpdateStateLogic();
     Rect GetRectangle(int _x, int _y);
     Rect GetFrame(int _frame);
-    void Update();
-    void Draw(Camera* _camera, olc::vf2d _position, olc::vf2d _scale);
+    virtual void Update();
+    virtual void Draw(Camera* _camera, olc::vf2d _position, olc::vf2d _scale);
 };
 #endif
