@@ -15,6 +15,6 @@ Leg0::~Leg0(){
 
 void
 Leg0::LoadResources(){
-    asset_manager.LoadDecal("../games/leg0/res/snowman.png", "snowman");
-    anim_snowman = AnimSnowman(this, "snowman", {32.0f,32.0f});
+    asset_manager.LoadDecal("../games/leg0/res/sprite_sheet.png", "snowman");
+    anim_snowman = AnimSnowman(this, "snowman", {64.0f,64.0f});
 }

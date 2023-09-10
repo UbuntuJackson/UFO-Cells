@@ -3,12 +3,11 @@
 #include "rect.h"
 #include "game.h"
 
-Animation::Animation(Game* _game, std::string _sprite_sheet, olc::vf2d _frame_size):
+Animation::Animation(Game* _game):
     game{_game},
-    sprite_sheet{_sprite_sheet},
-    frame_size{_frame_size},
+    frame_size{16.0f,16.0f},
     frame_count{0.0f},
-    delta_frames{0.2f},
+    delta_frames{0.01f},
     is_playing{false} {
         
     }
@@ -25,8 +24,10 @@ Animation::Stop(){
 
 void
 Animation::Update(){
-    if(is_playing) frame_count += delta_frames;
-    UpdateStateLogic();
+    if(is_playing){
+        frame_count += delta_frames;
+        UpdateStateLogic();
+    }
 }
 
 void
@@ -44,9 +45,8 @@ Animation::UpdateStateLogic(){
 }
 
 void
-Animation::Draw(Camera* _camera, olc::vf2d _position){
-
-    _camera->DrawRotatedPartialDecal(_position, game->asset_manager.GetDecal(sprite_sheet),{0.0f,0.0f}, GetFrame(int(frame_count)%10).position, frame_size, {1.0f,1.0f});
+Animation::Draw(Camera* _camera, olc::vf2d _position, olc::vf2d _scale){
+    _camera->DrawRotatedPartialDecal(_position, game->asset_manager.GetDecal(sprite_sheet),{0.0f,0.0f}, GetFrame(current_anim[(int)frame_count%current_anim.size()]).position, frame_size, _scale);
 }
 
 Rect
@@ -57,5 +57,8 @@ Animation::GetRectangle(int _x, int _y){
 
 Rect
 Animation::GetFrame(int _frame){
-    return GetRectangle(_frame % (int)frame_size.x, (int)_frame/(int)frame_size.y);
+    std::cout << (game->asset_manager.GetDecal(sprite_sheet)->sprite->Size().y/(int)frame_size.y) << std::endl;
+    return GetRectangle(
+        (int)_frame % (game->asset_manager.GetDecal(sprite_sheet)->sprite->Size().x/(int)frame_size.x), //1 can only give me x = 0
+        (int)_frame / (game->asset_manager.GetDecal(sprite_sheet)->sprite->Size().x/(int)frame_size.x)); //1 can only give y = 1
 }
