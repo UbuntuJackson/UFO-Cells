@@ -11,34 +11,34 @@
 #include "../../games/dummy_test/dummy.h"
 
 namespace UfoAPI{
-    /*void PrintFunction(std::string s){std::cout << s << std::endl;}
+    void PrintFunction(std::string s){std::cout << s << std::endl;}
     void LoadDecal(std::string _path){}
     void DrawDecal(int _x, int _y, std::string _decal_key){}
 
     void DrawRectangleDecal(int x, int y, int w, int h, int r, int g, int b, int a){
-        UfoGlobal::game->DrawRectDecal(olc::vf2d(x, y), olc::vf2d(w, h), olc::Pixel(r,g,b,a));
+        UfoGlobal::squirrel_interface.game->DrawRectDecal(olc::vf2d(x, y), olc::vf2d(w, h), olc::Pixel(r,g,b,a));
     }
     void FillRectangleDecal(int x, int y, int w, int h, int r, int g, int b, int a){
-        UfoGlobal::game->FillRectDecal(olc::vf2d(x, y), olc::vf2d(w, h), olc::Pixel(r,g,b,a));
+        UfoGlobal::squirrel_interface.game->FillRectDecal(olc::vf2d(x, y), olc::vf2d(w, h), olc::Pixel(r,g,b,a));
     }
 
     void DrawStringDecal(int x, int y, std::string _text, int r, int g, int b, int a, float _scale_x, float _scale_y){
-        UfoGlobal::game->DrawStringDecal(olc::vf2d(x, y), _text, olc::Pixel(r,g,b,a), olc::vf2d(_scale_x, _scale_y));
+        UfoGlobal::squirrel_interface.game->DrawStringDecal(olc::vf2d(x, y), _text, olc::Pixel(r,g,b,a), olc::vf2d(_scale_x, _scale_y));
     }
 
     void DrawMap(){
-        UfoGlobal::game->cell_map.Draw();
+        //UfoGlobal::squirrel_interface.game->cell_map.Draw();
     }
 
     //olc::HWButton GetKey(){}
     int GetMousePosX(){
-        return UfoGlobal::game->GetMousePos().x;
+        return UfoGlobal::squirrel_interface.game->GetMousePos().x;
     }
     int GetMousePosY(){
-        return UfoGlobal::game->GetMousePos().y;
+        return UfoGlobal::squirrel_interface.game->GetMousePos().y;
     }
     bool MouseLeftPressed(){
-        return UfoGlobal::game->GetMouse(0).bPressed;
+        return UfoGlobal::squirrel_interface.game->GetMouse(0).bPressed;
     }
     void GetMouseWheel(){}
 
@@ -48,21 +48,14 @@ namespace UfoAPI{
 
     //game control
     void Quit(){
-        UfoGlobal::game->running = false;
+        UfoGlobal::squirrel_interface.game->running = false;
     }
 
     void SetState(std::string _state, std::string _data){
-        UfoGlobal::game->SetState(_state, _data);
+        UfoGlobal::squirrel_interface.game->SetState(_state, _data);
     }
 
     std::string GetStateData(){
-        return UfoGlobal::game->game_state->GetData();
+        return UfoGlobal::squirrel_interface.game->game_state->GetData();
     }
-
-    void NewDummyTestGame(){
-        DummyTestGame *game = new DummyTestGame();
-    }
-    void UpdateDummyTestGame(){
-        UfoGlobal::game->game_state->Update();
-    }*/
 }

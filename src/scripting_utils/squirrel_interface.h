@@ -10,6 +10,7 @@ class SquirrelInterface{
 public:
     Game *game;
     SquirrelInterface() = default;
+    //SquirrelInterface(Game *_game);
     void PrintFunction(std::string s);
     void LoadDecal(std::string _path);
     void DrawDecal(int _x, int _y, std::string _decal_key);

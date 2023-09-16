@@ -42,10 +42,11 @@ file(
     src/ufo/layer_terrain.cpp
     src/ufo/layer_solid.cpp
     src/program/main.cpp
-    #src/program/ufo_global.cpp
-    games/leg0/*.cpp
+    src/program/ufo_global.cpp
+    games/dummy_test/*.cpp
     src/scripting/api.cpp
     src/squirrel/squirrel_error.cpp
+    src/squirrel/squirrel_interface.cpp
     src/scripting/wrapper.cpp
     external/cJSON.c
 )

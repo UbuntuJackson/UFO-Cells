@@ -6,7 +6,7 @@
 #endif
 
 namespace UfoAPI{
-    /*void PrintFunction(std::string s);
+    void PrintFunction(std::string s);
     void LoadDecal(std::string _path);
     void DrawDecal(int _x, int _y, std::string _decal_key);
     void DrawRectangleDecal(int x, int y, int w, int h, int r, int g, int b, int a);
@@ -24,8 +24,6 @@ namespace UfoAPI{
     void SetState(std::string _state, std::string _data);
     std::string GetStateData();
     //Game-specific
-    void NewDummyTestGame();
-    void UpdateDummyTestGame();*/
 }
 
 //#endif API_H
