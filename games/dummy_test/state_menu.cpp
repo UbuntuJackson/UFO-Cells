@@ -8,13 +8,14 @@
 #include <sqstdsystem.h>
 #include <sqstdmath.h>
 #include <sqstdstring.h>
+#include "../../src/program/ufo_global.h"
 
 #include "game_base_state.h"
 #include "dummy_test_game.h"
 
 StateMenu::StateMenu(DummyTestGame* _game): GameBaseState(_game){
-    //std::string path = "../games/" + UfoGlobal::game->game_dir_name + "/scripts/menus.nut";
-    //sqstd_dofile(UfoGlobal::game->vm, path.c_str(), 0, 1);
+    std::string path = "../games/dummy_test/scripts/menus.nut";
+    sqstd_dofile(game->vm, path.c_str(), 0, 1);
 }
 
 void StateMenu::Set(std::string _data){
@@ -24,7 +25,7 @@ void StateMenu::Set(std::string _data){
 }
 
 std::string StateMenu::GetData(){
-    return menu_string;
+    return menu_string; //expose menu instead
 }
 
 void StateMenu::Update(){
