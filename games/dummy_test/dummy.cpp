@@ -72,17 +72,6 @@ Dummy::Update(){
     if(!on_dynamic_solid){
         AdjustEnteredDynamicSolidX(act_layer);
 
-        for(auto act : act_layer->actors){
-
-            olc::vf2d act_new_position = act->position;
-            act_new_position.x += act->velocity.x;
-            on_dynamic_solid = IsOverlappingOtherDecal(mask_decal, olc::vf2d(position.x, position.y + 1), game->asset_manager.GetDecal(act->mask), act_new_position);
-            if(on_dynamic_solid){
-                is_grounded = true;
-                dynamic_ride_velocity = act->velocity;
-            }
-        }
-
         position.x += velocity.x;
         velocity.x *= 0.85f;
 
@@ -132,7 +121,7 @@ Dummy::Update(){
         OnDynamicSolid(act_layer);
         for(auto act : act_layer->actors){
 
-            olc::vf2d act_new_position = act->position;
+            olc::vf2d act_new_position = act->position+act->velocity;
             on_dynamic_solid = IsOverlappingOtherDecal(mask_decal, olc::vf2d(position.x, position.y + 1), game->asset_manager.GetDecal(act->mask), act_new_position);
             if(on_dynamic_solid){
                 is_grounded = true;
@@ -141,6 +130,7 @@ Dummy::Update(){
         }
         
     }
+    std::cout << on_dynamic_solid << std::endl;
 
     input_frame++;
 }
@@ -188,7 +178,6 @@ Dummy::OnDynamicSolid(DummyTestLayerActor* _act_layer){
                     }
                 }
             }
-            std::cout << "still in collision: " << IsOverlappingOtherDecal(mask_decal, position, game->asset_manager.GetDecal(act->mask), act->position+act->velocity) << std::endl;
         }
     }
 
