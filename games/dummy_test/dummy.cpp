@@ -98,16 +98,6 @@ Dummy::Update(){
         is_already_in_semi_solid = IsOverlapping(&(game->map), mask_decal, solid_layer, position, olc::RED);
 
         //Checking before we intend to move along the Y-Axis
-        
-        for(auto act : act_layer->actors){
-
-            olc::vf2d act_new_position = act->position+act->velocity;
-            on_dynamic_solid = IsOverlappingOtherDecal(mask_decal, olc::vf2d(position.x, position.y + 1), game->asset_manager.GetDecal(act->mask), act_new_position);
-            if(on_dynamic_solid){
-                is_grounded = true;
-                dynamic_ride_velocity = act->velocity;
-            }
-        }
 
         AdjustEnteredDynamicSolidY(act_layer);
 
@@ -127,8 +117,19 @@ Dummy::Update(){
         AdjustEnterDynamicSolidY(act_layer);
 
         AdjustDownSlope();
+
+        for(auto act : act_layer->actors){
+
+            olc::vf2d act_new_position = act->position+act->velocity;
+            on_dynamic_solid = IsOverlappingOtherDecal(mask_decal, olc::vf2d(position.x, position.y + 1), game->asset_manager.GetDecal(act->mask), act_new_position);
+            if(on_dynamic_solid){
+                is_grounded = true;
+                dynamic_ride_velocity = act->velocity;
+            }
+        }
     }
     else{
+        OnDynamicSolid(act_layer);
         for(auto act : act_layer->actors){
 
             olc::vf2d act_new_position = act->position;
@@ -138,7 +139,7 @@ Dummy::Update(){
                 dynamic_ride_velocity = act->velocity;
             }
         }
-        OnDynamicSolid(act_layer);
+        
     }
 
     input_frame++;
@@ -147,51 +148,48 @@ Dummy::Update(){
 void
 Dummy::OnDynamicSolid(DummyTestLayerActor* _act_layer){  
     for(auto act : _act_layer->actors){
-        //std::cout << "act before: " << act->position.y << std::endl;
-        //std::cout << "dum before: " << position.y << std::endl;
-        //std::cout << act->position.y - position.y << std::endl;
+        //We always compare with the future state of DynamicSolid here to make sure we are out of collision by the end of the frame,
+        //because if Player is relative to Dynamic solid, it is reasonable to emulate a scenario where both the x and y velocity is added
+        //the behaviour of a normal solid, where just one mo
+
+        //These checks are for making sure the player has moved out of the DynamicSolid before checking for player-movement
         if(IsOverlappingOtherDecal(mask_decal, olc::vf2d(position.x, position.y + 1.0f), game->asset_manager.GetDecal(act->mask),act->position)){
-            position.y += act->velocity.y;
-            
-            if(IsOverlappingOtherDecal(mask_decal, position, game->asset_manager.GetDecal(act->mask), olc::vf2d(act->position.x, act->position.y+act->velocity.y))){
-                position.y = std::floor(position.y);
-                while(IsOverlappingOtherDecal(mask_decal, position, game->asset_manager.GetDecal(act->mask), olc::vf2d(act->position.x, act->position.y+act->velocity.y))){
-                    position.y -= 1.0f;
-                }
-            }
-            position.x += act->velocity.x;
-            std::cout << "in collision: " << IsOverlappingOtherDecal(mask_decal, position, game->asset_manager.GetDecal(act->mask), act->position+act->velocity) << std::endl;
-            if(IsOverlappingOtherDecal(mask_decal, position, game->asset_manager.GetDecal(act->mask), act->position+act->velocity)){
-                if(act->velocity.x < 0.0f){ //next frame
-                    position.x = std::floor(position.x);
-                    while(IsOverlappingOtherDecal(mask_decal, position, game->asset_manager.GetDecal(act->mask), act->position+act->velocity)){
+
+            position.x += act->velocity.x; //This is to move the player relative to the DynamicSolid you collided with
+            //This is where things go wrong. This was mainly for the cases where you aren't quite resolved after DynamicSolid is moved
+
+            if(IsOverlappingOtherDecal(mask_decal, position, game->asset_manager.GetDecal(act->mask), {act->position.x+act->velocity.x,act->position.y})){
+                
+                if(IsOverlappingOtherDecal(mask_decal, {position.x+1.0f, position.y}, game->asset_manager.GetDecal(act->mask), {act->position.x+act->velocity.x,act->position.y})){
+                    while(IsOverlappingOtherDecal(mask_decal, {position.x+1.0f, position.y}, game->asset_manager.GetDecal(act->mask), {act->position.x+act->velocity.x,act->position.y})){
                         position.x -= 1.0f;
-                        std::cout << IsOverlappingOtherDecal(mask_decal, position, game->asset_manager.GetDecal(act->mask), act->position+act->velocity) << std::endl;
                     }
                 }
-                if(act->velocity.x > 0.0f){
-                    position.x = std::ceil(position.x);
-                    while(IsOverlappingOtherDecal(mask_decal, position, game->asset_manager.GetDecal(act->mask), act->position+act->velocity)){
+                else if(IsOverlappingOtherDecal(mask_decal, {position.x-1.0f, position.y}, game->asset_manager.GetDecal(act->mask), {act->position.x+act->velocity.x,act->position.y})){
+                    while(IsOverlappingOtherDecal(mask_decal, {position.x-1.0f, position.y}, game->asset_manager.GetDecal(act->mask), {act->position.x+act->velocity.x,act->position.y})){
                         position.x += 1.0f;
                     }
                 }
             }
-            
-            /*if(act->velocity.y > 0.0f){
-                position.y = std::ceil(position.y);
-                while(IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act->position+act->velocity)){
-                    position.y += 1.0f;
+
+            position.y += act->velocity.y; //This is to move the player relative to the DynamicSolid you collided with
+            //This is where things go wrong. This was mainly for the cases where you aren't quite resolved after DynamicSolid is moved
+
+            if(IsOverlappingOtherDecal(mask_decal, position, game->asset_manager.GetDecal(act->mask), act->position+act->velocity)){
+                
+                if(IsOverlappingOtherDecal(mask_decal, {position.x, position.y+1.0f}, game->asset_manager.GetDecal(act->mask), act->position+act->velocity)){
+                    while(IsOverlappingOtherDecal(mask_decal, {position.x, position.y+1.0f}, game->asset_manager.GetDecal(act->mask), act->position+act->velocity)){
+                        position.y -= 1.0f;
+                    }
                 }
-            }*/
-            //velocity.x = 0.0f;
-            //std::cout << IsOverlappingOtherDecal(mask_decal, position, UfoGlobal::program.asset_manager.GetDecal(act->mask), act->position+act->velocity) << std::endl;
+                else if(IsOverlappingOtherDecal(mask_decal, {position.x, position.y-1.0f}, game->asset_manager.GetDecal(act->mask), act->position+act->velocity)){ //added the if statements,dint do anything
+                    while(IsOverlappingOtherDecal(mask_decal, {position.x, position.y-1.0f}, game->asset_manager.GetDecal(act->mask), act->position+act->velocity)){
+                        position.y += 1.0f;
+                    }
+                }
+            }
+            std::cout << "still in collision: " << IsOverlappingOtherDecal(mask_decal, position, game->asset_manager.GetDecal(act->mask), act->position+act->velocity) << std::endl;
         }
-        /*if(IsOverlappingOtherDecal(mask_decal, olc::vf2d(position.x, position.y), UfoGlobal::program.asset_manager.GetDecal(act->mask), act_new_position)){
-            position.y -= 1;
-        }*/
-        //std::cout << "act after: " << act_new_position.y + act->velocity.y << std::endl;
-        //std::cout << "dum after: " << position.y << std::endl;
-        //std::cout << act->position.y + act->velocity.y - position.y << std::endl;
     }
 
     position.x += velocity.x;
