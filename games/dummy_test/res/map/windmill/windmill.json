@@ -30,11 +30,7 @@
             "name" : "dynamic_solids",
             "type" :"actor",
             "actors" : [
-                {
-                    "actor" : "DynamicSolid",
-                    "x" : 720,
-                    "y" : 150
-                }
+                
             ]
         },
         {

@@ -13,7 +13,7 @@ class Dummy : public CellActor{
 public:
     DummyTestGame* game;
 
-    bool on_dynamic_solid;
+    bool on_dynamic_solid = false;
     std::string solid_layer = "solid";
     bool is_already_in_semi_solid = false;
     olc::vf2d former_position;
