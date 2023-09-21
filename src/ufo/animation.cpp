@@ -23,7 +23,7 @@ Animation::Stop(){
 }
 
 void
-Animation::Update(){
+Animation::Update(){ //Take state string as argument, for example jump, run, walk... might just be easier to pass in the actor
     if(is_playing){
         frame_count += delta_frames;
     }

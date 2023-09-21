@@ -34,6 +34,7 @@ DummyTestGame::~DummyTestGame(){
 void
 DummyTestGame::LoadResources(){
     asset_manager.LoadDecal("../games/dummy_test/res/masks/pill_small.png", "decPin");
+    asset_manager.LoadDecal("../games/dummy_test/res/masks/purple.png", "decPurple");
     asset_manager.LoadDecal("../res/misc/new_logo_centred_ufo_cells.png", "load");
     asset_manager.LoadDecal("../games/dummy_test/res/map/zen/dynamic_solid_1.png", "dynamic_solid");
 }

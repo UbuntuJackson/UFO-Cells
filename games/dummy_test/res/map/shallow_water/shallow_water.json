@@ -1,0 +1,47 @@
+{
+    "layers" : [
+        {
+            "name" : "sky",
+            "type" : "background",
+            "path" : "../games/dummy_test/res/map/shallow_water/bg.png"
+        },
+        {
+            "name" : "clouds",
+            "type" : "background",
+            "path" : "../games/dummy_test/res/map/shallow_water/clouds.png"
+        },
+        {
+            "name" : "actors",
+            "type" :"actor",
+            "actors" : [
+                {
+                    "actor" : "Dummy",
+                    "x" : 740,
+                    "y" : 50
+                }
+            ]
+        },
+        {
+            "name" : "dynamic_solids",
+            "type" :"actor",
+            "actors" : [
+                
+            ]
+        },
+        {
+            "name" : "mg",
+            "type" : "terrain",
+            "path" : "../games/dummy_test/res/map/shallow_water/mg.png"
+        },
+        {
+            "name" : "water",
+            "type" : "terrain",
+            "path" : "../games/dummy_test/res/map/shallow_water/water.png"
+        },
+        {
+            "name" : "solid",
+            "type" : "collision",
+            "path" : "../games/dummy_test/res/map/shallow_water/solid.png"
+        }
+    ]
+}
