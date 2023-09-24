@@ -1,5 +1,6 @@
 #include "dummy_test_layer_actor.h"
 #include "dummy.h"
+#include "optimised_dummy.h"
 #include "../../src/ufo/layer_actor.h"
 #include "../../src/program/ufo_global.h"
 #include <iostream>
@@ -16,7 +17,7 @@ DummyTestLayerActor::LoadLayer(){ //Maybe people can derive from this class and 
             std::cout << "loaded dummy" << std::endl;
 
             //it is safe to load decals here, tho we need some kind of game start function
-            actors.push_back(new Dummy(olc::vf2d(act.x, act.y), game)); //temporary solution
+            actors.push_back(new OptimisedDummy(olc::vf2d(act.x, act.y), game)); //temporary solution
         }
         if(act.actor == "DynamicSolid"){
             std::cout << "loaded dummy" << std::endl;

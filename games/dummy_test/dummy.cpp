@@ -14,7 +14,7 @@
 Dummy::Dummy(olc::vf2d _position, DummyTestGame* _game) : CellActor(_position, _game), game{static_cast<DummyTestGame*>(_game)}{ //Fix
     game->camera.SetStateFollowPlatfomer(this, {0.0f, 0.0f}, game->map.map_size);
     //UfoGlobal::program.camera.SetStateStatic(olc::vf2d(480.0f, 480.0f));
-    game->camera.scale = 4.0f;
+    game->camera.scale = 2.0f;
     game->record_input = true;
     mask = "decPin";
     mask_decal = game->asset_manager.GetDecal(mask);
