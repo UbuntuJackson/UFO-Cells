@@ -3,8 +3,9 @@
 #include "../../src/ufo/cell_actor.h"
 #include "island.h"
 #include "../../src/ufo/layer_actor.h"
+#include "island.h"
 
-OptimisedDummy::OptimisedDummy(olc::vf2d _position, DummyTestGame* _game) : CellActor(_position, _game), game{static_cast<DummyTestGame*>(_game)}{
+OptimisedDummy::OptimisedDummy(olc::vf2d _position, Island* _game) : CellActor(_position, _game), game{static_cast<Island*>(_game)}{
     game->camera.SetStateFollowPlatfomer(this, {0.0f, 0.0f}, game->map.map_size);
     game->camera.scale = 2.0f;
     mask = "decPin";
@@ -19,7 +20,7 @@ OptimisedDummy::Update(){
 
     for(auto layer : game->map.layers){
         if(layer->name == "dynamic_solids"){
-            act_layer = layer;
+            act_layer = dynamic_cast<LayerActor*>(layer);
             if(act_layer == nullptr){
                 std::cout << "dummy.cpp cast failed" << std::endl;
             }

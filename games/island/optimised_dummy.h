@@ -6,8 +6,8 @@ class DummyTestGame;
 
 class OptimisedDummy : public CellActor{
 public:
-    DummyTestGame* game;
-    OptimisedDummy(olc::vf2d _position, DummyTestGame* _game);
+    Island* game;
+    OptimisedDummy(olc::vf2d _position, Island* _game);
     void Update();
     void Draw(Camera* _camera);
 };
