@@ -7,7 +7,7 @@ class DummyTestLayerActor : public LayerActor{
 public:
     DummyTestGame* game;
     DummyTestLayerActor() = default;
-    DummyTestLayerActor(DummyTestGame* _game, CellMap* _map ,std::string _name, std::string _type);
+    DummyTestLayerActor(DummyTestGame* _game, CellMap* _map ,std::string _name, std::string _type, std::vector<ActorInfo> _actors_to_create);
     void LoadLayer();
     void Draw(Camera* _camera);
 };

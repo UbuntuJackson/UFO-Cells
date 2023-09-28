@@ -7,6 +7,6 @@ public:
     int stone;
     int coal;
     int green_stuff;
-
+    Inventory() = default;
 };
 #endif

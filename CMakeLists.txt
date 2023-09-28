@@ -43,11 +43,13 @@ file(
     src/ufo/layer_solid.cpp
     src/program/main.cpp
     src/program/ufo_global.cpp
-    games/dummy_test/*.cpp
+    games/island/*.cpp
     src/scripting/api.cpp
     src/squirrel/squirrel_error.cpp
     src/squirrel/squirrel_interface.cpp
     src/scripting/wrapper.cpp
+    src/ufo/ufo_load.cpp
+    src/ufo/type_registry.cpp
     external/cJSON.c
 )
 
