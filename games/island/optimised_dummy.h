@@ -2,7 +2,7 @@
 #define OPTIMISED_DUMMY_H
 
 #include "../../src/ufo/cell_actor.h"
-class DummyTestGame;
+class Island;
 
 class OptimisedDummy : public CellActor{
 public:

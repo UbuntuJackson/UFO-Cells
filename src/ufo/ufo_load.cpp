@@ -1,32 +1,20 @@
-#include "state_load.h"
-#include <iostream>
-#include "../../src/program/ufo_global.h"
-#include <string>
+#include "ufo_load.h"
 #include <fstream>
 #include <iostream>
 #include "../../external/cJSON.h"
 #include "../../src/ufo/file_utils.h"
-#include "../../src/ufo/game.h"
-#include "dummy_test_game.h"
-#include "dummy.h"
-#include "../../external/olcPixelGameEngine.h"
-#include "../../src/ufo/layer.h"
-#include "../../src/ufo/layer_background.h"
-#include "../../src/ufo/layer_solid.h"
-#include "../../src/ufo/layer_actor.h"
-#include "../../src/ufo/layer_terrain.h"
-#include "state_load.h"
-#include "dummy_test_layer_actor.h"
-#include "game_base_state.h"
+#include "game.h"
+#include "cellmap.h"
+#include "layer.h"
+#include "layer_actor.h"
+#include "layer_background.h"
+#include "layer_solid.h"
+#include "layer_terrain.h"
 
-StateLoad::StateLoad(DummyTestGame* _game) : GameBaseState(_game){
-
-}
-
-void StateLoad::Set(std::string _data){ //this needs to be simplified somehow
-    
+void
+UfoLoad::Set(std::string _data ,CellMap* _map){
     asset_index = 0;
-    game->map.UnloadMap();
+    _map->UnloadMap();
     layer_information.clear();
 
     std::ifstream ifs;
@@ -43,19 +31,19 @@ void StateLoad::Set(std::string _data){ //this needs to be simplified somehow
         std::string type = cJSON_GetObjectItemCaseSensitive(item, "type") -> valuestring;
         if(type == "background"){
             std::string path = cJSON_GetObjectItemCaseSensitive(item, "path") -> valuestring;
-            game->map.layers.push_back(new LayerBackground(&(game->map),name, type, path));
+            _map->layers.push_back(new LayerBackground(&(game->camera), &(game->map),name, type, path));
         }
         if(type == "collision"){
             std::string path = cJSON_GetObjectItemCaseSensitive(item, "path") -> valuestring;
-            game->map.layers.push_back(new LayerSolid(&(game->map),name, type, path));
+            _map->layers.push_back(new LayerSolid(&(game->camera), &(game->map),name, type, path));
         }
         if(type == "terrain"){
             std::string path = cJSON_GetObjectItemCaseSensitive(item, "path") -> valuestring;
-            game->map.layers.push_back(new LayerTerrain(&(game->map),name, type, path));
+            _map->layers.push_back(new LayerTerrain(&(game->camera), &(game->map),name, type, path));
         }
         if(type == "actor"){
             const cJSON *actor_layer = cJSON_GetObjectItemCaseSensitive(item, "actors");
-            DummyTestLayerActor* layer_actor = new DummyTestLayerActor(game, &(game->map),name, type);
+            DummyTestLayerActor* layer_actor = new DummyTestLayerActor(game, &(game->camera), &(game->map),name, type);
             for(int j = 0; j < cJSON_GetArraySize(actor_layer); j++){
                 const cJSON *act = cJSON_GetArrayItem(actor_layer, j);
                 std::string actor_string = cJSON_GetObjectItemCaseSensitive(act, "actor") -> valuestring;
@@ -71,14 +59,24 @@ void StateLoad::Set(std::string _data){ //this needs to be simplified somehow
     cJSON_Delete(j);
 }
 
-void StateLoad::Update(){ //this can be generalised and put in some kind of class that we derive from
-    if(asset_index < game->map.layers.size()){
-        game->map.layers[asset_index]->LoadLayer();
-        asset_index++;
+Layer*
+UfoLoad::NewLayer(std::string _layer, std::string _name, std::string _type, std::string _path){
+    if(_layer == "background"){
+        return new LayerBackground(map,_name, _type, _path);
     }
-    else{
-        //we can just add another state and then set that state, as they are mapped with strings
-        game->SetState("play", "...");
+    if(_layer == "collision"){
+        
+        return new LayerSolid(map,_name, _type, _path);
     }
-    game->DrawDecal(olc::vf2d(0.0f, 0.0f), game->asset_manager.GetDecal("load"));
+    if(_layer == "terrain"){
+        return new LayerTerrain(map,_name, _type, _path);
+    }
 }
+
+Layer*
+UfoLoad::NewLayer(std::string _layer, std::string _name, std::string _type, ActorInfo _actor_info){
+    if(_layer == "actor"){
+        return new LayerActor(&(game->camera), &(game->map),_name, _type, _actor_info);
+    }
+}
+

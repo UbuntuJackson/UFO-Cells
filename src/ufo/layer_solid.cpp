@@ -6,7 +6,7 @@
 
 //maybe put strings in layer vector instead that refers to keys in a map with <string, Layer>
 
-LayerSolid::LayerSolid(Camera* _camera, CellMap* _map ,std::string _name, std::string _type, std::string _path) : Layer(_camera, _map ,_name, _type), path{_path}{}
+LayerSolid::LayerSolid(CellMap* _map ,std::string _name, std::string _type, std::string _path) : Layer( _map ,_name, _type), path{_path}{}
 
 /*olc::Pixel
 LayerSolid::GetPixel(olc::vf2d _position){

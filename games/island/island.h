@@ -13,6 +13,7 @@ public:
     State inventory;
     State load;
     State menu;
+    Island();
 };
 
 #endif

@@ -8,7 +8,7 @@
 #include "custom_dynamic_solid.h"
 #include "../../src/ufo/camera.h"
 
-DummyTestLayerActor::DummyTestLayerActor(DummyTestGame* _game, Camera* _camera, CellMap* _map ,std::string _name, std::string _type) : LayerActor(_camera,_map,_name, _type), game{_game}{}
+DummyTestLayerActor::DummyTestLayerActor(DummyTestGame* _game, CellMap* _map ,std::string _name, std::string _type) : LayerActor(_map,_name, _type), game{_game}{}
 
 void
 DummyTestLayerActor::LoadLayer(){ //Maybe people can derive from this class and make their own LoadLayer function

@@ -3,7 +3,7 @@
 #include "cellmap.h"
 #include "camera.h"
 
-LayerTerrain::LayerTerrain(Camera* _camera, CellMap* _map, std::string _name, std::string _type, std::string _path) : Layer(_camera, _map ,_name, _type), path{_path}{}
+LayerTerrain::LayerTerrain(CellMap* _map, std::string _name, std::string _type, std::string _path) : Layer(_map ,_name, _type), path{_path}{}
 
 /*olc::Pixel
 LayerTerrain::GetPixel(olc::vf2d _position){

@@ -11,13 +11,12 @@ class Layer{
 public:
     //Game* game; //Have CellMap* map instead of game
     CellMap* map;
-    Camera* camera;
 
     std::string name;
     std::string type;
     std::string visible;
     Layer() = default;
-    Layer(Camera* _camera , CellMap* _map,std::string _name, std::string _type);
+    Layer(CellMap* _map,std::string _name, std::string _type);
     virtual ~Layer();
     virtual void LoadLayer();
     virtual void Update();

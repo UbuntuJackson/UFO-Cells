@@ -4,7 +4,7 @@
 #include <iostream>
 #include "camera.h"
 
-LayerActor::LayerActor(Camera* _camera, CellMap* _map, std::string _name, std::string _type) : Layer(_camera, _map ,_name, _type){}
+LayerActor::LayerActor(CellMap* _map, std::string _name, std::string _type) : Layer(_map ,_name, _type){}
 
 LayerActor::~LayerActor(){
     std::cout << "destructor" << std::endl;
