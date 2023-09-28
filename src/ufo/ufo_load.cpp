@@ -63,7 +63,7 @@ void UfoLoad::Update(){ //this can be generalised and put in some kind of class 
     }
     else{
         //we can just add another state and then set that state, as they are mapped with strings
-        game->SetState("play", "...");
+        //game->game_state = 
     }
     game->DrawDecal(olc::vf2d(0.0f, 0.0f), game->asset_manager.GetDecal("load"));
 }
