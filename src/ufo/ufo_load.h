@@ -12,7 +12,7 @@ class Layer;
 class UfoLoad : public State{
 private:
 
-    int asset_index;
+    int asset_index = 0;
     //std::string current_data = "";
     //std::string former_data = "";
     //bool layers_are_added = false;
@@ -22,11 +22,12 @@ public:
     CellMap* map;
     TypeRegistry* registry;
     UfoLoad() = default;
-    UfoLoad(Game* game, TypeRegistry *_registry);
+    UfoLoad(Game* game,CellMap* _map, TypeRegistry *_registry);
     Layer* NewLayer(std::string _name, std::string _type, std::string _path);
     Layer* NewLayer(std::string _name, std::string _type, std::vector<ActorInfo> _layer_info);
     void Set(std::string _data, CellMap* _map);
     void Update();
+    virtual void OnLoadFinished();
 };
 
 #endif

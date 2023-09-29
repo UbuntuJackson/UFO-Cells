@@ -2,10 +2,11 @@
 #include "../../src/ufo/cellmap.h"
 #include "../../src/ufo/ufo_load.h"
 #include "custom_type_registry.h"
+#include "state_load.h"
 
-Island::Island() : Game(), camera{Camera(this)}, map{CellMap(this)}, play{State(this)}, menu{State(this)}{
+Island::Island() : Game(), camera{Camera(this)}, map{CellMap(this)}, play{StatePlay(this)}, menu{State(this)}{
     registry = new CustomTypeRegistry(this);
-    load = UfoLoad(this, registry);
+    load = StateLoad(this, &map, registry);
     game_state = &load;
     load.Set("../games/island/res/map/windmill/windmill.json", &map);
 }

@@ -5,11 +5,15 @@ StatePlay::StatePlay(Island *_game) : game{_game}{}
 
 void
 StatePlay::Set(){
+    //game->camera.SetStateMouseAndArrowKeys({0.0f,0.0f},game->map.map_size);
+    //std::cout << game->camera.position.x << std::endl;
 
 }
 
 void
 StatePlay::Update(){
+    //std::cout << "updating" << std::endl;
+    //game->DrawDecal(game->asset_manager.GetDecal());
     for(auto layer : game->map.layers){
         layer -> Update();
     }

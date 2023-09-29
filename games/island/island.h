@@ -5,16 +5,18 @@
 #include "../../src/ufo/cellmap.h"
 #include "../../src/ufo/camera.h"
 #include "../../src/ufo/ufo_load.h"
+#include "state_load.h"
+#include "state_play.h"
 
 class CustomTypeRegistry;
 class Island : public Game{
 public:
     Camera camera;
     CellMap map;
-    State play;
+    StatePlay play;
     State inventory;
     State menu;
-    UfoLoad load;
+    StateLoad load;
     CustomTypeRegistry *registry;
     Island();
     void LoadResources();

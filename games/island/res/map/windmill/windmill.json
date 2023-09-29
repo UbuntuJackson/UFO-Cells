@@ -3,19 +3,19 @@
         {
             "name" : "sky",
             "type" : "background",
-            "path" : "../games/dummy_test/res/map/windmill/sky.png",
+            "path" : "../games/island/res/map/windmill/sky.png",
             "category" : "other"
         },
         {
             "name" : "bg",
             "type" : "terrain",
-            "path" : "../games/dummy_test/res/map/windmill/bg.png",
+            "path" : "../games/island/res/map/windmill/bg.png",
             "category" : "other"
         },
         {
             "name" : "mg",
             "type" : "terrain",
-            "path" : "../games/dummy_test/res/map/windmill/mg.png",
+            "path" : "../games/island/res/map/windmill/mg.png",
             "category" : "other"
         },
         {
@@ -28,36 +28,32 @@
                     "y" : 50
                 }
             ],
-            "category" : "other"
+            "category" : "actor"
         },
         {
             "name" : "dynamic_solids",
             "type" :"actor",
             "actors" : [
-                {
-                    "actor" : "DynamicSolid",
-                    "x" : 720,
-                    "y" : 150
-                }
+                
             ],
-            "category" : "other"
+            "category" : "actor"
         },
         {
             "name" : "fg2",
             "type" : "terrain",
-            "path" : "../games/dummy_test/res/map/windmill/fg2.png",
+            "path" : "../games/island/res/map/windmill/fg2.png",
             "category" : "other"
         },
         {
             "name" : "fg",
             "type" : "terrain",
-            "path" : "../games/dummy_test/res/map/windmill/fg.png",
+            "path" : "../games/island/res/map/windmill/fg.png",
             "category" : "other"
         },
         {
             "name" : "solid",
             "type" : "collision",
-            "path" : "../games/dummy_test/res/map/windmill/solid.png",
+            "path" : "../games/island/res/map/windmill/solid.png",
             "category" : "other"
         }
     ]

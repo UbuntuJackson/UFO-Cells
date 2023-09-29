@@ -2,6 +2,7 @@
 #include "layer.h"
 #include "cellmap.h"
 #include "camera.h"
+#include <string>
 
 LayerBackground::LayerBackground(CellMap* _map ,std::string _name, std::string _type, std::string _path) : Layer(_map ,_name, _type), path{_path}{}
 
@@ -18,6 +19,7 @@ LayerBackground::GetPixel(olc::vf2d _position){
 
 void
 LayerBackground::LoadLayer(){
+    std::cout << path << std::endl;
     olc::Sprite *spr = new olc::Sprite(path);
     map->map_sprites[name] = spr;
     map->map_size = spr->Size();

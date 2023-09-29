@@ -11,10 +11,12 @@ OptimisedDummy::OptimisedDummy(olc::vf2d _position, Island* _game) : CellActor(_
     mask_decal = game->asset_manager.GetDecal(mask);
     solid_layer = "solid";
     is_already_in_semi_solid = false;
+    std::cout << position.y << std::endl;
 }
 
 void
 OptimisedDummy::Update(){
+
     LayerActor* act_layer;
 
     for(auto layer : game->map.layers){
@@ -80,6 +82,7 @@ OptimisedDummy::Update(){
 
 void
 OptimisedDummy::Draw(Camera* _camera){
+    std::cout << "draw" << std::endl;
     _camera->DrawDecal(
         position,
         game->asset_manager.GetDecal("decPurple"));

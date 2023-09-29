@@ -3,6 +3,7 @@
 #include <iostream>
 #include "../../external/cJSON.h"
 #include "../../src/ufo/file_utils.h"
+#include "../../src/ufo/actor_info.h"
 #include "game.h"
 #include "cellmap.h"
 #include "layer.h"
@@ -11,7 +12,7 @@
 #include "layer_solid.h"
 #include "layer_terrain.h"
 
-UfoLoad::UfoLoad(Game *_game, TypeRegistry *_registry) : game{_game}, registry{_registry}{
+UfoLoad::UfoLoad(Game *_game, CellMap* _map, TypeRegistry *_registry) : game{_game}, map{_map}, registry{_registry}{
     
 }
 
@@ -35,16 +36,21 @@ UfoLoad::Set(std::string _data ,CellMap* _map){
         std::string type = cJSON_GetObjectItemCaseSensitive(item, "type") -> valuestring;
         if(category == "other"){
             std::string path = cJSON_GetObjectItemCaseSensitive(item, "path") -> valuestring;
-            map->layers.push_back(NewLayer(type,name,path));
+            map->layers.push_back(NewLayer(name,type,path));
+            std::cout << type << std::endl;
+            std::cout << name << std::endl;
+            std::cout << path << std::endl;
         }
         if(category == "actor"){
             const cJSON *actor_layer = cJSON_GetObjectItemCaseSensitive(item, "actors");
             std::vector<ActorInfo> layer_information;
             for(int j = 0; j < cJSON_GetArraySize(actor_layer); j++){
                 const cJSON *act = cJSON_GetArrayItem(actor_layer, j);
+                std::cout << cJSON_GetObjectItemCaseSensitive(act, "actor") -> valuestring << std::endl;
                 std::string actor_string = cJSON_GetObjectItemCaseSensitive(act, "actor") -> valuestring;
                 int x = cJSON_GetObjectItemCaseSensitive(act, "x") -> valueint;
                 int y = cJSON_GetObjectItemCaseSensitive(act, "y") -> valueint;
+                std::cout << x << std::endl;
                 layer_information.push_back(ActorInfo{actor_string, x, y});
 
             }
@@ -64,6 +70,7 @@ void UfoLoad::Update(){ //this can be generalised and put in some kind of class 
     else{
         //we can just add another state and then set that state, as they are mapped with strings
         //game->game_state = 
+        OnLoadFinished();
     }
     game->DrawDecal(olc::vf2d(0.0f, 0.0f), game->asset_manager.GetDecal("load"));
 }
@@ -89,3 +96,6 @@ UfoLoad::NewLayer(std::string _name, std::string _type, std::vector<ActorInfo> _
     }
 }
 
+void UfoLoad::OnLoadFinished(){
+    std::cout << "ufo_load" << std::endl;
+}
