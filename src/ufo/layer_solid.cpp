@@ -3,6 +3,7 @@
 #include <cmath>
 #include <string>
 #include "cellmap.h"
+#include "camera.h"
 
 //maybe put strings in layer vector instead that refers to keys in a map with <string, Layer>
 
@@ -34,7 +35,7 @@ LayerSolid::Update(){}
 
 void
 LayerSolid::Draw(Camera* _camera){
-    //UfoGlobal::program.camera.DrawDecal(
-    //        olc::vf2d(0.0f, 0.0f),
-    //        UfoGlobal::program.cell_map.map_decals[name]);
+    _camera->DrawDecal( //Give it camera instead of game?
+            olc::vf2d(0.0f, 0.0f),
+            map->map_decals[name]);
 }

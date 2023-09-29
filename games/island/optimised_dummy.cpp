@@ -5,6 +5,7 @@
 #include "../../src/ufo/layer_actor.h"
 
 OptimisedDummy::OptimisedDummy(olc::vf2d _position, Island* _game) : CellActor(_position, _game), game{static_cast<Island*>(_game)}{
+    ray = PlayerRay(_game, &(game->camera), this);
     game->camera.SetStateFollowPlatfomer(this, {0.0f, 0.0f}, game->map.map_size);
     game->camera.scale = 2.0f;
     mask = "decPin";
@@ -16,6 +17,7 @@ OptimisedDummy::OptimisedDummy(olc::vf2d _position, Island* _game) : CellActor(_
 
 void
 OptimisedDummy::Update(){
+    //game->camera.ScreenToWorld(game->GetMousePos(), {0.0f,0.0f});
 
     LayerActor* act_layer;
 
@@ -78,6 +80,10 @@ OptimisedDummy::Update(){
     AdjustEnterDynamicSolidY(act_layer);
 
     AdjustDownSlope(&(game->map));
+
+    ray.Update();
+    bool collision = ray.IsHit(game->map.map_decals[solid_layer]);
+    std::cout << collision << std::endl;
 }
 
 void
@@ -86,4 +92,5 @@ OptimisedDummy::Draw(Camera* _camera){
     _camera->DrawDecal(
         position,
         game->asset_manager.GetDecal("decPurple"));
+    ray.Draw(_camera);
 }

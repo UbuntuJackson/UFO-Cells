@@ -49,6 +49,7 @@ file(
     src/squirrel/squirrel_interface.cpp
     src/scripting/wrapper.cpp
     src/ufo/ufo_load.cpp
+    src/ufo/player_ray.cpp
     src/ufo/type_registry.cpp
     external/cJSON.c
 )

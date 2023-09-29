@@ -1,29 +1,51 @@
 #include "player_ray.h"
 #include "../../external/olcPixelGameEngine.h"
-PlayerRay::PlayerRay(Game* _game, Camera* _camera): game{_game}, camera{_camera}{}
+#include "camera.h"
+#include "game.h"
+#include "cell_actor.h"
+#include "colour_utils.h"
+#include "cellmap.h"
+#include "layer_solid.h"
+PlayerRay::PlayerRay(Game* _game, Camera* _camera, CellActor* _host): game{_game}, camera{_camera}, host{_host}, start{host->position}, end{host->position+olc::vf2d(1.0f,0.0f)}{}
 
 olc::vf2d
 PlayerRay::GetTargetPosition(){
     olc::vf2d target_position;
-    olc::vf2d delta_position = end - start;
+    olc::vf2d delta_position = camera->ScreenToWorld(game->GetMousePos(), {0.0f,0.0f}) - start;
     target_position = camera->ScreenToWorld(game->GetMousePos(), {0.0f,0.0f});
-    target_position = game->GetMousePos();
     if(delta_position.mag() > radius){
         target_position = start + delta_position.norm() * radius;
     }
+    std::cout << target_position << std::endl;
+    return target_position;
 }
 
 void
 PlayerRay::OnCollision(){}
 
-olc::vf2d
-PlayerRay::GetFirstCollision(){
-
+bool
+PlayerRay::IsHit(olc::Decal* _decal){
+    
+    olc::vf2d sample_coordinate = start;
+    olc::vf2d sample_direction = (end-start).norm();
+    int increment = 0;
+    float t = 0.0f;
+    //float time_step = (end-start).norm().mag();
+    while(!CompareColour(_decal->sprite->GetPixel(int(sample_coordinate.x), int(sample_coordinate.y)), olc::WHITE)){
+        if((sample_coordinate-start).mag() > (end-start).mag()) break;
+        sample_coordinate+=sample_direction;
+    }
+    if(CompareColour(_decal->sprite->GetPixel(int(sample_coordinate.x), int(sample_coordinate.y)), olc::WHITE)){
+        hit = sample_coordinate;
+        return true;
+    }
+    //std::cout << sample_coordinate << std::endl;
+    return false;
 }
 
 std::vector<olc::vf2d>
 PlayerRay::GetAllCollisions(){
-
+    
 }
 
 CellActor*
@@ -38,10 +60,13 @@ PlayerRay::GetAllActorsDetected(){
 
 void
 PlayerRay::Update(){
+    start = host->position;
     end = GetTargetPosition();
 }
 
 void
 PlayerRay::Draw(Camera* _camera){
-    game->DrawLine(_camera->WorldToScreen(start, {0.0f,0.0f}), _camera->WorldToScreen(end, {0.0f,0.0f}), olc::RED);
+    std::cout << _camera->WorldToScreen(end, {0.0f,0.0f}) << std::endl;
+    game->DrawLineDecal(_camera->WorldToScreen(start, {0.0f,0.0f}), _camera->WorldToScreen(end, {0.0f,0.0f}), olc::RED);
+    //game->DrawLineDecal(_camera->WorldToScreen(start, {0.0f,0.0f}), _camera->WorldToScreen(hit, {0.0f,0.0f}), olc::RED);
 }
