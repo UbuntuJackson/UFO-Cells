@@ -190,6 +190,126 @@ Camera::FollowPlatformer(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _cen
 }
 
 void
+Camera::SetStatePlatformer(CellActor *_target, olc::vf2d top_left_corner, olc::vf2d bottom_right_corner){
+    clamp_up_left_corner = top_left_corner;
+    clamp_down_right_corner = bottom_right_corner;
+    m_camera_state = PLATFORMER;
+    target = _target;
+    centre = olc::vf2d(game->GetScreenSize().x*0.5f, game->GetScreenSize().y*0.5f)- olc::vf2d(target->mask_decal->sprite->Size().x*0.5f, target->mask_decal->sprite->Size().y*0.5f)*scale;
+    up_sensor = target->position.y - 95.0f;
+    down_sensor = target->position.y + 20.0f;
+    left_sensor = target->position.x + 75.0f;
+    right_sensor = target->position.x - 75.0f;
+}
+
+void
+Camera::Platformer(olc::vf2d _position, olc::Decal *_decal){
+    centre = olc::vf2d(game->GetScreenSize().x*0.5f, game->GetScreenSize().y*0.5f)- olc::vf2d(target->mask_decal->sprite->Size().x*0.5f, target->mask_decal->sprite->Size().y*0.5f)*scale;
+    std::cout << "platformer" << std::endl;
+    position.x = target->position.x;
+
+    if(target->position.y < up_sensor){
+        up_sensor = target->position.y;
+        down_sensor = up_sensor+90.0f/scale;
+    }
+    if(target->position.y > down_sensor){
+        down_sensor = target->position.y;
+        up_sensor = down_sensor-90.0f/scale;
+    }
+
+    position.y = up_sensor;
+
+    position.x = std::floor(position.x);
+    position.y = std::floor(position.y);
+
+    //Feed this value to WorldToScreen()
+
+    olc::vf2d f_screen_size;
+    f_screen_size.x = float(game->GetScreenSize().x);
+    f_screen_size.y = float(game->GetScreenSize().y);
+
+    olc::vf2d camera_clamp_min = centre/scale;
+    olc::vf2d camera_clamp_max = (clamp_down_right_corner-centre/scale);
+
+    if(position.x < camera_clamp_min.x) position.x = camera_clamp_min.x;
+    if(position.y < camera_clamp_min.y) position.y = camera_clamp_min.y;
+    if(position.x > camera_clamp_max.x) position.x = camera_clamp_max.x;
+    if(position.y > camera_clamp_max.y) position.y = camera_clamp_max.y;
+
+    olc::vf2d screen_position = WorldToScreen(_position, {0.0f,0.0f});
+
+    auto mod = [&](int a, int b){
+        if(a%b < 0.0f){
+            return a%b + b;
+        }
+        return a%b;
+    };
+
+    screen_position.x = int(std::floor(screen_position.x)) - mod(int(std::floor(screen_position.x)), int(scale)); //This is to maintain coordinates of pixles as multiples of scale.
+    screen_position.y = int(std::floor(screen_position.y)) - mod(int(std::floor(screen_position.y)), int(scale)); //This is to maintain coordinates of pixles as multiples of scale.
+
+    game->DrawDecal(
+        screen_position,
+        _decal,
+        olc::vf2d(scale, scale));
+}
+
+void
+Camera::Platformer(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _center, olc::vf2d _source_pos, olc::vf2d _source_size, olc::vf2d _scale){
+    centre = olc::vf2d(game->GetScreenSize().x*0.5f, game->GetScreenSize().y*0.5f)- olc::vf2d(target->mask_decal->sprite->Size().x*0.5f, target->mask_decal->sprite->Size().y*0.5f)*scale;
+    position.x = target->position.x;
+
+    if(target->position.y < up_sensor){
+        up_sensor = target->position.y;
+        down_sensor = up_sensor+90.0f/scale;
+    }
+    if(target->position.y > down_sensor){
+        down_sensor = target->position.y;
+        up_sensor = down_sensor-90.0f/scale;
+    }
+
+    position.y = up_sensor;
+
+    position.x = std::floor(position.x);
+    position.y = std::floor(position.y);
+
+    //Feed this value to WorldToScreen()
+
+    olc::vf2d f_screen_size;
+    f_screen_size.x = float(game->GetScreenSize().x);
+    f_screen_size.y = float(game->GetScreenSize().y);
+
+    olc::vf2d camera_clamp_min = centre/scale;
+    olc::vf2d camera_clamp_max = (clamp_down_right_corner-centre/scale);
+
+    if(position.x < camera_clamp_min.x) position.x = camera_clamp_min.x;
+    if(position.y < camera_clamp_min.y) position.y = camera_clamp_min.y;
+    if(position.x > camera_clamp_max.x) position.x = camera_clamp_max.x;
+    if(position.y > camera_clamp_max.y) position.y = camera_clamp_max.y;
+
+    olc::vf2d screen_position = WorldToScreen(_position, {0.0f,0.0f});
+
+    auto mod = [&](int a, int b){
+        if(a%b < 0.0f){
+            return a%b + b;
+        }
+        return a%b;
+    };
+
+    screen_position.x = int(std::floor(screen_position.x)) - mod(int(std::floor(screen_position.x)), int(scale)); //This is to maintain coordinates of pixles as multiples of scale.
+    screen_position.y = int(std::floor(screen_position.y)) - mod(int(std::floor(screen_position.y)), int(scale)); //This is to maintain coordinates of pixles as multiples of scale.
+
+    game->DrawPartialRotatedDecal(
+        screen_position,
+        _decal,
+        0.0f,
+        _center,
+        _source_pos,
+        _source_size,
+        olc::vf2d(scale, scale));
+}
+
+void
 Camera::SetStateZoom(float _target_scale){
     m_camera_state = ZOOM;
     target_scale = _target_scale;
@@ -379,21 +499,18 @@ Camera::SetStateStatic(olc::vf2d _offset){
 
 olc::vf2d Camera::ScreenToWorld(olc::vf2d _screen_position, olc::vf2d _shape_offset){
 
-    _screen_position -= olc::vf2d(float(game->GetScreenSize().x)*0.5f, float(game->GetScreenSize().y)*0.5f);
+    _screen_position -= olc::vf2d(float(centre.x), float(centre.y));
     olc::vf2d offset_position = _screen_position/scale;
-    olc::vf2d offset_camera_position = position + _shape_offset;
+    olc::vf2d offset_camera_position = position;
     olc::vf2d world_position = offset_position + offset_camera_position;
 
     return world_position;
 }
 olc::vf2d Camera::WorldToScreen(olc::vf2d _position, olc::vf2d _shape_offset){
-    olc::vf2d offset_camera_position = position + _shape_offset;
-
-    olc::vf2d offset_position = _position - offset_camera_position;
-
+    olc::vf2d offset_position = _position - position;
     olc::vf2d screen_position = scale * offset_position;
 
-    screen_position += game->GetScreenSize()/2;
+    screen_position += olc::vf2d(float(centre.x), float(centre.y));
     return screen_position;
 }
 
@@ -424,6 +541,9 @@ Camera::DrawDecal(olc::vf2d _position, olc::Decal *_decal){
         case STATIC:
             Static(_position, _decal);
             break;
+        case PLATFORMER:
+            Platformer(_position, _decal);
+            break;
     }
 }
 
@@ -452,6 +572,9 @@ Camera::DrawRotatedPartialDecal(olc::vf2d _position, olc::Decal *_decal, olc::vf
             break;
         case STATIC:
             Static(_position, _decal, _center,_source_pos,_source_size, _scale);
+            break;
+        case PLATFORMER:
+            Platformer(_position, _decal, _center,_source_pos,_source_size, _scale);
             break;
     }
 }

@@ -6,7 +6,7 @@
 #include "colour_utils.h"
 #include "cellmap.h"
 #include "layer_solid.h"
-PlayerRay::PlayerRay(Game* _game, Camera* _camera, CellActor* _host): game{_game}, camera{_camera}, host{_host}, start{host->position}, end{host->position+olc::vf2d(1.0f,0.0f)}{}
+PlayerRay::PlayerRay(Game* _game, Camera* _camera, CellActor* _host, olc::vf2d _relative_position): game{_game}, camera{_camera}, host{_host}, relative_position{_relative_position}, start{host->position}, end{host->position+olc::vf2d(1.0f,0.0f)}{}
 
 olc::vf2d
 PlayerRay::GetTargetPosition(){
@@ -27,19 +27,22 @@ bool
 PlayerRay::IsHit(olc::Decal* _decal){
     
     olc::vf2d sample_coordinate = start;
-    olc::vf2d sample_direction = (end-start).norm();
+    //std::cout << sample_coordinate << std::endl;
+    if((end-start).mag() == 0.0f) return false;
+    olc::vf2d sample_direction = (end-start).norm()/2.0f;
     int increment = 0;
     float t = 0.0f;
     //float time_step = (end-start).norm().mag();
     while(!CompareColour(_decal->sprite->GetPixel(int(sample_coordinate.x), int(sample_coordinate.y)), olc::WHITE)){
-        if((sample_coordinate-start).mag() > (end-start).mag()) break;
+        if((sample_coordinate-start).mag() > (end-start).mag()) return false;
+        //if((sample_coordinate-start).mag() > 600.0f) break;
         sample_coordinate+=sample_direction;
     }
     if(CompareColour(_decal->sprite->GetPixel(int(sample_coordinate.x), int(sample_coordinate.y)), olc::WHITE)){
         hit = sample_coordinate;
         return true;
     }
-    //std::cout << sample_coordinate << std::endl;
+    
     return false;
 }
 
@@ -60,13 +63,13 @@ PlayerRay::GetAllActorsDetected(){
 
 void
 PlayerRay::Update(){
-    start = host->position;
+    start = host->position+relative_position;
+    std::cout << start << std::endl;
     end = GetTargetPosition();
 }
 
 void
 PlayerRay::Draw(Camera* _camera){
-    std::cout << _camera->WorldToScreen(end, {0.0f,0.0f}) << std::endl;
-    game->DrawLineDecal(_camera->WorldToScreen(start, {0.0f,0.0f}), _camera->WorldToScreen(end, {0.0f,0.0f}), olc::RED);
-    //game->DrawLineDecal(_camera->WorldToScreen(start, {0.0f,0.0f}), _camera->WorldToScreen(hit, {0.0f,0.0f}), olc::RED);
+    if((end-start).mag() == 0.0f) return;
+    game->DrawLineDecal(_camera->WorldToScreen(start, {0.0f,0.0f}), _camera->WorldToScreen(end, {0.0f,0.0f}), draw_colour);
 }

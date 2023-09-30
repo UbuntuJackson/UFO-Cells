@@ -11,15 +11,17 @@ class CellMap;
 
 class PlayerRay{
 public:
+    olc::vf2d relative_position;
     CellActor* host;
     Game *game;
     Camera *camera;
     float radius = 100.0f;
+    olc::Pixel draw_colour;
     olc::vf2d start;
     olc::vf2d end;
     olc::vf2d hit;
     PlayerRay() = default;
-    PlayerRay(Game* _game, Camera* _camera, CellActor* _host);
+    PlayerRay(Game* _game, Camera* _camera, CellActor* _host,  olc::vf2d _relative_position);
     virtual olc::vf2d GetTargetPosition();
     virtual void OnCollision();
     virtual bool IsHit(olc::Decal* _decal);

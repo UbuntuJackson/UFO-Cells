@@ -19,7 +19,8 @@ enum CameraStates{
     MOUSE,
     MULTIPLAYER,
     ALL_CONTAINED,
-    STATIC
+    STATIC,
+    PLATFORMER
 };
 
 class Camera{
@@ -28,6 +29,7 @@ public:
 
     float scale;
     olc::vf2d position;
+    olc::vf2d centre;
     olc::vf2d vel;
     int m_camera_state;
     CellActor* target;
@@ -71,10 +73,15 @@ public:
     void SetStateStatic(olc::vf2d _offset);
     void SetStateMouseAndArrowKeys(olc::vf2d top_left_corner, olc::vf2d bottom_right_corner);
     void FollowPlatformer(olc::vf2d _position, olc::Decal *_decal);
+    //void FollowPlatformer(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _center, olc::vf2d _source_pos, olc::vf2d _source_size, olc::vf2d _scale);
+    void Platformer(olc::vf2d _position, olc::Decal *_decal);
+    void Platformer(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _center, olc::vf2d _source_pos, olc::vf2d _source_size, olc::vf2d _scale);
     void FollowPlatformer(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _center, olc::vf2d _source_pos, olc::vf2d _source_size, olc::vf2d _scale);
 
     void
     SetStateFollowPlatfomer(CellActor *_target, olc::vf2d top_left_corner, olc::vf2d bottom_right_corner);
+    void
+    SetStatePlatformer(CellActor *_target, olc::vf2d top_left_corner, olc::vf2d bottom_right_corner);
 
     olc::vf2d ScreenToWorld(olc::vf2d _screen_position, olc::vf2d _shape_offset);
     olc::vf2d WorldToScreen(olc::vf2d _position, olc::vf2d _shape_offset);
