@@ -205,7 +205,7 @@ Camera::SetStatePlatformer(CellActor *_target, olc::vf2d top_left_corner, olc::v
 void
 Camera::Platformer(olc::vf2d _position, olc::Decal *_decal){
     centre = olc::vf2d(game->GetScreenSize().x*0.5f, game->GetScreenSize().y*0.5f)- olc::vf2d(target->mask_decal->sprite->Size().x*0.5f, target->mask_decal->sprite->Size().y*0.5f)*scale;
-    std::cout << "platformer" << std::endl;
+
     position.x = target->position.x;
 
     if(target->position.y < up_sensor){
@@ -228,8 +228,8 @@ Camera::Platformer(olc::vf2d _position, olc::Decal *_decal){
     f_screen_size.x = float(game->GetScreenSize().x);
     f_screen_size.y = float(game->GetScreenSize().y);
 
-    olc::vf2d camera_clamp_min = centre/scale;
-    olc::vf2d camera_clamp_max = (clamp_down_right_corner-centre/scale);
+    olc::vf2d camera_clamp_min = f_screen_size*0.5f/scale - game->asset_manager.GetDecal("decPin")->sprite->Size()/2;
+    olc::vf2d camera_clamp_max = clamp_down_right_corner-f_screen_size*0.5f/scale - game->asset_manager.GetDecal("decPin")->sprite->Size()/2;
 
     if(position.x < camera_clamp_min.x) position.x = camera_clamp_min.x;
     if(position.y < camera_clamp_min.y) position.y = camera_clamp_min.y;
@@ -279,8 +279,8 @@ Camera::Platformer(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _center, o
     f_screen_size.x = float(game->GetScreenSize().x);
     f_screen_size.y = float(game->GetScreenSize().y);
 
-    olc::vf2d camera_clamp_min = centre/scale;
-    olc::vf2d camera_clamp_max = (clamp_down_right_corner-centre/scale);
+    olc::vf2d camera_clamp_min = f_screen_size*0.5f/scale - game->asset_manager.GetDecal("decPin")->sprite->Size()/2;
+    olc::vf2d camera_clamp_max = clamp_down_right_corner-f_screen_size*0.5f/scale - game->asset_manager.GetDecal("decPin")->sprite->Size()/2;
 
     if(position.x < camera_clamp_min.x) position.x = camera_clamp_min.x;
     if(position.y < camera_clamp_min.y) position.y = camera_clamp_min.y;

@@ -7,13 +7,12 @@
 OptimisedDummy::OptimisedDummy(olc::vf2d _position, Island* _game) : CellActor(_position, _game), game{static_cast<Island*>(_game)}{
     ray = PlayerRay(_game, &(game->camera), this, {6.0f, 12.0f});
     //game->camera.SetStateMouseAndArrowKeys({0.0f, 0.0f}, game->map.map_size);
-    game->camera.scale = 8.0f;
+    game->camera.scale = 4.0f;
     mask = "decPin";
     mask_decal = game->asset_manager.GetDecal(mask);
     solid_layer = "solid";
     game->camera.SetStatePlatformer(this, {0.0f, 0.0f}, game->map.map_size);
     is_already_in_semi_solid = false;
-    std::cout << position.y << std::endl;
 }
 
 void
@@ -90,7 +89,6 @@ OptimisedDummy::Update(){
 
 void
 OptimisedDummy::Draw(Camera* _camera){
-    std::cout << "draw" << std::endl;
     _camera->DrawDecal(
         position,
         game->asset_manager.GetDecal("decPurple"));
