@@ -82,9 +82,14 @@ OptimisedDummy::Update(){
     AdjustDownSlope(&(game->map));
 
     ray.Update();
-    bool collision = ray.IsHit(game->map.map_decals[solid_layer]);
+    bool collision = ray.IsHitBitmap(game->map.map_decals[solid_layer]);
     if(collision) ray.draw_colour = olc::RED;
     else ray.draw_colour = olc::GREEN;
+
+    bool collision_2 = ray.IsHitBitmap(game->map.map_decals[solid_layer]);
+    if(collision_2){
+        std::cout << ray.GetFirstHit() << std::endl;
+    }
 }
 
 void

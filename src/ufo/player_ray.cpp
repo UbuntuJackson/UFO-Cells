@@ -16,15 +16,18 @@ PlayerRay::GetTargetPosition(){
     if(delta_position.mag() > radius){
         target_position = start + delta_position.norm() * radius;
     }
-    std::cout << target_position << std::endl;
     return target_position;
 }
 
 void
 PlayerRay::OnCollision(){}
 
+olc::vf2d PlayerRay::GetFirstHit(){
+    return first_hit;
+}
+
 bool
-PlayerRay::IsHit(olc::Decal* _decal){
+PlayerRay::IsHitBitmap(olc::Decal* _decal){
     
     olc::vf2d sample_coordinate = start;
     //std::cout << sample_coordinate << std::endl;
@@ -39,7 +42,7 @@ PlayerRay::IsHit(olc::Decal* _decal){
         sample_coordinate+=sample_direction;
     }
     if(CompareColour(_decal->sprite->GetPixel(int(sample_coordinate.x), int(sample_coordinate.y)), olc::WHITE)){
-        hit = sample_coordinate;
+        first_hit = sample_coordinate;
         return true;
     }
     
@@ -64,7 +67,6 @@ PlayerRay::GetAllActorsDetected(){
 void
 PlayerRay::Update(){
     start = host->position+relative_position;
-    std::cout << start << std::endl;
     end = GetTargetPosition();
 }
 
