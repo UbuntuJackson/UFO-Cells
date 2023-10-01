@@ -8,7 +8,7 @@ Island::Island() : Game(), camera{Camera(this)}, map{CellMap(this)}, play{StateP
     registry = new CustomTypeRegistry(this);
     load = StateLoad(this, &map, registry);
     game_state = &load;
-    load.Set("../games/island/res/map/windmill/windmill.json", &map);
+    load.Set("../games/island/res/map/windmill/windmill.json");
 }
 
 void

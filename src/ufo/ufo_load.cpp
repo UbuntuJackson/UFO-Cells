@@ -17,9 +17,9 @@ UfoLoad::UfoLoad(Game *_game, CellMap* _map, TypeRegistry *_registry) : game{_ga
 }
 
 void
-UfoLoad::Set(std::string _data ,CellMap* _map){
+UfoLoad::Set(std::string _data){
     asset_index = 0;
-    _map->UnloadMap();
+    map->UnloadMap();
 
     std::ifstream ifs;
     ifs.open(_data, std::ifstream::in);

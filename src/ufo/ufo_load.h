@@ -25,7 +25,7 @@ public:
     UfoLoad(Game* game,CellMap* _map, TypeRegistry *_registry);
     Layer* NewLayer(std::string _name, std::string _type, std::string _path);
     Layer* NewLayer(std::string _name, std::string _type, std::vector<ActorInfo> _layer_info);
-    void Set(std::string _data, CellMap* _map);
+    void Set(std::string _data);
     void Update();
     virtual void OnLoadFinished();
 };
