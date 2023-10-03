@@ -36,9 +36,9 @@ OptimisedDummy::Update(){
     }
 
     // INPUT X-AXIS
-    if(game->GetKey(olc::Key::RIGHT).bHeld) velocity.x += 0.5f;
-    if(game->GetKey(olc::Key::LEFT).bHeld) velocity.x -= 0.5f;
-    if((game->GetKey(olc::Key::Z).bPressed) && is_grounded){
+    if(game->GetKey(olc::Key::D).bHeld) velocity.x += 0.5f;
+    if(game->GetKey(olc::Key::A).bHeld) velocity.x -= 0.5f;
+    if((game->GetKey(olc::Key::SPACE).bPressed || game->GetKey(olc::Key::W).bPressed) && is_grounded){
         velocity.y = -10.0f;
     }
 
