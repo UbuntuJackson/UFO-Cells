@@ -20,6 +20,7 @@ public:
     CellMap() = default;
     CellMap(Game* _game);
     ~CellMap();
+    Layer* GetLayer(std::string _layer_name);
     void LoadMap(std::string _map_path);
     void UnloadMap();
     void Draw(Camera* _camera);

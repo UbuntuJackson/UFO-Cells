@@ -8,8 +8,16 @@
 #include "../../external/olcPixelGameEngine.h"
 #include "../program/ufo_global.h"
 #include "camera.h"
+#include "layer.h"
 
 CellMap::CellMap(Game* _game) : game{_game}, map_path {""}{}
+
+Layer* CellMap::GetLayer(std::string _layer_name){
+    for(auto *layer : layers){
+        if(layer->name == _layer_name) return layer;
+    }
+    return nullptr;
+}
 
 void
 CellMap::LoadMap(std::string _map_path){ //OUTDATED
