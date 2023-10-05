@@ -64,14 +64,9 @@ OptimisedDummy::Update(){
 
     AdjustEnteredDynamicSolidY(act_layer);
 
-    if((game->GetKey(olc::Key::Z).bPressed) && (was_grounded || is_grounded)){
-        velocity.y = -10.0f;
-    } //I would consider putting this right after the OnEnteredCollisionY() call, which would also mean that was_grounded = is_grounded needs to be put after that
+    std::cout << is_grounded << std::endl;
 
-    was_grounded = is_grounded;
-
-    velocity.y += 0.7f;
-    is_grounded = false;
+    velocity.y += 0.01f;
     position.y += velocity.y;
     velocity.y *= 0.99f;
 
@@ -79,6 +74,8 @@ OptimisedDummy::Update(){
 
     AdjustEnterDynamicSolidY(act_layer);
 
+    was_grounded = is_grounded;
+    is_grounded = false;
     AdjustDownSlope(&(game->map));
 
     ray.Update();
