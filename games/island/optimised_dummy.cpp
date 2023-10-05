@@ -66,7 +66,7 @@ OptimisedDummy::Update(){
 
     std::cout << is_grounded << std::endl;
 
-    velocity.y += 0.01f;
+    velocity.y += 0.7f;
     position.y += velocity.y;
     velocity.y *= 0.99f;
 
