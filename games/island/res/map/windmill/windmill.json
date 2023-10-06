@@ -24,7 +24,7 @@
             "actors" : [
                 {
                     "actor" : "Dummy",
-                    "x" : 40,
+                    "x" : 100,
                     "y" : 50
                 }
             ],
@@ -34,7 +34,11 @@
             "name" : "dynamic_solids",
             "type" :"actor",
             "actors" : [
-                
+                {
+                    "actor" : "DynamicSolid",
+                    "x" : 40,
+                    "y" : 300
+                }
             ],
             "category" : "actor"
         },

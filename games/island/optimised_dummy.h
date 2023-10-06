@@ -9,6 +9,7 @@ class OptimisedDummy : public CellActor{
 public:
     PlayerRay ray;
     Island* game;
+    bool on_dynamic_solid = false;
     OptimisedDummy(olc::vf2d _position, Island* _game);
     void Update();
     void Draw(Camera* _camera);

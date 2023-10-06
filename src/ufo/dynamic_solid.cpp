@@ -8,6 +8,11 @@
 DynamicSolid::DynamicSolid(olc::vf2d _position, Game* _game, std::string _mask) : CellActor(_position, _game, _mask){
     velocity = {0.0f, 5.3f};
     timelapse = 0;
+    std::cout << "spawned dynamic solid" << std::endl;
+}
+
+olc::vf2d DynamicSolid::GetMovement(){
+    
 }
 
 void DynamicSolid::Update(){
@@ -15,7 +20,7 @@ void DynamicSolid::Update(){
     angle+=0.1;
     velocity.x = 2.0f; //change vel after movement to avoid wacky inaccurate adding of velocity
     velocity.y = 5.0f * std::sin(angle);
-    std::cout << velocity.y << std::endl;
+    //std::cout << velocity.y << std::endl;
     //timelapse++;
     //if(timelapse > 400){velocity *= -1.0f; timelapse = 0;}
 }

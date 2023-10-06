@@ -12,6 +12,7 @@ public:
     //std::string mask;
     int timelapse;
     DynamicSolid(olc::vf2d _position, Game* _game, std::string _mask);
+    olc::vf2d GetMovement();
     void Update();
     void Draw(Camera* _camera);
 };
