@@ -11,11 +11,22 @@ DynamicSolid::DynamicSolid(olc::vf2d _position, Game* _game, std::string _mask) 
     std::cout << "spawned dynamic solid" << std::endl;
 }
 
-olc::vf2d DynamicSolid::GetMovement(){
-    
+olc::vf2d DynamicSolid::GetVelocity(){
+    if(was_updated) angle-=0.1;
+    velocity.x = 2.0f; //change vel after movement to avoid wacky inaccurate adding of velocity
+    velocity.y = 5.0f * std::sin(angle);
+    return velocity;
+}
+
+olc::vf2d DynamicSolid::GetPosition(){
+    if(!was_updated) return position;
+    return position - GetVelocity();
 }
 
 void DynamicSolid::Update(){
+    //was_grounded = true;
+    //velocity = GetVelocity();
+    //position += velocity;
     position += velocity;
     angle+=0.1;
     velocity.x = 2.0f; //change vel after movement to avoid wacky inaccurate adding of velocity
