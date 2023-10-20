@@ -4,8 +4,6 @@ project(UFOCells)
 
 option(HAS_TERMINAL "Show a terminal window for STDOUT/STDERR" ON)
 
-add_subdirectory(external/squirrel)
-
 # Set C++ Standards
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -46,7 +44,7 @@ set(
 )
 
 add_library(UFOCells STATIC ${SRC})
-target_link_libraries(UFOCells PUBLIC squirrel)
+target_link_libraries(UFOCells PUBLIC external/squirrel)
 target_include_directories(UFOCells PUBLIC src)
 
 
