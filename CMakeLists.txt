@@ -4,24 +4,15 @@ project(UFOCells)
 
 option(HAS_TERMINAL "Show a terminal window for STDOUT/STDERR" ON)
 
+add_subdirectory(external/squirrel)
+
 # Set C++ Standards
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-# output executable basename
-set(OutputExecutable "${CMAKE_PROJECT_NAME}")
-
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}/src")
-#include(cmake/BuildProgramFile.cmake)
-include(ExternalProject)
-include(cmake/ProvideSquirrel.cmake)
-include(cmake/BuildMiniswigWrapper.cmake)
-
-
-# Source Files are Curated Here
-file(
-    GLOB SRCFILES
+set(
+    SRC
     src/ufo/animation.cpp
     src/ufo/assets.cpp
     src/ufo/cell_actor.cpp
@@ -54,8 +45,15 @@ file(
     external/cJSON.c
 )
 
-# Executable aka binary output
-add_executable(UFOCells ${SRCFILES})
+add_library(UFOCells STATIC ${SRC})
+target_link_libraries(UFOCells PUBLIC squirrel)
+target_include_directories(UFOCells PUBLIC src)
+
+
+#include(cmake/BuildProgramFile.cmake)
+include(ExternalProject)
+include(cmake/ProvideSquirrel.cmake)
+include(cmake/BuildMiniswigWrapper.cmake)
 
 target_link_libraries(UFOCells PUBLIC LibSquirrel)
 target_link_libraries(UFOCells PUBLIC LibSqstdlib)
