@@ -24,7 +24,7 @@ olc::vf2d DynamicSolid::GetPosition(){
 }
 
 void DynamicSolid::Update(){
-    //was_grounded = true;
+    //was_updated = true;
     //velocity = GetVelocity();
     //position += velocity;
     position += velocity;
@@ -32,8 +32,8 @@ void DynamicSolid::Update(){
     velocity.x = 2.0f; //change vel after movement to avoid wacky inaccurate adding of velocity
     velocity.y = 5.0f * std::sin(angle);
     //std::cout << velocity.y << std::endl;
-    //timelapse++;
-    //if(timelapse > 400){velocity *= -1.0f; timelapse = 0;}
+    timelapse++;
+    if(timelapse > 400){velocity *= -1.0f; timelapse = 0;}
 }
 void DynamicSolid::Draw(Camera* _camera){
     _camera->DrawDecal(
