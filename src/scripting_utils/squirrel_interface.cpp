@@ -1,6 +1,7 @@
 #include "squirrel_interface.h"
 #include <string>
 #include "../ufo/collision_utils.h"
+#include "../ufo/game.h"
 
 //SquirrelInterface::SquirrelInterface(Game *_game): game{_game}{}
 

@@ -31,17 +31,11 @@ public:
     }
 
     //game control
-    void Quit(){
-        game->running = false;
-    }
+    void Quit();
 
-    void SetState(std::string _state, std::string _data){
-        game->SetState(_state, _data);
-    }
+    void SetState(std::string _state, std::string _data);
 
-    std::string GetStateData(){
-        return game->game_state->GetData();
-    }
+    std::string GetStateData();
 
 };
 
