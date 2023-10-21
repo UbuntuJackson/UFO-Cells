@@ -41,15 +41,16 @@ set(
     external/cJSON.c
 )
 
+include(ExternalProject)
+include(cmake/ProvideSquirrel.cmake)
+include(cmake/BuildMiniswigWrapper.cmake)
+
 add_library(UFOCells STATIC ${SRC})
 target_link_libraries(UFOCells PUBLIC external/squirrel)
 target_include_directories(UFOCells PUBLIC src)
 
 
 #include(cmake/BuildProgramFile.cmake)
-include(ExternalProject)
-include(cmake/ProvideSquirrel.cmake)
-include(cmake/BuildMiniswigWrapper.cmake)
 
 target_link_libraries(UFOCells PUBLIC LibSquirrel)
 target_link_libraries(UFOCells PUBLIC LibSqstdlib)
