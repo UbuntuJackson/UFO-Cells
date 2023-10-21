@@ -4,6 +4,7 @@
 #include "../program/ufo_global.h"
 #include "camera.h"
 #include <cmath>
+#include "game.h"
 
 DynamicSolid::DynamicSolid(olc::vf2d _position, Game* _game, std::string _mask) : CellActor(_position, _game, _mask){
     velocity = {0.0f, 5.3f};
