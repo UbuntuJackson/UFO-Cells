@@ -30,9 +30,7 @@ set(
     src/ufo/layer_background.cpp
     src/ufo/layer_terrain.cpp
     src/ufo/layer_solid.cpp
-    src/program/main.cpp
     src/program/ufo_global.cpp
-    games/island/*.cpp
     src/scripting/api.cpp
     src/squirrel/squirrel_error.cpp
     src/squirrel/squirrel_interface.cpp
