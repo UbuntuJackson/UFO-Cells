@@ -7,6 +7,7 @@
 #include "../../external/olcPixelGameEngine.h"
 #include <iostream>
 #include "layer_actor.h"
+#include "game.h"
 
 CellActor::CellActor(olc::vf2d _position, Game *_game) :
     position{_position},
