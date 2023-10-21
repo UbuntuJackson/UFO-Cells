@@ -24,7 +24,7 @@ public:
     int GetMousePosX();
     int GetMousePosY();
     bool MouseLeftPressed();
-    void GetMouseWheel(){}
+    void GetMouseWheel();
 
     bool RectangleVsPoint(float rx, float ry, float rw, float rh, float px, float py);
 
