@@ -35,6 +35,11 @@ CMakeLists.txt
 
 /build
 
+/tools
+
 /build old
 
 /build_old
+
+/external/stb_image.h
+/games/dummy_test/CMakeLists.txt
