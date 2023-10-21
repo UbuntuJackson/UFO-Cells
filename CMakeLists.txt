@@ -33,7 +33,7 @@ set(
     src/program/ufo_global.cpp
     src/scripting/api.cpp
     src/squirrel/squirrel_error.cpp
-    src/squirrel_utils/squirrel_interface.cpp
+    src/scripting_utils/squirrel_interface.cpp
     src/scripting/wrapper.cpp
     src/ufo/ufo_load.cpp
     src/ufo/player_ray.cpp
