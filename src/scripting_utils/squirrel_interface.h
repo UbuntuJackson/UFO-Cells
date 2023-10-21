@@ -1,10 +1,11 @@
-#ifndef SQUIRRE_INTERFACE_H
-#define SQUIRRE_INTERFACE_H
+#ifndef SQUIRREL_INTERFACE_H
+#define SQUIRREL_INTERFACE_H
 
 #include "../../external/olcPixelGameEngine.h"
-#include "../ufo/game.h"
 #include "../ufo/rect.h"
 #include "../ufo/collision_utils.h"
+
+class Game;
 
 class SquirrelInterface{
 public:
