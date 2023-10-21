@@ -26,9 +26,7 @@ public:
     bool MouseLeftPressed();
     void GetMouseWheel(){}
 
-    bool RectangleVsPoint(float rx, float ry, float rw, float rh, float px, float py){
-        return RectVsPoint(Rect(olc::vf2d(rx, ry), olc::vf2d(rw, rh)), olc::vf2d(px, py));
-    }
+    bool RectangleVsPoint(float rx, float ry, float rw, float rh, float px, float py);
 
     //game control
     void Quit();
