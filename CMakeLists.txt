@@ -46,7 +46,6 @@ include(cmake/ProvideSquirrel.cmake)
 include(cmake/BuildMiniswigWrapper.cmake)
 
 add_library(UFOCells STATIC ${SRC})
-target_link_libraries(UFOCells PUBLIC ${CMAKE_SOURCE_DIR}/external/squirrel)
 target_include_directories(UFOCells PUBLIC src)
 
 
