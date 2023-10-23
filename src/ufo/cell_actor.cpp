@@ -481,11 +481,11 @@ bool CellActor::IsBeingEntered(olc::vf2d _position, olc::vf2d _delta_position, i
         if(IsOverlappingOtherDecal(game->asset_manager.GetDecal(_mask), {_position.x + _delta_position.x, _position.y}, game->asset_manager.GetDecal(mask), position)){
             if(_delta_position.x > 0){
                 std::cout << "left" << std::endl;
-                return _direction == UfoGlobal::LEFT;
+                if(_direction == UfoGlobal::LEFT) return true;
             }
             if(_delta_position.x < 0){
                 std::cout << "right" << std::endl;
-                return _direction == UfoGlobal::RIGHT;
+                if(_direction == UfoGlobal::RIGHT) return true;
             }
         }
     }
@@ -493,11 +493,11 @@ bool CellActor::IsBeingEntered(olc::vf2d _position, olc::vf2d _delta_position, i
         if(IsOverlappingOtherDecal(game->asset_manager.GetDecal(_mask), _position + _delta_position, game->asset_manager.GetDecal(mask), position)){
             if(_delta_position.y > 0){
                 std::cout << "up" << std::endl;
-                return _direction == UfoGlobal::UP; //I get it, I actually need to get OUT of the hitbox before the next frame, right? No?
+                if(_direction == UfoGlobal::UP) return true; //I get it, I actually need to get OUT of the hitbox before the next frame, right? No?
             }
             if(_delta_position.y < 0){
                 std::cout << "down" << std::endl;
-                return _direction == UfoGlobal::DOWN;
+                if(_direction == UfoGlobal::DOWN) return true;
             }
         }
     }
