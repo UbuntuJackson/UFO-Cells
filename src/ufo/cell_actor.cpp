@@ -501,6 +501,7 @@ bool CellActor::IsBeingEntered(olc::vf2d _position, olc::vf2d _delta_position, i
             }
         }
     }
+    std::cout << velocity.y << std::endl;
     
     return false;
 }
