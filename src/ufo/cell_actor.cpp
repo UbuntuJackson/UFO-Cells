@@ -8,6 +8,7 @@
 #include <iostream>
 #include "layer_actor.h"
 #include "game.h"
+#include "../program/ufo_global.h"
 
 CellActor::CellActor(olc::vf2d _position, Game *_game) :
     position{_position},
@@ -472,6 +473,29 @@ CellActor::AdjustDownSlope(CellMap* _map){
             position.y -= 1.0f;
         }
     }
+}
+
+
+bool CellActor::IsBeingEntered(olc::vf2d _position, olc::vf2d _delta_position, int _direction, std::string _mask){
+    if(!IsOverlappingOtherDecal(game->asset_manager.GetDecal(_mask), _position, game->asset_manager.GetDecal(mask), position)){
+        if(IsOverlappingOtherDecal(game->asset_manager.GetDecal(_mask), {_position.x + _delta_position.x, _position.y}, game->asset_manager.GetDecal(mask), position)){
+            if(_delta_position.x > 0){
+                return _direction == UfoGlobal::LEFT;
+            }
+            if(_delta_position.x < 0){
+                return _direction == UfoGlobal::RIGHT;
+            }
+        }
+        if(IsOverlappingOtherDecal(game->asset_manager.GetDecal(_mask), _position + _delta_position, game->asset_manager.GetDecal(mask), position)){
+            if(_delta_position.y > 0){
+                return _direction == UfoGlobal::UP;
+            }
+            if(_delta_position.y < 0){
+                return _direction == UfoGlobal::DOWN;
+            }
+        }
+    }
+    return false;
 }
 
 void CellActor::Update(){}

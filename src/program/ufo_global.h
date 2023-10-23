@@ -5,6 +5,9 @@
 
 namespace UfoGlobal{
     extern SquirrelInterface squirrel_interface;
+    enum Direction{
+        LEFT, RIGHT, UP, DOWN
+    };
 }
 #endif
 

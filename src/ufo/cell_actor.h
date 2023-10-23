@@ -48,6 +48,7 @@ public:
     virtual void AdjustEnterPseudoStaticSolidY(LayerActor* _act_layer);
     virtual void AdjustEnterDynamicSolidX(LayerActor* _act_layer);
     virtual void AdjustEnterDynamicSolidY(LayerActor* _act_layer);
+    virtual bool IsBeingEntered(olc::vf2d _position, olc::vf2d _delta_position, int _direction, std::string _mask);
 
     virtual void Update();
     virtual void Draw(Camera* _camera);
