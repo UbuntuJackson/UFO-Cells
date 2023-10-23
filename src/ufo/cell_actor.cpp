@@ -490,10 +490,11 @@ bool CellActor::IsBeingEntered(olc::vf2d _position, olc::vf2d _delta_position, i
     if(!IsOverlappingOtherDecal(game->asset_manager.GetDecal(_mask), {_position.x + _delta_position.x, _position.y}, game->asset_manager.GetDecal(mask), position)){
         if(IsOverlappingOtherDecal(game->asset_manager.GetDecal(_mask), _position + _delta_position, game->asset_manager.GetDecal(mask), position)){
             if(_delta_position.y > 0){
-                return _direction == UfoGlobal::UP;
+                return _direction == UfoGlobal::UP; //I get it, I actually need to get OUT of the hitbox before the next frame, right? No?
             }
             if(_delta_position.y < 0){
                 return _direction == UfoGlobal::DOWN;
+                std::cout << "down" << std::endl;
             }
         }
     }
