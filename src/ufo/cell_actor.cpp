@@ -479,7 +479,6 @@ CellActor::AdjustDownSlope(CellMap* _map){
 bool CellActor::IsBeingEntered(olc::vf2d _position, olc::vf2d _delta_position, int _direction, std::string _mask){
     if(!IsOverlappingOtherDecal(game->asset_manager.GetDecal(_mask), _position, game->asset_manager.GetDecal(mask), position)){
         if(IsOverlappingOtherDecal(game->asset_manager.GetDecal(_mask), {_position.x + _delta_position.x, _position.y}, game->asset_manager.GetDecal(mask), position)){
-            std::cout << _delta_position.y << std::endl;
             if(_delta_position.x > 0){
                 std::cout << "left" << std::endl;
                 if(_direction == UfoGlobal::LEFT) return true;
@@ -504,7 +503,7 @@ bool CellActor::IsBeingEntered(olc::vf2d _position, olc::vf2d _delta_position, i
         }
     }
     if(IsOverlappingOtherDecal(game->asset_manager.GetDecal(_mask), _position + _delta_position, game->asset_manager.GetDecal(mask), position)){
-        std::cout << _delta_position.y << std::endl;
+        std::cout << "just colliding: " << _delta_position.y << std::endl;
     }
     
     return false;
