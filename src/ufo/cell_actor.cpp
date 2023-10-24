@@ -504,7 +504,7 @@ bool CellActor::IsBeingEntered(olc::vf2d _position, olc::vf2d _delta_position, i
         }
     }
     if(IsOverlappingOtherDecal(game->asset_manager.GetDecal(_mask), _position + _delta_position, game->asset_manager.GetDecal(mask), position)){
-        std::cout << velocity.y << std::endl;
+        std::cout << _delta_position.y << std::endl;
     }
     
     return false;
