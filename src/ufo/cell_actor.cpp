@@ -349,7 +349,7 @@ CellActor::AdjustUpSlope(CellMap* _map){
 
                 }
 
-                former_position.x += 1.0f;
+                temporary_slope_adjustment_position.x += 1.0f;
             }
             //if you're still in collision after moving +=1.0f, then you move up again
             //There is a possibility that Dummy entres another pixel upon the last step, so you need to readjust in the y-axis.
