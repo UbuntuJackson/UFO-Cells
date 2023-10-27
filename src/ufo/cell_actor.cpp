@@ -478,7 +478,7 @@ CellActor::AdjustDownSlope(CellMap* _map){
 
 bool CellActor::IsBeingEntered(olc::vf2d _position, olc::vf2d _delta_position, int _direction, std::string _mask){
     if(IsOverlappingOtherDecal(game->asset_manager.GetDecal(_mask), _position, game->asset_manager.GetDecal(mask), position)){
-        std::cout << "just colliding before: " << _delta_position.y << std::endl;
+        std::cout << "just colliding before: " << _delta_position << std::endl;
     }
     if(!IsOverlappingOtherDecal(game->asset_manager.GetDecal(_mask), _position, game->asset_manager.GetDecal(mask), position)){
         if(IsOverlappingOtherDecal(game->asset_manager.GetDecal(_mask), {_position.x + _delta_position.x, _position.y}, game->asset_manager.GetDecal(mask), position)){
@@ -506,7 +506,7 @@ bool CellActor::IsBeingEntered(olc::vf2d _position, olc::vf2d _delta_position, i
         }
     }
     if(IsOverlappingOtherDecal(game->asset_manager.GetDecal(_mask), _position + _delta_position, game->asset_manager.GetDecal(mask), position)){
-        std::cout << "just colliding after: " << _delta_position.y << std::endl;
+        std::cout << "just colliding after: " << _delta_position << std::endl;
     }
     
     return false;
