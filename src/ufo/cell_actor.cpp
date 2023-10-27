@@ -354,7 +354,7 @@ CellActor::AdjustUpSlope(CellMap* _map){
             //if you're still in collision after moving +=1.0f, then you move up again
             //There is a possibility that Dummy entres another pixel upon the last step, so you need to readjust in the y-axis.
             if(IsOverlappingHeight(_map, mask_decal, solid_layer, temporary_slope_adjustment_position) > int(temporary_slope_adjustment_position.y) + snap_up_range){
-                while(IsOverlapping(_map, mask_decal, solid_layer, former_position)){
+                while(IsOverlapping(_map, mask_decal, solid_layer, temporary_slope_adjustment_position)){
                     temporary_slope_adjustment_position.y -= 1.0f;
                 }
             }
