@@ -18,6 +18,7 @@ public:
     bool is_grounded;
     bool was_grounded;
     bool is_already_in_semi_solid = false;
+    bool on_dynamic_solid = false;
     bool is_grounded_dynamic = false;
     bool was_grounded_dynamic = false;
     olc::vf2d correct_dynamic;
