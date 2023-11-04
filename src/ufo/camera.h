@@ -74,6 +74,10 @@ public:
     void SetStateMouseAndArrowKeys(olc::vf2d top_left_corner, olc::vf2d bottom_right_corner);
     void FollowPlatformer(olc::vf2d _position, olc::Decal *_decal);
     //void FollowPlatformer(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _center, olc::vf2d _source_pos, olc::vf2d _source_size, olc::vf2d _scale);
+    
+    //This function, Platformer is like the name suggests appropriate for Platforming games.
+    //For now it takes the position given and a centre variable into account to define where on the screen the centre of
+    //the field of view is. This has not been applied to MouseAndArrowKeys()
     void Platformer(olc::vf2d _position, olc::Decal *_decal);
     void Platformer(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _center, olc::vf2d _source_pos, olc::vf2d _source_size, olc::vf2d _scale);
     void FollowPlatformer(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _center, olc::vf2d _source_pos, olc::vf2d _source_size, olc::vf2d _scale);
