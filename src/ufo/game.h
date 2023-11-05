@@ -26,9 +26,13 @@ public:
     //CellMap cell_map; //Pass in this?
     //Camera camera; //Attach to objects, probably, camera can have an owner
     State* game_state; //Pass in this in update function probably
+    std::vector<State*> state_stack;
     const olc::vf2d CHUNK_SIZE = {400, 400};
     std::map <std::string, State*> game_states;
     void SetState(std::string _state, std::string _data);
+    void AddStateToTopOfStack(State* _state);
+    void ResetActiveStateInStack();
+    void RemoveActiveStateInStack();
     virtual void LoadResources();
     bool OnUserCreate();
     bool OnUserUpdate(float fElapsedTime);

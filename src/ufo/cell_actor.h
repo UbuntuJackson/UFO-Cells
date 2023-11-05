@@ -51,6 +51,8 @@ public:
     virtual void AdjustEnterDynamicSolidY(LayerActor* _act_layer);
     virtual bool IsBeingEntered(olc::vf2d _position, olc::vf2d _delta_position, int _direction, std::string _mask);
 
+    virtual void ApplyCollision(CellMap* _map);
+
     virtual void Update();
     virtual void Draw(Camera* _camera);
 };
