@@ -304,12 +304,6 @@ CellActor::AdjustCollisionY(CellMap* _map){
                 position.y -= 1.0f;
             }
         }
-        if(velocity.y < 0.0f){
-            position.y = std::ceil(position.y);
-            while(IsOverlapping(_map,mask_decal, solid_layer, position, olc::RED)){
-                position.y += 1.0f;
-            }
-        }
 
         velocity.y = 0.0f;
     }
@@ -574,9 +568,6 @@ CellActor::ApplyCollision(CellMap* _map){
 
     former_position = position;
 
-    is_already_in_semi_solid = false;
-    is_already_in_semi_solid = IsOverlapping(_map, mask_decal, solid_layer, position, olc::RED);
-
     if(!on_dynamic_solid) AdjustEnteredDynamicSolidX(act_layer);
     position.x += velocity.x;
     if(on_dynamic_solid) AdjustEnterPseudoStaticSolidX(act_layer);
@@ -589,6 +580,8 @@ CellActor::ApplyCollision(CellMap* _map){
     if(!on_dynamic_solid) AdjustEnterDynamicSolidX(act_layer);
 
     // ADJUSTMENT ALONG Y-AXIS
+    is_already_in_semi_solid = false;
+    is_already_in_semi_solid = IsOverlapping(_map, mask_decal, solid_layer, position, olc::RED);
     position.y += velocity.y;
 
     if(on_dynamic_solid) AdjustEnterPseudoStaticSolidY(act_layer);
