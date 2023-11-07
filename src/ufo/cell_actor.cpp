@@ -296,14 +296,14 @@ CellActor::AdjustCollisionY(CellMap* _map){
     //SEMI SOLID
 
     if(IsOverlapping(_map,mask_decal, solid_layer, position, olc::RED) &&
-        velocity.y > 0.0f &&
+        position-former_position > 0.0f &&
         !is_already_in_semi_solid){
-        if(velocity.y > 0.0f){
-            position.y = std::floor(position.y);
-            while(IsOverlapping(_map,mask_decal, solid_layer, position, olc::RED)){
-                position.y -= 1.0f;
-            }
+        
+        position.y = std::floor(position.y);
+        while(IsOverlapping(_map,mask_decal, solid_layer, position, olc::RED)){
+            position.y -= 1.0f;
         }
+        
 
         velocity.y = 0.0f;
     }
