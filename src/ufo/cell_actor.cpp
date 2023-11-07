@@ -380,7 +380,7 @@ CellActor::AdjustUpSlope(CellMap* _map){
 
     //SEMI SOLID ADJUST_HEIGHT
 
-    if(IsOverlapping(_map, mask_decal, solid_layer, position, olc::RED) && !is_already_in_semi_solid){
+    if(IsOverlapping(_map, mask_decal, solid_layer, position, olc::RED) && !is_already_in_semi_solid && velocity.y > 0.0f){
 
         if(velocity.x > 0.0f){
             temporary_slope_adjustment_position.x = std::floor(temporary_slope_adjustment_position.x);
