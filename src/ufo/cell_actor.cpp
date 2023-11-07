@@ -378,63 +378,6 @@ CellActor::AdjustUpSlope(CellMap* _map){
         }
     }
 
-    //SEMI SOLID ADJUST_HEIGHT
-
-    if(IsOverlapping(_map, mask_decal, solid_layer, position, olc::RED) && !is_already_in_semi_solid){
-
-        if(velocity.x > 0.0f){
-            temporary_slope_adjustment_position.x = std::floor(temporary_slope_adjustment_position.x);
-        }
-        if(velocity.x < 0.0f){
-            temporary_slope_adjustment_position.x = std::ceil(temporary_slope_adjustment_position.x);
-        }
-
-        if(velocity.x > 0.0f){
-
-            while(std::floor(temporary_slope_adjustment_position.x) != std::floor(position.x)+1.0f){
-                if(IsOverlappingHeight(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, olc::RED) > int(temporary_slope_adjustment_position.y) + snap_up_range
-                    && IsOverlappingHeight(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, olc::RED) != temporary_slope_adjustment_position.y +
-                    mask_decal->sprite->Size().y){
-
-                    while(IsOverlapping(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, olc::RED)){
-                        temporary_slope_adjustment_position.y -= 1.0f;
-                    }
-
-                }
-
-                temporary_slope_adjustment_position.x += 1.0f;
-            }
-
-            if(IsOverlappingHeight(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, olc::RED) > int(temporary_slope_adjustment_position.y) + snap_up_range){
-                while(IsOverlapping(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, olc::RED)){
-                    temporary_slope_adjustment_position.y -= 1.0f;
-                }
-            }
-        }
-
-        if(velocity.x < 0.0f){
-            while(temporary_slope_adjustment_position.x != std::floor(position.x)){
-
-                if(IsOverlappingHeight(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, olc::RED) > int(temporary_slope_adjustment_position.y) + snap_up_range
-                    && IsOverlappingHeight(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, olc::RED) != temporary_slope_adjustment_position.y +
-                    mask_decal->sprite->Size().y){
-                    while(IsOverlapping(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, olc::RED)){
-                        temporary_slope_adjustment_position.y -= 1.0f;
-                    }
-
-                }
-
-                temporary_slope_adjustment_position.x -= 1.0f;
-            }
-
-            if(IsOverlappingHeight(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, olc::RED) > int(temporary_slope_adjustment_position.y) + snap_up_range){
-                while(IsOverlapping(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, olc::RED)){
-                    temporary_slope_adjustment_position.y -= 1.0f;
-                }
-
-            }
-        }
-    }
     position.y = temporary_slope_adjustment_position.y;
 }
 
