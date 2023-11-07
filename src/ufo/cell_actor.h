@@ -28,6 +28,7 @@ public:
     std::string mask;
     olc::Decal* mask_decal;
     std::string solid_layer;
+    std::vector<std::string> collision_history;
 
     int draw_layer = 2;
 

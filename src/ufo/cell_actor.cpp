@@ -459,19 +459,6 @@ CellActor::AdjustDownSlope(CellMap* _map){
             adjusted = true;
         }
     }
-    //HEIGHT ADJUSTMENT SNAP_TO_GROUND
-
-    if(was_grounded == true && is_grounded == false && velocity.y > 0.0f && !adjusted){
-        position.y = std::floor(position.y);
-        if(HeightUntilGround(_map, mask_decal, solid_layer, position) < snap_to_ground){
-            while(!IsOverlapping(_map, mask_decal, solid_layer, position)){
-
-                position.y += 1.0f;
-
-            }
-            position.y -= 1.0f;
-        }
-    }
 }
 
 
@@ -513,6 +500,8 @@ bool CellActor::IsBeingEntered(olc::vf2d _position, olc::vf2d _delta_position, i
 
 void
 CellActor::ApplyCollision(CellMap* _map){
+
+    collision_history.clear();
 
     LayerActor* act_layer;
 
