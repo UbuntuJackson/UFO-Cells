@@ -444,27 +444,19 @@ CellActor::AdjustDownSlope(CellMap* _map){
     //SEMI SOLID HEIGHT ADJUSTMENT SNAP_TO_GROUND
     if(was_grounded == true && is_grounded == false && velocity.y > 0.0f){
         position.y = std::floor(position.y);
-        if(HeightUntilGround(_map, mask_decal, solid_layer, position, olc::RED) < snap_to_ground){
-            while(!IsOverlapping(_map, mask_decal, solid_layer, position, olc::RED)){
+        if((HeightUntilGround(_map, mask_decal, solid_layer, position, olc::RED) < snap_to_ground) ||
+            (HeightUntilGround(_map, mask_decal, solid_layer, position, olc::WHITE) < snap_to_ground)
+            ){
+            while(
+                !IsOverlapping(_map, mask_decal, solid_layer, position, olc::RED) ||
+                !IsOverlapping(_map, mask_decal, solid_layer, position, olc::WHITE)
+                ){
 
                 position.y += 1.0f;
 
             }
             position.y -= 1.0f;
             adjusted = true;
-        }
-    }
-    //HEIGHT ADJUSTMENT SNAP_TO_GROUND
-
-    if(was_grounded == true && is_grounded == false && velocity.y > 0.0f && !adjusted){
-        position.y = std::floor(position.y);
-        if(HeightUntilGround(_map, mask_decal, solid_layer, position) < snap_to_ground){
-            while(!IsOverlapping(_map, mask_decal, solid_layer, position)){
-
-                position.y += 1.0f;
-
-            }
-            position.y -= 1.0f;
         }
     }
 }
