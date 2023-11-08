@@ -587,7 +587,6 @@ CellActor::ApplyCollision(CellMap* _map){
 
     was_grounded = is_grounded;
     is_grounded = false;
-    AdjustDownSlope(_map);
 
     for(auto act : act_layer->actors){
 
@@ -603,6 +602,8 @@ CellActor::ApplyCollision(CellMap* _map){
         IsOverlapping(_map,mask_decal,solid_layer,{position.x,position.y+1.0f}, olc::RED)){
         is_grounded = true;        
     }
+
+    AdjustDownSlope(_map);
     
 }
 
