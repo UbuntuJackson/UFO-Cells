@@ -458,7 +458,7 @@ CellActor::AdjustDownSlope(CellMap* _map){
             position.y -= 1.0f;
             adjusted = true;
         }
-        std::cout << is_grounded << std::endl;
+        //std::cout << is_grounded << std::endl;
     }
 }
 
