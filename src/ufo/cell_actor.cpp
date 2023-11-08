@@ -461,6 +461,11 @@ CellActor::AdjustDownSlope(CellMap* _map){
         }
         //std::cout << is_grounded << std::endl;
     }
+    else{
+        std::cout << "was_grounded:" << was_grounded << std::endl;
+        std::cout << "is_grounded:" << is_grounded << std::endl;
+        std::cout << "velocity.y:" << velocity.y << std::endl;
+    }
 }
 
 
