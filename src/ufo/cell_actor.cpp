@@ -461,7 +461,7 @@ CellActor::ApplyCollisionNaive(CellMap* _map){
     for(auto [k, v] : semisolid_colours_overlapped){
         olc::Pixel colour = StringToColour(k);
         if(IsOverlapping(_map, mask_decal, solid_layer, position, colour) &&
-            !IsAlreadyInSolid(k) &&
+            !v &&
             velocity.y > 0.0f
         ){
             if(velocity.x > 0.0f){
@@ -524,7 +524,7 @@ CellActor::ApplyCollisionNaive(CellMap* _map){
     for(auto [k, v] : semisolid_colours_overlapped){
         if(IsOverlapping(_map,mask_decal, solid_layer, position, StringToColour(k)) &&
             velocity.y > 0.0f &&
-            !IsAlreadyInSolid(k)){
+            !v){
             
             position.y = std::floor(position.y);
             while(IsOverlapping(_map,mask_decal, solid_layer, position, StringToColour(k))){
