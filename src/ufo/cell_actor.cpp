@@ -520,6 +520,20 @@ CellActor::ApplyCollisionNaive(CellMap* _map){
     UpdateSemiSolidOverlapStatus(_map);
     position.y += velocity.y;
     AdjustCollisionY(_map);
+    for(auto [k, v] : semisolid_colours_overlapped){
+        if(IsOverlapping(_map,mask_decal, solid_layer, position, StringToColour(k)) &&
+            velocity.y > 0.0f &&
+            !is_already_in_semi_solid){
+            
+            position.y = std::floor(position.y);
+            while(IsOverlapping(_map,mask_decal, solid_layer, position, StringToColour(k))){
+                position.y -= 1.0f;
+            }
+            
+
+            velocity.y = 0.0f;
+        }
+    }
     was_grounded = is_grounded;
     is_grounded = false;
 
