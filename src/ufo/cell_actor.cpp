@@ -512,7 +512,6 @@ CellActor::ApplyCollisionNaive(CellMap* _map){
                 }
             }
             UpdateSemiSolidOverlapStatus(_map);
-            break;
         }
     }
     position.y = temporary_slope_adjustment_position.y;
@@ -533,7 +532,6 @@ CellActor::ApplyCollisionNaive(CellMap* _map){
 
             velocity.y = 0.0f;
             UpdateSemiSolidOverlapStatus(_map);
-            break;
         }
     }
     was_grounded = is_grounded;
