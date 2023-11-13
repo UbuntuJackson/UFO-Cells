@@ -507,7 +507,7 @@ bool CellActor::IsAlreadyInSolid(std::string _colour_name){
 }
 
 void
-CellActor::UpdateSemiSolidOverlapStatus(){
+CellActor::UpdateSemiSolidOverlapStatus(CellMap* _map){
     for(auto [k,v] : semisolid_colours_overlapped){
         semisolid_colours_overlapped[k] = IsOverlapping(_map, mask_decal, solid_layer, position, StringToColour(k));
     }
@@ -582,7 +582,7 @@ CellActor::ApplyCollisionNaive(CellMap* _map){
     position.y = temporary_slope_adjustment_position.y;
     AdjustUpSlope(_map);
     AdjustCollisionX(_map);
-    UpdateSemiSolidOverlapStatus();
+    UpdateSemiSolidOverlapStatus(_map);
     position.y += velocity.y;
     AdjustCollisionY(_map);
     was_grounded = is_grounded;

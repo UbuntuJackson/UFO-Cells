@@ -59,7 +59,7 @@ public:
     virtual bool IsBeingEntered(olc::vf2d _position, olc::vf2d _delta_position, int _direction, std::string _mask);
     olc::Pixel StringToColour(std::string _colour_name);
     bool IsAlreadyInSolid(std::string _colour_name);
-    void UpdateSemiSolidOverlapStatus();
+    void UpdateSemiSolidOverlapStatus(CellMap* _map);
     void CheckSemiSolidOverlapStatus(olc::vf2d _position);
     virtual void ApplyCollisionNaive(CellMap* _map);
     virtual void ApplyCollision(CellMap* _map);
