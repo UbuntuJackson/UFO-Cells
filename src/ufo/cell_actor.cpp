@@ -511,7 +511,7 @@ CellActor::ApplyCollisionNaive(CellMap* _map){
                     }
                 }
             }
-            UpdateSemiSolidOverlapStatus();
+            UpdateSemiSolidOverlapStatus(_map);
             break;
         }
     }
@@ -532,7 +532,7 @@ CellActor::ApplyCollisionNaive(CellMap* _map){
             }
 
             velocity.y = 0.0f;
-            UpdateSemiSolidOverlapStatus();
+            UpdateSemiSolidOverlapStatus(_map);
             break
         }
     }
