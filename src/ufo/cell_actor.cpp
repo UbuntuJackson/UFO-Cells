@@ -335,14 +335,12 @@ CellActor::AdjustUpSlope(CellMap* _map){
             while(std::floor(temporary_slope_adjustment_position.x) != std::floor(position.x)+1.0f){
                 if(IsOverlappingHeight(_map, mask_decal, solid_layer, temporary_slope_adjustment_position) > int(temporary_slope_adjustment_position.y) + snap_up_range
                     && IsOverlappingHeight(_map, mask_decal, solid_layer, temporary_slope_adjustment_position) != temporary_slope_adjustment_position.y +
-                    mask_decal->sprite->Size().y){
-
+                    mask_decal->sprite->Size().y)
+                {
                     while(IsOverlapping(_map, mask_decal, solid_layer, temporary_slope_adjustment_position)){
                         temporary_slope_adjustment_position.y -= 1.0f;
                     }
-
                 }
-
                 temporary_slope_adjustment_position.x += 1.0f;
             }
             //if you're still in collision after moving +=1.0f, then you move up again
@@ -363,9 +361,7 @@ CellActor::AdjustUpSlope(CellMap* _map){
                     while(IsOverlapping(_map, mask_decal, solid_layer, temporary_slope_adjustment_position)){
                         temporary_slope_adjustment_position.y -= 1.0f;
                     }
-
                 }
-
                 temporary_slope_adjustment_position.x -= 1.0f;
             }
 
@@ -373,13 +369,12 @@ CellActor::AdjustUpSlope(CellMap* _map){
                 while(IsOverlapping(_map, mask_decal, solid_layer, temporary_slope_adjustment_position)){
                     temporary_slope_adjustment_position.y -= 1.0f;
                 }
-
             }
         }
     }
 
     //SEMI SOLID ADJUST_HEIGHT
-
+    //this if-statement right here is why entering while walking into a semi-solid does not result in height-adjustment
     if(IsOverlapping(_map, mask_decal, solid_layer, position, olc::RED) && !is_already_in_semi_solid && velocity.y > 0.0f){
 
         if(velocity.x > 0.0f){
@@ -399,9 +394,7 @@ CellActor::AdjustUpSlope(CellMap* _map){
                     while(IsOverlapping(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, olc::RED)){
                         temporary_slope_adjustment_position.y -= 1.0f;
                     }
-
                 }
-
                 temporary_slope_adjustment_position.x += 1.0f;
             }
 
@@ -421,9 +414,7 @@ CellActor::AdjustUpSlope(CellMap* _map){
                     while(IsOverlapping(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, olc::RED)){
                         temporary_slope_adjustment_position.y -= 1.0f;
                     }
-
                 }
-
                 temporary_slope_adjustment_position.x -= 1.0f;
             }
 
@@ -431,7 +422,6 @@ CellActor::AdjustUpSlope(CellMap* _map){
                 while(IsOverlapping(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, olc::RED)){
                     temporary_slope_adjustment_position.y -= 1.0f;
                 }
-
             }
         }
     }
