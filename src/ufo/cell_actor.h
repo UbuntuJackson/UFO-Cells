@@ -2,6 +2,7 @@
 #define CELL_ACTOR_H
 #include "../../external/olcPixelGameEngine.h"
 #include <string>
+#include <vector>
 class Game;
 class Camera;
 class CellMap;
@@ -17,7 +18,12 @@ public:
     olc::vf2d size;
     bool is_grounded;
     bool was_grounded;
+    std::map<std::string, bool> semisolid_colours_overlapped = {{"red", false}, {"orange", false}, {"yellow", false}, {"lemon", false}};
     bool is_already_in_semi_solid = false;
+    bool is_already_in_semi_solid_red = false;
+    bool is_already_in_semi_solid_orange = false;
+    bool is_already_in_semi_solid_yellow = false;
+    bool is_already_in_semi_solid_lemon = false;
     bool on_dynamic_solid = false;
     bool is_grounded_dynamic = false;
     bool was_grounded_dynamic = false;
@@ -51,7 +57,11 @@ public:
     virtual void AdjustEnterDynamicSolidX(LayerActor* _act_layer);
     virtual void AdjustEnterDynamicSolidY(LayerActor* _act_layer);
     virtual bool IsBeingEntered(olc::vf2d _position, olc::vf2d _delta_position, int _direction, std::string _mask);
-
+    olc::Pixel StringToColour(std::string _colour_name);
+    bool IsAlreadyInSolid(std::string _colour_name);
+    void UpdateSemiSolidOverlapStatus();
+    void CheckSemiSolidOverlapStatus(olc::vf2d _position);
+    virtual void ApplyCollisionNaive(CellMap* _map);
     virtual void ApplyCollision(CellMap* _map);
 
     virtual void Update();
