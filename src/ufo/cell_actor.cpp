@@ -511,6 +511,7 @@ CellActor::ApplyCollisionNaive(CellMap* _map){
                     }
                 }
             }
+            UpdateSemiSolidOverlapStatus();
             break;
         }
     }
@@ -529,9 +530,10 @@ CellActor::ApplyCollisionNaive(CellMap* _map){
             while(IsOverlapping(_map,mask_decal, solid_layer, position, StringToColour(k))){
                 position.y -= 1.0f;
             }
-            
 
             velocity.y = 0.0f;
+            UpdateSemiSolidOverlapStatus();
+            break
         }
     }
     was_grounded = is_grounded;
