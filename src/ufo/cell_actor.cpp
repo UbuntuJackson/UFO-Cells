@@ -511,7 +511,9 @@ CellActor::ApplyCollisionNaive(CellMap* _map){
                     }
                 }
             }
-            UpdateSemiSolidOverlapStatus(_map);
+            for(auto [_k, _v] : semisolid_colours_overlapped){
+                if(_k != k) semisolid_colours_overlapped[k] = IsOverlapping(_map, mask_decal, solid_layer, position, StringToColour(k));
+            }
         }
     }
     position.y = temporary_slope_adjustment_position.y;
