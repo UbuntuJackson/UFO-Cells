@@ -455,15 +455,15 @@ void
 CellActor::ApplyCollisionNaive(CellMap* _map){
     former_position = position;
     position.x += velocity.x;
-
     olc::vf2d temporary_slope_adjustment_position = former_position;
-    temporary_slope_adjustment_position.y = std::floor(former_position.y);
-    for(auto [k, v] : semisolid_colours_overlapped){
+    /*for(auto [k, v] : semisolid_colours_overlapped){
         olc::Pixel colour = StringToColour(k);
         if(IsOverlapping(_map, mask_decal, solid_layer, position, colour) &&
             !v &&
             velocity.y > 0.0f
         ){
+            temporary_slope_adjustment_position.y = std::floor(former_position.y);
+
             if(velocity.x > 0.0f){
                 temporary_slope_adjustment_position.x = std::floor(temporary_slope_adjustment_position.x);
             }
@@ -512,10 +512,10 @@ CellActor::ApplyCollisionNaive(CellMap* _map){
                 }
             }
             for(auto [_k, _v] : semisolid_colours_overlapped){
-                //semisolid_colours_overlapped[_k] = IsOverlapping(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, StringToColour(_k));
+                semisolid_colours_overlapped[_k] = IsOverlapping(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, StringToColour(_k));
             }
         }
-    }
+    }*/
     position.y = temporary_slope_adjustment_position.y;
     AdjustUpSlope(_map);
     AdjustCollisionX(_map);
@@ -533,7 +533,7 @@ CellActor::ApplyCollisionNaive(CellMap* _map){
             }
 
             velocity.y = 0.0f;
-            //UpdateSemiSolidOverlapStatus(_map);
+            UpdateSemiSolidOverlapStatus(_map);
         }
     }
     was_grounded = is_grounded;
