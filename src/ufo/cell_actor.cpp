@@ -462,7 +462,7 @@ CellActor::ApplyCollisionNaive(CellMap* _map){
             !v &&
             velocity.y > 0.0f
         ){
-            temporary_slope_adjustment_position.y = std::floor(former_position.y);
+            temporary_slope_adjustment_position.y = std::floor(temporary_slope_adjustment_position.y);
 
             if(velocity.x > 0.0f){
                 temporary_slope_adjustment_position.x = std::floor(temporary_slope_adjustment_position.x);
