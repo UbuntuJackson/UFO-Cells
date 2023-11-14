@@ -374,6 +374,7 @@ void
 Camera::SetStateMouseAndArrowKeys(olc::vf2d top_left_corner, olc::vf2d bottom_right_corner){
     clamp_up_left_corner = top_left_corner;
     clamp_down_right_corner = bottom_right_corner;
+    centre = olc::vf2d(game->GetScreenSize().x/2.0f, game->GetScreenSize().y/2.0f);
     m_camera_state = MOUSE;
 }
 
@@ -398,22 +399,15 @@ Camera::MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal){
     f_screen_size.x = float(game->GetScreenSize().x);
     f_screen_size.y = float(game->GetScreenSize().y);
 
-    //We wanna clamp the position, not the offset_camera_position
     olc::vf2d camera_clamp_min = f_screen_size*0.5f/scale;
-    //std::cout << camera_clamp_min.x << ", " << camera_clamp_min.y << std::endl;
     olc::vf2d camera_clamp_max = clamp_down_right_corner-f_screen_size*0.5f/scale;
-    //std::cout << camera_clamp_max.x << ", " << camera_clamp_max.y << std::endl;
 
     if(position.x < camera_clamp_min.x) position.x = camera_clamp_min.x;
     if(position.y < camera_clamp_min.y) position.y = camera_clamp_min.y;
     if(position.x > camera_clamp_max.x) position.x = camera_clamp_max.x;
     if(position.y > camera_clamp_max.y) position.y = camera_clamp_max.y;
 
-    olc::vf2d offset_camera_position = position;
-
-    olc::vf2d offset_position = _position - offset_camera_position;
-    olc::vf2d screen_position = offset_position * scale;
-    screen_position += f_screen_size*0.5f;
+    olc::vf2d screen_position = WorldToScreen(_position, {0.0f,0.0f});
 
     game->DrawDecal(
         screen_position,
