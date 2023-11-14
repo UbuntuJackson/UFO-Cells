@@ -385,11 +385,6 @@ CellActor::AdjustDownSlope(CellMap* _map){
         }
         //std::cout << is_grounded << std::endl;
     }
-    else{
-        std::cout << "was_grounded:" << was_grounded << std::endl;
-        std::cout << "is_grounded:" << is_grounded << std::endl;
-        std::cout << "velocity.y:" << velocity.y << std::endl;
-    }
 }
 
 
@@ -421,9 +416,6 @@ bool CellActor::IsBeingEntered(olc::vf2d _position, olc::vf2d _delta_position, i
                 if(_direction == UfoGlobal::DOWN) return true;
             }
         }
-    }
-    if(IsOverlappingOtherDecal(game->asset_manager.GetDecal(_mask), _position + _delta_position, game->asset_manager.GetDecal(mask), position)){
-        std::cout << "just colliding after: " << _delta_position << std::endl;
     }
     
     return false;
@@ -480,7 +472,6 @@ CellActor::ApplyCollisionNaive(CellMap* _map){
 
                         while(IsOverlapping(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, colour)){
                             temporary_slope_adjustment_position.y -= 1.0f;
-                            std::cout << "does it adjust at all" << std::endl;
                         }
                     }
                     temporary_slope_adjustment_position.x += 1.0f;
