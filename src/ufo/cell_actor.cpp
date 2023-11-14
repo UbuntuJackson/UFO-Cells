@@ -480,6 +480,7 @@ CellActor::ApplyCollisionNaive(CellMap* _map){
 
                         while(IsOverlapping(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, colour)){
                             temporary_slope_adjustment_position.y -= 1.0f;
+                            std::cout << "does it adjust at all" << std::endl;
                         }
                     }
                     temporary_slope_adjustment_position.x += 1.0f;
