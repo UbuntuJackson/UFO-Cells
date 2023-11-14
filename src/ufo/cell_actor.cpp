@@ -534,7 +534,7 @@ CellActor::ApplyCollisionNaive(CellMap* _map){
             }
 
             velocity.y = 0.0f;
-            UpdateSemiSolidOverlapStatus(_map);
+            //UpdateSemiSolidOverlapStatus(_map);
         }
     }
     was_grounded = is_grounded;
