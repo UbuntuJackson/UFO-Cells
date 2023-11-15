@@ -195,7 +195,7 @@ Camera::SetStatePlatformer(CellActor *_target, olc::vf2d top_left_corner, olc::v
     clamp_down_right_corner = bottom_right_corner;
     m_camera_state = PLATFORMER;
     target = _target;
-    centre = olc::vf2d(game->GetScreenSize().x*0.5f, game->GetScreenSize().y*0.5f)- olc::vf2d(target->mask_decal->sprite->Size().x*0.5f, target->mask_decal->sprite->Size().y*0.5f);
+    centre = olc::vf2d(game->GetScreenSize().x*0.5f, game->GetScreenSize().y*0.5f)- olc::vf2d(target->mask_decal->sprite->Size().x*0.5f, target->mask_decal->sprite->Size().y*0.5f)*scale;
     up_sensor = target->position.y - 95.0f;
     down_sensor = target->position.y + 20.0f;
     left_sensor = target->position.x + 75.0f;
@@ -204,6 +204,7 @@ Camera::SetStatePlatformer(CellActor *_target, olc::vf2d top_left_corner, olc::v
 
 void
 Camera::Platformer(olc::vf2d _position, olc::Decal *_decal){
+    centre = olc::vf2d(game->GetScreenSize().x*0.5f, game->GetScreenSize().y*0.5f)- olc::vf2d(target->mask_decal->sprite->Size().x*0.5f, target->mask_decal->sprite->Size().y*0.5f)*scale;
 
     position.x = target->position.x;
 
@@ -227,8 +228,8 @@ Camera::Platformer(olc::vf2d _position, olc::Decal *_decal){
     f_screen_size.x = float(game->GetScreenSize().x);
     f_screen_size.y = float(game->GetScreenSize().y);
 
-    olc::vf2d camera_clamp_min = centre;
-    olc::vf2d camera_clamp_max = clamp_down_right_corner - centre;
+    olc::vf2d camera_clamp_min = f_screen_size*0.5f/scale - game->asset_manager.GetDecal("decPin")->sprite->Size()/2;
+    olc::vf2d camera_clamp_max = clamp_down_right_corner-f_screen_size*0.5f/scale - game->asset_manager.GetDecal("decPin")->sprite->Size()/2;
 
     if(position.x < camera_clamp_min.x) position.x = camera_clamp_min.x;
     if(position.y < camera_clamp_min.y) position.y = camera_clamp_min.y;
@@ -500,7 +501,10 @@ olc::vf2d Camera::ScreenToWorld(olc::vf2d _screen_position, olc::vf2d _shape_off
     return world_position;
 }
 olc::vf2d Camera::WorldToScreen(olc::vf2d _position, olc::vf2d _shape_offset){
-    olc::vf2d screen_position = (_position - position)*scale + centre/scale;
+    olc::vf2d offset_position = _position - position;
+    olc::vf2d screen_position = scale * offset_position;
+
+    screen_position += olc::vf2d(float(centre.x), float(centre.y));
     return screen_position;
 }
 
