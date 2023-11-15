@@ -227,8 +227,8 @@ Camera::Platformer(olc::vf2d _position, olc::Decal *_decal){
     f_screen_size.x = float(game->GetScreenSize().x);
     f_screen_size.y = float(game->GetScreenSize().y);
 
-    olc::vf2d camera_clamp_min = ScreenToWorld(clamp_up_left_corner, {0.0f, 0.0f});
-    olc::vf2d camera_clamp_max = ScreenToWorld(clamp_down_right_corner-f_screen_size, {0.0f, 0.0f});
+    olc::vf2d camera_clamp_min = ScreenToWorld(centre, {0.0f, 0.0f});
+    olc::vf2d camera_clamp_max = ScreenToWorld(clamp_down_right_corner-centre, {0.0f, 0.0f});
 
     if(position.x < camera_clamp_min.x) position.x = camera_clamp_min.x;
     if(position.y < camera_clamp_min.y) position.y = camera_clamp_min.y;
