@@ -500,7 +500,7 @@ olc::vf2d Camera::ScreenToWorld(olc::vf2d _screen_position, olc::vf2d _shape_off
     return world_position;
 }
 olc::vf2d Camera::WorldToScreen(olc::vf2d _position, olc::vf2d _shape_offset){
-    olc::vf2d offset_position = (_position - position + centre)*scale;
+    olc::vf2d screen_position = (_position - position + centre)*scale;
     return screen_position;
 }
 
