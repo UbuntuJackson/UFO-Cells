@@ -447,8 +447,7 @@ void
 CellActor::ApplyCollisionNaive(CellMap* _map){
     former_position = position;
     position.x += velocity.x;
-    AdjustUpSlope(_map);
-    /*olc::vf2d temporary_slope_adjustment_position = former_position;
+    olc::vf2d temporary_slope_adjustment_position = former_position;
     
     for(auto [k, v] : semisolid_colours_overlapped){
         olc::Pixel colour = StringToColour(k);
@@ -510,8 +509,8 @@ CellActor::ApplyCollisionNaive(CellMap* _map){
             }
         }
     }
-    position.y = temporary_slope_adjustment_position.y;*/
-    
+    position.y = temporary_slope_adjustment_position.y;
+    AdjustUpSlope(_map);
     AdjustCollisionX(_map);
     UpdateSemiSolidOverlapStatus(_map);
     position.y += velocity.y;
