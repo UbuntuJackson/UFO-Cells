@@ -4,7 +4,7 @@
 #include "game.h"
 #include "../../external/olcPixelGameEngine.h"
 
-Animation::Animation(Game* _game, float _frame_size, float _delta_frames):
+Animation::Animation(Game* _game, olc::vf2d _frame_size, float _delta_frames):
     game{_game},
     frame_size{_frame_size},
     delta_frames{_delta_frames},
