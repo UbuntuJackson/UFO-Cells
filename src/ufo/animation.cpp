@@ -3,11 +3,11 @@
 #include "rect.h"
 #include "game.h"
 
-Animation::Animation(Game* _game):
+Animation::Animation(Game* _game, float _frame_size, float _delta_frames):
     game{_game},
-    frame_size{16.0f,16.0f},
+    frame_size{_frame_size},
+    delta_frames{_delta_frames},
     frame_count{0.0f},
-    delta_frames{0.01f},
     is_playing{false} {
         
     }
