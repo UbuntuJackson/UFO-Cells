@@ -20,7 +20,7 @@ public:
     std::vector<int> idle_stand; //example, will not remain in this class, but can be added in classes inheriting from this class
     std::vector<int> idle_wait; //example, will not remain in this class, but can be added in classes inheriting from this class
     Animation() = default;
-    Animation(Game* _game,olc::vf2d _frame_size, float _delta_frames);
+    Animation(Game* _game,olc::vf2d _frame_size, float _delta_frames, std::string _sprite_sheet);
     void Play();
     void Stop();
     void ResetAndPlay();

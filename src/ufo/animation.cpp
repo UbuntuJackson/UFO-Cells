@@ -3,11 +3,13 @@
 #include "rect.h"
 #include "game.h"
 #include "../../external/olcPixelGameEngine.h"
+#include <string>
 
-Animation::Animation(Game* _game, olc::vf2d _frame_size, float _delta_frames):
+Animation::Animation(Game* _game, olc::vf2d _frame_size, float _delta_frames, std::string _sprite_sheet):
     game{_game},
     frame_size{_frame_size},
     delta_frames{_delta_frames},
+    sprite_sheet{_sprite_sheet},
     frame_count{0.0f},
     is_playing{false} {
         
