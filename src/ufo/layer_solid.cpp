@@ -35,7 +35,7 @@ LayerSolid::Update(){}
 
 void
 LayerSolid::Draw(Camera* _camera){
-    _camera->DrawDecal( //Give it camera instead of game?
+    /*_camera->DrawDecal(
             olc::vf2d(0.0f, 0.0f),
-            map->map_decals[name]);
+            map->map_decals[name]);*/
 }
