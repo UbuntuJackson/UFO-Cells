@@ -65,6 +65,21 @@ CellActor::IsOverlappingOtherDecal(olc::Decal *_decal, olc::vf2d _position, olc:
     return false;
 }
 
+bool
+CellActor::IsOverlappingSolid_Or_SemiSolid(CellMap* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position){
+    for(auto [k, v] : semisolid_colours_overlapped){
+        olc::Pixel colour = StringToColour(k);
+        if(!IsOverlapping(_map, mask_decal, solid_layer, _position, colour) &&
+            !v &&
+            velocity.y > 0.0f
+        ){
+            return true;
+        }
+    }
+    if(IsOverlapping(_map, mask_decal, solid_layer, _position, olc::WHITE)) return true;
+    return false;
+}
+
 int
 CellActor::IsOverlappingHeight(CellMap* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour){ //Pass in the map
 
@@ -426,6 +441,27 @@ CellActor::ApplyUpSlope_SemiSolid(CellMap* _map){
         }
     }
 }
+
+/*void
+CellActor::ApplyDownSlope_SemiSolid(CellMap* _map){
+    int distance_under_character = 0;
+    while(!IsOverlapping(_map, mask_decal, solid_layer, {int(position.x), int(position.y) + distance_under_character}, colour)){
+        for(auto [k, v] : semisolid_colours_overlapped){
+            olc::Pixel colour = StringToColour(k);
+            if(!IsOverlapping(_map, mask_decal, solid_layer, {int(position.x), int(position.y) + distance_under_character}, colour) &&
+                !v &&
+                velocity.y > 0.0f
+            ){
+                
+                distance_under_character++;
+                
+            }
+            else{
+                distance_under_character--;
+            }
+        }
+    }
+}*/
 
 void
 CellActor::AdjustDownSlope(CellMap* _map){
