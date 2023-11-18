@@ -505,9 +505,6 @@ CellActor::ApplyCollisionNaive(CellMap* _map){
                     }
                 }
             }
-            for(auto [_k, _v] : semisolid_colours_overlapped){
-                //semisolid_colours_overlapped[_k] = IsOverlapping(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, StringToColour(_k));
-            }
             position.y = temporary_slope_adjustment_position.y;
         }
     }
@@ -528,7 +525,6 @@ CellActor::ApplyCollisionNaive(CellMap* _map){
             }
 
             velocity.y = 0.0f;
-            //UpdateSemiSolidOverlapStatus(_map);
         }
     }
     was_grounded = is_grounded;
