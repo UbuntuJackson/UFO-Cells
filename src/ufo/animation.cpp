@@ -2,6 +2,7 @@
 #include "camera.h"
 #include "rect.h"
 #include "game.h"
+#include "../../external/olcPixelGameEngine.h"
 
 Animation::Animation(Game* _game, float _frame_size, float _delta_frames):
     game{_game},
