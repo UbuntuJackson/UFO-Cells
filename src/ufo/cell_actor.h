@@ -49,7 +49,8 @@ public:
     virtual void AdjustCollisionX(CellMap* _map);
     virtual void AdjustCollisionY(CellMap* _map);
     virtual void AdjustDownSlope(CellMap* _map);
-    virtual void AdjustUpSlope(CellMap* _map);
+    virtual void ApplyUpSlope(CellMap* _map);
+    virtual void ApplyUpSlope_SemiSolid(CellMap* _map);
     virtual void AdjustEnteredDynamicSolidX(LayerActor* _act_layer);
     virtual void AdjustEnteredDynamicSolidY(LayerActor* _act_layer);
     virtual void AdjustEnterPseudoStaticSolidX(LayerActor* _act_layer);

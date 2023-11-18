@@ -297,7 +297,7 @@ CellActor::AdjustCollisionY(CellMap* _map){
 }
 
 void
-CellActor::AdjustUpSlope(CellMap* _map){
+CellActor::ApplyUpSlope(CellMap* _map){
     //SOLID
     olc::vf2d temporary_slope_adjustment_position = former_position;
     temporary_slope_adjustment_position.y = std::floor(former_position.y);
@@ -361,6 +361,70 @@ CellActor::AdjustUpSlope(CellMap* _map){
         position.y = temporary_slope_adjustment_position.y;
     }
     
+}
+
+void
+CellActor::ApplyUpSlope_SemiSolid(CellMap* _map){
+    olc::vf2d temporary_slope_adjustment_position = former_position;
+    
+    for(auto [k, v] : semisolid_colours_overlapped){
+        olc::Pixel colour = StringToColour(k);
+        if(IsOverlapping(_map, mask_decal, solid_layer, position, colour) &&
+            !v &&
+            velocity.y > 0.0f
+        ){
+            temporary_slope_adjustment_position.y = std::floor(temporary_slope_adjustment_position.y);
+
+            if(velocity.x > 0.0f){
+                temporary_slope_adjustment_position.x = std::floor(temporary_slope_adjustment_position.x);
+            }
+            if(velocity.x < 0.0f){
+                temporary_slope_adjustment_position.x = std::ceil(temporary_slope_adjustment_position.x);
+            }
+
+            if(velocity.x > 0.0f){
+
+                while(std::floor(temporary_slope_adjustment_position.x) != std::floor(position.x)+1.0f){
+                    if(IsOverlappingHeight(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, colour) > int(temporary_slope_adjustment_position.y) + snap_up_range
+                        && IsOverlappingHeight(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, colour) != temporary_slope_adjustment_position.y +
+                        mask_decal->sprite->Size().y){
+
+                        while(IsOverlapping(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, colour)){
+                            temporary_slope_adjustment_position.y -= 1.0f;
+                        }
+                    }
+                    temporary_slope_adjustment_position.x += 1.0f;
+                }
+
+                if(IsOverlappingHeight(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, colour) > int(temporary_slope_adjustment_position.y) + snap_up_range){
+                    while(IsOverlapping(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, colour)){
+                        temporary_slope_adjustment_position.y -= 1.0f;
+                    }
+                }
+            }
+
+            if(velocity.x < 0.0f){
+                while(temporary_slope_adjustment_position.x != std::floor(position.x)){
+
+                    if(IsOverlappingHeight(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, colour) > int(temporary_slope_adjustment_position.y) + snap_up_range
+                        && IsOverlappingHeight(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, colour) != temporary_slope_adjustment_position.y +
+                        mask_decal->sprite->Size().y){
+                        while(IsOverlapping(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, colour)){
+                            temporary_slope_adjustment_position.y -= 1.0f;
+                        }
+                    }
+                    temporary_slope_adjustment_position.x -= 1.0f;
+                }
+
+                if(IsOverlappingHeight(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, colour) > int(temporary_slope_adjustment_position.y) + snap_up_range){
+                    while(IsOverlapping(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, colour)){
+                        temporary_slope_adjustment_position.y -= 1.0f;
+                    }
+                }
+            }
+            position.y = temporary_slope_adjustment_position.y;
+        }
+    }
 }
 
 void
@@ -448,68 +512,8 @@ void
 CellActor::ApplyCollisionNaive(CellMap* _map){
     former_position = position;
     position.x += velocity.x;
-    olc::vf2d temporary_slope_adjustment_position = former_position;
     
-    for(auto [k, v] : semisolid_colours_overlapped){
-        olc::Pixel colour = StringToColour(k);
-        if(IsOverlapping(_map, mask_decal, solid_layer, position, colour) &&
-            !v &&
-            velocity.y > 0.0f
-        ){
-            temporary_slope_adjustment_position.y = std::floor(temporary_slope_adjustment_position.y);
-
-            if(velocity.x > 0.0f){
-                temporary_slope_adjustment_position.x = std::floor(temporary_slope_adjustment_position.x);
-            }
-            if(velocity.x < 0.0f){
-                temporary_slope_adjustment_position.x = std::ceil(temporary_slope_adjustment_position.x);
-            }
-
-            if(velocity.x > 0.0f){
-
-                while(std::floor(temporary_slope_adjustment_position.x) != std::floor(position.x)+1.0f){
-                    if(IsOverlappingHeight(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, colour) > int(temporary_slope_adjustment_position.y) + snap_up_range
-                        && IsOverlappingHeight(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, colour) != temporary_slope_adjustment_position.y +
-                        mask_decal->sprite->Size().y){
-
-                        while(IsOverlapping(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, colour)){
-                            temporary_slope_adjustment_position.y -= 1.0f;
-                        }
-                    }
-                    temporary_slope_adjustment_position.x += 1.0f;
-                }
-
-                if(IsOverlappingHeight(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, colour) > int(temporary_slope_adjustment_position.y) + snap_up_range){
-                    while(IsOverlapping(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, colour)){
-                        temporary_slope_adjustment_position.y -= 1.0f;
-                    }
-                }
-            }
-
-            if(velocity.x < 0.0f){
-                while(temporary_slope_adjustment_position.x != std::floor(position.x)){
-
-                    if(IsOverlappingHeight(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, colour) > int(temporary_slope_adjustment_position.y) + snap_up_range
-                        && IsOverlappingHeight(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, colour) != temporary_slope_adjustment_position.y +
-                        mask_decal->sprite->Size().y){
-                        while(IsOverlapping(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, colour)){
-                            temporary_slope_adjustment_position.y -= 1.0f;
-                        }
-                    }
-                    temporary_slope_adjustment_position.x -= 1.0f;
-                }
-
-                if(IsOverlappingHeight(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, colour) > int(temporary_slope_adjustment_position.y) + snap_up_range){
-                    while(IsOverlapping(_map, mask_decal, solid_layer, temporary_slope_adjustment_position, colour)){
-                        temporary_slope_adjustment_position.y -= 1.0f;
-                    }
-                }
-            }
-            position.y = temporary_slope_adjustment_position.y;
-        }
-    }
-    
-    AdjustUpSlope(_map);
+    ApplyUpSlope(_map);
     AdjustCollisionX(_map);
     UpdateSemiSolidOverlapStatus(_map);
     position.y += velocity.y;
@@ -620,7 +624,7 @@ CellActor::ApplyCollision(CellMap* _map){
     if(on_dynamic_solid) AdjustEnterPseudoStaticSolidX(act_layer);
 
     //HEIGHT ADJUSTMENT OVERLAP
-    AdjustUpSlope(_map);
+    ApplyUpSlope(_map);
     // COLLISION ADJUSTMENT X-AXIS
     AdjustCollisionX(_map);
     //ThisVsDynamicSolid
