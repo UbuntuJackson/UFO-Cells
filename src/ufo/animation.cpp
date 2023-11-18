@@ -34,6 +34,11 @@ Animation::Update(){ //Take state string as argument, for example jump, run, wal
 }
 
 void
+Animation::Reset(){
+    frame_count = 0.0f;
+}
+
+void
 Animation::ResetAndPlay(){
     frame_count = 0.0f;
     Play();

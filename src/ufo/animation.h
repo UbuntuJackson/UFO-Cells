@@ -22,6 +22,7 @@ public:
     Animation(Game* _game,olc::vf2d _frame_size, float _delta_frames, std::string _sprite_sheet);
     void Play();
     void Stop();
+    void Reset();
     void ResetAndPlay();
     virtual void UpdateStateLogic();
     Rect GetRectangle(int _x, int _y);
