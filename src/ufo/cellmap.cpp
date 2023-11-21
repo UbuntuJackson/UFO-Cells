@@ -21,7 +21,7 @@ Layer* CellMap::GetLayer(std::string _layer_name){
 }
 
 void
-CellMap::NewActor(std::string _actor_type ,float _x, float _y, std::string _layer_tag){
+CellMap::NewActor(std::string _actor_type ,int _x, int _y, std::string _layer_tag){
     std::cout << "NewActor base-class" << std::endl;
 }
 
