@@ -21,6 +21,7 @@ public:
 
     //Actors tagged with a layer
     std::vector<CellActor*> actors;
+    std::vector<int> deferred_actor_removals;
     virtual void NewActor(std::string _actor_type ,int _x, int _y, std::string _layer_tag);
     virtual void RemoveActor(int _actor_id);
     CellMap() = default;
@@ -29,6 +30,7 @@ public:
     Layer* GetLayer(std::string _layer_name);
     void LoadMap(std::string _map_path);
     void UnloadMap();
+    void DeferActorRemoval(int _actor_id);
     void Update();
     void Draw(Camera* _camera);
 

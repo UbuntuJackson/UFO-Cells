@@ -27,7 +27,17 @@ CellMap::NewActor(std::string _actor_type ,int _x, int _y, std::string _layer_ta
 
 void
 CellMap::RemoveActor(int _actor_id){
+    for(int i = 0; i < actors.size(); i++){
+        if(actors[i]->GetID() == _actor_id){
+            std::cout << i << std::endl;
+            actors.erase(actors.begin() + i);
+        }
+    }
+}
 
+void
+CellMap::DeferActorRemoval(int _actor_id){
+    deferred_actor_removals.push_back(_actor_id);
 }
 
 void
@@ -85,8 +95,12 @@ CellMap::~CellMap(){UnloadMap();}
 
 void
 CellMap::Update(){
+    deferred_actor_removals.clear();
     for(auto layer : layers){
         layer->Update();
+    }
+    for(auto act_id : deferred_actor_removals){
+        RemoveActor(act_id);
     }
 }
 
