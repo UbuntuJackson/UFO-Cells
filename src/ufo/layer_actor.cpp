@@ -26,20 +26,20 @@ LayerActor::AddActorInfo(std::string _actor, int _x, int _y){
 void
 LayerActor::LoadLayer(){ //Will be overwritten by a game for a custom LoadLayer function
     for(auto i : actors_to_create){
-        actors.push_back(registry->NewActor(i.actor,{i.x,i.y}));
+        map->NewActor(i.actor, i.x, i.y, name);
     }
 }
 
 void
 LayerActor::Update(){
-    for(auto act : actors){
-        act->Update();
+    for(auto act : map->actors){
+        if(act->layer_tag = name) act->Update();
     }
 }
 
 void
 LayerActor::Draw(Camera* _camera){
-    for(auto act : actors){
-        act->Draw(_camera);
+    for(auto act : map->actors){
+        if(act->layer_tag = name) act->Draw(_camera);
     }
 }
