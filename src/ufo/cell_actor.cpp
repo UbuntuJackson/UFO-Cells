@@ -12,6 +12,7 @@
 
 CellActor::CellActor(int _id , olc::vf2d _position, Game *_game, std::string _layer_tag) :
     id{_id},
+    layer_tag{_layer_tag},
     position{_position},
     game{_game},
     is_grounded{false},
