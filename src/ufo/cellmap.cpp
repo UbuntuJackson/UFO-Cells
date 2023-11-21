@@ -9,6 +9,7 @@
 #include "../program/ufo_global.h"
 #include "camera.h"
 #include "layer.h"
+#include "cell_actor.h"
 
 CellMap::CellMap(Game* _game) : game{_game}, map_path {""}{}
 
@@ -17,6 +18,16 @@ Layer* CellMap::GetLayer(std::string _layer_name){
         if(layer->name == _layer_name) return layer;
     }
     return nullptr;
+}
+
+CellActor*
+CellMap::NewActor(std::string _actor_type ,float _x, float _y, std::string _layer_tag){
+
+}
+
+void
+CellMap::RemoveActor(int _actor_id){
+
 }
 
 void
