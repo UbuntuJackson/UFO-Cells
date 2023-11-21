@@ -10,7 +10,7 @@
 #include "game.h"
 #include "../program/ufo_global.h"
 
-CellActor::CellActor(int _id ,olc::vf2d _position, Game *_game) :
+CellActor::CellActor(int _id , olc::vf2d _position, Game *_game, std::string _layer_tag) :
     id{_id},
     position{_position},
     game{_game},
@@ -21,7 +21,7 @@ CellActor::CellActor(int _id ,olc::vf2d _position, Game *_game) :
 {
 }
 
-CellActor::CellActor(int _id, olc::vf2d _position, Game *_game, std::string _mask) :
+CellActor::CellActor(int _id, olc::vf2d _position, Game *_game, std::string _mask, std::string _layer_tag) :
     id{_id},
     position{_position},
     game{_game},

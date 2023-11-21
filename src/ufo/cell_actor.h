@@ -12,6 +12,7 @@ class CellActor{
 public:
     Game *game;
     int id;
+    int layer_tag;
 
     olc::vf2d position;
     olc::vf2d former_position;
@@ -39,8 +40,8 @@ public:
 
     int draw_layer = 2;
 
-    CellActor(int _id, olc::vf2d _position, Game *_game);
-    CellActor(int _id, olc::vf2d _position, Game *_game, std::string _mask);
+    CellActor(int _id, olc::vf2d _position, Game *_game, std::string _layer_tag);
+    CellActor(int _id, olc::vf2d _position, Game *_game, std::string _mask, std::string _layer_tag);
     virtual ~CellActor();
 
     int GetID();

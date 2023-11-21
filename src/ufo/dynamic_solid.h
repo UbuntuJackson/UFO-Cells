@@ -12,7 +12,7 @@ public:
     bool was_updated = false;
     //std::string mask;
     int timelapse;
-    DynamicSolid(int _id, olc::vf2d _position, Game* _game, std::string _mask);
+    DynamicSolid(int _id, olc::vf2d _position, Game* _game, std::string _mask, std::string _layer_tag);
     olc::vf2d GetVelocity();
     olc::vf2d GetPosition();
     void Update();
