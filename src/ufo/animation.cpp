@@ -65,7 +65,6 @@ Animation::GetRectangle(int _x, int _y){
 
 Rect
 Animation::GetFrame(int _frame){
-    std::cout << (game->asset_manager.GetDecal(sprite_sheet)->sprite->Size().y/(int)frame_size.y) << std::endl;
     return GetRectangle(
         (int)_frame % (game->asset_manager.GetDecal(sprite_sheet)->sprite->Size().x/(int)frame_size.x), //1 can only give me x = 0
         (int)_frame / (game->asset_manager.GetDecal(sprite_sheet)->sprite->Size().x/(int)frame_size.x)); //1 can only give y = 1
