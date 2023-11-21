@@ -34,13 +34,13 @@ LayerActor::LoadLayer(){ //Will be overwritten by a game for a custom LoadLayer 
 void
 LayerActor::Update(){
     for(auto act : map->actors){
-        if(act->layer_tag = name) act->Update();
+        if(act->layer_tag == name) act->Update();
     }
 }
 
 void
 LayerActor::Draw(Camera* _camera){
     for(auto act : map->actors){
-        if(act->layer_tag = name) act->Draw(_camera);
+        if(act->layer_tag == name) act->Draw(_camera);
     }
 }
