@@ -22,7 +22,7 @@ public:
     //Actors tagged with a layer
     std::vector<CellActor*> actors;
     virtual CellActor* NewActor(std::string _actor_type ,float _x, float _y, std::string _layer_tag);
-    virtual void RemoveActor(std::string _actor_id);
+    virtual void RemoveActor(int _actor_id);
     CellMap() = default;
     CellMap(Game* _game);
     ~CellMap();
