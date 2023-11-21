@@ -22,7 +22,7 @@ Layer* CellMap::GetLayer(std::string _layer_name){
 
 void
 CellMap::NewActor(std::string _actor_type ,float _x, float _y, std::string _layer_tag){
-
+    
 }
 
 void
