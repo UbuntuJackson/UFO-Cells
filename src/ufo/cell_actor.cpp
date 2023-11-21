@@ -10,7 +10,8 @@
 #include "game.h"
 #include "../program/ufo_global.h"
 
-CellActor::CellActor(olc::vf2d _position, Game *_game) :
+CellActor::CellActor(int _id ,olc::vf2d _position, Game *_game) :
+    id{_id},
     position{_position},
     game{_game},
     is_grounded{false},
@@ -20,7 +21,8 @@ CellActor::CellActor(olc::vf2d _position, Game *_game) :
 {
 }
 
-CellActor::CellActor(olc::vf2d _position, Game *_game, std::string _mask) :
+CellActor::CellActor(int _id, olc::vf2d _position, Game *_game, std::string _mask) :
+    id{_id},
     position{_position},
     game{_game},
     mask{_mask},
@@ -32,6 +34,11 @@ CellActor::CellActor(olc::vf2d _position, Game *_game, std::string _mask) :
 }
 
 CellActor::~CellActor(){}
+
+int
+CellActor::GetID(){
+    return id;
+}
 
 bool
 CellActor::IsOverlapping(CellMap* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour){

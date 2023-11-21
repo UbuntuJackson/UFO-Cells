@@ -11,6 +11,7 @@ class LayerActor;
 class CellActor{
 public:
     Game *game;
+    int id;
 
     olc::vf2d position;
     olc::vf2d former_position;
@@ -38,9 +39,12 @@ public:
 
     int draw_layer = 2;
 
-    CellActor(olc::vf2d _position, Game *_game);
-    CellActor(olc::vf2d _position, Game *_game, std::string _mask);
+    CellActor(int _id, olc::vf2d _position, Game *_game);
+    CellActor(int _id, olc::vf2d _position, Game *_game, std::string _mask);
     virtual ~CellActor();
+
+    int GetID();
+
     bool IsOverlapping(CellMap* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);
     int IsOverlappingHeight(CellMap* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);
     int HeightUntilGround(CellMap* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);

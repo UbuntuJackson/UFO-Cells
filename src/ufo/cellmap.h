@@ -17,6 +17,11 @@ public:
     std::vector<Layer*> layers;
     std::vector<olc::Decal*> visible_layers;
     std::map<std::string, olc::Decal*> collision_layers;
+
+    //Actors tagged with a layer
+    std::vector<CellActor*> actors;
+    virtual void NewActor(std::string _actor_type ,float _x, float _y, std::string _layer_tag) = 0;
+    virtual void RemoveActor(std::string _actor_id) = 0;
     CellMap() = default;
     CellMap(Game* _game);
     ~CellMap();
