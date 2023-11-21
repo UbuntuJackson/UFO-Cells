@@ -30,7 +30,6 @@ CellMap::RemoveActor(int _actor_id){
     for(int i = 0; i < actors.size(); i++){
         if(actors[i]->GetID() == _actor_id){
             delete actors[i];
-            std::cout << i << std::endl;
             actors.erase(actors.begin() + i);
         }
     }
