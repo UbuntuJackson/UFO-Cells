@@ -594,6 +594,9 @@ CellActor::ApplyCollisionNaive(CellMap* _map){
             is_grounded = true;        
         }
     }
+    if(IsOverlapping(_map,mask_decal,solid_layer,{position.x,position.y+1.0f})){
+        is_grounded = true;        
+    }
 
 }
 
