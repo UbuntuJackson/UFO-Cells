@@ -5,6 +5,7 @@
 #include "camera.h"
 #include "type_registry.h"
 #include "actor_info.h"
+#include "cellmap.h"
 
 LayerActor::LayerActor(CellMap* _map, std::string _name, std::string _type, std::vector<ActorInfo> _actors_to_create, TypeRegistry* _type_registry) : Layer(_map ,_name, _type),
 actors_to_create{_actors_to_create},
