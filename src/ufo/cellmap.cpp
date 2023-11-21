@@ -29,6 +29,7 @@ void
 CellMap::RemoveActor(int _actor_id){
     for(int i = 0; i < actors.size(); i++){
         if(actors[i]->GetID() == _actor_id){
+            delete actors[i];
             std::cout << i << std::endl;
             actors.erase(actors.begin() + i);
         }
@@ -37,6 +38,7 @@ CellMap::RemoveActor(int _actor_id){
 
 void
 CellMap::DeferActorRemoval(int _actor_id){
+    std::cout << "Deferred actor-removal with id: " << _actor_id << std::endl;
     deferred_actor_removals.push_back(_actor_id);
 }
 
