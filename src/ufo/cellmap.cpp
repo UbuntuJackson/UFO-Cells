@@ -20,7 +20,7 @@ Layer* CellMap::GetLayer(std::string _layer_name){
     return nullptr;
 }
 
-CellActor*
+void
 CellMap::NewActor(std::string _actor_type ,float _x, float _y, std::string _layer_tag){
 
 }
@@ -79,6 +79,13 @@ void CellMap::UnloadMap(){
 }
 
 CellMap::~CellMap(){UnloadMap();}
+
+void
+CellMap::Update(){
+    for(auto layer : layers){
+        layer->Update();
+    }
+}
 
 void
 CellMap::Draw(Camera* _camera){

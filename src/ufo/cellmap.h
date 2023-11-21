@@ -21,7 +21,7 @@ public:
 
     //Actors tagged with a layer
     std::vector<CellActor*> actors;
-    virtual CellActor* NewActor(std::string _actor_type ,float _x, float _y, std::string _layer_tag);
+    virtual void NewActor(std::string _actor_type ,float _x, float _y, std::string _layer_tag);
     virtual void RemoveActor(int _actor_id);
     CellMap() = default;
     CellMap(Game* _game);
@@ -29,6 +29,7 @@ public:
     Layer* GetLayer(std::string _layer_name);
     void LoadMap(std::string _map_path);
     void UnloadMap();
+    void Update();
     void Draw(Camera* _camera);
 
 };
