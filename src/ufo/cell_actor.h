@@ -12,7 +12,7 @@ class CellActor{
 public:
     Game *game;
     int id;
-    int layer_tag;
+    std::string layer_tag;
 
     olc::vf2d position;
     olc::vf2d former_position;
