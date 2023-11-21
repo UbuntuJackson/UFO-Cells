@@ -6,7 +6,7 @@
 #include <cmath>
 #include "game.h"
 
-DynamicSolid::DynamicSolid(olc::vf2d _position, Game* _game, std::string _mask) : CellActor(_position, _game, _mask){
+DynamicSolid::DynamicSolid(int _id, olc::vf2d _position, Game* _game, std::string _mask) : CellActor(_id, _position, _game, _mask){
     velocity = {0.0f, 5.3f};
     timelapse = 0;
     std::cout << "spawned dynamic solid" << std::endl;
