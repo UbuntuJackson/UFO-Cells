@@ -63,6 +63,9 @@ CellMap::LoadMap(std::string _map_path){ //OUTDATED
 }
 
 void CellMap::UnloadMap(){
+    for(auto act : actors){
+        delete act;
+    }
     for(auto &[key, spr] : map_sprites){
         delete spr;
     }
