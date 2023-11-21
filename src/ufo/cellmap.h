@@ -6,6 +6,7 @@
 #include "layer.h"
 
 class Game;
+class CellActor;
 
 class CellMap{
 public:
