@@ -27,7 +27,7 @@ LayerActor::AddActorInfo(std::string _actor, int _x, int _y){
 void
 LayerActor::LoadLayer(){ //Will be overwritten by a game for a custom LoadLayer function
     for(auto i : actors_to_create){
-        std::cout << i << std::endl;
+        std::cout << "a" << std::endl;
         map->NewActor(i.actor, i.x, i.y, name);
     }
 }
