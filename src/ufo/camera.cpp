@@ -383,8 +383,7 @@ Camera::MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal){
     olc::vf2d delta_pos = mouse_control.GetDeltaMousePosition();
     //std::cout << UfoGlobal::program.GetMouseWheel() << std::endl;
 
-    if(game->GetMouseWheel() >= 1) scale *= 1.05f;
-    if(game->GetMouseWheel() <= -1) scale *= (1.0f/1.05f);
+    ControlZoom();
 
     if(game->GetKey(olc::RIGHT).bHeld) position.x += 2.2f/scale;
     if(game->GetKey(olc::LEFT).bHeld) position.x -= 2.2f/scale;
@@ -421,8 +420,7 @@ Camera::MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _ce
     olc::vf2d delta_pos = mouse_control.GetDeltaMousePosition();
     //std::cout << UfoGlobal::program.GetMouseWheel() << std::endl;
 
-    if(game->GetMouseWheel() >= 1) scale *= 1.05f;
-    if(game->GetMouseWheel() <= -1) scale *= (1.0f/1.05f);
+    ControlZoom();
 
     if(game->GetKey(olc::RIGHT).bHeld) position.x += 2.2f/scale;
     if(game->GetKey(olc::LEFT).bHeld) position.x -= 2.2f/scale;
@@ -506,6 +504,12 @@ olc::vf2d Camera::WorldToScreen(olc::vf2d _position, olc::vf2d _shape_offset){
 
     screen_position += olc::vf2d(float(centre.x), float(centre.y));
     return screen_position;
+}
+
+void
+Camera::ControlZoom(){
+    if(game->GetMouseWheel() >= 1) scale *= 1.05f;
+    if(game->GetMouseWheel() <= -1) scale *= (1.0f/1.05f);
 }
 
 void

@@ -90,6 +90,8 @@ public:
     olc::vf2d ScreenToWorld(olc::vf2d _screen_position, olc::vf2d _shape_offset);
     olc::vf2d WorldToScreen(olc::vf2d _position, olc::vf2d _shape_offset);
 
+    virtual void ControlZoom();
+
     void DrawDecal(olc::vf2d _position, olc::Decal *_decal);
     void DrawRotatedPartialDecal(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _center, olc::vf2d _source_pos, olc::vf2d _source_size, olc::vf2d _scale);
 };
