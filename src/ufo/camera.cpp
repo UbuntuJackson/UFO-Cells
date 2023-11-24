@@ -379,12 +379,12 @@ Camera::SetStateMouseAndArrowKeys(olc::vf2d top_left_corner, olc::vf2d bottom_ri
 }
 
 void
-Camera::MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal, bool _zoom_condition){
+Camera::MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal){
     olc::vf2d delta_pos = mouse_control.GetDeltaMousePosition();
     //std::cout << UfoGlobal::program.GetMouseWheel() << std::endl;
 
-    if(game->GetMouseWheel() >= 1 && _zoom_condition) scale *= 1.05f;
-    if(game->GetMouseWheel() <= -1 && _zoom_condition) scale *= (1.0f/1.05f);
+    if(game->GetMouseWheel() >= 1) scale *= 1.05f;
+    if(game->GetMouseWheel() <= -1) scale *= (1.0f/1.05f);
 
     if(game->GetKey(olc::RIGHT).bHeld) position.x += 2.2f/scale;
     if(game->GetKey(olc::LEFT).bHeld) position.x -= 2.2f/scale;
@@ -417,12 +417,12 @@ Camera::MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal, bool _zoom_co
 }
 
 void
-Camera::MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _center, olc::vf2d _source_pos, olc::vf2d _source_size, olc::vf2d _scale, bool _zoom_condition){
+Camera::MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _center, olc::vf2d _source_pos, olc::vf2d _source_size, olc::vf2d _scale){
     olc::vf2d delta_pos = mouse_control.GetDeltaMousePosition();
     //std::cout << UfoGlobal::program.GetMouseWheel() << std::endl;
 
-    if(game->GetMouseWheel() >= 1 && _zoom_condition) scale *= 1.05f;
-    if(game->GetMouseWheel() <= -1 && _zoom_condition) scale *= (1.0f/1.05f);
+    if(game->GetMouseWheel() >= 1) scale *= 1.05f;
+    if(game->GetMouseWheel() <= -1) scale *= (1.0f/1.05f);
 
     if(game->GetKey(olc::RIGHT).bHeld) position.x += 2.2f/scale;
     if(game->GetKey(olc::LEFT).bHeld) position.x -= 2.2f/scale;

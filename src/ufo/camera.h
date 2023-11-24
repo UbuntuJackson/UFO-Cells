@@ -65,8 +65,8 @@ public:
     void Switch();
     void Static(olc::vf2d _position, olc::Decal *_decal);
     void Static(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _center, olc::vf2d _source_pos, olc::vf2d _source_size, olc::vf2d _scale);
-    void MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal, bool _zoom_condition = true);
-    void MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _center, olc::vf2d _source_pos, olc::vf2d _source_size, olc::vf2d _scale, bool _zoom_condition = true);
+    void MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal);
+    void MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _center, olc::vf2d _source_pos, olc::vf2d _source_size, olc::vf2d _scale);
     void SetStateSwitch(CellActor *_target);
     void SetStateZoom(float _target_scale);
     void SetStateMove(olc::vf2d _vel);
