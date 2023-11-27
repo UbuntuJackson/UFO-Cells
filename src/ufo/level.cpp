@@ -1,16 +1,62 @@
 #include "level.h"
 #include "game.h"
 #include "layer.h"
+#include "layer_actor.h"
+#include "layer_background.h"
+#include "layer_solid.h"
+#include "layer_terrain.h"
 #include "actor_info.h"
-Level::Level(Game* _game) : game{_game}, loading_progress{0}{}
 
-Layer* Level::GetLayer(){}
+Level::Level() : loading_progress{0}{}
 
-Layer* Level::NewLayer(){}
+Layer*
+Level::NewLayer(std::string _name, std::string _type, std::string _path){
+    if(_type == "background"){
+        return new LayerBackground(map,_name, _type, _path);
+    }
+    if(_type == "collision"){
+        
+        return new LayerSolid(map,_name, _type, _path);
+    }
+    if(_type == "terrain"){
+        return new LayerTerrain(map,_name, _type, _path);
+    }
+}
 
-CellActor
-Level::NewActor(std::string _actor, olc::vf2d _position){
+Layer*
+Level::NewLayer(std::string _name, std::string _type, std::vector<ActorInfo> _layer_info){
+    if(_type == "actor"){
+        return new LayerActor(map ,_name, _type, _layer_info, registry);
+    }
+}
 
+Layer*
+Level::GetLayer(std::string _layer_name){
+    for(auto *layer : layers){
+        if(layer->name == _layer_name) return layer;
+    }
+    return nullptr;
+}
+
+void
+Level::NewActor(std::string _actor_type ,int _x, int _y, std::string _layer_tag){
+    std::cout << "NewActor base-class" << std::endl;
+}
+
+void
+Level::RemoveActor(int _actor_id){
+    for(int i = 0; i < actors.size(); i++){
+        if(actors[i]->GetID() == _actor_id){
+            delete actors[i];
+            actors.erase(actors.begin() + i);
+        }
+    }
+}
+
+void
+Level::DeferActorRemoval(int _actor_id){
+    std::cout << "Deferred actor-removal with id: " << _actor_id << std::endl;
+    deferred_actor_removals.push_back(_actor_id);
 }
 
 bool
@@ -68,8 +114,12 @@ Level::Load(){
 
 void
 Level::Update(){
+    deferred_actor_removals.clear();
     for(auto layer : layers){
-        layer -> Update();
+        layer->Update();
+    }
+    for(auto act_id : deferred_actor_removals){
+        RemoveActor(act_id);
     }
 }
 

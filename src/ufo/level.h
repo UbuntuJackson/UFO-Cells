@@ -4,10 +4,18 @@
 #include "../../external/olcPixelGameEngine.h"
 #include <vector>
 #include <string>
+
+class Class;
 class Layer;
 class Game;
+class CellActor;
+
 class Level{
     Game* game;
+    
+    std::vector<CellActor*> actors;
+    std::vector<int> deferred_actor_removals;
+
     int loading_progress;
     olc::vf2d level_size;
     std::string level_path;
@@ -17,10 +25,13 @@ class Level{
     std::vector<olc::Decal*> visible_layers;
     std::map<std::string, olc::Decal*> collision_layers;
     Level() = default;
-    Level(Game* _game);
+    Level();
+    Layer* NewLayer(std::string _name, std::string _type, std::string _path);
+    Layer* NewLayer(std::string _name, std::string _type, std::vector<ActorInfo> _layer_info);
     Layer* GetLayer(std::string _layer_name);
-    Layer* NewLayer()
-    CellActor NewActor(std::string _actor, olc::vf2d _position);
+    void NewActor(std::string _actor_type ,int _x, int _y, std::string _layer_tag);
+    void RemoveActor(int _actor_id);
+    void DeferActorRemoval(int _actor_id);
     bool ReadLevelFromFile(std::string _path);
     bool Load();
     void Update();

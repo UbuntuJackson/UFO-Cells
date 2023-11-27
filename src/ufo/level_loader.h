@@ -1,14 +1,13 @@
 #ifndef LEVEL_LOADER_H
 #define LEVEL_LOADER_H
 #include <string>
-class Game;
+#include "stack_based_state.h"
+#include "stack_based_state_machine.h"
 class StatePlay;
-class LevelLoader{
-    Game* game;
-    StatePlay* level_to_load;
+class LevelLoader : public StackBasedState{
+    Level* _level;
     LevelLoader() = default;
-    LevelLoader(Game* _game);
-    bool Set(std::string _path);
+    LevelLoader(StackBasedStateMachine* _state_machine ,Level* _level);
     void Update();
 };
 

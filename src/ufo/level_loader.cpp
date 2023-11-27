@@ -1,14 +1,16 @@
 #include "level_loader.h"
 #include <string>
-LevelLoader::Set(std::string _path){
-    game->level = new Level(_path)
-}
+#include "game.h"
+#include "level.h"
+
+LevelLoader::LevelLoader(StackBasedStateMachine* _state_machine ,Level* _level) :
+    StackBasedState(_state_machine),
+    level{_level}{}
+
+void
 LevelLoader::Update(){
-    if(game->level.load())
+    if(!level.load()) //Load can draw the image instead
     {
-      //DrawLoadingScreenImage();
-    }
-    else{
-      game->active_state_ptr = &(game->state_play)
+        state_machine.RemoveActiveStateInStack();
     }
 }
