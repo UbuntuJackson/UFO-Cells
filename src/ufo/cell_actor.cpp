@@ -17,6 +17,7 @@ CellActor::CellActor(int _id , olc::vf2d _position, Game *_game, std::string _la
     game{_game},
     is_grounded{false},
     was_grounded{false},
+    on_dynamic_solid{false},
     snap_to_ground{6},
     snap_up_range{16}
 {
@@ -24,11 +25,13 @@ CellActor::CellActor(int _id , olc::vf2d _position, Game *_game, std::string _la
 
 CellActor::CellActor(int _id, olc::vf2d _position, Game *_game, std::string _mask, std::string _layer_tag) :
     id{_id},
+    layer_tag{_layer_tag},
     position{_position},
     game{_game},
     mask{_mask},
     is_grounded{false},
     was_grounded{false},
+    on_dynamic_solid{false},
     snap_to_ground{6},
     snap_up_range{16}
 {
