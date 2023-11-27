@@ -385,10 +385,10 @@ Camera::MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal){
 
     ControlZoom();
 
-    if(game->GetKey(olc::RIGHT).bHeld) position.x += 2.2f/scale;
-    if(game->GetKey(olc::LEFT).bHeld) position.x -= 2.2f/scale;
-    if(game->GetKey(olc::UP).bHeld) position.y -= 2.2f/scale;
-    if(game->GetKey(olc::DOWN).bHeld) position.y += 2.2f/scale;
+    if(game->GetKey(olc::D).bHeld) position.x += 2.2f/scale;
+    if(game->GetKey(olc::A).bHeld) position.x -= 2.2f/scale;
+    if(game->GetKey(olc::W).bHeld) position.y -= 2.2f/scale;
+    if(game->GetKey(olc::S).bHeld) position.y += 2.2f/scale;
 
     if(game->GetMouse(2).bHeld || game->GetMouse(0).bHeld) position -= delta_pos/scale;
 
@@ -422,10 +422,10 @@ Camera::MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _ce
 
     ControlZoom();
 
-    if(game->GetKey(olc::RIGHT).bHeld) position.x += 2.2f/scale;
-    if(game->GetKey(olc::LEFT).bHeld) position.x -= 2.2f/scale;
-    if(game->GetKey(olc::UP).bHeld) position.y -= 2.2f/scale;
-    if(game->GetKey(olc::DOWN).bHeld) position.y += 2.2f/scale;
+    if(game->GetKey(olc::D).bHeld) position.x += 2.2f/scale;
+    if(game->GetKey(olc::A).bHeld) position.x -= 2.2f/scale;
+    if(game->GetKey(olc::W).bHeld) position.y -= 2.2f/scale;
+    if(game->GetKey(olc::S).bHeld) position.y += 2.2f/scale;
 
     if(game->GetMouse(2).bHeld || game->GetMouse(0).bHeld) position -= delta_pos/scale;
 
