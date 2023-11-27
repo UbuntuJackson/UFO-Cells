@@ -4,6 +4,8 @@
 #include "../../external/olcPixelGameEngine.h"
 #include <vector>
 #include <string>
+#include "actor_info.h"
+#include "camera.h"
 
 class Class;
 class Layer;
