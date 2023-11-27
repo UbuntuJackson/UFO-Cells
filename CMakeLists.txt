@@ -38,6 +38,10 @@ set(
     src/ufo/ufo_load.cpp
     src/ufo/player_ray.cpp
     src/ufo/type_registry.cpp
+    src/ufo/level.cpp
+    src/ufo/level_loader.cpp
+    src/ufo/stack_based_state_machine.cpp
+    src/ufo/stack_based_state.cpp
     external/cJSON.c
 )
 
