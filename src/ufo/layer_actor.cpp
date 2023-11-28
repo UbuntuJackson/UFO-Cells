@@ -7,9 +7,8 @@
 #include "actor_info.h"
 #include "level.h"
 
-LayerActor::LayerActor(Level* _level, std::string _name, std::string _type, std::vector<ActorInfo> _actors_to_create, TypeRegistry* _type_registry) : Layer(_level ,_name, _type),
+LayerActor::LayerActor(Level* _level, std::string _name, std::string _type, std::vector<ActorInfo> _actors_to_create) : Layer(_level ,_name, _type),
 actors_to_create{_actors_to_create},
-registry{_type_registry}
 {}
 
 LayerActor::~LayerActor(){
