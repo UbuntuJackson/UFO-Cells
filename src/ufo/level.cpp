@@ -62,7 +62,7 @@ Level::DeferActorRemoval(int _actor_id){
 bool
 Level::ReadLevelFromFile(std::string _path){
     std::ifstream ifs;
-    ifs.open(_data, std::ifstream::in);
+    ifs.open(_path, std::ifstream::in);
     std::string sl = PutFileIntoString(ifs);
     ifs.close();
     cJSON *j = cJSON_Parse(sl.c_str());
