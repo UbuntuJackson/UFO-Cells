@@ -8,7 +8,7 @@
 #include "level.h"
 
 LayerActor::LayerActor(Level* _level, std::string _name, std::string _type, std::vector<ActorInfo> _actors_to_create) : Layer(_level ,_name, _type),
-actors_to_create{_actors_to_create},
+actors_to_create{_actors_to_create}
 {}
 
 LayerActor::~LayerActor(){
