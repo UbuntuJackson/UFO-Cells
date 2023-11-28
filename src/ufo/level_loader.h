@@ -8,7 +8,7 @@ class Level;
 
 class LevelLoader : public StackBasedState{
 public:
-    Level* _level;
+    Level* level;
     LevelLoader() = default;
     LevelLoader(StackBasedStateMachine* _state_machine ,Level* _level);
     void Update();
