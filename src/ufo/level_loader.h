@@ -8,6 +8,7 @@ class Level;
 
 class StatePlay;
 class LevelLoader : public StackBasedState{
+public:
     Level* _level;
     LevelLoader() = default;
     LevelLoader(StackBasedStateMachine* _state_machine ,Level* _level);
