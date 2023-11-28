@@ -12,21 +12,21 @@ Level::Level() : loading_progress{0}{}
 Layer*
 Level::NewLayer(std::string _name, std::string _type, std::string _path){
     if(_type == "background"){
-        return new LayerBackground(level,_name, _type, _path);
+        return new LayerBackground(this,_name, _type, _path);
     }
     if(_type == "collision"){
         
-        return new LayerSolid(level,_name, _type, _path);
+        return new LayerSolid(this,_name, _type, _path);
     }
     if(_type == "terrain"){
-        return new LayerTerrain(level,_name, _type, _path);
+        return new LayerTerrain(this,_name, _type, _path);
     }
 }
 
 Layer*
 Level::NewLayer(std::string _name, std::string _type, std::vector<ActorInfo> _layer_info){
     if(_type == "actor"){
-        return new LayerActor(level ,_name, _type, _layer_info, registry);
+        return new LayerActor(this ,_name, _type, _layer_info, registry);
     }
 }
 
