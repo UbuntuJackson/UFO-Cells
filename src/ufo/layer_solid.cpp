@@ -25,6 +25,7 @@ LayerSolid::GetPixel(olc::vf2d _position){
 
 void
 LayerSolid::LoadLayer(){
+    std::cout << level->map_size << std::endl;
     olc::Sprite *spr = new olc::Sprite(path);
     level->level_sprites.emplace(std::make_pair(name, spr));
     level->map_size = spr->Size();
