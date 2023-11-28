@@ -13,7 +13,8 @@ StackBasedStateMachine::ResetActiveStateInStack(){
 
 void
 StackBasedStateMachine::RemoveActiveStateInStack(){
-    delete state_stack.pop_back();
+    delete state_stack[state_stack.size()-1];
+    state_stack.pop_back();
 }
 
 void
