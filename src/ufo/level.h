@@ -13,6 +13,7 @@ class Game;
 class CellActor;
 
 class Level{
+public:
     Game* game;
 
     std::vector<CellActor*> actors;
