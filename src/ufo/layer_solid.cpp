@@ -4,6 +4,8 @@
 #include <string>
 #include "level.h"
 #include "camera.h"
+#include <utility>
+#include <map>
 
 //maybe put strings in layer vector instead that refers to keys in a map with <string, Layer>
 
@@ -23,11 +25,11 @@ LayerSolid::GetPixel(olc::vf2d _position){
 void
 LayerSolid::LoadLayer(){
     olc::Sprite *spr = new olc::Sprite(path);
-    level->level_sprites[name] = spr;
+    level->level_sprites.emplace(std::make_pair(name, spr)) = spr;
     level->map_size = spr->Size();
 
     olc::Decal *dec = new olc::Decal(spr);
-    level->level_decals[name] = dec;
+    level->level_decals.emplace(std::make_pair(name, dec)) = dec;
 }
 
 void

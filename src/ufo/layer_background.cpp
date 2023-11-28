@@ -4,6 +4,7 @@
 #include "camera.h"
 #include <string>
 #include <iostream>
+#include "../../external/olcPixelGameEngine.h"
 
 LayerBackground::LayerBackground(Level* _level ,std::string _name, std::string _type, std::string _path) : Layer(_level ,_name, _type), path{_path}{}
 
@@ -20,13 +21,12 @@ LayerBackground::GetPixel(olc::vf2d _position){
 
 void
 LayerBackground::LoadLayer(){
-    std::cout << path << std::endl;
     olc::Sprite *spr = new olc::Sprite(path);
-    level->level_sprites[name] = spr;
+    level->level_sprites.emplace(std::make_pair(name, spr)) = spr;
     level->map_size = spr->Size();
-    std::cout << "loading decal now..." << std::endl;
+
     olc::Decal *dec = new olc::Decal(spr);
-    level->level_decals[name] = dec;
+    level->level_decals.emplace(std::make_pair(name, dec)) = dec;
 }
 
 void
