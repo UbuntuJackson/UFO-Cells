@@ -7,6 +7,11 @@
 #include "layer_terrain.h"
 #include "actor_info.h"
 
+#include <fstream>
+#include <iostream>
+#include "../../external/cJSON.h"
+#include "../../src/ufo/file_utils.h"
+
 Level::Level() : loading_progress{0}{}
 
 Layer*
