@@ -13,11 +13,14 @@ StackBasedStateMachine::ResetActiveStateInStack(){
 
 void
 StackBasedStateMachine::RemoveActiveStateInStack(){
-    state_stack.pop_back();
+    delete state_stack.pop_back();
 }
 
 void
 StackBasedStateMachine::EmptyStack(){
+    for(auto state : state_stack){
+        delete state;
+    }
     state_stack.clear();
 }
 
