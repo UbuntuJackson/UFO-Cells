@@ -11,6 +11,6 @@ void
 LevelLoader::Update(){
     if(!level->Load()) //Load can draw the image instead
     {
-        state_machine.RemoveActiveStateInStack();
+        state_machine->RemoveActiveStateInStack();
     }
 }
