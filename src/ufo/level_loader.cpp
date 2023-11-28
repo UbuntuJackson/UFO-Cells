@@ -9,7 +9,7 @@ LevelLoader::LevelLoader(StackBasedStateMachine* _state_machine ,Level* _level) 
 
 void
 LevelLoader::Update(){
-    if(!level.load()) //Load can draw the image instead
+    if(!level->load()) //Load can draw the image instead
     {
         state_machine.RemoveActiveStateInStack();
     }
