@@ -28,16 +28,16 @@ public:
     std::map<std::string, olc::Decal*> collision_layers;
     Level() = default;
     Level(std::string _path);
-    Layer* NewLayer(std::string _name, std::string _type, std::string _path);
-    Layer* NewLayer(std::string _name, std::string _type, std::vector<ActorInfo> _layer_info);
-    Layer* GetLayer(std::string _layer_name);
-    void NewActor(std::string _actor_type ,int _x, int _y, std::string _layer_tag);
+    virtual Layer* NewLayer(std::string _name, std::string _type, std::string _path);
+    virtual Layer* NewLayer(std::string _name, std::string _type, std::vector<ActorInfo> _layer_info);
+    virtual Layer* GetLayer(std::string _layer_name);
+    virtual void NewActor(std::string _actor_type ,int _x, int _y, std::string _layer_tag);
     void RemoveActor(int _actor_id);
     void DeferActorRemoval(int _actor_id);
     bool ReadLevelFromFile(std::string _path);
-    bool Load();
-    void Update();
-    void Draw(Camera* _camera);
+    virtual bool Load();
+    virtual void Update();
+    virtual void Draw(Camera* _camera);
 };
 
 #endif
