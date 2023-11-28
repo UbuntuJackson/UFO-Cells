@@ -1,11 +1,12 @@
 #ifndef STACK_BASED_STATE_MACHINE
 #define STACK_BASED_STATE_MACHINE
 #include <vector>
-#include "stack_based_state.h"
+
+class StackBasedState;
 
 class StackBasedStateMachine{
 public:
-    std::vector<StackBasedState> state_stack;
+    std::vector<StackBasedState*> state_stack;
     StackBasedStateMachine() = default;
     void AddStateToTopOfStack(StackBasedState* _state);
     void ResetActiveStateInStack();

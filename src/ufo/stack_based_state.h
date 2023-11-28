@@ -4,6 +4,7 @@
 class StackBasedStateMachine;
 
 class StackBasedState{
+public:
     StackBasedStateMachine* stack_machine;
     bool update_active;
     bool draw_active;
