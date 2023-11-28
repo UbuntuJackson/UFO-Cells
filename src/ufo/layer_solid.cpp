@@ -26,12 +26,12 @@ LayerSolid::GetPixel(olc::vf2d _position){
 void
 LayerSolid::LoadLayer(){
     olc::Sprite *spr = new olc::Sprite(path);
-    level->level_sprites.emplace(std::make_pair(name, spr));
+    level->level_sprites[name] = spr;
     level->map_size = spr->Size();
     std::cout << name << std::endl;
 
     olc::Decal *dec = new olc::Decal(spr);
-    level->level_decals.emplace(std::make_pair(name, dec));
+    level->level_decals[name] = dec;
 }
 
 void

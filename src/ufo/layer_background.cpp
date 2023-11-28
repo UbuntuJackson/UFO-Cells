@@ -23,10 +23,10 @@ void
 LayerBackground::LoadLayer(){
     olc::Sprite *spr = new olc::Sprite(path);
     std::cout << "does it crash here?" << std::endl;
-    level->level_sprites.emplace(std::make_pair(name, spr));
+    level->level_sprites[name] = spr;
     level->map_size = spr->Size();
     olc::Decal *dec = new olc::Decal(spr);
-    level->level_decals.emplace(std::make_pair(name, dec));
+    level->level_decals[name] = dec;
 }
 
 void
