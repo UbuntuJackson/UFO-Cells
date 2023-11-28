@@ -15,7 +15,7 @@
 Level::Level(Game* _game, std::string _path) :
     game{_game},
     loading_progress{0}{
-        ReadLevelFromFile(_path)
+        ReadLevelFromFile(_path);
     }
 
 Layer*
