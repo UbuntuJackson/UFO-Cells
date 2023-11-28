@@ -6,15 +6,17 @@
 #include "layer_solid.h"
 #include "layer_terrain.h"
 #include "actor_info.h"
-
+#include <string>
 #include <fstream>
 #include <iostream>
 #include "../../external/cJSON.h"
 #include "../../src/ufo/file_utils.h"
 
-Level::Level(Game* _game) :
+Level::Level(Game* _game, std::string _path) :
     game{_game},
-    loading_progress{0}{}
+    loading_progress{0}{
+        ReadLevelFromFile(_path)
+    }
 
 Layer*
 Level::NewLayer(std::string _name, std::string _type, std::string _path){
