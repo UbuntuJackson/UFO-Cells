@@ -19,11 +19,11 @@ LayerTerrain::GetPixel(olc::vf2d _position){
 void
 LayerTerrain::LoadLayer(){ //Pass it a map directly?
     olc::Sprite *spr = new olc::Sprite(path);
-    level->map_sprites[name] = spr;
+    level->level_sprites[name] = spr;
     level->map_size = spr->Size();
 
     olc::Decal *dec = new olc::Decal(spr);
-    level->map_decals[name] = dec;
+    level->level_decals[name] = dec;
 }
 
 void
@@ -33,5 +33,5 @@ void
 LayerTerrain::Draw(Camera* _camera){
     _camera->DrawDecal( //Give it camera instead of game?
             olc::vf2d(0.0f, 0.0f),
-            level->map_decals[name]);
+            level->level_decals[name]);
 }

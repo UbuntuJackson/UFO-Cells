@@ -20,7 +20,7 @@ public:
     std::vector<int> deferred_actor_removals;
 
     int loading_progress;
-    olc::vf2d level_size;
+    olc::vf2d map_size;
     std::string level_path;
     std::map<std::string ,olc::Sprite*> level_sprites;
     std::map<std::string, olc::Decal*> level_decals;
