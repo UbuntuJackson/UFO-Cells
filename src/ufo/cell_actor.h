@@ -5,7 +5,7 @@
 #include <vector>
 class Game;
 class Camera;
-class CellMap;
+class Level;
 class LayerActor;
 
 class CellActor{

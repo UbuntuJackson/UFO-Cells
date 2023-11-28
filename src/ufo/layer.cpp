@@ -2,7 +2,7 @@
 #include "game.h"
 #include "level.h"
 
-Layer::Layer(Level* _level, std::string _name, std::string _type) : map{_map}, name{_name}, type{_type}{}
+Layer::Layer(Level* _level, std::string _name, std::string _type) : level{_level}, name{_name}, type{_type}{}
 
 Layer::~Layer(){}
 
