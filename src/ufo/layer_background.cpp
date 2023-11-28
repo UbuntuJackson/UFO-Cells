@@ -24,7 +24,7 @@ LayerBackground::LoadLayer(){
     olc::Sprite *spr = new olc::Sprite(path);
     level->level_sprites.emplace(std::make_pair(name, spr));
     level->map_size = spr->Size();
-
+    std::cout << name << std::endl;
     olc::Decal *dec = new olc::Decal(spr);
     level->level_decals.emplace(std::make_pair(name, dec));
 }
