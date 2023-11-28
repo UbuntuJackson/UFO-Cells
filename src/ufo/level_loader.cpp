@@ -9,9 +9,9 @@ LevelLoader::LevelLoader(StackBasedStateMachine* _state_machine ,Level* _level) 
 
 void
 LevelLoader::Update(){
+    std::cout << "is this running" << std::endl;
     if(!level->Load()) //Load can draw the image instead
     {
-        std::cout << "is this running" << std::endl;
         state_machine->RemoveActiveStateInStack();
     }
 }
