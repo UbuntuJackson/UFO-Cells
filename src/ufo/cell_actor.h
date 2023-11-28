@@ -50,7 +50,7 @@ public:
     int IsOverlappingHeight(Level* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);
     int HeightUntilGround(Level* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);
     bool IsOverlappingOtherDecal(olc::Decal *_decal, olc::vf2d _position, olc::Decal *_other_decal, olc::vf2d _other_position, olc::Pixel _colour = olc::WHITE);
-    bool IsOverlappingSolid_Or_SemiSolid(CellMap* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position);
+    bool IsOverlappingSolid_Or_SemiSolid(Level* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position);
 
     virtual void AdjustCollisionX(Level* _map);
     virtual void AdjustCollisionY(Level* _map);
