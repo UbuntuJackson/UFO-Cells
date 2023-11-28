@@ -26,7 +26,7 @@ Level::NewLayer(std::string _name, std::string _type, std::string _path){
 Layer*
 Level::NewLayer(std::string _name, std::string _type, std::vector<ActorInfo> _layer_info){
     if(_type == "actor"){
-        return new LayerActor(this ,_name, _type, _layer_info, registry);
+        return new LayerActor(this ,_name, _type, _layer_info);
     }
 }
 
