@@ -27,6 +27,7 @@ public:
     std::vector<Layer*> layers;
     std::vector<olc::Decal*> visible_layers;
     std::map<std::string, olc::Decal*> collision_layers;
+    Level() = default;
     Level(Game* _game, std::string _path);
     Layer* NewLayer(std::string _name, std::string _type, std::string _path);
     Layer* NewLayer(std::string _name, std::string _type, std::vector<ActorInfo> _layer_info);
