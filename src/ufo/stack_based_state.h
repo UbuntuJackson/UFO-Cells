@@ -5,7 +5,7 @@ class StackBasedStateMachine;
 
 class StackBasedState{
 public:
-    StackBasedStateMachine* stack_machine;
+    StackBasedStateMachine* state_machine;
     bool update_active;
     bool draw_active;
     StackBasedState() = default;
