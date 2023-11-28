@@ -114,6 +114,7 @@ Level::ReadLevelFromFile(std::string _path){
 bool
 Level::Load(){
     if(loading_progress < layers.size()){
+        std::cout << loading_progress << std::endl;
         layers[loading_progress]->LoadLayer();
         loading_progress++;
         return true;
