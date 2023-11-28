@@ -46,17 +46,17 @@ public:
 
     int GetID();
 
-    bool IsOverlapping(CellMap* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);
-    int IsOverlappingHeight(CellMap* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);
-    int HeightUntilGround(CellMap* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);
+    bool IsOverlapping(Level* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);
+    int IsOverlappingHeight(Level* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);
+    int HeightUntilGround(Level* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);
     bool IsOverlappingOtherDecal(olc::Decal *_decal, olc::vf2d _position, olc::Decal *_other_decal, olc::vf2d _other_position, olc::Pixel _colour = olc::WHITE);
     bool IsOverlappingSolid_Or_SemiSolid(CellMap* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position);
 
-    virtual void AdjustCollisionX(CellMap* _map);
-    virtual void AdjustCollisionY(CellMap* _map);
-    virtual void AdjustDownSlope(CellMap* _map);
-    virtual void ApplyUpSlope(CellMap* _map);
-    virtual void ApplyUpSlope_SemiSolid(CellMap* _map);
+    virtual void AdjustCollisionX(Level* _map);
+    virtual void AdjustCollisionY(Level* _map);
+    virtual void AdjustDownSlope(Level* _map);
+    virtual void ApplyUpSlope(Level* _map);
+    virtual void ApplyUpSlope_SemiSolid(Level* _map);
     virtual void AdjustEnteredDynamicSolidX(LayerActor* _act_layer);
     virtual void AdjustEnteredDynamicSolidY(LayerActor* _act_layer);
     virtual void AdjustEnterPseudoStaticSolidX(LayerActor* _act_layer);
@@ -66,10 +66,10 @@ public:
     virtual bool IsBeingEntered(olc::vf2d _position, olc::vf2d _delta_position, int _direction, std::string _mask);
     olc::Pixel StringToColour(std::string _colour_name);
     bool IsAlreadyInSolid(std::string _colour_name);
-    void UpdateSemiSolidOverlapStatus(CellMap* _map);
+    void UpdateSemiSolidOverlapStatus(Level* _map);
     void CheckSemiSolidOverlapStatus(olc::vf2d _position);
-    virtual void ApplyCollisionNaive(CellMap* _map);
-    virtual void ApplyCollision(CellMap* _map);
+    virtual void ApplyCollisionNaive(Level* _map);
+    virtual void ApplyCollision(Level* _map);
 
     virtual void Update();
     virtual void Draw(Camera* _camera);
