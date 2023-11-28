@@ -21,12 +21,11 @@ LayerBackground::GetPixel(olc::vf2d _position){
 
 void
 LayerBackground::LoadLayer(){
-    std::cout << name << " " << path << std::endl;
+
     olc::Sprite *spr = new olc::Sprite(path);
+    std::cout << "does it crash here?" << std::endl;
     level->level_sprites.emplace(std::make_pair(name, spr));
-    std::cout << level->level_decals.size() << std::endl;
     level->map_size = spr->Size();
-    std::cout << name << std::endl;
     olc::Decal *dec = new olc::Decal(spr);
     level->level_decals.emplace(std::make_pair(name, dec));
 }
