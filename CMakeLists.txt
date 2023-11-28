@@ -36,7 +36,6 @@ set(
     src/scripting_utils/squirrel_interface.cpp
     src/scripting/wrapper.cpp
     src/ufo/player_ray.cpp
-    src/ufo/type_registry.cpp
     src/ufo/level.cpp
     src/ufo/level_loader.cpp
     src/ufo/stack_based_state_machine.cpp
