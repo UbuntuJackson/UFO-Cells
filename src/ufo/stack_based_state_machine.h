@@ -4,6 +4,7 @@
 #include "stack_based_state.h"
 
 class StackBasedStateMachine{
+public:
     std::vector<StackBasedState> state_stack;
     StackBasedStateMachine() = default;
     void AddStateToTopOfStack(StackBasedState* _state);
