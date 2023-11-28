@@ -3,6 +3,7 @@
 #include "level.h"
 #include "camera.h"
 #include <string>
+#include <iostream>
 
 LayerBackground::LayerBackground(Level* _level ,std::string _name, std::string _type, std::string _path) : Layer(_level ,_name, _type), path{_path}{}
 
@@ -23,7 +24,7 @@ LayerBackground::LoadLayer(){
     olc::Sprite *spr = new olc::Sprite(path);
     level->level_sprites[name] = spr;
     level->map_size = spr->Size();
-
+    std::cout << "loading decal now..." << std::endl;
     olc::Decal *dec = new olc::Decal(spr);
     level->level_decals[name] = dec;
 }
