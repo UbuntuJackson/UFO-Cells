@@ -12,7 +12,9 @@
 #include "../../external/cJSON.h"
 #include "../../src/ufo/file_utils.h"
 
-Level::Level() : loading_progress{0}{}
+Level::Level(Game* _game) :
+    game{_game},
+    loading_progress{0}{}
 
 Layer*
 Level::NewLayer(std::string _name, std::string _type, std::string _path){
