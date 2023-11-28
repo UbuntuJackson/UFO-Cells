@@ -3,6 +3,9 @@
 #include <string>
 #include "stack_based_state.h"
 #include "stack_based_state_machine.h"
+
+class Level;
+
 class StatePlay;
 class LevelLoader : public StackBasedState{
     Level* _level;
