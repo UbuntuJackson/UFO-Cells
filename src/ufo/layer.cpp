@@ -1,7 +1,8 @@
 #include "layer.h"
 #include "game.h"
+#include "level.h"
 
-Layer::Layer(CellMap* _map, std::string _name, std::string _type) : map{_map}, name{_name}, type{_type}{}
+Layer::Layer(Level* _level, std::string _name, std::string _type) : map{_map}, name{_name}, type{_type}{}
 
 Layer::~Layer(){}
 

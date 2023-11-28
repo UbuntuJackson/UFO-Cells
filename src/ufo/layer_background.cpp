@@ -1,10 +1,10 @@
 #include "layer_background.h"
 #include "layer.h"
-#include "cellmap.h"
+#include "level.h"
 #include "camera.h"
 #include <string>
 
-LayerBackground::LayerBackground(CellMap* _map ,std::string _name, std::string _type, std::string _path) : Layer(_map ,_name, _type), path{_path}{}
+LayerBackground::LayerBackground(Level* _level ,std::string _name, std::string _type, std::string _path) : Layer(_level ,_name, _type), path{_path}{}
 
 /*olc::Pixel
 LayerBackground::GetPixel(olc::vf2d _position){
@@ -21,11 +21,11 @@ void
 LayerBackground::LoadLayer(){
     std::cout << path << std::endl;
     olc::Sprite *spr = new olc::Sprite(path);
-    map->map_sprites[name] = spr;
-    map->map_size = spr->Size();
+    level->map_sprites[name] = spr;
+    level->map_size = spr->Size();
 
     olc::Decal *dec = new olc::Decal(spr);
-    map->map_decals[name] = dec;
+    level->map_decals[name] = dec;
 }
 
 void
@@ -35,5 +35,5 @@ void
 LayerBackground::Draw(Camera* _camera){
     _camera->DrawDecal(
             olc::vf2d(0.0f, 0.0f),
-            map->map_decals[name]);
+            level->map_decals[name]);
 }

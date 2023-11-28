@@ -4,19 +4,19 @@
 #include <string>
 
 class Game;
-class CellMap;
+class Level;
 class Camera;
 
 class Layer{
 public:
     //Game* game; //Have CellMap* map instead of game
-    CellMap* map;
+    Level* level;
 
     std::string name;
     std::string type;
     std::string visible;
     Layer() = default;
-    Layer(CellMap* _map,std::string _name, std::string _type);
+    Layer(Level* _level,std::string _name, std::string _type);
     virtual ~Layer();
     virtual void LoadLayer();
     virtual void Update();

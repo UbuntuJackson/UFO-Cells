@@ -2,12 +2,12 @@
 #include "layer_solid.h"
 #include <cmath>
 #include <string>
-#include "cellmap.h"
+#include "level.h"
 #include "camera.h"
 
 //maybe put strings in layer vector instead that refers to keys in a map with <string, Layer>
 
-LayerSolid::LayerSolid(CellMap* _map ,std::string _name, std::string _type, std::string _path) : Layer( _map ,_name, _type), path{_path}{}
+LayerSolid::LayerSolid(Level* _level ,std::string _name, std::string _type, std::string _path) : Layer( _level ,_name, _type), path{_path}{}
 
 /*olc::Pixel
 LayerSolid::GetPixel(olc::vf2d _position){
@@ -23,11 +23,11 @@ LayerSolid::GetPixel(olc::vf2d _position){
 void
 LayerSolid::LoadLayer(){
     olc::Sprite *spr = new olc::Sprite(path);
-    map->map_sprites[name] = spr;
-    map->map_size = spr->Size();
+    level->map_sprites[name] = spr;
+    level->map_size = spr->Size();
 
     olc::Decal *dec = new olc::Decal(spr);
-    map->map_decals[name] = dec;
+    level->map_decals[name] = dec;
 }
 
 void
