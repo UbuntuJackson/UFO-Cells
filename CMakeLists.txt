@@ -35,7 +35,6 @@ set(
     src/squirrel/squirrel_error.cpp
     src/scripting_utils/squirrel_interface.cpp
     src/scripting/wrapper.cpp
-    src/ufo/ufo_load.cpp
     src/ufo/player_ray.cpp
     src/ufo/type_registry.cpp
     src/ufo/level.cpp
