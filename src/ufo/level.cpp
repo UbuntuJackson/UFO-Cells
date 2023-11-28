@@ -81,7 +81,7 @@ Level::ReadLevelFromFile(std::string _path){
         std::string type = cJSON_GetObjectItemCaseSensitive(item, "type") -> valuestring;
         if(category == "other"){
             std::string path = cJSON_GetObjectItemCaseSensitive(item, "path") -> valuestring;
-            map->layers.push_back(NewLayer(name,type,path));
+            layers.push_back(NewLayer(name,type,path));
             std::cout << type << std::endl;
             std::cout << name << std::endl;
             std::cout << path << std::endl;
