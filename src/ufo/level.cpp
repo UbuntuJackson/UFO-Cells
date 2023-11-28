@@ -12,8 +12,7 @@
 #include "../../external/cJSON.h"
 #include "../../src/ufo/file_utils.h"
 
-Level::Level(Game* _game, std::string _path) :
-    game{_game},
+Level::Level(std::string _path) :
     loading_progress{0}{
         ReadLevelFromFile(_path);
     }

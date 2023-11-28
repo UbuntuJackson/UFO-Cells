@@ -21,7 +21,6 @@ LayerBackground::GetPixel(olc::vf2d _position){
 
 void
 LayerBackground::LoadLayer(){
-
     olc::Sprite *spr = new olc::Sprite(path);
     std::cout << "does it crash here?" << std::endl;
     level->level_sprites.emplace(std::make_pair(name, spr));
