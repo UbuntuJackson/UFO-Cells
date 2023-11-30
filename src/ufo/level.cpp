@@ -121,6 +121,9 @@ Level::Load(){
     return false;
 }
 
+bool
+Level::OnLoadFinished(){}
+
 void
 Level::Update(){
     deferred_actor_removals.clear();
