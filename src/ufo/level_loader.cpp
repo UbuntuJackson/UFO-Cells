@@ -12,6 +12,7 @@ LevelLoader::Update(){
     std::cout << "is this running" << std::endl;
     if(!level->Load()) //Load can draw the image instead
     {
+        level->OnLoadFinished();
         state_machine->RemoveActiveStateInStack();
     }
 }
