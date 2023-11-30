@@ -121,7 +121,7 @@ Level::Load(){
     return false;
 }
 
-bool
+void
 Level::OnLoadFinished(){}
 
 void

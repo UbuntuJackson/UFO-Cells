@@ -36,7 +36,7 @@ public:
     void DeferActorRemoval(int _actor_id);
     bool ReadLevelFromFile(std::string _path);
     virtual bool Load();
-    virtual bool OnLoadFinished();
+    virtual void OnLoadFinished();
     virtual void Update();
     virtual void Draw(Camera* _camera);
 };
