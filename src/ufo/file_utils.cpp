@@ -22,3 +22,8 @@ std::string ReadFileToString(std::string _path){
     ifs.close();
     return file_from_stream;
 }
+
+bool FileExists(std::string _path){
+    std::ifstream ifs(_path.c_str());
+    return ifs.good();
+}
