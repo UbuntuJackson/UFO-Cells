@@ -9,8 +9,16 @@ std::string PutFileIntoString(std::ifstream& in) {
     return sstr.str();
 }
 
-std::string WriteFile(std::string _text, std::string _filename){
+void WriteFileFromString(std::string _text, std::string _filename){
     std::ofstream outfile(_filename);
     outfile << _text << std::endl;
     outfile.close();
+}
+
+std::string ReadFileToString(std::string _path){
+    std::ifstream ifs;
+    ifs.open(_path);
+    std::string file_from_stream = PutFileIntoString(ifs);
+    ifs.close();
+    return file_from_stream;
 }

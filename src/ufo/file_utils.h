@@ -6,5 +6,6 @@
 #include <fstream>
 
 std::string PutFileIntoString(std::ifstream& in);
-std::string WriteFile(std::string _text, std::string _filename);
+void WriteFileFromString(std::string _text, std::string _filename);
+std::string ReadFileToString(std::string _path);
 #endif
