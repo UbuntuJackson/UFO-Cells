@@ -40,7 +40,7 @@ set(
     src/ufo/level_loader.cpp
     src/ufo/stack_based_state_machine.cpp
     src/ufo/stack_based_state.cpp
-    src/ufo/json_inteface.cpp
+    src/ufo/json_interface.cpp
     external/cJSON.c
 )
 
