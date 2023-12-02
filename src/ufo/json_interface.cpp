@@ -8,7 +8,7 @@ namespace ujson{
         return cJSON_GetObjectItemCaseSensitive(_obj, _name);
     }
     int ArrayLen(cJSON* _obj){
-        return _obj-> cJSON_GetArraySize(_obj);
+        return cJSON_GetArraySize(_obj);
     }
     cJSON* GetElement(cJSON* _obj, int _index){
         return cJSON_GetArrayItem(_obj, _index);
