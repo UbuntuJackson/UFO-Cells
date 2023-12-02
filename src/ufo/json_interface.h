@@ -14,7 +14,7 @@ namespace ujson{
         cJSON *member;
         JsonNode(std::string _path) : member{JsonParse(_path)}{}
         JsonNode(cJSON *_j) : member{_j}{}
-        ~JsonNode(){cJSON_Delete(member);}
+        void JsonNodeDelete(){cJSON_Delete(member);}
         int GetMember(int _){
             return member->valueint;
         }
