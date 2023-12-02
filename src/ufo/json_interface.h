@@ -25,7 +25,7 @@ namespace ujson{
         std::vector<JsonNode> GetMember(std::vector<JsonNode> _){
             std::vector<JsonNode> v;
             for(int i = 0; i < ArrayLen(member); i++){
-                v.push_back(JsonNode(GetElement(i)));
+                v.push_back(JsonNode(GetElement(member, i)));
             }
             return v;
         }
