@@ -2,6 +2,7 @@
 #define JSON_INTERFACE_H
 #include "../../external/cJSON.h"
 #include <string>
+#include <vector>
 namespace ujson{
     cJSON* JsonParse(std::string _path);
     cJSON* GetObject(cJSON* _obj, std::string _name);
