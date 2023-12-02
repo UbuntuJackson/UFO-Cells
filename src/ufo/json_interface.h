@@ -30,8 +30,8 @@ namespace ujson{
             return v;
         }
 
-        JsonNode GetObject(std::string _name){
-            return JsonNode(this->GetObject(member, _name));
+        JsonNode GetJsonNode(std::string _name){
+            return JsonNode(GetObject(member, _name));
         }
 
         template <typename T>
