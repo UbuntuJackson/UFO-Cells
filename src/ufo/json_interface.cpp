@@ -1,5 +1,6 @@
 #include "json_interface.h"
 #include "../../external/cJSON.h"
+#include <string>
 namespace ujson{
     cJSON* JsonParse(std::string _path){
         return cJSON_Parse(_path.c_str());
