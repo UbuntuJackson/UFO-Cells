@@ -6,7 +6,7 @@ namespace ujson{
     cJSON* JsonParse(std::string _path);
     cJSON* GetObject(cJSON* _obj, std::string _name);
     int ArrayLen(cJSON* _obj);
-    cJSON* GetElement(cJSON* _obj);
+    cJSON* GetElement(cJSON* _obj, int _index);
     
     class JsonNode{
     public:
@@ -28,7 +28,7 @@ namespace ujson{
             }
             return v;
         }
-        
+
         JsonNode GetObject(std::string _name){
             return JsonNode(GetObject(member, _name));
         }
