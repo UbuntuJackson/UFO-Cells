@@ -5,7 +5,7 @@ namespace ujson{
         return cJSON_Parse(_path.c_str());
     }
     cJSON* GetObject(cJSON* _obj, std::string _name){
-        return _obj->cJSON_GetObjectItemCaseSensitive(_name);
+        return cJSON_GetObjectItemCaseSensitive(_obj, _name);
     }
     int ArrayLen(cJSON* _obj){
         return _obj-> cJSON_GetArraySize(_obj);
