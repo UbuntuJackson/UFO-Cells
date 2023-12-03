@@ -30,6 +30,6 @@ namespace ujson{
         cJSON_AddItemToArray(_obj_a, _obj_b);
     }
     void AddItemToObject(cJSON* _obj_a, std::string _name, cJSON* _obj_b){
-        cJSON_AddItemToObject(_obj_a, _name.c_str(), _obj_b)
+        cJSON_AddItemToObject(_obj_a, _name.c_str(), _obj_b);
     }
 }
