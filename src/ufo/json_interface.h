@@ -60,12 +60,15 @@ namespace ujson{
     };
 
     class JsonNodeString : public JsonNode{
+    public:
         JsonNodeString(std::string _s) : member{CreateString(std::string _s)}{}
     };
     class JsonNodeNumber : public JsonNode{
+    public:
         JsonNodeNumber(double _num) : member{CreateNumber(_num)}{}
     };
     class JsonNodeArray : public JsonNode{
+    public:
         JsonNodeArray() : member{CreateArray()}{}
     };
 }
