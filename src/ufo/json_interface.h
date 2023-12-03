@@ -58,5 +58,15 @@ namespace ujson{
             AddItemToObject(member, _s, _n->member);
         }
     };
+
+    class JsonNodeString : public JsonNode{
+        JsonNodeString(std::string _s) : member{CreateString(std::string _s)}{}
+    };
+    class JsonNodeNumber : public JsonNode{
+        JsonNodeNumber(double _num) : member{CreateNumber(_num)}{}
+    };
+    class JsonNodeArray : public JsonNode{
+        JsonNodeArray() : member{CreateArray()}{}
+    };
 }
 #endif
