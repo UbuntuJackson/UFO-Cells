@@ -18,9 +18,9 @@ namespace ujson{
     class JsonNode{
     public:
         cJSON *member;
-        JsonNode<string>(std::string _s) : member{CreateString(std::string _s)}{}
-        JsonNode<double>(double _num) : member{CreateNumber(_num)}{}
-        JsonNode<std::vector<JsonNode*>>() : member{CreateArray()}{}
+        //JsonNode<string>(std::string _s) : member{CreateString(std::string _s)}{}
+        //JsonNode<double>(double _num) : member{CreateNumber(_num)}{}
+        //JsonNode<std::vector<JsonNode*>>() : member{CreateArray()}{}
 
         JsonNode(std::string _path) : member{JsonParse(_path)}{}
         JsonNode(cJSON *_j) : member{_j}{}
