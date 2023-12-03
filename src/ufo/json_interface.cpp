@@ -27,9 +27,9 @@ namespace ujson{
         return cJSON_CreateArray();
     }
     void AddItemToArray(cJSON* _obj_a, cJSON* _obj_b){
-        cJSON_AddItemToArray(_obj, _obj);
+        cJSON_AddItemToArray(_obj_a, _obj_b);
     }
     void AddItemToObject(cJSON* _obj_a, std::string _name, cJSON* _obj_b){
-        cJSON_AddItemToObject(_obj, _name, _obj)
+        cJSON_AddItemToObject(_obj_a, _name, _obj_b)
     }
 }
