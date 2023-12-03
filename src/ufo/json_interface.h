@@ -61,15 +61,15 @@ namespace ujson{
 
     class JsonNodeString : public JsonNode{
     public:
-        JsonNodeString(std::string _s) : member{CreateString(std::string _s)}{}
+        JsonNodeString(std::string _s) : JsonNode(CreateString(std::string _s)){}
     };
     class JsonNodeNumber : public JsonNode{
     public:
-        JsonNodeNumber(double _num) : member{CreateNumber(_num)}{}
+        JsonNodeNumber(double _num) : JsonNode(CreateNumber(_num)){}
     };
     class JsonNodeArray : public JsonNode{
     public:
-        JsonNodeArray() : member{CreateArray()}{}
+        JsonNodeArray() : JsonNode(CreateArray()){}
     };
 }
 #endif
