@@ -14,4 +14,22 @@ namespace ujson{
     cJSON* GetElement(cJSON* _obj, int _index){
         return cJSON_GetArrayItem(_obj, _index);
     }
+    cJSON* CreateObject(){
+        return cJSON_CreateObject();
+    }
+    cJSON* CreateString(){
+        return cJSON_CreateString();
+    }
+    cJSON* CreateNumber(){
+        return cJSON_CreateNumber();
+    }
+    cJSON* CreateArray(){
+        return cJSON_CreateArray();
+    }
+    void AddItemToArray(cJSON* _obj_a, cJSON* _obj_b){
+        cJSON_AddItemToArray(_obj, _obj);
+    }
+    void AddItemToObject(cJSON* _obj_a, std::string _name, cJSON* _obj_b){
+        cJSON_AddItemToObject(_obj, _name, _obj)
+    }
 }

@@ -8,10 +8,23 @@ namespace ujson{
     cJSON* GetObject(cJSON* _obj, std::string _name);
     int ArrayLen(cJSON* _obj);
     cJSON* GetElement(cJSON* _obj, int _index);
+    cJSON* CreateObject();
+    cJSON* CreateString();
+    cJSON* CreateNumber();
+    cJSON* CreateArray();
+    void AddItemToArray(cJSON* _obj_a, cJSON* _obj_b);
+    void AddItemToObject(cJSON* _obj_a, std::string _name, cJSON* _obj_b);
     
     class JsonNode{
     public:
         cJSON *member;
+        template <>
+        JsonNode<string>() : member{CreateString()}{}
+        template <>
+        JsonNode<int>() : member{CreateNumber()}{}
+        template <>
+        JsonNode<std::vector<JsonNode>>() : member{CreateArray()}{}
+
         JsonNode(std::string _path) : member{JsonParse(_path)}{}
         JsonNode(cJSON *_j) : member{_j}{}
         void JsonNodeDelete(){cJSON_Delete(member);}
@@ -38,6 +51,14 @@ namespace ujson{
         template <typename T>
         T GetAs(){
             return GetMember(T());
+        }
+
+        void AddItemToArray(JsonNode* _n){
+            AddItemToArray(member, _n.member); //this object may or may not even be an array
+        }
+
+        void AddItemToObject(std::string _s, JsonNode* _n){
+            AddItemToObject(member, _s, _n.member);
         }
     };
 }
