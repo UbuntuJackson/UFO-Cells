@@ -61,7 +61,7 @@ namespace ujson{
 
     class JsonNodeString : public JsonNode{
     public:
-        JsonNodeString(std::string _s) : JsonNode(CreateString(std::string _s)){}
+        JsonNodeString(std::string _s) : JsonNode(CreateString(_s)){}
     };
     class JsonNodeNumber : public JsonNode{
     public:
