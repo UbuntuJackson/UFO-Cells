@@ -18,14 +18,9 @@ namespace ujson{
     class JsonNode{
     public:
         cJSON *member;
-        template <typename T>
-        JsonNode<T>() = delete;
-        template <>
         JsonNode<string>(std::string _s) : member{CreateString(std::string _s)}{}
-        template <>
         JsonNode<double>(double _num) : member{CreateNumber(_num)}{}
-        template <>
-        JsonNode<std::vector<JsonNode>>() : member{CreateArray()}{}
+        JsonNode<std::vector<JsonNode*>>() : member{CreateArray()}{}
 
         JsonNode(std::string _path) : member{JsonParse(_path)}{}
         JsonNode(cJSON *_j) : member{_j}{}
