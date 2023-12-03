@@ -9,8 +9,8 @@ namespace ujson{
     int ArrayLen(cJSON* _obj);
     cJSON* GetElement(cJSON* _obj, int _index);
     cJSON* CreateObject();
-    cJSON* CreateString();
-    cJSON* CreateNumber();
+    cJSON* CreateString(std::string _s);
+    cJSON* CreateNumber(double _num);
     cJSON* CreateArray();
     void AddItemToArray(cJSON* _obj_a, cJSON* _obj_b);
     void AddItemToObject(cJSON* _obj_a, std::string _name, cJSON* _obj_b);
@@ -19,9 +19,9 @@ namespace ujson{
     public:
         cJSON *member;
         template <>
-        JsonNode<string>() : member{CreateString()}{}
+        JsonNode<string>(std::string _s) : member{CreateString(std::string _s)}{}
         template <>
-        JsonNode<int>() : member{CreateNumber()}{}
+        JsonNode<double>(double _num) : member{CreateNumber(_num)}{}
         template <>
         JsonNode<std::vector<JsonNode>>() : member{CreateArray()}{}
 

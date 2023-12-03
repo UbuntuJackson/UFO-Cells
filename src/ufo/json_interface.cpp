@@ -17,11 +17,11 @@ namespace ujson{
     cJSON* CreateObject(){
         return cJSON_CreateObject();
     }
-    cJSON* CreateString(){
-        return cJSON_CreateString();
+    cJSON* CreateString(std::string _s){
+        return cJSON_CreateString(_s.c_str());
     }
-    cJSON* CreateNumber(){
-        return cJSON_CreateNumber();
+    cJSON* CreateNumber(double _num){
+        return cJSON_CreateNumber(_num);
     }
     cJSON* CreateArray(){
         return cJSON_CreateArray();
