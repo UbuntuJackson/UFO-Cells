@@ -50,11 +50,11 @@ namespace ujson{
             return GetMember(T());
         }
 
-        void AddItemToArray(JsonNode* _n){
+        void AddNodeToArray(JsonNode* _n){
             AddItemToArray(member, _n->member); //this object may or may not even be an array
         }
 
-        void AddItemToObject(std::string _s, JsonNode* _n){
+        void AddNodeToObject(std::string _s, JsonNode* _n){
             AddItemToObject(member, _s, _n->member);
         }
     };
