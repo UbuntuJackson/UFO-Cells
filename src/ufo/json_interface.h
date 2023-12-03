@@ -18,6 +18,8 @@ namespace ujson{
     class JsonNode{
     public:
         cJSON *member;
+        template <typename T>
+        JsonNode<T>() = delete;
         template <>
         JsonNode<string>(std::string _s) : member{CreateString(std::string _s)}{}
         template <>
