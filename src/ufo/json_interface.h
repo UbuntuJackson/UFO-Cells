@@ -57,6 +57,10 @@ namespace ujson{
         void AddNodeToObject(std::string _s, JsonNode* _n){
             AddItemToObject(member, _s, _n->member);
         }
+
+        void GetFileAsString(){
+            return cJson_Print(member);
+        }
     };
 
     class JsonNodeString : public JsonNode{
