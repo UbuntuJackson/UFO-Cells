@@ -11,6 +11,7 @@ namespace ujson{
     cJSON* CreateObject();
     cJSON* CreateString(std::string _s);
     cJSON* CreateNumber(double _num);
+    cJSON* CreateNumber(int _num);
     cJSON* CreateArray();
     void AddItemToArray(cJSON* _obj_a, cJSON* _obj_b);
     void AddItemToObject(cJSON* _obj_a, std::string _name, cJSON* _obj_b);
@@ -72,6 +73,7 @@ namespace ujson{
     class JsonNodeNumber : public JsonNode{
     public:
         JsonNodeNumber(double _num) : JsonNode(CreateNumber(_num)){}
+        JsonNodeNumber(int _num) : JsonNode(CreateNumber(_num)){}
     };
     class JsonNodeArray : public JsonNode{
     public:

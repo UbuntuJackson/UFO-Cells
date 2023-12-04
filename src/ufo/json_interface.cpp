@@ -23,6 +23,9 @@ namespace ujson{
     cJSON* CreateNumber(double _num){
         return cJSON_CreateNumber(_num);
     }
+    cJSON* CreateNumber(int _num){
+        return cJSON_CreateNumber(_num);
+    }
     cJSON* CreateArray(){
         return cJSON_CreateArray();
     }
