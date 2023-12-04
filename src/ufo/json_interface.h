@@ -63,6 +63,8 @@ namespace ujson{
         }
     };
 
+    //This is to make the json object you create a number, string or array specifically
+
     class JsonNodeString : public JsonNode{
     public:
         JsonNodeString(std::string _s) : JsonNode(CreateString(_s)){}
