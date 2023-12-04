@@ -59,7 +59,7 @@ namespace ujson{
         }
 
         void GetFileAsString(){
-            return cJson_Print(member);
+            return cJSON_Print(member);
         }
     };
 
