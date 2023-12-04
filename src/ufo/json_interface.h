@@ -58,7 +58,7 @@ namespace ujson{
             AddItemToObject(member, _s, _n->member);
         }
 
-        void GetFileAsString(){
+        std::string GetFileAsString(){
             return cJSON_Print(member);
         }
     };
