@@ -20,7 +20,7 @@ Assets::LoadDecal(std::string _path, std::string _name){
 
 olc::Decal*
 Assets::GetDecal(std::string _name){
-    return decals[_name];
+    return decals.at(_name);
 }
 
 void
