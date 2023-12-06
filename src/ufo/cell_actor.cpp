@@ -714,4 +714,4 @@ CellActor::ApplyCollision(Level* _map){
 
 void CellActor::Update(){}
 void CellActor::Draw(Camera* _camera){}
-void CellActor::GetType(){return "CellActor";}
+std::string CellActor::GetType(){return "CellActor";}
