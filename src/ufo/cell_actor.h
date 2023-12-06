@@ -73,7 +73,7 @@ public:
 
     virtual void Update();
     virtual void Draw(Camera* _camera);
-    virtual void GetType();
+    virtual std::string GetType();
 };
 
 #endif
