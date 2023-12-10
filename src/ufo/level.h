@@ -34,7 +34,7 @@ public:
     virtual void NewActor(std::string _actor_type ,int _x, int _y, std::string _layer_tag);
     void RemoveActor(int _actor_id);
     void DeferActorRemoval(int _actor_id);
-    bool ReadLevelFromFile(std::string _path);
+    virtual bool ReadLevelFromFile(std::string _path);
     virtual bool Load();
     virtual void OnLoadFinished();
     virtual void Update();
