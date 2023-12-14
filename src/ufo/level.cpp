@@ -13,9 +13,7 @@
 #include "../../src/ufo/file_utils.h"
 
 Level::Level(std::string _path) :
-    loading_progress{0}{
-        ReadLevelFromFile(_path);
-    }
+    loading_progress{0}{}
 
 Layer*
 Level::NewLayer(std::string _name, std::string _type, std::string _path){
