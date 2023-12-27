@@ -384,7 +384,7 @@ CellActor::ApplyUpSlope(Level* _map){
                 }
             }
         }
-        position.y = temporary_slope_adjustment_position.y;
+        if(!IsOverlapping(_map,mask_decal, solid_layer, temporary_slope_adjustment_position)) position.y = temporary_slope_adjustment_position.y;
     }
     
 }
