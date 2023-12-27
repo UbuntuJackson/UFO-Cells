@@ -363,7 +363,7 @@ CellActor::ApplyUpSlope(Level* _map){
                     temporary_slope_adjustment_position.y -= 1.0f;
                 }
             }
-            if(IsOverlapping(_map,mask_decal, solid_layer, temporary_slope_adjustment_position)) position.y = temporary_slope_adjustment_position.y;
+            if(!IsOverlapping(_map,mask_decal, solid_layer, temporary_slope_adjustment_position)) position.y = temporary_slope_adjustment_position.y;
         }
 
         if(velocity.x < 0.0f){
@@ -384,7 +384,7 @@ CellActor::ApplyUpSlope(Level* _map){
                     temporary_slope_adjustment_position.y -= 1.0f;
                 }
             }
-            if(IsOverlapping(_map,mask_decal, solid_layer, temporary_slope_adjustment_position)) position.y = temporary_slope_adjustment_position.y;
+            if(!IsOverlapping(_map,mask_decal, solid_layer, temporary_slope_adjustment_position)) position.y = temporary_slope_adjustment_position.y;
         }
     }
     
