@@ -39,7 +39,7 @@ LayerSolid::Update(){}
 
 void
 LayerSolid::Draw(Camera* _camera){
-    if(show_solid_layers){
+    if(level->show_solid_layers){
         _camera->DrawDecal(
             olc::vf2d(0.0f, 0.0f),
             level->level_decals[name]);
