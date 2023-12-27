@@ -41,5 +41,5 @@ void
 LayerSolid::Draw(Camera* _camera){
     _camera->DrawDecal(
             olc::vf2d(0.0f, 0.0f),
-            map->map_decals[name]);
+            level->map_decals[name]);
 }
