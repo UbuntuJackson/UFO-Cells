@@ -576,7 +576,7 @@ CellActor::ApplyCollisionNaive(Level* _map){
     former_position = position;
     position.x += velocity.x;
     ApplyUpSlope_SemiSolid(_map);
-    ApplyUpSlope(_map);
+    CB_ApplyUpSlope(_map);
     AdjustCollisionX(_map);
     UpdateSemiSolidOverlapStatus(_map);
     position.y += velocity.y;
@@ -690,7 +690,7 @@ CellActor::ApplyCollision(Level* _map){
     if(on_dynamic_solid) AdjustEnterPseudoStaticSolidX(act_layer);
 
     //HEIGHT ADJUSTMENT OVERLAP
-    CB_ApplyUpSlope(_map);
+    ApplyUpSlope(_map);
     // COLLISION ADJUSTMENT X-AXIS
     AdjustCollisionX(_map);
     //ThisVsDynamicSolid

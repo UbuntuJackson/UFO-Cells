@@ -55,6 +55,7 @@ public:
     virtual void AdjustCollisionX(Level* _map);
     virtual void AdjustCollisionY(Level* _map);
     virtual void AdjustDownSlope(Level* _map);
+    virtual void CB_ApplyUpSlope(Level* _lvl);
     virtual void ApplyUpSlope(Level* _map);
     virtual void ApplyUpSlope_SemiSolid(Level* _map);
     virtual void AdjustEnteredDynamicSolidX(LayerActor* _act_layer);
