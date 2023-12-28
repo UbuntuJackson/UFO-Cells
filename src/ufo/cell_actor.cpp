@@ -339,7 +339,9 @@ CellActor::CB_ApplyUpSlope(Level* _lvl){
                 position.y -= 1.0f;
                 
                 if(!IsOverlapping(_lvl, mask_decal, solid_layer, position)) break;
-                if(up_slope_range == step) position = before_height_adj;
+                if(up_slope_range-1 == step && IsOverlapping(_lvl, mask_decal, solid_layer, position)){
+                    position = before_height_adj;
+                }
             }
         }
     }
