@@ -323,6 +323,27 @@ CellActor::AdjustCollisionY(Level* _map){
 }
 
 void
+CellActor::CB_ApplyUpSlope(Level* _lvl){
+    if(IsOverlapping(_lvl, mask_decal, solid_layer, position)){
+        position = former_position;
+        float direction = 0.0f;
+        if(velocity.y > 0.0f) direction = 1.0f;
+        if(velocity.y < 0.0f) direction = -1.0f;
+
+        for(int x_step = 0; x_step < (int)(std::abs(velocity.y*direction)); x_step++){
+            olc::vf2d before_height_adj = position;        
+            position += direction;
+            for(int step = 0; step < up_slope_range; step++){
+                position.y -= 1.0f;
+                position.y = std::floor(position.y);
+                if(!IsOverlapping(_lvl, mask_decal, solid_layer, position)) break;
+                if(up_slope_range == step) position = before_height_adj;
+            }
+        }
+    }
+}
+
+void
 CellActor::ApplyUpSlope(Level* _map){
     //SOLID
     olc::vf2d temporary_slope_adjustment_position = former_position;
@@ -669,7 +690,7 @@ CellActor::ApplyCollision(Level* _map){
     if(on_dynamic_solid) AdjustEnterPseudoStaticSolidX(act_layer);
 
     //HEIGHT ADJUSTMENT OVERLAP
-    ApplyUpSlope(_map);
+    CB_ApplyUpSlope(_map);
     // COLLISION ADJUSTMENT X-AXIS
     AdjustCollisionX(_map);
     //ThisVsDynamicSolid
