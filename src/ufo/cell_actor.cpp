@@ -324,6 +324,8 @@ CellActor::AdjustCollisionY(Level* _map){
 
 void
 CellActor::CB_ApplyUpSlope(Level* _lvl){
+    int up_slope_range = 8;
+
     if(IsOverlapping(_lvl, mask_decal, solid_layer, position)){
         position = former_position;
         float direction = 0.0f;
