@@ -329,8 +329,8 @@ CellActor::CB_ApplyUpSlope(Level* _lvl){
     if(IsOverlapping(_lvl, mask_decal, solid_layer, position)){
         position = former_position;
         float direction = 0.0f;
-        if(velocity.y > 0.0f) direction = 1.0f;
-        if(velocity.y < 0.0f) direction = -1.0f;
+        if(velocity.x > 0.0f) direction = 1.0f;
+        if(velocity.x < 0.0f) direction = -1.0f;
 
         for(int x_step = 0; x_step < (int)(std::abs(velocity.y*direction)); x_step++){
             olc::vf2d before_height_adj = position;        
