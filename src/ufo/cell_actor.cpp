@@ -580,7 +580,7 @@ CellActor::ApplyCollisionNaive(Level* _map){
     former_position = position;
     position.x += velocity.x;
     ApplyUpSlope_SemiSolid(_map);
-    CB_ApplyUpSlope(_map);
+    //CB_ApplyUpSlope(_map);
     AdjustCollisionX(_map);
     UpdateSemiSolidOverlapStatus(_map);
     position.y += velocity.y;
