@@ -500,6 +500,25 @@ CellActor::ApplyDownSlope_SemiSolid(CellMap* _map){
 }*/
 
 void
+CellActor::CB_AdjustDownSlope(Level* _lvl){
+    int down_slope_range = 8;
+    if(!IsOverlapping(_map, mask_decal, solid_layer, olc::vf2d(position.x, position.y + 1.0f), olc::WHITE)){
+        for(int i= 0; i < down_slope_range; i++){
+            olc::vf2d before_down_slope_adj = position;
+            if(!IsOverlapping(_map, mask_decal, solid_layer, olc::vf2d(position.x, position.y + 1.0f), olc::WHITE)){
+                position.y += 1.0f;
+            }
+            else{
+                break;
+            }
+            if(i == down_slope_range-1 && IsOverlapping(_map, mask_decal, solid_layer, position, olc::WHITE)){
+                position = before_down_slope_adj;
+            }
+        }
+    }
+}
+
+void
 CellActor::AdjustDownSlope(Level* _map){
     //SEMI SOLID HEIGHT ADJUSTMENT SNAP_TO_GROUND
     if(was_grounded == true && is_grounded == false && velocity.y > 0.0f){
@@ -580,7 +599,7 @@ CellActor::ApplyCollisionNaive(Level* _map){
     former_position = position;
     position.x += velocity.x;
     ApplyUpSlope_SemiSolid(_map);
-    //CB_ApplyUpSlope(_map);
+    CB_ApplyUpSlope(_map);
     AdjustCollisionX(_map);
     UpdateSemiSolidOverlapStatus(_map);
     position.y += velocity.y;
