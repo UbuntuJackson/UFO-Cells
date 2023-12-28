@@ -579,13 +579,13 @@ void
 CellActor::ApplyCollisionNaive(Level* _map){
     former_position = position;
     position.x += velocity.x;
-    ApplyUpSlope_SemiSolid(_map);
+    //ApplyUpSlope_SemiSolid(_map);
     CB_ApplyUpSlope(_map);
     AdjustCollisionX(_map);
-    UpdateSemiSolidOverlapStatus(_map);
+    //UpdateSemiSolidOverlapStatus(_map);
     position.y += velocity.y;
     AdjustCollisionY(_map);
-    for(auto [k, v] : semisolid_colours_overlapped){
+    /*for(auto [k, v] : semisolid_colours_overlapped){
         if(IsOverlapping(_map,mask_decal, solid_layer, position, StringToColour(k)) &&
             velocity.y > 0.0f &&
             !v){
@@ -597,11 +597,11 @@ CellActor::ApplyCollisionNaive(Level* _map){
 
             velocity.y = 0.0f;
         }
-    }
+    }*/
     was_grounded = is_grounded;
     is_grounded = false;
 
-    for(auto [k, v] : semisolid_colours_overlapped){
+    /*for(auto [k, v] : semisolid_colours_overlapped){
         if(IsOverlapping(_map,mask_decal,solid_layer,{position.x,position.y+1.0f}, StringToColour(k))){
             is_grounded = true;        
         }
@@ -609,15 +609,15 @@ CellActor::ApplyCollisionNaive(Level* _map){
 
     if(IsOverlapping(_map,mask_decal,solid_layer,{position.x,position.y+1.0f})){
         is_grounded = true;        
-    }
+    }*/
 
     //AdjustDownSlope(_map);
 
-    for(auto [k, v] : semisolid_colours_overlapped){
+    /*for(auto [k, v] : semisolid_colours_overlapped){
         if(IsOverlapping(_map,mask_decal,solid_layer,{position.x,position.y+1.0f}, StringToColour(k))){
             is_grounded = true;        
         }
-    }
+    }*/
     if(IsOverlapping(_map,mask_decal,solid_layer,{position.x,position.y+1.0f})){
         is_grounded = true;        
     }
