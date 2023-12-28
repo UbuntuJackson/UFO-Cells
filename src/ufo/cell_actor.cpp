@@ -613,14 +613,14 @@ CellActor::ApplyCollisionNaive(Level* _map){
 
     AdjustDownSlope(_map);
 
-    /*for(auto [k, v] : semisolid_colours_overlapped){
+    for(auto [k, v] : semisolid_colours_overlapped){
         if(IsOverlapping(_map,mask_decal,solid_layer,{position.x,position.y+1.0f}, StringToColour(k))){
             is_grounded = true;        
         }
     }
     if(IsOverlapping(_map,mask_decal,solid_layer,{position.x,position.y+1.0f})){
         is_grounded = true;        
-    }*/
+    }
 
 }
 
