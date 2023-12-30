@@ -501,6 +501,8 @@ CellActor::ApplyDownSlope_SemiSolid(CellMap* _map){
 
 void
 CellActor::CB_AdjustDownSlope(Level* _lvl){
+    if(!(was_grounded == true && is_grounded == false && velocity.y > 0.0f)) return;
+
     int down_slope_range = 8;
     if(!IsOverlapping(_lvl, mask_decal, solid_layer, olc::vf2d(position.x, position.y + 1.0f), olc::WHITE)){
         for(int i= 0; i < down_slope_range; i++){
