@@ -19,6 +19,7 @@ public:
     bool play_input = false;
 
     bool running = true;
+    float game_time = 0.0f;
     float dt;
 
     Assets asset_manager; //Pass in this?
