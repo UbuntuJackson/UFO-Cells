@@ -1,34 +1,33 @@
 #include "timer.h"
+#include "game.h"
 
-Timer::Timer()
-: is_ticking{false},
-time_in_frames{0}
+Timer::Timer(Game* _game) :
+game{_game},
+period_in_seconds{0.0f}
 {
 
 }
 
 void
-Timer::Start(){
-    is_ticking = true;
+Timer::Start(float _period){
+    time_start_in_seconds = game->game_time;
+    time_end_in_seconds = time_start_in_seconds + period_in_seconds;
 }
 
-void
-Timer::Stop(){
-    is_ticking = false;
+float
+Timer::GetTimeleft(){
+    return time_end_in_seconds - game->game_time;
 }
 
-void
-Timer::Reset(){
-    Start();
-    time_in_frames = 0;
+float
+Timer::GetTimeSinceStart(){
+    return game->game_time - time_start_in_seconds;
 }
 
 bool
-Timer::Check(){
-    time_in_frames++;
-    if(time_in_frames <= 0){
-        Stop();
-        return false;
+Timer::TimeOut(){
+    if(game->game_time >= time_end_in_seconds){
+        return true;
     }
-    return true;
+    return false;
 }
