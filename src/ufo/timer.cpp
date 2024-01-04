@@ -9,9 +9,9 @@ period_in_seconds{0.0f}
 }
 
 void
-Timer::Start(float _period){
+Timer::Start(float _period_in_seconds){
     time_start_in_seconds = game->game_time;
-    time_end_in_seconds = time_start_in_seconds + period_in_seconds;
+    time_end_in_seconds = time_start_in_seconds + _period_in_seconds;
 }
 
 float

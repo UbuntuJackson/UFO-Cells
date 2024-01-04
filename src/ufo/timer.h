@@ -11,7 +11,7 @@ public:
     float period_in_seconds;
     Timer() = default;
     Timer(Game *_game);
-    void Start(float _period);
+    void Start(float _period_in_seconds);
     float GetTimeleft();
     float GetTimeSinceStart();
     bool TimeOut();
