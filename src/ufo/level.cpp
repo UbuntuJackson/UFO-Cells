@@ -128,7 +128,7 @@ Level::Update(){
     for(auto layer : layers){
         layer->Update();
     }
-    for(auto actor : new_actors){
+    for(auto &actor : new_actors){
         actors.push_back(actor);
     }
     new_actors.clear();
