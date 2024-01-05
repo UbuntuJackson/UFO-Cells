@@ -332,21 +332,18 @@ CellActor::CB_ApplyUpSlope(Level* _lvl){
         if(velocity.x > 0.0f) direction = 1.0f;
         if(velocity.x < 0.0f) direction = -1.0f;
 
+        //This loop is to iterate from start position to end position. The +1 is to make sure the distance isn't somehow rounded down.
         for(int x_step = 0; x_step < (int)(std::abs(velocity.x*direction)+1); x_step++){
             olc::vf2d before_height_adj = position;        
             position.x += direction;
             for(int step = 0; step < up_slope_range; step++){
                 position.y -= 1.0f;
-                
-                if(
-                    !IsOverlapping(_lvl, mask_decal, solid_layer, position) &&
-                    x_step == (int)(std::abs(velocity.x*direction)) &&
-                    step == up_slope_range-1
-                ){
+
+                //if able to resolve, the velocity is maintained
+                if(!IsOverlapping(_lvl, mask_decal, solid_layer, position)){
                     position.x += velocity.x;
                     break;
                 }
-                if(!IsOverlapping(_lvl, mask_decal, solid_layer, position)) break;
                 if(up_slope_range-1 == step && IsOverlapping(_lvl, mask_decal, solid_layer, position)){
                     position = before_height_adj;
                 }
