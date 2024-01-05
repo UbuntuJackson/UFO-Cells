@@ -338,7 +338,11 @@ CellActor::CB_ApplyUpSlope(Level* _lvl){
             for(int step = 0; step < up_slope_range; step++){
                 position.y -= 1.0f;
                 
-                if(!IsOverlapping(_lvl, mask_decal, solid_layer, position) && x_step == (int)(std::abs(velocity.x*direction)-1)){
+                if(
+                    !IsOverlapping(_lvl, mask_decal, solid_layer, position) &&
+                    x_step == (int)(std::abs(velocity.x*direction)-1) &&
+                    step == up_slope_range-1
+                ){
                     position.x += velocity.x;
                     break;
                 }
