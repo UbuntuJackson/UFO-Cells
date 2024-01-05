@@ -128,6 +128,10 @@ Level::Update(){
     for(auto layer : layers){
         layer->Update();
     }
+    for(auto actor : new_actors){
+        actors.push_back(actor);
+    }
+    new_actors.clear();
     for(auto act_id : deferred_actor_removals){
         RemoveActor(act_id);
     }
