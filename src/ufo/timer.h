@@ -1,3 +1,5 @@
+//Credit goes to the SuperTux timer class.
+
 #ifndef TIMER_H
 #define TIMER_H
 
