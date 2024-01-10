@@ -16,6 +16,7 @@ public:
     std::string decal_clicked;
     olc::vf2d position;
     olc::vf2d size;
+    Button() = default;
     Button(Game* _game, olc::vf2d _position, olc::vf2d _size);
     Button(Game* _game, olc::vf2d _position, std::string _decal_neutral, std::string _decal_hover, std::string _decal_clicked);
     bool Clicked();
