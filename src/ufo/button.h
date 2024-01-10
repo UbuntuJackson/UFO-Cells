@@ -3,6 +3,7 @@
 #include "rect.h"
 #include "../../external/olcPixelGameEngine.h"
 class Game;
+class Camera;
 
 class Button{
 public:
