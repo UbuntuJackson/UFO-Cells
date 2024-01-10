@@ -36,8 +36,8 @@ Button::Hover(){
 void
 Button::Draw(Camera* _camera){
     if(Hover()){
-        if(Clicked()) game->DrawDecal(position, game->asset_manager.GetDecal(decal_hover));
-        else game->DrawDecal(position, game->asset_manager.GetDecal(decal_clicked));
+        if(Clicked()) game->DrawDecal(position, game->asset_manager.GetDecal(decal_clicked));
+        else game->DrawDecal(position, game->asset_manager.GetDecal(decal_hover));
     }
     else{
         game->DrawDecal(position, game->asset_manager.GetDecal(decal_neutral));
