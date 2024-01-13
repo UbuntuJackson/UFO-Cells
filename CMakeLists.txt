@@ -49,8 +49,8 @@ target_include_directories(UFOCells PUBLIC src)
 
 #include(cmake/BuildProgramFile.cmake)
 
-target_link_libraries(UFOCells PUBLIC LibSquirrel)
-target_link_libraries(UFOCells PUBLIC LibSqstdlib)
+#target_link_libraries(UFOCells PUBLIC LibSquirrel)
+#target_link_libraries(UFOCells PUBLIC LibSqstdlib)
 
 # OpenGL
 set(OpenGL_GL_PREFERENCE LEGACY)
