@@ -31,10 +31,6 @@ public:
     //game control
     void Quit();
 
-    void SetState(std::string _state, std::string _data);
-
-    std::string GetStateData();
-
 };
 
 

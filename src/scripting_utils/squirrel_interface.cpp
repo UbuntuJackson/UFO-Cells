@@ -45,11 +45,3 @@ bool SquirrelInterface::RectangleVsPoint(float rx, float ry, float rw, float rh,
 void SquirrelInterface::Quit(){
     game->running = false;
 }
-
-void SquirrelInterface::SetState(std::string _state, std::string _data){
-    game->SetState(_state, _data);
-}
-
-std::string SquirrelInterface::GetStateData(){
-    return game->game_state->GetData();
-}
