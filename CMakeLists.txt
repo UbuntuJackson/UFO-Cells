@@ -31,7 +31,6 @@ set(
     src/ufo/layer_solid.cpp
     src/program/ufo_global.cpp
     src/ufo/timer.cpp
-    src/ufo/player_ray.cpp
     src/ufo/level.cpp
     src/ufo/level_loader.cpp
     src/ufo/stack_based_state_machine.cpp
