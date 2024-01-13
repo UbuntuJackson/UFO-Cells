@@ -20,11 +20,9 @@ set(
     src/ufo/colour_utils.cpp
     src/ufo/misc_math.cpp
     src/ufo/rect.cpp
-    src/ufo/cellmap.cpp
     src/ufo/file_utils.cpp
     src/ufo/camera.cpp
     src/ufo/mouse_control.cpp
-    src/ufo/state.cpp
     src/ufo/game.cpp
     src/ufo/layer.cpp
     src/ufo/layer_actor.cpp
