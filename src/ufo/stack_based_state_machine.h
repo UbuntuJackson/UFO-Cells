@@ -6,6 +6,7 @@ class StackBasedState;
 
 class StackBasedStateMachine{
 public:
+    //This stack could use some unique pointers
     std::vector<StackBasedState*> state_stack;
     StackBasedStateMachine() = default;
     void AddStateToTopOfStack(StackBasedState* _state);
