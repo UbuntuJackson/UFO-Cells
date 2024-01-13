@@ -30,11 +30,7 @@ set(
     src/ufo/layer_terrain.cpp
     src/ufo/layer_solid.cpp
     src/program/ufo_global.cpp
-    src/scripting/api.cpp
-    src/squirrel/squirrel_error.cpp
     src/ufo/timer.cpp
-    src/scripting_utils/squirrel_interface.cpp
-    src/scripting/wrapper.cpp
     src/ufo/player_ray.cpp
     src/ufo/level.cpp
     src/ufo/level_loader.cpp
@@ -44,9 +40,9 @@ set(
     external/cJSON.c
 )
 
-include(ExternalProject)
-include(cmake/ProvideSquirrel.cmake)
-include(cmake/BuildMiniswigWrapper.cmake)
+#include(ExternalProject)
+#include(cmake/ProvideSquirrel.cmake)
+#include(cmake/BuildMiniswigWrapper.cmake)
 
 add_library(UFOCells STATIC ${SRC})
 target_include_directories(UFOCells PUBLIC src)

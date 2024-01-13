@@ -3,7 +3,6 @@
 #include <map>
 #include <string>
 #include "../../external/olcPixelGameEngine.h"
-#include <squirrel.h>
 #include "../ufo/assets.h"
 #include "../ufo/cell_actor.h"
 #include "../ufo/camera.h"
@@ -11,7 +10,6 @@
 class Game : public olc::PixelGameEngine{
 public:
     std::string game_dir_name;
-    HSQUIRRELVM vm;
 
     bool record_input = true;
     bool play_input = false;
