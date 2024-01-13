@@ -6,10 +6,6 @@
 #include "api.h"
 #include <iostream>
 
-//game specific
-#include "../../games/dummy_test/dummy_test_game.h"
-#include "../../games/dummy_test/dummy.h"
-
 namespace UfoAPI{
     void PrintFunction(std::string s){std::cout << s << std::endl;}
     void LoadDecal(std::string _path){}
@@ -49,13 +45,5 @@ namespace UfoAPI{
     //game control
     void Quit(){
         UfoGlobal::squirrel_interface.game->running = false;
-    }
-
-    void SetState(std::string _state, std::string _data){
-        UfoGlobal::squirrel_interface.game->SetState(_state, _data);
-    }
-
-    std::string GetStateData(){
-        return UfoGlobal::squirrel_interface.game->game_state->GetData();
     }
 }

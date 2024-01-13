@@ -21,8 +21,6 @@ namespace UfoAPI{
     bool RectangleVsPoint(float rx, float ry, float rw, float rh, float px, float py);
     //Game control
     void Quit();
-    void SetState(std::string _state, std::string _data);
-    std::string GetStateData();
     //Game-specific
 }
 
