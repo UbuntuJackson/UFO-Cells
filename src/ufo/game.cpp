@@ -1,29 +1,11 @@
 #define OLC_PGE_APPLICATION
 #include "game.h"
-#include "state.h"
 #include <squirrel.h>
 #include <sqstdio.h>
 #include <sqstdsystem.h>
 #include <sqstdmath.h>
 #include <sqstdstring.h>
 #include "../scripting/wrapper.h"
-
-Game::Game(State* _game_state) :
-game_state{_game_state}
-{
-    sAppName = "UFO-Cells";
-    game_dir_name = "dummy_test";
-    vm = sq_open(1024);
-
-    sq_pushroottable(vm);
-    sqstd_register_iolib(vm);
-    sqstd_register_systemlib(vm);
-    sqstd_register_mathlib(vm);
-    sqstd_register_stringlib(vm);
-
-    UfoAPI::register_ufo_wrapper(vm);
-
-}
 
 Game::Game()
 {
