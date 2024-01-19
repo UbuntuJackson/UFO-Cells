@@ -11,10 +11,7 @@ class LayerActor;
 class CollisionBody{
 public:
     Game *game;
-    int id;
-    std::string layer_tag;
-
-    olc::vf2d position;
+    
     olc::vf2d former_position;
     olc::vf2d velocity;
     olc::vf2d size;
@@ -42,8 +39,6 @@ public:
 
     CollisionBody(int _id, olc::vf2d _position, Game *_game, std::string _layer_tag);
     CollisionBody(int _id, olc::vf2d _position, Game *_game, std::string _mask, std::string _layer_tag);
-
-    int GetID();
 
     bool IsOverlapping(Level* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);
     int IsOverlappingHeight(Level* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);

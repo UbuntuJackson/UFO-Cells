@@ -5,7 +5,7 @@
 Actor::Actor(int _id, olc::vf2d _position, std::string _layer_tag) : id{_id}, position{_position}, layer_tag{_layer_tag}{}
 
 int
-Actor::GetId(){
+Actor::GetID(){
     return id;
 }
 
@@ -15,7 +15,10 @@ Actor::Update(){}
 void
 Actor::Draw(Camera* _camera){}
 
+void
+Actor::Draw(){}
+
 std::string
 Actor::GetType(){
-    return "Actor"
+    return "Actor";
 }

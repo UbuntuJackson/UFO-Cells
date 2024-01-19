@@ -11,6 +11,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(
     SRC
+    src/ufo/actor.cpp
     src/ufo/animation.cpp
     src/ufo/assets.cpp
     src/ufo/button.cpp

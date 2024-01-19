@@ -9,37 +9,35 @@
 #include "layer_actor.h"
 #include "game.h"
 #include "../program/ufo_global.h"
+#include "actor.h"
 
 CollisionBody::CollisionBody(int _id , olc::vf2d _position, Game *_game, std::string _layer_tag) :
-    id{_id},
-    layer_tag{_layer_tag},
-    position{_position},
-    game{_game},
-    is_grounded{false},
-    was_grounded{false},
-    on_dynamic_solid{false},
-    snap_to_ground{6},
-    snap_up_range{16}
+Actor(_id, _position, _game),
+id{_id},
+layer_tag{_layer_tag},
+position{_position},
+game{_game},
+is_grounded{false},
+was_grounded{false},
+on_dynamic_solid{false},
+snap_to_ground{6},
+snap_up_range{16}
 {
 }
 
 CollisionBody::CollisionBody(int _id, olc::vf2d _position, Game *_game, std::string _mask, std::string _layer_tag) :
-    id{_id},
-    layer_tag{_layer_tag},
-    position{_position},
-    game{_game},
-    mask{_mask},
-    is_grounded{false},
-    was_grounded{false},
-    on_dynamic_solid{false},
-    snap_to_ground{6},
-    snap_up_range{16}
+Actor(_id, _position, _game),
+id{_id},
+layer_tag{_layer_tag},
+position{_position},
+game{_game},
+mask{_mask},
+is_grounded{false},
+was_grounded{false},
+on_dynamic_solid{false},
+snap_to_ground{6},
+snap_up_range{16}
 {
-}
-
-int
-CollisionBody::GetID(){
-    return id;
 }
 
 bool
