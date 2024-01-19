@@ -2,6 +2,7 @@
 #define STACK_BASED_STATE_MACHINE
 #include <vector>
 #include <memory>
+#include "stack_based_state.h"
 
 class StackBasedState;
 
