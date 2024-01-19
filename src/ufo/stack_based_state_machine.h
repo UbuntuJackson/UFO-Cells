@@ -4,8 +4,6 @@
 #include <memory>
 #include "stack_based_state.h"
 
-class StackBasedState;
-
 class StackBasedStateMachine{
 public:
     //This stack could use some unique pointers
