@@ -1,8 +1,9 @@
 #include "stack_based_state_machine.h"
 #include "stack_based_state.h"
+#include <memory>
 
 void
-StackBasedStateMachine::AddStateToTopOfStack(StackBasedState* _state){
+StackBasedStateMachine::AddStateToTopOfStack(std::unique_ptr<StackBasedState> _state){
 
 }
 
@@ -13,15 +14,11 @@ StackBasedStateMachine::ResetActiveStateInStack(){
 
 void
 StackBasedStateMachine::RemoveActiveStateInStack(){
-    delete state_stack[state_stack.size()-1];
     state_stack.pop_back();
 }
 
 void
 StackBasedStateMachine::EmptyStack(){
-    for(auto state : state_stack){
-        delete state;
-    }
     state_stack.clear();
 }
 
