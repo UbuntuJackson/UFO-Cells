@@ -23,10 +23,7 @@ snap_up_range{16}
 }
 
 CollisionBody::CollisionBody(int _id, olc::vf2d _position, Game *_game, std::string _mask, std::string _layer_tag) :
-Actor(_id, _position, _game),
-id{_id},
-layer_tag{_layer_tag},
-position{_position},
+Actor(_id, _position, _layer_tag),
 game{_game},
 mask{_mask},
 is_grounded{false},
