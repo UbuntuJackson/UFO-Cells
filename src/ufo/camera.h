@@ -2,7 +2,7 @@
 #define CAMERA_H
 #include <string>
 #include "../../external/olcPixelGameEngine.h"
-#include "cell_actor.h"
+#include "collision_body.h"
 #include "mouse_control.h"
 
 enum CameraStates{

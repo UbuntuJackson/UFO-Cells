@@ -1,4 +1,4 @@
-#include "cell_actor.h"
+#include "collision_body.h"
 #include "level.h"
 #include "colour_utils.h"
 #include <string>
@@ -10,7 +10,7 @@
 #include "game.h"
 #include "../program/ufo_global.h"
 
-CellActor::CellActor(int _id , olc::vf2d _position, Game *_game, std::string _layer_tag) :
+CollisionBody::CollisionBody(int _id , olc::vf2d _position, Game *_game, std::string _layer_tag) :
     id{_id},
     layer_tag{_layer_tag},
     position{_position},
@@ -23,7 +23,7 @@ CellActor::CellActor(int _id , olc::vf2d _position, Game *_game, std::string _la
 {
 }
 
-CellActor::CellActor(int _id, olc::vf2d _position, Game *_game, std::string _mask, std::string _layer_tag) :
+CollisionBody::CollisionBody(int _id, olc::vf2d _position, Game *_game, std::string _mask, std::string _layer_tag) :
     id{_id},
     layer_tag{_layer_tag},
     position{_position},
@@ -37,15 +37,13 @@ CellActor::CellActor(int _id, olc::vf2d _position, Game *_game, std::string _mas
 {
 }
 
-CellActor::~CellActor(){}
-
 int
-CellActor::GetID(){
+CollisionBody::GetID(){
     return id;
 }
 
 bool
-CellActor::IsOverlapping(Level* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour){
+CollisionBody::IsOverlapping(Level* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour){
 
     olc::Decal* collision_layer = _map->level_decals[_layer];
 
@@ -62,7 +60,7 @@ CellActor::IsOverlapping(Level* _map, olc::Decal *_decal, std::string _layer, ol
 }
 
 bool
-CellActor::IsOverlappingOtherDecal(olc::Decal *_decal, olc::vf2d _position, olc::Decal *_other_decal, olc::vf2d _other_position, olc::Pixel _colour){
+CollisionBody::IsOverlappingOtherDecal(olc::Decal *_decal, olc::vf2d _position, olc::Decal *_other_decal, olc::vf2d _other_position, olc::Pixel _colour){
 
     for(int y = int(_position.y); y < int(_position.y) + _decal->sprite->Size().y; y++){
         for(int x = int(_position.x); x < int(_position.x) + _decal->sprite->Size().x; x++){
@@ -77,7 +75,7 @@ CellActor::IsOverlappingOtherDecal(olc::Decal *_decal, olc::vf2d _position, olc:
 }
 
 bool
-CellActor::IsOverlappingSolid_Or_SemiSolid(Level* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position){
+CollisionBody::IsOverlappingSolid_Or_SemiSolid(Level* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position){
     for(auto [k, v] : semisolid_colours_overlapped){
         olc::Pixel colour = StringToColour(k);
         if(!IsOverlapping(_map, mask_decal, solid_layer, _position, colour) &&
@@ -92,7 +90,7 @@ CellActor::IsOverlappingSolid_Or_SemiSolid(Level* _map, olc::Decal *_decal, std:
 }
 
 int
-CellActor::IsOverlappingHeight(Level* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour){ //Pass in the map
+CollisionBody::IsOverlappingHeight(Level* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour){ //Pass in the map
 
     olc::Decal* collision_layer = _map->level_decals[_layer];
 
@@ -112,7 +110,7 @@ CellActor::IsOverlappingHeight(Level* _map, olc::Decal *_decal, std::string _lay
 //Used to make platforming type actors snap to ground as if they are walking down a slope, or stairs.
 //Do a comparison between the value returned by this function and snap_to_ground
 int
-CellActor::HeightUntilGround(Level* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour){
+CollisionBody::HeightUntilGround(Level* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour){
 
     olc::Decal* collision_layer = _map->level_decals[_layer];
 
@@ -133,7 +131,7 @@ CellActor::HeightUntilGround(Level* _map, olc::Decal *_decal, std::string _layer
 //can make a function that iterates through actor layers and makes use of this function
 
 void
-CellActor::AdjustEnterDynamicSolidX(LayerActor* _act_layer){
+CollisionBody::AdjustEnterDynamicSolidX(LayerActor* _act_layer){
     for(auto act : _act_layer->actors){
         olc::vf2d act_new_position = act->position;
         act_new_position.x = act->position.x + act->velocity.x;
@@ -158,7 +156,7 @@ CellActor::AdjustEnterDynamicSolidX(LayerActor* _act_layer){
 }
 
 void
-CellActor::AdjustEnterDynamicSolidY(LayerActor* _act_layer){
+CollisionBody::AdjustEnterDynamicSolidY(LayerActor* _act_layer){
     for(auto act : _act_layer->actors){
         olc::vf2d act_new_position = act->position + act->velocity; //Maybe check for a different position
 
@@ -181,7 +179,7 @@ CellActor::AdjustEnterDynamicSolidY(LayerActor* _act_layer){
 }
 
 void
-CellActor::AdjustEnterPseudoStaticSolidX(LayerActor* _act_layer){
+CollisionBody::AdjustEnterPseudoStaticSolidX(LayerActor* _act_layer){
     //We compare with the future state of DynamicSolid here to make sure we are out of collision by the end of the frame,
     //because if Player is relative to Dynamic solid, it is reasonable to emulate a scenario where both the x and y velocity is added
     //the behaviour should emulate that of a normal solid.
@@ -209,7 +207,7 @@ CellActor::AdjustEnterPseudoStaticSolidX(LayerActor* _act_layer){
 }
 
 void
-CellActor::AdjustEnterPseudoStaticSolidY(LayerActor* _act_layer){
+CollisionBody::AdjustEnterPseudoStaticSolidY(LayerActor* _act_layer){
     //We compare with the future state of DynamicSolid here to make sure we are out of collision by the end of the frame,
     //because if Player is relative to Dynamic solid, it is reasonable to emulate a scenario where both the x and y velocity is added
     //the behaviour should emulate that of a normal solid.
@@ -234,7 +232,7 @@ CellActor::AdjustEnterPseudoStaticSolidY(LayerActor* _act_layer){
 }
 
 void
-CellActor::AdjustEnteredDynamicSolidX(LayerActor* _act_layer){
+CollisionBody::AdjustEnteredDynamicSolidX(LayerActor* _act_layer){
     for(auto act : _act_layer->actors){
         olc::vf2d act_new_position = act->position;
         act_new_position.x = act->position.x + act->velocity.x; //Dynamic solid moves in along the X-axis
@@ -259,7 +257,7 @@ CellActor::AdjustEnteredDynamicSolidX(LayerActor* _act_layer){
 }
 
 void
-CellActor::AdjustEnteredDynamicSolidY(LayerActor* _act_layer){
+CollisionBody::AdjustEnteredDynamicSolidY(LayerActor* _act_layer){
     for(auto act : _act_layer->actors){
         olc::vf2d act_new_position = act->position + act->velocity; //Dynamic solid moves in along the X-axis
 
@@ -282,7 +280,7 @@ CellActor::AdjustEnteredDynamicSolidY(LayerActor* _act_layer){
 }
 
 void
-CellActor::AdjustCollisionX(Level* _map){ //What information should be passed in?
+CollisionBody::AdjustCollisionX(Level* _map){ //What information should be passed in?
     if(IsOverlapping(_map, mask_decal, solid_layer, position)){
         if(velocity.x > 0.0f){
             position.x = std::floor(position.x); //Do I need floor and ceil?
@@ -301,7 +299,7 @@ CellActor::AdjustCollisionX(Level* _map){ //What information should be passed in
 }
 
 void
-CellActor::AdjustCollisionY(Level* _map){
+CollisionBody::AdjustCollisionY(Level* _map){
     if(IsOverlapping(_map,mask_decal, solid_layer, position)){
         if(velocity.y > 0.0f){
             position.y = std::floor(position.y);
@@ -323,7 +321,7 @@ CellActor::AdjustCollisionY(Level* _map){
 }
 
 void
-CellActor::CB_ApplyUpSlope(Level* _lvl){
+CollisionBody::CB_ApplyUpSlope(Level* _lvl){
     int up_slope_range = 10;
 
     if(IsOverlapping(_lvl, mask_decal, solid_layer, position)){
@@ -360,7 +358,7 @@ CellActor::CB_ApplyUpSlope(Level* _lvl){
 }
 
 void
-CellActor::ApplyUpSlope(Level* _map){
+CollisionBody::ApplyUpSlope(Level* _map){
     //SOLID
     olc::vf2d temporary_slope_adjustment_position = former_position;
     temporary_slope_adjustment_position.y = std::floor(former_position.y);
@@ -427,7 +425,7 @@ CellActor::ApplyUpSlope(Level* _map){
 }
 
 void
-CellActor::ApplyUpSlope_SemiSolid(Level* _map){
+CollisionBody::ApplyUpSlope_SemiSolid(Level* _map){
     olc::vf2d temporary_slope_adjustment_position = former_position;
     
     for(auto [k, v] : semisolid_colours_overlapped){
@@ -512,7 +510,7 @@ CellActor::ApplyDownSlope_SemiSolid(CellMap* _map){
 }*/
 
 void
-CellActor::CB_AdjustDownSlope(Level* _lvl){
+CollisionBody::CB_AdjustDownSlope(Level* _lvl){
     if(!(was_grounded == true && is_grounded == false && velocity.y > 0.0f)) return;
 
     int down_slope_range = 8;
@@ -533,7 +531,7 @@ CellActor::CB_AdjustDownSlope(Level* _lvl){
 }
 
 void
-CellActor::AdjustDownSlope(Level* _map){
+CollisionBody::AdjustDownSlope(Level* _map){
     //SEMI SOLID HEIGHT ADJUSTMENT SNAP_TO_GROUND
     if(was_grounded == true && is_grounded == false && velocity.y > 0.0f){
         position.y = std::floor(position.y);
@@ -554,7 +552,7 @@ CellActor::AdjustDownSlope(Level* _map){
 }
 
 
-bool CellActor::IsBeingEntered(olc::vf2d _position, olc::vf2d _delta_position, int _direction, std::string _mask){
+bool CollisionBody::IsBeingEntered(olc::vf2d _position, olc::vf2d _delta_position, int _direction, std::string _mask){
     if(IsOverlappingOtherDecal(game->asset_manager.GetDecal(_mask), _position, game->asset_manager.GetDecal(mask), position)){
         std::cout << "just colliding before: " << _delta_position << std::endl;
     }
@@ -586,30 +584,30 @@ bool CellActor::IsBeingEntered(olc::vf2d _position, olc::vf2d _delta_position, i
     return false;
 }
 
-olc::Pixel CellActor::StringToColour(std::string _colour_name){
+olc::Pixel CollisionBody::StringToColour(std::string _colour_name){
     if(_colour_name == "red") return olc::RED;
     if(_colour_name == "orange") return UfoGlobal::ORANGE;
     if(_colour_name == "yellow") return UfoGlobal::YELLOW;
     if(_colour_name == "lemon") return UfoGlobal::LEMON;
 }
 
-bool CellActor::IsAlreadyInSolid(std::string _colour_name){
+bool CollisionBody::IsAlreadyInSolid(std::string _colour_name){
     return semisolid_colours_overlapped.at(_colour_name);
 }
 
 void
-CellActor::UpdateSemiSolidOverlapStatus(Level* _map){
+CollisionBody::UpdateSemiSolidOverlapStatus(Level* _map){
     for(auto [k,v] : semisolid_colours_overlapped){
         semisolid_colours_overlapped[k] = IsOverlapping(_map, mask_decal, solid_layer, position, StringToColour(k));
     }
 }
 
-void CellActor::CheckSemiSolidOverlapStatus(olc::vf2d _position){
+void CollisionBody::CheckSemiSolidOverlapStatus(olc::vf2d _position){
 
 }
 
 void
-CellActor::ApplyCollisionNaive(Level* _map){
+CollisionBody::ApplyCollisionNaive(Level* _map){
     former_position = position;
     position.x += velocity.x;
     ApplyUpSlope_SemiSolid(_map);
@@ -658,7 +656,7 @@ CellActor::ApplyCollisionNaive(Level* _map){
 }
 
 void
-CellActor::ApplyCollision(Level* _map){
+CollisionBody::ApplyCollision(Level* _map){
 
     collision_history.clear();
 
@@ -770,6 +768,6 @@ CellActor::ApplyCollision(Level* _map){
     
 }
 
-void CellActor::Update(){}
-void CellActor::Draw(Camera* _camera){}
-std::string CellActor::GetType(){return "CellActor";}
+void CollisionBody::Update(){}
+void CollisionBody::Draw(Camera* _camera){}
+std::string CollisionBody::GetType(){return "CollisionBody";}

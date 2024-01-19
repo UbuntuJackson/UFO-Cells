@@ -10,14 +10,14 @@
 class Class;
 class Layer;
 class Game;
-class CellActor;
+class CollisionBody;
 
 class Level{
 public:
     bool show_solid_layers = false;
 
-    std::vector<CellActor*> actors;
-    std::vector<CellActor*> new_actors;
+    std::vector<CollisionBody*> actors;
+    std::vector<CollisionBody*> new_actors;
     std::vector<int> deferred_actor_removals;
 
     int loading_progress;

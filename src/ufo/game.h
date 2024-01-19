@@ -4,8 +4,6 @@
 #include <string>
 #include "../../external/olcPixelGameEngine.h"
 #include "../ufo/assets.h"
-#include "../ufo/cell_actor.h"
-#include "../ufo/camera.h"
 
 class Game : public olc::PixelGameEngine{
 public:

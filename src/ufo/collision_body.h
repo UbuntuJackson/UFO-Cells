@@ -8,7 +8,7 @@ class Camera;
 class Level;
 class LayerActor;
 
-class CellActor{
+class CollisionBody{
 public:
     Game *game;
     int id;
@@ -40,9 +40,8 @@ public:
 
     int draw_layer = 2;
 
-    CellActor(int _id, olc::vf2d _position, Game *_game, std::string _layer_tag);
-    CellActor(int _id, olc::vf2d _position, Game *_game, std::string _mask, std::string _layer_tag);
-    virtual ~CellActor();
+    CollisionBody(int _id, olc::vf2d _position, Game *_game, std::string _layer_tag);
+    CollisionBody(int _id, olc::vf2d _position, Game *_game, std::string _mask, std::string _layer_tag);
 
     int GetID();
 
