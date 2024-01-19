@@ -14,7 +14,7 @@ set(
     src/ufo/animation.cpp
     src/ufo/assets.cpp
     src/ufo/button.cpp
-    src/ufo/cell_actor.cpp
+    src/ufo/collision_body.cpp
     src/ufo/dynamic_solid.cpp
     src/ufo/collision_utils.cpp
     src/ufo/colour_utils.cpp
