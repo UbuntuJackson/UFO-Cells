@@ -27,13 +27,5 @@ StackBasedStateMachine::EmptyStack(){
 
 void
 StackBasedStateMachine::Update(){
-    /*for(auto state : state_stack){
-        if(state->update_active){
-            state->Update();
-        }
-        if(state->draw_active){
-            state->Draw();
-        }
-    }*/
     state_stack[state_stack.size()-1]->Update();
 }
