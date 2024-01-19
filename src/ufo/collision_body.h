@@ -1,6 +1,7 @@
 #ifndef CELL_ACTOR_H
 #define CELL_ACTOR_H
 #include "../../external/olcPixelGameEngine.h"
+#include "actor.h"
 #include <string>
 #include <vector>
 class Game;
@@ -8,7 +9,7 @@ class Camera;
 class Level;
 class LayerActor;
 
-class CollisionBody{
+class CollisionBody : public Actor{
 public:
     Game *game;
     
