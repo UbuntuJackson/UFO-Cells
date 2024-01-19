@@ -1,12 +1,12 @@
 #ifndef DYNAMIC_SOLID_H
 #define DYNAMIC_SOLID_H
-#include "cell_actor.h"
+#include "collision_body.h"
 #include <string>
 #include "../../external/olcPixelGameEngine.h"
 class Camera;
 class Game;
 
-class DynamicSolid : public CellActor{
+class DynamicSolid : public CollisionBody{
 public:
     float angle = 0;
     bool was_updated = false;

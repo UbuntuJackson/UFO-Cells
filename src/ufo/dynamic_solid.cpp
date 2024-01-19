@@ -1,12 +1,12 @@
 #include "dynamic_solid.h"
-#include "cell_actor.h"
+#include "collision_body.h"
 #include <string>
 #include "../program/ufo_global.h"
 #include "camera.h"
 #include <cmath>
 #include "game.h"
 
-DynamicSolid::DynamicSolid(int _id, olc::vf2d _position, Game* _game, std::string _mask, std::string _layer_tag) : CellActor(_id, _position, _game, _mask, _layer_tag){
+DynamicSolid::DynamicSolid(int _id, olc::vf2d _position, Game* _game, std::string _mask, std::string _layer_tag) : CollisionBody(_id, _position, _game, _mask, _layer_tag){
     velocity = {0.0f, 5.3f};
     timelapse = 0;
     std::cout << "spawned dynamic solid" << std::endl;
