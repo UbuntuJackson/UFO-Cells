@@ -32,7 +32,7 @@ public:
     olc::vf2d centre;
     olc::vf2d vel;
     int m_camera_state;
-    CellActor* target;
+    CollisionBody* target;
     float target_scale;
     float m_initial_scale_difference;
     float m_delta_scale;
@@ -50,14 +50,14 @@ public:
 
     olc::vf2d m_delta_pos;
     olc::vf2d pos_diff;
-    CellActor* new_target;
+    CollisionBody* new_target;
     olc::vf2d m_decal_wh_offset;
 
     MouseControl mouse_control;
 
     Camera() = default;
     Camera(Game *_game);
-    void SetTarget(CellActor *_target);
+    void SetTarget(CollisionBody *_target);
     void Zoom();
     void Follow(olc::vf2d _position, olc::Decal *_decal);
     void Follow(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _center, olc::vf2d _source_pos, olc::vf2d _source_size, olc::vf2d _scale);
@@ -67,7 +67,7 @@ public:
     void Static(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _center, olc::vf2d _source_pos, olc::vf2d _source_size, olc::vf2d _scale);
     void MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal);
     void MouseAndArrowKeys(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _center, olc::vf2d _source_pos, olc::vf2d _source_size, olc::vf2d _scale);
-    void SetStateSwitch(CellActor *_target);
+    void SetStateSwitch(CollisionBody *_target);
     void SetStateZoom(float _target_scale);
     void SetStateMove(olc::vf2d _vel);
     void SetStateStatic(olc::vf2d _offset);
@@ -83,9 +83,9 @@ public:
     void FollowPlatformer(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _center, olc::vf2d _source_pos, olc::vf2d _source_size, olc::vf2d _scale);
 
     void
-    SetStateFollowPlatfomer(CellActor *_target, olc::vf2d top_left_corner, olc::vf2d bottom_right_corner);
+    SetStateFollowPlatfomer(CollisionBody *_target, olc::vf2d top_left_corner, olc::vf2d bottom_right_corner);
     void
-    SetStatePlatformer(CellActor *_target, olc::vf2d top_left_corner, olc::vf2d bottom_right_corner);
+    SetStatePlatformer(CollisionBody *_target, olc::vf2d top_left_corner, olc::vf2d bottom_right_corner);
 
     olc::vf2d ScreenToWorld(olc::vf2d _screen_position, olc::vf2d _shape_offset);
     olc::vf2d WorldToScreen(olc::vf2d _position, olc::vf2d _shape_offset);

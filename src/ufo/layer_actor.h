@@ -6,7 +6,7 @@
 #include <string>
 #include "actor_info.h"
 
-class CellActor;
+class CollisionBody;
 class Camera;
 class Level;
 
@@ -15,7 +15,7 @@ public:
 
     std::vector<ActorInfo> actors_to_create;
 
-    std::vector<CellActor*> actors; //How about I instantiate it, call AddActorInfo and THEN add it to the vector?
+    std::vector<CollisionBody*> actors; //How about I instantiate it, call AddActorInfo and THEN add it to the vector?
     LayerActor(Level* _level, std::string _name, std::string _type, std::vector<ActorInfo> _actors_to_create);
     ~LayerActor();
     void LoadLayer();

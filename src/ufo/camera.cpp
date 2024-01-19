@@ -5,6 +5,7 @@
 #include "mouse_control.h"
 #include "../program/ufo_global.h"
 #include "game.h"
+#include "collision_body.h"
 
 
 Camera::Camera(Game* _game) :
@@ -15,7 +16,7 @@ Camera::Camera(Game* _game) :
 {
 }
 
-void Camera::SetTarget(CellActor *_target){
+void Camera::SetTarget(CollisionBody *_target){
     target = _target;
 }
 
@@ -64,7 +65,7 @@ Camera::Follow(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _center, olc::
 }
 
 void
-Camera::SetStateFollowPlatfomer(CellActor *_target, olc::vf2d top_left_corner, olc::vf2d bottom_right_corner){
+Camera::SetStateFollowPlatfomer(CollisionBody *_target, olc::vf2d top_left_corner, olc::vf2d bottom_right_corner){
     clamp_up_left_corner = top_left_corner;
     clamp_down_right_corner = bottom_right_corner;
     m_camera_state = FOLLOW_PLATFORMER;
@@ -190,7 +191,7 @@ Camera::FollowPlatformer(olc::vf2d _position, olc::Decal *_decal, olc::vf2d _cen
 }
 
 void
-Camera::SetStatePlatformer(CellActor *_target, olc::vf2d top_left_corner, olc::vf2d bottom_right_corner){
+Camera::SetStatePlatformer(CollisionBody *_target, olc::vf2d top_left_corner, olc::vf2d bottom_right_corner){
     clamp_up_left_corner = top_left_corner;
     clamp_down_right_corner = bottom_right_corner;
     m_camera_state = PLATFORMER;
@@ -332,7 +333,7 @@ Camera::Zoom(){
 }
 
 void
-Camera::SetStateSwitch(CellActor *_target){
+Camera::SetStateSwitch(CollisionBody *_target){
     m_camera_state = SWITCH;
     new_target = _target;
     pos_diff = new_target -> position - position;
