@@ -12,7 +12,7 @@
 #include "actor.h"
 
 CollisionBody::CollisionBody(int _id , olc::vf2d _position, Game *_game, std::string _layer_tag) :
-Actor(_id, _position, _game),
+Actor(_id, _position, _layer_tag),
 game{_game},
 is_grounded{false},
 was_grounded{false},
