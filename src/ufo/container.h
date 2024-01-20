@@ -29,7 +29,7 @@ public:
     T* New(Args ...args){
         std::unique_ptr<T> instance = std::make_unique<T>(args ...);
         container.push_back(instance.get());
-        level.push_back(std::move(instance));
+        level->push_back(std::move(instance));
     }
 };
 
