@@ -10,7 +10,7 @@ class Container{
 public:
     Level* _level;
     std::vector<T*> container;
-    std::function<void(int)> remove_ptr = [&this](int _id){
+    std::function<void(int)> remove_ptr = [](int _id){
         for(int i = 0; i < container.size(); i++){
             if(container[i]->GetID() == _actor_id){
                 container.erase(container.begin() + i);
@@ -26,7 +26,7 @@ public:
     }
     template<typename ... Args>
     T* New(Args ...args){
-        std::unique_ptr instance = std::make_unique<T>(args ..., remove_ptr);
+        std::unique_ptr instance = std::make_unique<T>(args ...);
         container.push_back(instance.get());
         level.push_back(std::move(instance));
     }
