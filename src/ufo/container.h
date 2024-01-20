@@ -11,7 +11,7 @@ class Container{
 public:
     Level* _level;
     std::vector<T*> container;
-    std::function<void(int)> remove_ptr = [](int _id){
+    std::function<void(int)> remove_ptr = [&](int _id){
         for(int i = 0; i < container.size(); i++){
             if(container[i]->GetID() == _actor_id){
                 container.erase(container.begin() + i);
