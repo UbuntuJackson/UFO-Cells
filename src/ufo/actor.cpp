@@ -19,6 +19,11 @@ Actor::Draw(Camera* _camera){}
 void
 Actor::Draw(){}
 
+void
+Actor::OnRemoval(){
+    remove_pointer_from_container(GetID());
+}
+
 std::string
 Actor::GetType(){
     return "Actor";
