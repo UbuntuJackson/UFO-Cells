@@ -54,9 +54,10 @@ void
 Level::RemoveActor(int _actor_id){
     for(int i = 0; i < actors.size(); i++){
         if(actors[i]->GetID() == _actor_id){
-            actors[i]->OnRemoval();
-            delete actors[i];
-            actors.erase(actors.begin() + i);
+            actors[i]->OnRemoval(); //Granted that you have created a Container<T> this function will basically call a lambda which removes
+                                    //the additional pointer from the containers member vector.
+            delete actors[i];       //This delete is for the main vector where all actors are stored together
+            actors.erase(actors.begin() + i); //removes the pointer
         }
     }
 }
