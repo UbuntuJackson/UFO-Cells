@@ -54,6 +54,7 @@ void
 Level::RemoveActor(int _actor_id){
     for(int i = 0; i < actors.size(); i++){
         if(actors[i]->GetID() == _actor_id){
+            actors[i]->OnRemoval();
             delete actors[i];
             actors.erase(actors.begin() + i);
         }
