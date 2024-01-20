@@ -25,7 +25,7 @@ public:
         }
         return nullptr;
     }
-    template<typename ... Args>
+    template<typename ...Args>
     T* New(Args ...args){
         std::unique_ptr instance = std::make_unique<T>(args ...);
         container.push_back(instance.get());
