@@ -17,6 +17,7 @@ public:
                 container.erase(container.begin() + i);
             }
         }
+        std::cout << container.size() << std::endl;
     };
     Container(Level* _level) : level{_level}{}
     T* GetByID(int _id){
