@@ -30,7 +30,7 @@ public:
         //std::unique_ptr<T> instance = std::make_unique<T>(args ...);
         //container.push_back(instance.get());
         //level->actors.push_back(std::move(instance));
-        T* act = new T(args ...)
+        T* act = new T(args ...);
         act->remove_pointer_from_container = remove_ptr;
         container.push_back(act);
         level->actors.push_back(act);
