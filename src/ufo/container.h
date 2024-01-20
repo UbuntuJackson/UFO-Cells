@@ -17,7 +17,7 @@ public:
                 container.erase(container.begin() + i);
             }
         }
-    }
+    };
     Container(Level* _level) : level{_level}{}
     T* GetByID(int _id){
         for(auto p : container){
