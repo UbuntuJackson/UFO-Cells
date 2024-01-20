@@ -9,7 +9,7 @@
 class Camera;
 class Actor{
 public:
-    std::function<void(int)>* remove_pointer_from_container = [](int){std::cout << "Destruct function empty.";};
+    std::function<void(int)>* remove_pointer_from_container;
     std::vector<Actor> attachments;
     int id;
     std::string layer_tag;
