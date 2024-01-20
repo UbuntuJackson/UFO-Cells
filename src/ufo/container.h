@@ -9,7 +9,7 @@
 template<typename T>
 class Container{
 public:
-    Level* _level;
+    Level* level;
     std::vector<T*> container;
     std::function<void(int)> remove_ptr = [&](int _id){
         for(int i = 0; i < container.size(); i++){
