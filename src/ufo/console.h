@@ -10,6 +10,11 @@ public:
     std::cout << arg;
     ((std::cout << ", " << args), ...) << std::endl;
   }
+
+  template<typename Arg>
+  static void Out(Arg arg){
+    std::cout << arg << std::endl;
+  }
   
   template<typename T>
   static void Out(std::vector<T> _vec){
