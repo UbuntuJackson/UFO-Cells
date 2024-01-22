@@ -6,14 +6,9 @@
 class Console{
 public:
   template<typename Arg, typename ...Args>
-  static void Out(Arg arg, Args ...args){
+  static void Out(Arg&& arg, Args&& ...args){
     std::cout << arg;
     ((std::cout << ", " << args), ...) << std::endl;
-  }
-
-  template<typename Arg>
-  static void Out(Arg arg){
-    std::cout << arg << std::endl;
   }
   
   template<typename T>
