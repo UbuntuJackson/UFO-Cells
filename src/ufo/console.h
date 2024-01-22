@@ -8,7 +8,7 @@ public:
   template<typename Arg, typename ...Args>
   static void Out(Arg&& arg, Args&& ...args){
     std::cout << arg;
-    ((std::cout << ", " << args), ...)
+    ((std::cout << ", " << args), ...);
     std::cout << std::endl;
   }
   
