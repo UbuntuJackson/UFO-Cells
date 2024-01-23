@@ -47,7 +47,7 @@ set(
 add_library(UFOCells STATIC ${SRC})
 target_include_directories(UFOCells PUBLIC src)
 
-include_directories("${PROJECT_SOURCE_DIR}/external")
+include_directories("${CMAKE_SOURCE_DIR}/external")
 
 #include(cmake/BuildProgramFile.cmake)
 
