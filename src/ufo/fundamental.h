@@ -11,7 +11,7 @@ public:
     template<typename T, typename ... Args>
     T& Attach(Args ...args){
         T node = T(args ...);
-        node->parent = this;
+        node.parent = this;
         nodes.push_back(&node);
         return node;
     }
