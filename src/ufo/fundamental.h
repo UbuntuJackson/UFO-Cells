@@ -6,6 +6,7 @@ class Fundamental{
 public:
     Fundamental* parent = nullptr;
     std::vector<Fundamental*> nodes;
+    Fundamental() = default;
     template<typename T, typename ... Args>
     T Attach(Args ...args){
         T node = T(args ...);
