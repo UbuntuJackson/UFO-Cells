@@ -15,7 +15,7 @@ public:
         nodes.push_back(node);
         return *node;
     }
-    void Update(){
+    virtual void Update(){
         Console::Out("hello from Fundamental");
     }
     void UpdateCallbacks(){
