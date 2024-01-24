@@ -3,6 +3,7 @@
 #include <vector>
 #include <utility>
 class Fundamental{
+public:
     Fundamental* parent = nullptr;
     std::vector<Fundamental*> nodes;
     template<typename T, typename ... Args>

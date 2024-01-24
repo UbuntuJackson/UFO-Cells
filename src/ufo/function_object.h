@@ -4,6 +4,7 @@
 #include "fundamental.h"
 
 class FunctionObject : public Fundamental{
+public:
     std::function<void()> fun;
     FunctionObject(std::function<void()> _fun) : fun{_fun}{}
     void Update();
