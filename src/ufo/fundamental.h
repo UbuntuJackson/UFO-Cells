@@ -23,6 +23,7 @@ public:
         for(auto &node : nodes){
             node->UpdateCallbacks();
         }
+        Console::Out("hello from UpdateCallbacks");
     }
 };
 
