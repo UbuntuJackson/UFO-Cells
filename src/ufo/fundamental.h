@@ -10,7 +10,7 @@ public:
     Fundamental(){}
     template<typename T, typename ... Args>
     T Attach(Args ...args){
-        T node = new T(args ...);
+        T *node = new T(args ...);
         node->parent = this;
         nodes.push_back(node);
         return *node;
