@@ -21,6 +21,7 @@ public:
     void UpdateCallbacks(){
         Update();
         for(auto &node : nodes){
+            std::cout << this << std::endl;
             node->UpdateCallbacks();
         }
         Console::Out("hello from UpdateCallbacks");
