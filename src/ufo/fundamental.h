@@ -20,9 +20,9 @@ public:
     }
     void UpdateCallbacks(){
         Update();
-        for(auto &node : nodes){
+        for(int i = 0; i < nodes.size(); i++){
             std::cout << this << std::endl;
-            node->UpdateCallbacks();
+            nodes[i]->UpdateCallbacks();
         }
         Console::Out("hello from UpdateCallbacks");
     }
