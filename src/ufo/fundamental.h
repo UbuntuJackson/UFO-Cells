@@ -16,9 +16,9 @@ public:
     }
     void Update(){}
     void UpdateCallbacks(){
+        Update();
         for(auto node : nodes){
             node->UpdateCallbacks();
-            node->Update();
         }
     }
 };
