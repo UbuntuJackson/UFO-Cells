@@ -12,6 +12,13 @@ class Fundamental{
         nodes.push_back(&node);
         return std::move(node);
     }
+    void Update(){}
+    void UpdateCallbacks(){
+        for(auto node : nodes){
+            node->UpdateCallbacks();
+            node->Update();
+        }
+    }
 };
 
 #endif
