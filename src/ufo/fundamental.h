@@ -9,11 +9,11 @@ public:
     std::vector<Fundamental*> nodes;
     Fundamental(){}
     template<typename T, typename ... Args>
-    T& Attach(Args ...args){
-        T node = T(args ...);
-        node.parent = this;
-        nodes.push_back(&node);
-        return node;
+    T Attach(Args ...args){
+        T *node = new T(args ...);
+        node->parent = this;
+        nodes.push_back(node);
+        return *node;
     }
     void Update(){
         Console::Out("hello from Fundamental");
