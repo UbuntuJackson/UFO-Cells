@@ -2,11 +2,12 @@
 #define FUNDAMENTAL_H
 #include <vector>
 #include <utility>
+#include "console.h"
 class Fundamental{
 public:
     Fundamental* parent = nullptr;
     std::vector<Fundamental*> nodes;
-    Fundamental() = default;
+    Fundamental(){}
     template<typename T, typename ... Args>
     T Attach(Args ...args){
         T node = T(args ...);
@@ -14,7 +15,9 @@ public:
         nodes.push_back(&node);
         return std::move(node);
     }
-    void Update(){}
+    void Update(){
+        Console::Out("hello from Fundamental");
+    }
     void UpdateCallbacks(){
         Update();
         for(auto node : nodes){
