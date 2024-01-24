@@ -20,7 +20,7 @@ public:
     }
     void UpdateCallbacks(){
         Update();
-        for(auto node : nodes){
+        for(auto &node : nodes){
             node->UpdateCallbacks();
         }
     }
