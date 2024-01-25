@@ -21,16 +21,14 @@ public:
         nodes.push_back(node);
         return node;
     }
-    virtual void Update(){
-        Console::Out("hello from Fundamental");
-    }
+    virtual void Update(){}
     void UpdateCallbacks(){
+        Console::Out(name, "Update");
         Update();
         for(int i = 0; i < nodes.size(); i++){
             std::cout << this << std::endl;
             nodes[i]->UpdateCallbacks();
         }
-        Console::Out(name, "Update");
     }
     ~Fundamental(){
         for(auto node : nodes){
