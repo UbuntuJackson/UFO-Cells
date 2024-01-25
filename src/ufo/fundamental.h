@@ -26,15 +26,8 @@ public:
         }
         Console::Out("hello from UpdateCallbacks");
     }
-    void
-    DeleteFundamentals(){
-        for(auto i : nodes){
-            i->DeleteFundamentals();
-            delete i;
-        }
-    }
     ~Fundamental(){
-        DeleteFundamentals();
+        Console::Out("Destructor");
     }
 };
 
