@@ -19,13 +19,15 @@ public:
     T* Attach(Args ...args){
         T *node = new T(args ...);
         node->parent = this;
-        
-        node->depth = depth+1;
         nodes.push_back(node);
 
-        std::string indent = ""
+        //for debugging
+
+        node->depth = depth+1;
+        std::string indent = "";
         for(int _ = 0; _ < depth; _++) indent += std::string("  ");
-        Console::Out(indent ,name)
+        Console::Out(indent ,name);
+
         return node;
     }
     virtual void Update(){}
