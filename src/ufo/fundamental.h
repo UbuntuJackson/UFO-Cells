@@ -19,7 +19,8 @@ public:
     T* Attach(Args ...args){
         T *node = new T(args ...);
         node->parent = this;
-        node->depth = ++depth;
+        
+        node->depth = depth+1;
         nodes.push_back(node);
 
         std::string indent = ""
