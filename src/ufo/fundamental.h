@@ -26,7 +26,7 @@ public:
         node->depth = depth+1;
         std::string indent = "";
         for(int _ = 0; _ < node->depth; _++) indent += std::string("  ");
-        Console::Out(indent ,name);
+        Console::Out(indent , node->name);
 
         return node;
     }
