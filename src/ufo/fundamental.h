@@ -29,7 +29,7 @@ public:
     void
     DeleteFundamentals(){
         for(auto i : nodes){
-            DeleteFundamentals();
+            i->DeleteFundamentals();
             delete i;
         }
     }
