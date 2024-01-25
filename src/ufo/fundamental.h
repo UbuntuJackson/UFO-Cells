@@ -26,7 +26,6 @@ public:
         Console::Out(name, "Update");
         Update();
         for(int i = 0; i < nodes.size(); i++){
-            std::cout << this << std::endl;
             nodes[i]->UpdateCallbacks();
         }
     }
