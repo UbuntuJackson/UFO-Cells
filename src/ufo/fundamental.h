@@ -26,6 +26,16 @@ public:
         }
         Console::Out("hello from UpdateCallbacks");
     }
+    void
+    DeleteFundamentals(){
+        for(auto i : nodes){
+            DeleteFundamentals();
+            delete i;
+        }
+    }
+    ~Fundamental(){
+        DeleteFundamentals();
+    }
 };
 
 #endif
