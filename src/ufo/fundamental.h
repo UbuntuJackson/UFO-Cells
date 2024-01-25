@@ -29,7 +29,7 @@ public:
 
     void PrintTree(int _depth = 0){
         std::string indent = "";
-        for(int _ = 0; _ < depth; _++) indent += std::string("    ");
+        for(int _ = 0; _ < _depth; _++) indent += std::string("    ");
         Console::Out(std::string(indent) + " " + name);
         for(auto node : nodes){
             node->PrintTree(_depth+1);
