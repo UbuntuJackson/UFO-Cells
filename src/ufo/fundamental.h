@@ -23,7 +23,7 @@ public:
 
         //for debugging
 
-        node->depth = depth+1;
+        node->depth = parent->depth+1;
         std::string indent = "";
         for(int _ = 0; _ < node->depth; _++) indent += std::string("  ");
         Console::Out(std::string(indent) + " " + node->name);
