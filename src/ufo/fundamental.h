@@ -3,12 +3,16 @@
 #include <vector>
 #include <utility>
 #include "console.h"
+#include <string>
 class Fundamental{
 public:
     Fundamental* parent = nullptr;
     std::vector<Fundamental*> nodes;
 
+    std::string name;
+
     Fundamental(){}
+    Fundamental(std::string_view _name = "") : name{_name}{}
 
     template<typename T, typename ... Args>
     T* Attach(Args ...args){
@@ -26,13 +30,13 @@ public:
             std::cout << this << std::endl;
             nodes[i]->UpdateCallbacks();
         }
-        Console::Out("hello from UpdateCallbacks");
+        Console::Out(name, "Update");
     }
     ~Fundamental(){
         for(auto node : nodes){
             delete node;
         }
-        Console::Out("Destructor");
+        Console::Out(name ,"Destructor");
     }
 };
 
