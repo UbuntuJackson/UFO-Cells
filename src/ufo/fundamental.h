@@ -9,10 +9,10 @@ public:
     Fundamental* parent = nullptr;
     std::vector<Fundamental*> nodes;
 
-    std::string name;
+    std::string name = "";
 
     Fundamental(){}
-    Fundamental(std::string _name = "") : name{_name}{}
+    Fundamental(std::string _name) : name{_name}{}
 
     template<typename T, typename ... Args>
     T* Attach(Args ...args){
