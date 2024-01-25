@@ -34,7 +34,7 @@ public:
         Console::Out("hello from UpdateCallbacks");
     }
     void AttemptPointerDelete(){
-        if(!attached_as_non_pointer){
+        if(attached_as_non_pointer){
             for(auto node : nodes){
                 node->AttemptPointerDelete();
                 delete node;
