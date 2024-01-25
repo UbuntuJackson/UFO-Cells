@@ -7,7 +7,14 @@ class Fundamental{
 public:
     Fundamental* parent = nullptr;
     std::vector<Fundamental*> nodes;
+    bool attached_as_non_pointer = false;
     Fundamental(){}
+
+    Fundamental& operator=(const Fundamental& f){
+        attached_as_non_pointer = true;
+        return *this;
+    }
+
     template<typename T, typename ... Args>
     T& Attach(Args ...args){
         T *node = new T(args ...);
@@ -26,7 +33,16 @@ public:
         }
         Console::Out("hello from UpdateCallbacks");
     }
+    void AttemptPointerDelete(){
+        if(!attached_as_non_pointer){
+            for(auto node : nodes){
+                node->AttemptPointerDelete();
+                delete node;
+            }
+        }
+    }
     ~Fundamental(){
+        AttemptPointerDelete();
         Console::Out("Destructor");
     }
 };
