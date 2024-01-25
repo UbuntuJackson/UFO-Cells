@@ -12,7 +12,7 @@ public:
     std::string name;
 
     Fundamental(){}
-    Fundamental(std::string_view _name = "") : name{_name}{}
+    Fundamental(std::string _name = "") : name{_name}{}
 
     template<typename T, typename ... Args>
     T* Attach(Args ...args){
