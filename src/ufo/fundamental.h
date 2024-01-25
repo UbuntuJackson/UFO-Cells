@@ -24,12 +24,18 @@ public:
         //for debugging
 
         node->depth = depth+1;
-        std::string indent = "";
-        for(int _ = 0; _ < node->depth; _++) indent += std::string("  ");
-        Console::Out(std::string(indent) + " " + node->name);
-
         return node;
     }
+
+    void PrintTree(){
+        std::string indent = "";
+        for(int _ = 0; _ < depth; _++) indent += std::string("    ");
+        Console::Out(std::string(indent) + " " + name);
+        for(auto node : nodes){
+            node->PrintTree();
+        }
+    }
+
     virtual void Update(){}
     void UpdateCallbacks(){
         Console::Out(name, "Update");
