@@ -2,19 +2,18 @@
 #define FUNDAMENTAL_H
 #include <vector>
 #include <utility>
-#include <memory>
 #include "console.h"
 class Fundamental{
 public:
     Fundamental* parent = nullptr;
-    std::vector<std::unique_ptr<Fundamental>> nodes;
+    std::vector<Fundamental*> nodes;
     Fundamental(){}
     template<typename T, typename ... Args>
     T& Attach(Args ...args){
-        std::unique_ptr<T> node = std::make_unique<T>(args ...);
+        T *node = new T(args ...);
         node->parent = this;
-        nodes.push_back(std::move(node));
-        return *(node.get());
+        nodes.push_back(node);
+        return *node;
     }
     virtual void Update(){
         Console::Out("hello from Fundamental");
