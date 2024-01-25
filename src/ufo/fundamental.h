@@ -34,7 +34,7 @@ public:
         for(auto node : nodes){
             delete node;
         }
-        Console::Out(name ,"Destructor");
+        Console::Out(name, "Destructor");
     }
 };
 
