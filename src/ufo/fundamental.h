@@ -13,7 +13,7 @@ public:
         T *node = new T(args ...);
         node->parent = this;
         nodes.push_back(node);
-        return *nodes.back();
+        return *node;
     }
     virtual void Update(){
         Console::Out("hello from Fundamental");
