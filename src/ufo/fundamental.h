@@ -9,7 +9,7 @@ public:
     Fundamental* parent = nullptr;
     std::vector<Fundamental*> nodes;
 
-    std::string depth = 0;
+    int depth = 0;
     std::string name = "";
 
     Fundamental(){}
