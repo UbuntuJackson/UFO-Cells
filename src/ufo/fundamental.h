@@ -7,11 +7,11 @@ class Fundamental{
 public:
     Fundamental* parent = nullptr;
     std::vector<Fundamental*> nodes;
-    bool attached_as_non_pointer = false;
+    bool is_attached_anonymously = true;
     Fundamental(){}
 
     Fundamental& operator=(const Fundamental& f){
-        attached_as_non_pointer = true;
+        is_attached_anonymously = false;
         return *this;
     }
 
@@ -34,7 +34,7 @@ public:
         Console::Out("hello from UpdateCallbacks");
     }
     void AttemptPointerDelete(){
-        if(attached_as_non_pointer){
+        if(is_attached_anonymously){
             for(auto node : nodes){
                 node->AttemptPointerDelete();
                 delete node;
