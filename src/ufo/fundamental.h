@@ -9,6 +9,7 @@ public:
     Fundamental* parent = nullptr;
     std::vector<Fundamental*> nodes;
 
+    std::string depth = 0;
     std::string name = "";
 
     Fundamental(){}
@@ -18,7 +19,12 @@ public:
     T* Attach(Args ...args){
         T *node = new T(args ...);
         node->parent = this;
+        node->depth = ++depth;
         nodes.push_back(node);
+
+        std::string indent = ""
+        for(int _ = 0; _ < depth; _++) indent += std::string("  ");
+        Console::Out(indent ,name)
         return node;
     }
     virtual void Update(){}
