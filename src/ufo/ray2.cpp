@@ -18,9 +18,9 @@ Ray2::Size(){
     return p1 - p0;
 }
 
-olc::vf2d
+float
 Ray2::LineVsLine(Ray2 _other_ray){
     
-    LinearAlgebra::LineVsLine(Ray2(p0,p1), _other_ray);
+    return LinearAlgebra::LineVsLine(Ray2(p0,p1), _other_ray);
 
 }
