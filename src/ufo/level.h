@@ -6,13 +6,14 @@
 #include <string>
 #include "actor_info.h"
 #include "camera.h"
+#include "stack_based_state.h"
 
 class Class;
 class Layer;
 class Game;
 class Actor;
 
-class Level{
+class Level : public StackBasedState{
 public:
     bool show_solid_layers = false;
 

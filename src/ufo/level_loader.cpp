@@ -4,7 +4,8 @@
 #include "level.h"
 
 LevelLoader::LevelLoader(StackBasedStateMachine* _state_machine ,Level* _level) :
-    StackBasedState(_state_machine),
+    StackBasedState(),
+    state_machine{_state_machine},
     level{_level}{}
 
 void

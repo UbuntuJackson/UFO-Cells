@@ -13,6 +13,7 @@
 #include "../../src/ufo/file_utils.h"
 
 Level::Level(std::string _path) :
+    StackBasedState(),
     loading_progress{0},
     path{_path}{}
 

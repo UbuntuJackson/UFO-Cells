@@ -24,5 +24,13 @@ StackBasedStateMachine::EmptyStack(){
 
 void
 StackBasedStateMachine::Update(){
-    state_stack[state_stack.size()-1]->Update();
+    if(state_stack.size() > 1){
+        if(!state_stack[state_stack.size()-2]->Load()){
+            RemoveActiveStateInStack();
+        }
+    }
+    if(state_stack.size() > 0){
+        state_stack[state_stack.size()-1]->Update();
+        state_stack[state_stack.size()-1]->Draw();
+    }
 }

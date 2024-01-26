@@ -8,8 +8,8 @@ public:
     StackBasedStateMachine* state_machine;
     bool update_active;
     bool draw_active;
-    StackBasedState() = default;
-    StackBasedState(StackBasedStateMachine* _state_machine);
+    StackBasedState();
+    virtual bool Load(){}
     virtual void Update();
     virtual void Draw();
 };
