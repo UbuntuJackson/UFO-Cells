@@ -21,7 +21,7 @@ public:
     virtual void Draw();
     int GetID();
     void OnRemoval();
-    std::string GetType();
+    virtual std::string GetType();
 };
 
 #endif
