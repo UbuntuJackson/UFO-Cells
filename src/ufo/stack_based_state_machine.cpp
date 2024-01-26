@@ -27,6 +27,7 @@ StackBasedStateMachine::Update(){
     if(state_stack.size() > 1){
         if(!state_stack[state_stack.size()-2]->Load()){
             RemoveActiveStateInStack();
+            state_stack[state_stack.size()-1]->OnLoadFinished();
         }
     }
     if(state_stack.size() > 0){

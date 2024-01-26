@@ -2,18 +2,12 @@
 #include <string>
 #include "game.h"
 #include "level.h"
+#include "console.h"
 
 LevelLoader::LevelLoader(StackBasedStateMachine* _state_machine ,Level* _level) :
-    StackBasedState(),
-    state_machine{_state_machine},
-    level{_level}{}
+    StackBasedState(){}
 
 void
 LevelLoader::Update(){
-    std::cout << "is this running" << std::endl;
-    if(!level->Load()) //Load can draw the image instead
-    {
-        level->OnLoadFinished();
-        state_machine->RemoveActiveStateInStack();
-    }
+    Console::Out("loading...");
 }
