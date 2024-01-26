@@ -44,6 +44,13 @@ public:
             nodes[i]->UpdateCallbacks();
         }
     }
+    void DrawCallbacks(){
+        Console::Out(name, "Draw");
+        Update();
+        for(int i = 0; i < nodes.size(); i++){
+            nodes[i]->DrawCallbacks();
+        }
+    }
     ~Fundamental(){
         for(auto node : nodes){
             delete node;
