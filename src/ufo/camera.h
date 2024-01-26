@@ -4,6 +4,7 @@
 #include "../../external/olcPixelGameEngine.h"
 #include "collision_body.h"
 #include "mouse_control.h"
+#include <ufo/fundamental.h>
 
 enum CameraStates{
     BASIC_FOLLOW,
@@ -23,7 +24,7 @@ enum CameraStates{
     PLATFORMER
 };
 
-class Camera{
+class Camera : public Fundamental{
 public:
     Game* game;
 

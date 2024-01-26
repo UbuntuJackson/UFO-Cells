@@ -1,9 +1,11 @@
 #ifndef STACK_BASED_STATE_H
 #define STACK_BASED_STATE_H
 
+#include <ufo/fundamental.h>
+
 class StackBasedStateMachine;
 
-class StackBasedState{
+class StackBasedState : public Fundamental{
 public:
     StackBasedStateMachine* state_machine;
     bool update_active;

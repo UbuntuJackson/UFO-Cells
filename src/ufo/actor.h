@@ -5,9 +5,10 @@
 #include <vector>
 #include <functional>
 #include <iostream>
+#include <ufo/fundamental.h>
 
 class Camera;
-class Actor{
+class Actor : Fundamental{
 public:
     std::function<void(int)> remove_pointer_from_container = [](int){std::cout << "Destruct function empty.";};
     std::vector<Actor> attachments;
