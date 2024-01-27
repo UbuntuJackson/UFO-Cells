@@ -2,7 +2,7 @@
 #include "ray_vs_ray_2.h"
 #include "collision_data.h"
 namespace LinearAlgebra{
-    CollisionData RayVsRay(Ray2 _v, Ray2 _w){
+    CollisionData RayVsRay(Ray2 &_v, Ray2 &_w){
         //float t;
         //_v.p0.x + _v.size().x * s = _w.p0.x + _w.size().x * t
         

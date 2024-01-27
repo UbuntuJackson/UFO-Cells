@@ -19,8 +19,8 @@ Ray2::Size(){
 }
 
 CollisionData
-Ray2::VsOtherRay(Ray2 _other_ray){
+Ray2::VsOtherRay(Ray2& _other_ray){
     
-    return LinearAlgebra::RayVsRay(Ray2(p0,p1), _other_ray);
+    return LinearAlgebra::RayVsRay(*this, _other_ray);
 
 }

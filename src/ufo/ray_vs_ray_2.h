@@ -1,5 +1,11 @@
+#ifndef RAY_VS_RAY_2_H
+#define RAY_VS_RAY_2_H
+
+#include "collision_data.h"
 class Ray2;
-class CollisionData;
+
 namespace LinearAlgebra{
-    CollisionData RayVsRay(const Ray2 _v, const Ray2 _w);
+    CollisionData RayVsRay(Ray2& _v, Ray2& _w);
 }
+
+#endif
