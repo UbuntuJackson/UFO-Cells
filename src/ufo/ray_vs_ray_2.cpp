@@ -27,10 +27,14 @@ namespace LinearAlgebra{
         
         olc::vf2d intersection_point = _v.Start() + _v.Size() * collision_time;
         
-        bool hit_succeed = false;
+        bool hit_succeed = true;
         
         if(collision_time < 0.0f || collision_time > 1.0f){
-            hit_succeed = true;
+            hit_succeed = false;
+        }
+
+        if(collision_time_other < 0.0f || collision_time_other > 1.0f){
+            hit_succeed = false;
         }
 
         return CollisionData{
