@@ -23,7 +23,7 @@ namespace LinearAlgebra{
 
         float collision_time = (_w.p0.y + (_w.Size().y / _w.Size().x) * _v.p0.x - (_w.Size().y / _w.Size().x) * _w.p0.x) / (_v.p0.y + _v.Size().y - (_w.Size().y / _w.Size().x) * _v.Size().x);
         
-        float collision_time_other = (_v.p0.y + (_v.Size().y / _v.Size().x) * _w.p0.y - (_v.Size().y / _v.Size().x) * _v.p0.x) / (_w.p0.y + _w.Size().y - (_v.Size().y / _v.Size().x) * _w.Size().y);
+        float collision_time_other = (_v.p0.y + (_v.Size().y / _v.Size().x) * _w.p0.x - (_v.Size().y / _v.Size().x) * _v.p0.x) / (_w.p0.y + _w.Size().y - (_v.Size().y / _v.Size().x) * _w.Size().x);
         
         olc::vf2d intersection_point = _v.Start() + _v.Size() * collision_time;
         
