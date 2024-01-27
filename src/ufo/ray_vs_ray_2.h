@@ -1,5 +1,5 @@
 class Ray2;
-
+class CollisionData;
 namespace LinearAlgebra{
-    float RayVsRay(const Ray2 _v, const Ray2 _w);
+    CollisionData RayVsRay(const Ray2 _v, const Ray2 _w);
 }
