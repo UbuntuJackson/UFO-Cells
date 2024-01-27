@@ -12,7 +12,7 @@ public:
     olc::vf2d Size();
     Ray2() = default;
     Ray2(olc::vf2d _p0, olc::vf2d _p1);
-    float LineVsLine(Ray2 _other_ray);
+    float VsOtherRay(Ray2 _other_ray);
 };
 
 #endif
