@@ -1,5 +1,5 @@
 #include "ray2.h"
-#include "ray_vs_ray.h"
+#include "ray_vs_ray_2.h"
 #include "collision_data.h"
 namespace LinearAlgebra{
     CollisionData RayVsRay(Ray2 _v, Ray2 _w){
