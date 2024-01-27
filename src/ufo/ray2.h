@@ -14,6 +14,7 @@ public:
     Ray2() = default;
     Ray2(olc::vf2d _p0, olc::vf2d _p1);
     CollisionData VsOtherRay(Ray2 &_other_ray);
+    olc::vf2d Normal();
 };
 
 #endif

@@ -24,3 +24,8 @@ Ray2::VsOtherRay(Ray2& _other_ray){
     return LinearAlgebra::RayVsRay(*this, _other_ray);
 
 }
+
+olc::vf2d
+Ray2::Normal(){
+    return olc::vf2d(Size().y, -Size().x);
+}
