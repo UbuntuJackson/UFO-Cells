@@ -2,7 +2,7 @@
 #define RAY_2_H
 
 #include "../../external/olcPixelGameEngine.h"
-class CollisionData;
+#include "collision_data.h"
 
 class Ray2{
 public:
