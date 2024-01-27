@@ -2,6 +2,7 @@
 #define RAY_2_H
 
 #include "../../external/olcPixelGameEngine.h"
+class CollisionData;
 
 class Ray2{
 public:
@@ -12,7 +13,7 @@ public:
     olc::vf2d Size();
     Ray2() = default;
     Ray2(olc::vf2d _p0, olc::vf2d _p1);
-    float VsOtherRay(Ray2 _other_ray);
+    CollisionData VsOtherRay(Ray2 _other_ray);
 };
 
 #endif
