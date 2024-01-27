@@ -38,7 +38,7 @@ set(
     src/ufo/stack_based_state.cpp
     src/ufo/json_interface.cpp
     external/cJSON.c
-    src/ufo/line_vs_line_2d.cpp
+    src/ufo/ray_vs_ray_2.cpp
     src/ufo/ray2.cpp
 )
 
