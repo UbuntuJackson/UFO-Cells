@@ -7,6 +7,7 @@
 #include "actor_info.h"
 #include "camera.h"
 #include "stack_based_state.h"
+#include "json_interface.h"
 
 class Class;
 class Layer;
@@ -37,6 +38,13 @@ public:
     virtual void NewActor(std::string _actor_type ,int _x, int _y, std::string _layer_tag);
     void RemoveActor(int _actor_id);
     void DeferActorRemoval(int _actor_id);
+    bool ReadLevelSegments();
+    void OnHeaderCreate(ujson::JsonNode _json);
+    void OnActorLayerCreate(ujson::JsonNode _json);
+    void OnCollisionLayerCreate(ujson::JsonNode _json);
+    void OnTerrainLayerCreate(ujson::JsonNode _json);
+    void OnBackgroundLayerCreate(ujson::JsonNode _json);
+    void OnCustomLayerCreate(ujson::JsonNode _json);
     bool ReadLevelFromFile(std::string _path);
     virtual bool Load();
     virtual void OnLoadFinished();

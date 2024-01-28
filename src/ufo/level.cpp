@@ -70,6 +70,18 @@ Level::DeferActorRemoval(int _actor_id){
 }
 
 bool
+Level::ReadLevelSegments(){
+
+}
+
+void Level::OnHeaderCreate(ujson::JsonNode _json){}
+void Level::OnActorLayerCreate(ujson::JsonNode _json){}
+void Level::OnCollisionLayerCreate(ujson::JsonNode _json){}
+void Level::OnTerrainLayerCreate(ujson::JsonNode _json){}
+void Level::OnBackgroundLayerCreate(ujson::JsonNode _json){}
+void Level::OnCustomLayerCreate(ujson::JsonNode _json){}
+
+bool
 Level::ReadLevelFromFile(std::string _path){
     std::ifstream ifs;
     ifs.open(_path, std::ifstream::in);
