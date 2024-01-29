@@ -16,7 +16,9 @@
 Level::Level(std::string _path) :
     StackBasedState(),
     loading_progress{0},
-    path{_path}{}
+    path{_path}{
+        ReadLevelSegments(_path);
+    }
 
 Layer*
 Level::NewLayer(std::string _name, std::string _type, std::string _path){
