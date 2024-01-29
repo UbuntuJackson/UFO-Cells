@@ -17,7 +17,6 @@ Level::Level(std::string _path) :
     StackBasedState(),
     loading_progress{0},
     path{_path}{
-        ReadLevelSegments(_path);
     }
 
 Layer*
@@ -80,8 +79,7 @@ Level::ReadLevelSegments(std::string _path){
 
     ujson::JsonNode main_object = ujson::JsonNode(json_as_string);
 
-    ujson::JsonNode header_object = main_object.GetJsonNode("header");
-    OnHeaderCreate(header_object);
+    OnHeaderCreate(main_object);
 
     std::vector<ujson::JsonNode> layer_objects = main_object.GetJsonNode("layers").GetAs<std::vector<ujson::JsonNode>>();
 
