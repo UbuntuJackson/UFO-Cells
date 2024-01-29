@@ -11,6 +11,7 @@
 #include <iostream>
 #include "../../external/cJSON.h"
 #include "../../src/ufo/file_utils.h"
+#include "file.h"
 
 Level::Level(std::string _path) :
     StackBasedState(),
@@ -70,16 +71,56 @@ Level::DeferActorRemoval(int _actor_id){
 }
 
 bool
-Level::ReadLevelSegments(){
+Level::ReadLevelSegments(std::string _path){
+
+    File file;
+    std::string json_as_string = file.Read(_path);
+
+    ujson::JsonNode main_node = ujson::JsonNode(json_as_string);
+
+    ujson::JsonNode header_object = main_node.GetJsonNode("header");
+    OnHeaderCreate(header_object);
+
+    std::vector<ujson::JsonNode> layer_objects = main_node.GetJsonNode("layers").GetAs<std::vector<ujson::JsonNode>>();
+
+    for(auto layer_object : layer_objects){
+        if(layer_object.GetJsonNode("type").GetAs<std::string>() == "actor") OnActorLayerCreate(layer_object);
+        if(layer_object.GetJsonNode("type").GetAs<std::string>() == "collision") OnActorLayerCreate(layer_object);
+        if(layer_object.GetJsonNode("type").GetAs<std::string>() == "terrain") OnActorLayerCreate(layer_object);
+        if(layer_object.GetJsonNode("type").GetAs<std::string>() == "background") OnActorLayerCreate(layer_object);
+        if(layer_object.GetJsonNode("type").GetAs<std::string>() == "custom") OnActorLayerCreate(layer_object);
+        if(layer_object.GetJsonNode("type").GetAs<std::string>() == "geometry") OnActorLayerCreate(layer_object);
+        if(layer_object.GetJsonNode("type").GetAs<std::string>() == "tilemap") OnActorLayerCreate(layer_object);
+    }
+    main_object.JsonNodeDelete();
 
 }
 
 void Level::OnHeaderCreate(ujson::JsonNode _json){}
 void Level::OnActorLayerCreate(ujson::JsonNode _json){}
-void Level::OnCollisionLayerCreate(ujson::JsonNode _json){}
-void Level::OnTerrainLayerCreate(ujson::JsonNode _json){}
-void Level::OnBackgroundLayerCreate(ujson::JsonNode _json){}
+void Level::OnCollisionLayerCreate(ujson::JsonNode _json){
+    std::string type = _json.GetJsonNode("type").GetAs<std::string>();
+    std::string name = _json.GetJsonNode("name").GetAs<std::string>();
+    std::string path = _json.GetJsonNode("path").GetAs<std::string>();
+    destructable_layer_keys.push_back(name);
+    layers.push_back(new LayerSolid(this, name, type, path));
+}
+void Level::OnTerrainLayerCreate(ujson::JsonNode _json){
+    std::string type = _json.GetJsonNode("type").GetAs<std::string>();
+    std::string name = _json.GetJsonNode("name").GetAs<std::string>();
+    std::string path = _json.GetJsonNode("path").GetAs<std::string>();
+    destructable_layer_keys.push_back(name);
+    layers.push_back(new LayerTerrain(this, name, type, path));
+}
+void Level::OnBackgroundLayerCreate(ujson::JsonNode _json){
+    std::string type = _json.GetJsonNode("type").GetAs<std::string>();
+    std::string name = _json.GetJsonNode("name").GetAs<std::string>();
+    std::string path = _json.GetJsonNode("path").GetAs<std::string>();
+    layers.push_back(new LayerBackground(this, name, type, path));
+}
 void Level::OnCustomLayerCreate(ujson::JsonNode _json){}
+void Level::OnGeometryLayerCreate(ujson::JsonNode _json){}
+void Level::OnTilemapLayerCreate(ujson::JsonNode _json){}
 
 bool
 Level::ReadLevelFromFile(std::string _path){

@@ -1,6 +1,11 @@
 #include "file.h"
 #include <fstream>
 #include <sstream>
+#include <string>
+
+File::File() : contents{""}{}
+
+File::File(std::string _path) : contents{Read(_path)}{}
 
 std::string File::Read(std::string _path){
     std::ifstream ifs;
@@ -8,7 +13,8 @@ std::string File::Read(std::string _path){
     std::ostringstream sstr;
     sstr << ifs.rdbuf();
     ifs.close();
-    return sstr.str();
+    contents = sstr.str();
+    return contents;
 }
 void File::Write(std::string _filename, std::string _text){
     std::ofstream outfile(_filename);
