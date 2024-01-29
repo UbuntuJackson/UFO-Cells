@@ -78,12 +78,12 @@ Level::ReadLevelSegments(std::string _path){
     File file;
     std::string json_as_string = file.Read(_path);
 
-    ujson::JsonNode main_node = ujson::JsonNode(json_as_string);
+    ujson::JsonNode main_object = ujson::JsonNode(json_as_string);
 
-    ujson::JsonNode header_object = main_node.GetJsonNode("header");
+    ujson::JsonNode header_object = main_object.GetJsonNode("header");
     OnHeaderCreate(header_object);
 
-    std::vector<ujson::JsonNode> layer_objects = main_node.GetJsonNode("layers").GetAs<std::vector<ujson::JsonNode>>();
+    std::vector<ujson::JsonNode> layer_objects = main_object.GetJsonNode("layers").GetAs<std::vector<ujson::JsonNode>>();
 
     for(auto layer_object : layer_objects){
         if(layer_object.GetJsonNode("type").GetAs<std::string>() == "actor") OnActorLayerCreate(layer_object);
