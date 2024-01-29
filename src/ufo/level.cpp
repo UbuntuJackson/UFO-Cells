@@ -85,12 +85,12 @@ Level::ReadLevelSegments(std::string _path){
 
     for(auto layer_object : layer_objects){
         if(layer_object.GetJsonNode("type").GetAs<std::string>() == "actor") OnActorLayerCreate(layer_object);
-        if(layer_object.GetJsonNode("type").GetAs<std::string>() == "collision") OnActorLayerCreate(layer_object);
-        if(layer_object.GetJsonNode("type").GetAs<std::string>() == "terrain") OnActorLayerCreate(layer_object);
-        if(layer_object.GetJsonNode("type").GetAs<std::string>() == "background") OnActorLayerCreate(layer_object);
-        if(layer_object.GetJsonNode("type").GetAs<std::string>() == "custom") OnActorLayerCreate(layer_object);
-        if(layer_object.GetJsonNode("type").GetAs<std::string>() == "geometry") OnActorLayerCreate(layer_object);
-        if(layer_object.GetJsonNode("type").GetAs<std::string>() == "tilemap") OnActorLayerCreate(layer_object);
+        if(layer_object.GetJsonNode("type").GetAs<std::string>() == "collision") OnCollisionLayerCreate(layer_object);
+        if(layer_object.GetJsonNode("type").GetAs<std::string>() == "terrain") OnTerrainLayerCreate(layer_object);
+        if(layer_object.GetJsonNode("type").GetAs<std::string>() == "background") OnBackgroundLayerCreate(layer_object);
+        if(layer_object.GetJsonNode("type").GetAs<std::string>() == "custom") OnCustomLayerCreate(layer_object);
+        if(layer_object.GetJsonNode("type").GetAs<std::string>() == "geometry") OnGeometryLayerCreate(layer_object);
+        if(layer_object.GetJsonNode("type").GetAs<std::string>() == "tilemap") OnTilemapLayerCreate(layer_object);
     }
     main_object.JsonNodeDelete();
 
