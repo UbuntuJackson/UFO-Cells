@@ -104,14 +104,12 @@ void Level::OnCollisionLayerCreate(ujson::JsonNode _json){
     std::string type = _json.GetJsonNode("type").GetAs<std::string>();
     std::string name = _json.GetJsonNode("name").GetAs<std::string>();
     std::string path = _json.GetJsonNode("path").GetAs<std::string>();
-    destructable_layer_keys.push_back(name);
     layers.push_back(new LayerSolid(this, name, type, path));
 }
 void Level::OnTerrainLayerCreate(ujson::JsonNode _json){
     std::string type = _json.GetJsonNode("type").GetAs<std::string>();
     std::string name = _json.GetJsonNode("name").GetAs<std::string>();
     std::string path = _json.GetJsonNode("path").GetAs<std::string>();
-    destructable_layer_keys.push_back(name);
     layers.push_back(new LayerTerrain(this, name, type, path));
 }
 void Level::OnBackgroundLayerCreate(ujson::JsonNode _json){
