@@ -35,7 +35,7 @@ std::stringstream& File::GetAsStream(){
 
 
 
-void File::Write(std::string _filename, std::string _text){
+void File::Write(std::string _filename){
     std::ofstream outfile(_filename);
     outfile << contents.str() << std::endl;
     outfile.close();

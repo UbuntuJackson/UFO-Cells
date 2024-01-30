@@ -13,7 +13,7 @@ public:
     std::stringstream& GetAsStream();
     std::string ReadAsString(std::string _path);
     std::string GetAsString();
-    void Write(std::string _filename, std::string _text);
+    void Write(std::string _filename);
     
     template<typename ...Args>
     void Insert(Args&& ...args){
