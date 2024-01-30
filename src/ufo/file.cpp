@@ -10,8 +10,7 @@ File::File(std::string _path){
 }
 
 std::stringstream& File::ReadAsStream(std::string _path){
-    std::ifstream ifs;
-    ifs.open(_path);
+    std::ifstream ifs{_path};
     contents << ifs.rdbuf();
     ifs.close();
     return contents;
