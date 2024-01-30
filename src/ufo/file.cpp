@@ -22,8 +22,7 @@ std::string File::GetAsString(){
 }
 
 std::string File::ReadAsString(std::string _path){
-    std::ifstream ifs;
-    ifs.open(_path);
+    std::ifstream ifs{_path};
     contents << ifs.rdbuf();
     ifs.close();
     return contents.str();
