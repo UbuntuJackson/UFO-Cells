@@ -16,7 +16,7 @@ public:
     void Write(std::string _filename, std::string _text);
     
     template<typename Arg, typename ...Args>
-    static void Insert(Arg&& arg, Args&& ...args){
+    void Insert(Arg&& arg, Args&& ...args){
         ((contents << args), ...);
     }
 };

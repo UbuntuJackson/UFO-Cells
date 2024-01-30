@@ -12,7 +12,6 @@ File::File(std::string _path){
 std::stringstream& File::ReadAsStream(std::string _path){
     std::ifstream ifs;
     ifs.open(_path);
-    std::stringstream sstr;
     contents << ifs.rdbuf();
     ifs.close();
     return contents;
@@ -25,7 +24,6 @@ std::string File::GetAsString(){
 std::string File::ReadAsString(std::string _path){
     std::ifstream ifs;
     ifs.open(_path);
-    std::stringstream sstr;
     contents << ifs.rdbuf();
     ifs.close();
     return contents.str();
