@@ -9,6 +9,11 @@ File::File(std::string _path){
     ReadAsStream(_path);
 }
 
+bool File::Exists(std::string _path){
+    std::ifstream ifs(_path.c_str());
+    return ifs.good();
+}
+
 std::stringstream& File::ReadAsStream(std::string _path){
     std::ifstream ifs{_path};
     contents << ifs.rdbuf();

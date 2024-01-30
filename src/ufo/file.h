@@ -9,6 +9,7 @@ public:
     std::stringstream contents;
     File();
     File(std::string _path);
+    bool Exists(std::string _path);
     std::stringstream& ReadAsStream(std::string _path);
     std::stringstream& GetAsStream();
     std::string ReadAsString(std::string _path);
