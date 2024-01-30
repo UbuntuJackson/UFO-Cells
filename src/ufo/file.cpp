@@ -3,24 +3,38 @@
 #include <sstream>
 #include <string>
 
-File::File() : contents{""}{}
+File::File(){}
 
-File::File(std::string _path) : contents{Read(_path)}{}
+File::File(std::string _path){
+    ReadAsStream(_path);
+}
 
-std::string File::Read(std::string _path){
+std::stringstream& File::ReadAsStream(std::string _path){
     std::ifstream ifs;
     ifs.open(_path);
-    std::ostringstream sstr;
-    sstr << ifs.rdbuf();
+    std::stringstream sstr;
+    contents << ifs.rdbuf();
     ifs.close();
-    contents = sstr.str();
     return contents;
 }
+
+std::string File::GetAsString(){
+    return contents.str();
+}
+
+std::string File::ReadAsString(std::string _path){
+    std::ifstream ifs;
+    ifs.open(_path);
+    std::stringstream sstr;
+    contents << ifs.rdbuf();
+    ifs.close();
+    return contents.str();
+}
+
+
+
 void File::Write(std::string _filename, std::string _text){
     std::ofstream outfile(_filename);
-    outfile << _text << std::endl;
+    outfile << contents.str() << std::endl;
     outfile.close();
-}
-void File::In(std::string _text){
-
 }

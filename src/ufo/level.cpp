@@ -75,7 +75,7 @@ bool
 Level::ReadLevelSegments(std::string _path){
 
     File file;
-    std::string json_as_string = file.Read(_path);
+    std::string json_as_string = file.ReadAsString(_path);
 
     ujson::JsonNode main_object = ujson::JsonNode(json_as_string);
 

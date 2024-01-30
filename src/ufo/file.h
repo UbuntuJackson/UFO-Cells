@@ -2,15 +2,23 @@
 #define FILE_H
 
 #include <string>
+#include <sstream>
 
 class File{
 public:
-    std::string contents;
+    std::stringstream contents;
     File();
     File(std::string _path);
-    std::string Read(std::string _path);
+    std::stringstream& ReadAsStream(std::string _path);
+    std::stringstream& GetAsStream();
+    std::string ReadAsString(std::string _path);
+    std::string GetAsString();
     void Write(std::string _filename, std::string _text);
-    void In(std::string  _text);
+    
+    template<typename Arg, typename ...Args>
+    static void Insert(Arg&& arg, Args&& ...args){
+        ((contents << args), ...);
+    }
 };
 
 #endif
