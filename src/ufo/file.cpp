@@ -29,6 +29,10 @@ std::string File::ReadAsString(std::string _path){
     return contents.str();
 }
 
+std::stringstream& File::GetAsStream(){
+    return contents;
+}
+
 
 
 void File::Write(std::string _filename, std::string _text){
