@@ -17,7 +17,7 @@ public:
     
     template<typename ...Args>
     void Insert(Args&& ...args){
-        ((contents << args), ...);
+        (contents << ... << args);
     }
 };
 
