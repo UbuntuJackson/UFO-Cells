@@ -15,7 +15,7 @@ public:
     std::string GetAsString();
     void Write(std::string _filename, std::string _text);
     
-    template<typename Arg, typename ...Args>
+    template<typename ...Args>
     void Insert(Args&& ...args){
         ((contents << args), ...);
     }
