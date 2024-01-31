@@ -54,6 +54,4 @@ jobs:
       with:
         name: ufo-libraries
         path: |
-          $GITHUB_WORKSPACE/UFOCells.a
-          $GITHUB_WORKSPACE/UFOCells.so
-          $GITHUB_WORKSPACE/UFOCells.so.debug
+          ${{ github.workspace }}/build/UFOCells.a
