@@ -31,13 +31,13 @@ jobs:
           libglm-dev \
           libx11-dev \
           libpthread-stubs0-dev \
-          libstdc++fs-dev
+          libstdc++-9-dev
 
     - name: Configure and Build
       run: |
         mkdir build
         cd build
-        cmake ..
+        cmake .. -DCMAKE_CXX_FLAGS="-ggdb"
         make
 
     - name: Run Tests
