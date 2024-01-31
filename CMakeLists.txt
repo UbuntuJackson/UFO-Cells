@@ -9,6 +9,11 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# Find required libraries
+find_package(CURL REQUIRED)
+find_package(PNG REQUIRED)
+find_package(ZLIB REQUIRED)
+
 set(
     SRC
     src/ufo/actor.cpp
@@ -43,40 +48,37 @@ set(
     src/ufo/file.cpp
 )
 
-#include(ExternalProject)
-#include(cmake/ProvideSquirrel.cmake)
-#include(cmake/BuildMiniswigWrapper.cmake)
-
+# Add the library
 add_library(UFOCells STATIC ${SRC})
 target_include_directories(UFOCells PUBLIC src)
-
 target_include_directories(UFOCells PUBLIC external)
 
-#include(cmake/BuildProgramFile.cmake)
-
-#target_link_libraries(UFOCells PUBLIC LibSquirrel)
-#target_link_libraries(UFOCells PUBLIC LibSqstdlib)
+# Link libraries
+target_link_libraries(UFOCells PUBLIC
+    CURL::libcurl
+    PNG::PNG
+    ZLIB::ZLIB
+)
 
 # OpenGL
 set(OpenGL_GL_PREFERENCE LEGACY)
 find_package(OpenGL REQUIRED)
-include_directories(${OpenGL_INCLUDE_DIRS})
+target_include_directories(UFOCells PUBLIC ${OpenGL_INCLUDE_DIRS})
 target_link_libraries(UFOCells PUBLIC OpenGL::GL)
 
 # X11
-find_package(X11 REQUIRED)
-target_link_libraries(UFOCells PUBLIC X11::X11)
-
-include_directories(${X11_INCLUDE_DIRS})
+if(NOT WIN32)
+    find_package(X11 REQUIRED)
+    if(NOT X11_FOUND)
+        message(FATAL_ERROR "X11 not found. Please install X11 development libraries.")
+    endif()
+    target_include_directories(UFOCells PUBLIC ${X11_INCLUDE_DIR})
+    target_link_libraries(UFOCells PUBLIC X11::X11)
+endif()
 
 # Threads
 find_package(Threads REQUIRED)
 target_link_libraries(UFOCells PUBLIC Threads::Threads)
-include_directories(${Threads_INCLUDE_DIRS})
-
-find_package(PNG REQUIRED)
-target_link_libraries(UFOCells PUBLIC PNG::PNG)
-include_directories(${PNG_INCLUDE_DIRS})
 
 # stdc++fs
-target_link_libraries(UFOCells PUBLIC stdc++fs)
+target_compile_features(UFOCells PUBLIC cxx_std_17)
