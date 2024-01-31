@@ -94,6 +94,7 @@ Level::ReadLevelSegments(std::string _path){
     }
     main_object.JsonNodeDelete();
 
+    return false;
 }
 
 void Level::OnHeaderCreate(ujson::JsonNode _json){}
@@ -161,6 +162,7 @@ Level::ReadLevelFromFile(std::string _path){
     }
 
     cJSON_Delete(j);
+    return false;
 }
 
 bool
