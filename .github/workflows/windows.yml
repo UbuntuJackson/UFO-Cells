@@ -32,11 +32,9 @@ jobs:
           cd build
           cmake -DCMAKE_TOOLCHAIN_FILE=D:/a/UFO-Cells/UFO-Cells/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows -DCMAKE_PREFIX_PATH=D:/a/UFO-Cells/UFO-Cells/vcpkg/installed/x64-windows -DCMAKE_BUILD_TYPE=Debug ..
 
-      - name: Clear Cache
-        run: cmake --build . --target clean
-
       - name: Build
-        run: cmake --build . --config Debug --target ALL_BUILD
+        working-directory: build
+        run: cmake --build . --config Debug
 
       - name: Copy Libraries to Artifact
         run: |
