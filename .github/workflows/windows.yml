@@ -48,5 +48,3 @@ jobs:
           path: |
             ${{ github.workspace }}/UFOCells.lib
             ${{ github.workspace }}/UFOCells.pdb
-            ${{ github.workspace }}/UFOCells.lib
-            ${{ github.workspace }}/UFOCells.lib
