@@ -38,8 +38,8 @@ jobs:
 
       - name: Copy Libraries to Artifact
         run: |
-          Copy-Item -Path .\build\UFOCells.dll -Destination $env:GITHUB_WORKSPACE\UFOCells.dll
-          Copy-Item -Path .\build\UFOCells.lib -Destination $env:GITHUB_WORKSPACE\UFOCells.lib
+          Copy-Item -Path $env:GITHUB_WORKSPACE\build\UFOCells.dll -Destination $env:GITHUB_WORKSPACE\UFOCells.dll
+          Copy-Item -Path $env:GITHUB_WORKSPACE\build\UFOCells.lib -Destination $env:GITHUB_WORKSPACE\UFOCells.lib
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
