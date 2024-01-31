@@ -12,10 +12,6 @@ jobs:
   build:
     runs-on: windows-latest
 
-    strategy:
-      matrix:
-        config: [Release, Debug]
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -30,15 +26,20 @@ jobs:
           # Install required libraries
           .\vcpkg.exe install curl:x64-windows libpng:x64-windows zlib:x64-windows glew:x64-windows glbinding:x64-windows glm:x64-windows
 
+      - name: Clean Build Directory and CMake Cache
+        run: |
+          cd build
+          rm -rf *
+          cmake -E remove CMakeCache.txt
+
       - name: Configure with CMake
         run: |
           mkdir build
           cd build
-          cmake -DCMAKE_TOOLCHAIN_FILE=D:/a/UFO-Cells/UFO-Cells/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows -DCMAKE_PREFIX_PATH=D:/a/UFO-Cells/UFO-Cells/vcpkg/installed/x64-windows -DCMAKE_BUILD_TYPE=${{ matrix.config }} ..
+          cmake -DCMAKE_TOOLCHAIN_FILE=D:/a/UFO-Cells/UFO-Cells/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows -DCMAKE_PREFIX_PATH=D:/a/UFO-Cells/UFO-Cells/vcpkg/installed/x64-windows -DCMAKE_BUILD_TYPE=Debug ..
 
       - name: Build
-        run: |
-          cmake --build . --config ${{ matrix.config }}
+        run: cmake --build . --config Debug
 
       - name: Copy Libraries to Artifact
         run: |
@@ -48,7 +49,7 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: ufo-libraries-${{ matrix.config }}
+          name: ufo-libraries-debug
           path: |
             ${{ github.workspace }}/UFOCells.dll
             ${{ github.workspace }}/UFOCells.lib
