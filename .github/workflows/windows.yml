@@ -10,6 +10,7 @@ on:
 
 jobs:
   build:
+
     runs-on: windows-latest
 
     steps:
@@ -18,9 +19,6 @@ jobs:
 
     - name: Install Dependencies
       run: |
-        # Navigate to the root directory
-        cd ${{ github.workspace }}
-
         # Install and bootstrap Vcpkg
         git clone https://github.com/Microsoft/vcpkg.git
         cd vcpkg
@@ -28,50 +26,28 @@ jobs:
 
         # Install required libraries
         .\vcpkg.exe install curl:x64-windows libpng:x64-windows zlib:x64-windows glew:x64-windows glbinding:x64-windows glm:x64-windows
-
-    - name: List contents of C:/vcpkg/installed/x64-windows
+    
+    - name: List Contents from vcpkg root
       run: |
-        # Navigate to the root directory
-        cd ${{ github.workspace }}
-        
-        # List contents of the installed libraries directory
-        Get-ChildItem -Recurse .\vcpkg\installed\x64-windows
+        Get-ChildItem -Recurse ..
 
     - name: Configure with CMake
       run: |
-        # Navigate to the root directory
-        cd ${{ github.workspace }}
-        
-        # Create build directory
         mkdir build
         cd build
-
-        # Configure with CMake
-        cmake -DCMAKE_TOOLCHAIN_FILE=.\vcpkg\scripts\buildsystems\vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows -DCMAKE_PREFIX_PATH=.\vcpkg\installed\x64-windows ..
-
+        cmake -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows -DCMAKE_PREFIX_PATH=C:/vcpkg/installed/x64-windows ..
     - name: Build with MSBuild
       run: |
-        # Navigate to the build directory
-        cd ${{ github.workspace }}/build
-
-        # Build with MSBuild
+        cd build
         msbuild /p:Configuration=Release /p:Platform=x64
 
     - name: Debug Build Contents
       run: |
-        # Navigate to the build directory
-        cd ${{ github.workspace }}/build
-
-        # Debugging: List contents of the build directory
         Get-ChildItem -Recurse
 
     - name: Copy Libraries to Artifact
       run: |
-        # Navigate to the build directory
-        cd ${{ github.workspace }}/build
-
-        # Copy the DLL to the workspace
-        Copy-Item -Path .\UFOCells.dll -Destination $env:GITHUB_WORKSPACE
+        Copy-Item -Path .\build\UFOCells.dll -Destination $env:GITHUB_WORKSPACE\UFOCells.dll
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
