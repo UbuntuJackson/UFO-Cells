@@ -36,6 +36,9 @@ jobs:
         working-directory: build
         run: cmake --build . --config Debug
 
+      - name: List Build Directory Contents
+        run: Get-ChildItem -Path D:/a/UFO-Cells/UFO-Cells/build/
+
       - name: Copy Libraries to Artifact
         run: |
           Copy-Item -Path $env:GITHUB_WORKSPACE\build\UFOCells.dll -Destination $env:GITHUB_WORKSPACE\UFOCells.dll
