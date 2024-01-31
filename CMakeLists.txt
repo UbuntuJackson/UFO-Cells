@@ -58,6 +58,7 @@ target_link_libraries(UFOCells PUBLIC
     CURL::libcurl
     PNG::PNG
     ZLIB::ZLIB
+    ${CURL_LIBRARIES}
 )
 
 # OpenGL
