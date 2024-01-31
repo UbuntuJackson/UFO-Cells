@@ -25,7 +25,7 @@ jobs:
         .\bootstrap-vcpkg.bat
 
         # Install required libraries
-        .\vcpkg.exe install libcurl libpng zlib glew glbinding glm
+        .\vcpkg.exe install curl:x64-windows libpng:x64-windows zlib:x64-windows glew:x64-windows glbinding:x64-windows glm:x64-windows
 
     - name: Configure and Build
       run: |
