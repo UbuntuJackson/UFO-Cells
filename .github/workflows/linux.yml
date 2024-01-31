@@ -41,6 +41,10 @@ jobs:
         cmake .. -DCMAKE_CXX_FLAGS="-ggdb"
         make
         
+    - name: Debug Build Contents
+      run: |
+       ls -al build
+
     - name: Copy Libraries to Artifact
       run: |
         cp libUFOCells.a $GITHUB_WORKSPACE/UFOCells.a
