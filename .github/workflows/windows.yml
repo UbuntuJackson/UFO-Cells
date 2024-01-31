@@ -38,13 +38,15 @@ jobs:
 
       - name: Copy Libraries to Artifact
         run: |
-          Copy-Item -Path D:/a/UFO-Cells/UFO-Cells/build/Debug/UFOCells.lib -Destination $env:GITHUB_WORKSPACE/UFOCells.lib
-          Copy-Item -Path D:/a/UFO-Cells/UFO-Cells/build/Debug/UFOCells.pdb -Destination $env:GITHUB_WORKSPACE/UFOCells.pdb
+          Copy-Item -Path $env:GITHUB_WORKSPACE\build\Debug\UFOCells.lib -Destination $env:GITHUB_WORKSPACE\UFOCells.lib
+          Copy-Item -Path $env:GITHUB_WORKSPACE\build\Debug\UFOCells.pdb -Destination $env:GITHUB_WORKSPACE\UFOCells.pdb
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         with:
           name: ufo-libraries-debug
           path: |
+            ${{ github.workspace }}/UFOCells.lib
+            ${{ github.workspace }}/UFOCells.pdb
             ${{ github.workspace }}/UFOCells.lib
             ${{ github.workspace }}/UFOCells.lib
