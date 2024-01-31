@@ -31,8 +31,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows -DCMAKE_PREFIX_PATH=C:/vcpkg/installed/x64-windows ..
-      
+         cmake -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows -DCMAKE_PREFIX_PATH=${{ github.workspace }}/installed/x64-windows ..
     - name: Build with MSBuild
       run: |
         cd build
