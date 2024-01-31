@@ -1,1 +1,50 @@
+name: C/C++ CI
 
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Install Dependencies
+      run: |
+        # Install and bootstrap Vcpkg
+        git clone https://github.com/Microsoft/vcpkg.git
+        cd vcpkg
+        .\bootstrap-vcpkg.bat
+
+        # Install required libraries
+        .\vcpkg.exe install libcurl libpng zlib glew glbinding glm
+
+    - name: Configure and Build
+      run: |
+        mkdir build
+        cd build
+        cmake -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows -DCMAKE_PREFIX_PATH=C:/vcpkg/installed/x64-windows ..
+        cmake --build .
+
+    - name: Debug Build Contents
+      run: |
+        Get-ChildItem -Recurse
+
+    - name: Copy Libraries to Artifact
+      run: |
+        Copy-Item -Path .\build\libUFOCells.a -Destination $env:GITHUB_WORKSPACE\UFOCells.a
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: ufo-libraries
+        path: |
+          ${{ github.workspace }}/UFOCells.a
