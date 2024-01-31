@@ -42,10 +42,6 @@ jobs:
         cd build
         msbuild /p:Configuration=Release /p:Platform=x64
 
-    - name: Debug Build Contents
-      run: |
-        Get-ChildItem -Recurse
-
     - name: Copy Libraries to Artifact
       run: |
         Copy-Item -Path .\build\UFOCells.dll -Destination $env:GITHUB_WORKSPACE\UFOCells.dll
