@@ -1,0 +1,53 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake
+
+    - name: Configure and Build
+      run: |
+        mkdir build
+        cd build
+        cmake ..
+        make
+
+    - name: Run Tests
+      run: |
+        cd build
+        make check
+
+    - name: Create Distribution
+      run: |
+        cd build
+        make distcheck
+
+    - name: Copy Libraries to Artifact
+      run: |
+        cp build/UFOCells.lib $GITHUB_WORKSPACE/UFOCells.lib
+        cp build/UFOCells.pdb $GITHUB_WORKSPACE/UFOCells.pdb
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: ufo-libraries
+        path: |
+          $GITHUB_WORKSPACE/UFOCells.lib
+          $GITHUB_WORKSPACE/UFOCells.pdb
