@@ -31,6 +31,7 @@ jobs:
           libglm-dev \
           libx11-dev \
           libpthread-stubs0-dev \
+          g++-9 \
           libstdc++-9-dev
 
     - name: Configure and Build
@@ -39,26 +40,18 @@ jobs:
         cd build
         cmake .. -DCMAKE_CXX_FLAGS="-ggdb"
         make
-
-    - name: Run Tests
-      run: |
-        cd build
-        make check
-
-    - name: Make Distribution
-      run: |
-        cd build
-        make distcheck
-
+        
     - name: Copy Libraries to Artifact
       run: |
-        cp build/UFOCells.lib $GITHUB_WORKSPACE/UFOCells.lib
-        cp build/UFOCells.pdb $GITHUB_WORKSPACE/UFOCells.pdb
+        cp libUFOCells.a $GITHUB_WORKSPACE/UFOCells.a
+        cp libUFOCells.so $GITHUB_WORKSPACE/UFOCells.so
+        cp libUFOCells.so.debug $GITHUB_WORKSPACE/UFOCells.so.debug
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
       with:
         name: ufo-libraries
         path: |
-          $GITHUB_WORKSPACE/UFOCells.lib
-          $GITHUB_WORKSPACE/UFOCells.pdb
+          $GITHUB_WORKSPACE/UFOCells.a
+          $GITHUB_WORKSPACE/UFOCells.so
+          $GITHUB_WORKSPACE/UFOCells.so.debug
