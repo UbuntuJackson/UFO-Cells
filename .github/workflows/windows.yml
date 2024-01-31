@@ -1,4 +1,4 @@
-name: Windows C++ With Vcpkg
+name: Windows C++ With MSVC
 
 on:
   push:
