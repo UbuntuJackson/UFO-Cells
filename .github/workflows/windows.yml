@@ -26,12 +26,16 @@ jobs:
 
         # Install required libraries
         .\vcpkg.exe install curl:x64-windows libpng:x64-windows zlib:x64-windows glew:x64-windows glbinding:x64-windows glm:x64-windows
-
+    
+    - name: List contents of C:/vcpkg/installed/x64-windows
+      run: |
+       ls C:/vcpkg/installed/x64-windows
+    
     - name: Configure with CMake
       run: |
         mkdir build
         cd build
-        cmake -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows -DCMAKE_PREFIX_PATH=${{ github.workspace }}/C:/vcpkg/installed/x64-windows ..
+        cmake -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows -DCMAKE_PREFIX_PATH=C:/vcpkg/installed/x64-windows ..
     - name: Build with MSBuild
       run: |
         cd build
