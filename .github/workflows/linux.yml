@@ -48,8 +48,6 @@ jobs:
     - name: Copy Libraries to Artifact
       run: |
        cp build/libUFOCells.a $GITHUB_WORKSPACE/UFOCells.a
-       cp build/libUFOCells.so $GITHUB_WORKSPACE/UFOCells.so
-       cp build/libUFOCells.so.debug $GITHUB_WORKSPACE/UFOCells.so.debug
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
