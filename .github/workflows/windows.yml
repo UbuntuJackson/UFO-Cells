@@ -27,12 +27,16 @@ jobs:
         # Install required libraries
         .\vcpkg.exe install curl:x64-windows libpng:x64-windows zlib:x64-windows glew:x64-windows glbinding:x64-windows glm:x64-windows
 
-    - name: Configure and Build
+    - name: Configure with CMake
       run: |
         mkdir build
         cd build
         cmake -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows -DCMAKE_PREFIX_PATH=C:/vcpkg/installed/x64-windows ..
-        cmake --build .
+      
+    - name: Build with MSBuild
+      run: |
+        cd build
+        msbuild /p:Configuration=Release /p:Platform=x64
 
     - name: Debug Build Contents
       run: |
@@ -40,7 +44,6 @@ jobs:
 
     - name: Copy Libraries to Artifact
       run: |
-        Copy-Item -Path .\build\libUFOCells.lib -Destination $env:GITHUB_WORKSPACE\UFOCells.lib
         Copy-Item -Path .\build\UFOCells.dll -Destination $env:GITHUB_WORKSPACE\UFOCells.dll
 
     - name: Upload Artifacts
@@ -48,5 +51,4 @@ jobs:
       with:
         name: ufo-libraries
         path: |
-          ${{ github.workspace }}/UFOCells.lib
           ${{ github.workspace }}/UFOCells.dll
