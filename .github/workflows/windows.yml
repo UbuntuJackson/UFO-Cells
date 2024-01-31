@@ -45,4 +45,4 @@ jobs:
         with:
           name: ufo-libraries-debug
           path: |
-            ${{ github.workspace }}/UFOCells.dll
+            ${{ github.workspace }}\Debug\UFOCells.lib
