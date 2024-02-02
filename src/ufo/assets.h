@@ -1,6 +1,7 @@
 #ifndef ASSETS_H
 #define ASSETS_H
 #include "../../external/olcPixelGameEngine.h"
+#include "console.h"
 #include <map>
 #include <string>
 
@@ -14,7 +15,7 @@ public:
 
     Assets();
     ~Assets();
-    void LoadDecal(std::string _path, std::string _name);
+    void LoadDecal(const std::string& _path, const std::string& _name);
     olc::Decal* GetDecal(std::string _name);
     void LoadAssets();
     void DeleteAssets();
