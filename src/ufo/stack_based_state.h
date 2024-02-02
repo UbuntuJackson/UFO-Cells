@@ -11,10 +11,10 @@ public:
     bool update_active;
     bool draw_active;
     StackBasedState();
-    virtual void OnLoadFinished() = 0;
-    virtual bool Load() = 0;
-    virtual void Update() = 0;
-    virtual void Draw() = 0;
+    virtual void OnLoadFinished();
+    virtual bool Load();
+    virtual void Update();
+    virtual void Draw();
 };
 
 #endif
