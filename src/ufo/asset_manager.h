@@ -6,7 +6,7 @@
 #include <memory>
 
 class AssetManager{
-
+public:
     std::map<std::string, std::unique_ptr<olc::Sprite>> sprites;
     std::map<std::string,std::unique_ptr<olc::Decal>> decals;
 
@@ -17,7 +17,7 @@ class AssetManager{
     olc::Decal* GetDecal(std::string _name);
     void RemoveDecal(std::string _name);
 
-    AssetManager& GetSelf(){static AssetManager self; return self;} //this practically makes AssetManager global.
+    static AssetManager& GetSelf(){static AssetManager self; return self;} //this practically makes AssetManager global.
 
 };
 
