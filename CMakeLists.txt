@@ -19,6 +19,7 @@ set(
     src/ufo/actor.cpp
     src/ufo/animation.cpp
     src/ufo/assets.cpp
+    src/ufo/asset_manager.cpp
     src/ufo/button.cpp
     src/ufo/collision_body.cpp
     src/ufo/dynamic_solid.cpp
