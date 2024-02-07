@@ -22,7 +22,7 @@ void AssetManager::LoadSprite(const std::string& _path, const std::string& _name
 
 olc::Sprite*
 AssetManager::GetSprite(std::string _name) {
-    if(sprites.count(_name)) Console::Out("Error: No entry with given key.");
+    if(!sprites.count(_name)) Console::Out("Error: No entry with given key.");
     return sprites.at(_name).get();
 }
 
@@ -53,7 +53,7 @@ void AssetManager::LoadDecal(const std::string& _path, const std::string& _name)
 
 olc::Decal*
 AssetManager::GetDecal(std::string _name) {
-    if(decals.count(_name)) Console::Out("Error: No entry with given key.");
+    if(!decals.count(_name)) Console::Out("Error: No entry with given key.");
     return decals.at(_name).get();
 }
 
