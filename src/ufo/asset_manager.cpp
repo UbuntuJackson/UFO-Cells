@@ -17,7 +17,7 @@ void AssetManager::LoadSprite(const std::string& _path, const std::string& _name
             break;
     }
 
-    sprites[_name] = std::make_unique<olc::Sprite>(spr);
+    sprites[_name] = std::unique_ptr<olc::Sprite>(spr);
 }
 
 olc::Sprite*
@@ -47,8 +47,8 @@ void AssetManager::LoadDecal(const std::string& _path, const std::string& _name)
 
     olc::Decal* dec = new olc::Decal(spr);
 
-    sprites[_name] = std::make_unique<olc::Sprite>(spr);
-    decals[_name] = std::make_unique<olc::Decal>(dec);
+    sprites[_name] = std::unique_ptr<olc::Sprite>(spr);
+    decals[_name] = std::unique_ptr<olc::Decal>(dec);
 }
 
 olc::Decal*
