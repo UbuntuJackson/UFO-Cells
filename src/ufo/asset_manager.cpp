@@ -4,7 +4,7 @@
 #include "console.h"
 
 void AssetManager::LoadSprite(const std::string& _path, const std::string& _name) {
-    olc::Sprite* spr = new olc::Sprite();
+    olc::Sprite* spr = new olc::Sprite(_path);
 
     switch (spr->LoadFromFile(_path)){
         case olc::rcode::NO_FILE:
@@ -32,7 +32,7 @@ AssetManager::RemoveSprite(std::string _name){
 }
 
 void AssetManager::LoadDecal(const std::string& _path, const std::string& _name) {
-    olc::Sprite* spr = new olc::Sprite();
+    olc::Sprite* spr = new olc::Sprite(_path);
 
     switch (spr->LoadFromFile(_path)){
         case olc::rcode::NO_FILE:
