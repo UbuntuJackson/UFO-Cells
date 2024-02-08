@@ -55,7 +55,7 @@ Animation::UpdateStateLogic(){
 
 void
 Animation::Draw(Camera* _camera, olc::vf2d _position, olc::vf2d _scale){
-    _camera->DrawRotatedPartialDecal(_position, AssetManager::GetSelf().GetDecal(sprite_sheet),{0.0f,0.0f}, GetFrame(current_anim[(int)frame_count%current_anim.size()]).position, frame_size, _scale);
+    _camera->DrawRotatedPartialDecal(_position, AssetManager::Get().GetDecal(sprite_sheet),{0.0f,0.0f}, GetFrame(current_anim[(int)frame_count%current_anim.size()]).position, frame_size, _scale);
 }
 
 Rect
@@ -67,6 +67,6 @@ Animation::GetRectangle(int _x, int _y){
 Rect
 Animation::GetFrame(int _frame){
     return GetRectangle(
-        (int)_frame % (AssetManager::GetSelf().GetDecal(sprite_sheet)->sprite->Size().x/(int)frame_size.x), //1 can only give me x = 0
-        (int)_frame / (AssetManager::GetSelf().GetDecal(sprite_sheet)->sprite->Size().x/(int)frame_size.x)); //1 can only give y = 1
+        (int)_frame % (AssetManager::Get().GetDecal(sprite_sheet)->sprite->Size().x/(int)frame_size.x), //1 can only give me x = 0
+        (int)_frame / (AssetManager::Get().GetDecal(sprite_sheet)->sprite->Size().x/(int)frame_size.x)); //1 can only give y = 1
 }
