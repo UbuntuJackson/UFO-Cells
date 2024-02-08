@@ -32,11 +32,6 @@ AssetManager::GetSprite(std::string _name) {
     return sprites.at(_name).get();
 }
 
-void
-AssetManager::RemoveSprite(std::string _name){
-    if(!sprites.erase(_name)) Console::Out("Error: Sprite with given key does not exist.");
-}
-
 std::map<std::string, std::unique_ptr<olc::Decal>>& AssetManager::GetDecals(){
     return decals;
 }
@@ -71,7 +66,7 @@ AssetManager::GetDecal(std::string _name) {
 }
 
 void
-AssetManager::RemoveDecal(std::string _name){
+AssetManager::RemoveAsset(std::string _name){
     if(!sprites.erase(_name)) Console::Out("Error: Sprite with given key does not exist.");
     if(!decals.erase(_name)) Console::Out("Error: Sprite with given key does not exist.");
 }
