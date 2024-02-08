@@ -11,9 +11,7 @@ public:
     std::map<std::string, std::unique_ptr<olc::Sprite>> sprites;
     std::map<std::string,std::unique_ptr<olc::Decal>> decals;
 
-    std::map<std::string, std::unique_ptr<olc::Sprite>> GetSprites(){
-        return sprites;
-    }
+    std::map<std::string, std::unique_ptr<olc::Sprite>> GetSprites();
     void LoadSprite(const std::string& _path, const std::string& _name);
     olc::Sprite* GetSprite(std::string _name);
     void RemoveSprite(std::string _name);
