@@ -4,6 +4,7 @@
 #include "game.h"
 #include "../../external/olcPixelGameEngine.h"
 #include <string>
+#include "asset_manager.h"
 
 Animation::Animation(Game* _game, olc::vf2d _frame_size, float _delta_frames, std::string _sprite_sheet):
     game{_game},
@@ -54,7 +55,7 @@ Animation::UpdateStateLogic(){
 
 void
 Animation::Draw(Camera* _camera, olc::vf2d _position, olc::vf2d _scale){
-    _camera->DrawRotatedPartialDecal(_position, game->asset_manager.GetDecal(sprite_sheet),{0.0f,0.0f}, GetFrame(current_anim[(int)frame_count%current_anim.size()]).position, frame_size, _scale);
+    _camera->DrawRotatedPartialDecal(_position, AssetManager::Get().GetDecal(sprite_sheet),{0.0f,0.0f}, GetFrame(current_anim[(int)frame_count%current_anim.size()]).position, frame_size, _scale);
 }
 
 Rect
@@ -66,6 +67,6 @@ Animation::GetRectangle(int _x, int _y){
 Rect
 Animation::GetFrame(int _frame){
     return GetRectangle(
-        (int)_frame % (game->asset_manager.GetDecal(sprite_sheet)->sprite->Size().x/(int)frame_size.x), //1 can only give me x = 0
-        (int)_frame / (game->asset_manager.GetDecal(sprite_sheet)->sprite->Size().x/(int)frame_size.x)); //1 can only give y = 1
+        (int)_frame % (AssetManager::Get().GetDecal(sprite_sheet)->sprite->Size().x/(int)frame_size.x), //1 can only give me x = 0
+        (int)_frame / (AssetManager::Get().GetDecal(sprite_sheet)->sprite->Size().x/(int)frame_size.x)); //1 can only give y = 1
 }
