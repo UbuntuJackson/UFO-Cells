@@ -4,9 +4,8 @@
 #include "console.h"
 #include <map>
 
-std::map<std::string, std::unique_ptr<olc::Sprite>> AssetManager::GetSprites(){
-    std::map<std::string, std::unique_ptr<olc::Sprite>> m(sprites);
-    return m;
+std::map<std::string, std::unique_ptr<olc::Sprite>>& AssetManager::GetSprites(){
+    return sprites;
 }
 
 void AssetManager::LoadSprite(const std::string& _path, const std::string& _name) {
