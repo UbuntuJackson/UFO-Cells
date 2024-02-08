@@ -3,6 +3,11 @@
 #include "asset_manager.h"
 #include "console.h"
 
+std::map<std::string, std::unique_ptr<olc::Sprite>>& AssetManager::GetSprites(){
+    static AssetManager self;
+    return self.sprites;
+}
+
 void AssetManager::LoadSprite(const std::string& _path, const std::string& _name) {
     olc::Sprite* spr = new olc::Sprite(_path);
 
