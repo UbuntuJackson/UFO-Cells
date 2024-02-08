@@ -22,7 +22,8 @@ void AssetManager::LoadSprite(const std::string& _path, const std::string& _name
             break;
     }
 
-    sprites[_name] = std::unique_ptr<olc::Sprite>(spr);
+    if(!sprites.count(_name)) sprites[_name] = std::unique_ptr<olc::Sprite>(spr);
+    else Console::Out("Sprite with key: " + _name + " already exists");
 }
 
 olc::Sprite*
@@ -56,8 +57,11 @@ void AssetManager::LoadDecal(const std::string& _path, const std::string& _name)
 
     olc::Decal* dec = new olc::Decal(spr);
 
-    sprites[_name] = std::unique_ptr<olc::Sprite>(spr);
-    decals[_name] = std::unique_ptr<olc::Decal>(dec);
+    if(!sprites.count(_name)) sprites[_name] = std::unique_ptr<olc::Sprite>(spr);
+    else Console::Out("Sprite with key: " + _name + " already exists");
+
+    if(!sprites.count(_name)) decals[_name] = std::unique_ptr<olc::Decal>(dec);
+    else Console::Out("Decal with key: " + _name + " already exists");
 }
 
 olc::Decal*
