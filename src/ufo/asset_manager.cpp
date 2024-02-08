@@ -67,6 +67,12 @@ AssetManager::GetDecal(std::string _name) {
 
 void
 AssetManager::RemoveAsset(std::string _name){
-    if(!sprites.erase(_name)) Console::Out("Error: Sprite with given key does not exist.");
-    if(!decals.erase(_name)) Console::Out("Error: Sprite with given key does not exist.");
+    bool sprite_was_deleted = sprites.erase(_name);
+    bool decal_was_deleted = decals.erase(_name);
+
+    if(!sprite_was_deleted) Console::Out("Error: Sprite with given key does not exist.");
+    if(!decal_was_deleted){
+        if(!sprite_was_deleted) Console::Out("Error: Decal with given key does not exist.");
+        else Console::Out("Only sprite was loaded");
+    }
 }
