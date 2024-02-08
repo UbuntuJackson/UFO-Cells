@@ -20,7 +20,7 @@ public:
     olc::Decal* GetDecal(std::string _name);
     void RemoveDecal(std::string _name);
 
-    static AssetManager& GetSelf(){static AssetManager self; return self;} //this practically makes AssetManager global.
+    static AssetManager& Get(){static AssetManager self; return self;} //this practically makes AssetManager global.
 
 };
 
