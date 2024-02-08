@@ -36,6 +36,10 @@ AssetManager::RemoveSprite(std::string _name){
     if(!sprites.erase(_name)) Console::Out("Error: Sprite with given key does not exist.");
 }
 
+std::map<std::string, std::unique_ptr<olc::Decal>>& AssetManager::GetDecals(){
+    return decals;
+}
+
 void AssetManager::LoadDecal(const std::string& _path, const std::string& _name) {
     olc::Sprite* spr = new olc::Sprite(_path);
 
