@@ -7,6 +7,7 @@
 
 class AssetManager{
 public:
+    AssetManager() = default;
     std::map<std::string, std::unique_ptr<olc::Sprite>> sprites;
     std::map<std::string,std::unique_ptr<olc::Decal>> decals;
 
