@@ -11,7 +11,7 @@ public:
     std::map<std::string, std::unique_ptr<olc::Sprite>> sprites;
     std::map<std::string,std::unique_ptr<olc::Decal>> decals;
 
-    std::map<std::string, std::unique_ptr<olc::Sprite>>& GetSprites(){
+    static std::map<std::string, std::unique_ptr<olc::Sprite>>& GetSprites(){
         static AssetManager self;
         return self.sprites;
     }
