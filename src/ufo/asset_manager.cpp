@@ -5,7 +5,7 @@
 #include <map>
 
 std::map<std::string, std::unique_ptr<olc::Sprite>> AssetManager::GetSprites(){
-    std::map<std::string, std::unique_ptr<olc::Sprite>> m = sprites;
+    std::map<std::string, std::unique_ptr<olc::Sprite>> m(sprites);
     return m;
 }
 
