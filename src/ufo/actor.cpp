@@ -14,6 +14,11 @@ void
 Actor::Update(){}
 
 void
+LayerProcess(Layer* _layer){
+    
+}
+
+void
 Actor::Draw(Camera* _camera){}
 
 void
