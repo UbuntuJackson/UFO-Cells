@@ -7,6 +7,7 @@
 #include "camera.h"
 #include <utility>
 #include <map>
+#include "collision_body.h"
 
 //maybe put strings in layer vector instead that refers to keys in a map with <string, Layer>
 

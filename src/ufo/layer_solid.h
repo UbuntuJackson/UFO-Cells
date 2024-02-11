@@ -6,6 +6,7 @@
 #include <map>
 #include <vector>
 
+class CollisionBody;
 class Level;
 
 class LayerSolid : public Layer{
