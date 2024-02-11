@@ -22,6 +22,10 @@ LayerSolid::GetPixel(olc::vf2d _position){
     std::string dec = decal_layout[chunk_x][chunk_y];
     return UfoGlobal::game->asset_manager.GetDecal(dec)->sprite->GetPixel(olc::vf2d(pixel_x, pixel_y));
 }*/
+void
+LayerSolid::AcceptVisitor(CollisionBody* _collision_body){
+    _collision_body->LayerProcess(this);
+}
 
 void
 LayerSolid::LoadLayer(){

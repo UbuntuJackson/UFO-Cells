@@ -20,6 +20,7 @@ public:
     //~LayerSolid();
     //virtual olc::Pixel GetPixel(olc::vf2d _position);
     void LoadLayer();
+    void AcceptVisitor(CollisionBody* _collision_body);
     void Update();
     void Draw(Camera* _camera);
 };

@@ -10,6 +10,7 @@
 #include "game.h"
 #include "../program/ufo_global.h"
 #include "actor.h"
+#include "layer_solid.h"
 
 CollisionBody::CollisionBody(int _id , olc::vf2d _position, Game *_game, std::string _layer_tag) :
 Actor(_id, _position, _layer_tag),
@@ -32,6 +33,11 @@ on_dynamic_solid{false},
 snap_to_ground{6},
 snap_up_range{16}
 {
+}
+
+void
+CollisionBody::LayerProcess(LayerSolid* _layer){
+    Console::Out("LayerProcess" ,_layer->name);
 }
 
 bool

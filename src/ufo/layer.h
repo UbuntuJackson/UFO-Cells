@@ -19,6 +19,7 @@ public:
     Layer(Level* _level,std::string _name, std::string _type);
     virtual ~Layer();
     virtual void LoadLayer();
+    virtual void AcceptVisitor(Actor* _actor);
     virtual void Update();
     virtual void Draw(Camera* _camera);
 };
