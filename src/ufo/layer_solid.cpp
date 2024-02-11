@@ -8,6 +8,7 @@
 #include <utility>
 #include <map>
 #include "collision_body.h"
+#include "layer_interface.h"
 
 //maybe put strings in layer vector instead that refers to keys in a map with <string, Layer>
 
@@ -25,7 +26,8 @@ LayerSolid::GetPixel(olc::vf2d _position){
 }*/
 void
 LayerSolid::AcceptVisitor(CollisionBody* _collision_body){
-    _collision_body->LayerProcess(this);
+    LayerInterface i;
+    i.AcceptVisitor(_collision_body ,this);
 }
 
 void
