@@ -2,7 +2,7 @@
 #define LAYER_H
 #include "../../external/olcPixelGameEngine.h"
 #include <string>
-
+class Actor;
 class Game;
 class Level;
 class Camera;

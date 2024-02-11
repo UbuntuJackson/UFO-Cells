@@ -1,6 +1,7 @@
 #include "layer.h"
 #include "game.h"
 #include "level.h"
+#include "actor.h"
 
 Layer::Layer(Level* _level, std::string _name, std::string _type) : level{_level}, name{_name}, type{_type}{}
 
