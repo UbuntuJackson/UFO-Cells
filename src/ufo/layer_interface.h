@@ -6,6 +6,7 @@ class LayerSolid;
 class Layer;
 
 class LayerInterface{
+public:
     LayerInterface() = default;
     void AcceptVisitor(Actor *_actor, Layer* _layer);
     void AcceptVisitor(CollisionBody *_actor, LayerSolid* _layer);
