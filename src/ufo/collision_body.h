@@ -4,7 +4,6 @@
 #include "actor.h"
 #include <string>
 #include <vector>
-#include "layer_solid.h"
 
 template<class T_Layer>
 class LayerInterface;
@@ -12,6 +11,7 @@ class Game;
 class Camera;
 class Level;
 class LayerActor;
+class LayerSolid;
 
 class CollisionBody : public Actor{
 public:
