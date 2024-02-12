@@ -12,11 +12,11 @@ public:
     T_Layer* layer;
     LayerInterface(T_Layer* _layer) : layer{_layer}{}
 
-    void
+    /*void
     AcceptVisitor(Actor *_actor){
         Console::Out("actor.");
         //_actor->LayerProcess(_layer);
-    }
+    }*/
     void
     AcceptVisitor(CollisionBody *_actor){
         _actor->LayerProcess(layer);
