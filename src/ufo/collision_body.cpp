@@ -37,7 +37,7 @@ snap_up_range{16}
 
 void
 CollisionBody::LayerProcess(LayerSolid* _layer){
-    Console::Out("LayerProcess" ,_layer->name);
+    Console::Out("LayerProcess" , GetType());
 }
 
 bool
@@ -769,3 +769,5 @@ CollisionBody::ApplyCollision(Level* _map){
 void CollisionBody::Update(){}
 void CollisionBody::Draw(Camera* _camera){}
 std::string CollisionBody::GetType(){return "CollisionBody";}
+
+template void Actor::GetVisitedByLayerInterface<LayerSolid>(LayerInterface<LayerSolid>* _interface);
