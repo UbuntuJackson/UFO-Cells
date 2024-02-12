@@ -3,6 +3,7 @@
 #include "level.h"
 #include "actor.h"
 #include "layer_interface.h"
+#include "console.h"
 
 Layer::Layer(Level* _level, std::string _name, std::string _type) : level{_level}, name{_name}, type{_type}{}
 
@@ -16,6 +17,7 @@ void Layer::ProcessActors(){
 
 void Layer::AcceptVisitor(Actor* _actor){
     LayerInterface interface{this};
+    Console::Out(interface.layer->GetType());
     _actor->GetVisitedByLayerInterface(&interface);
 }
 void Layer::Update(){}
