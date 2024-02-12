@@ -76,4 +76,6 @@ public:
     virtual std::string GetType();
 };
 
+template class LayerInterface<LayerSolid>;
+
 #endif
