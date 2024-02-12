@@ -6,6 +6,7 @@
 #include <functional>
 #include <iostream>
 #include <ufo/fundamental.h>
+#include "layer_interface.h"
 class Layer;
 class Camera;
 class Actor : Fundamental{
@@ -18,6 +19,11 @@ public:
     Actor(int _id, olc::vf2d _position, std::string _layer_tag);
     Actor(int _id, olc::vf2d _position, std::string _layer_tag, std::function<void(int)> *_destruct_instance);
     virtual void Update();
+
+    template <typename T_Layer>
+    void GetVisitedByLayerInterface(LayerInterface<T_Layer>* _interface){
+        _interface->AcceptVisitor(this);
+    }
     virtual void LayerProcess(Layer* _layer);
     virtual void Draw(Camera* _camera);
     virtual void Draw();
