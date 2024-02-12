@@ -25,7 +25,7 @@ public:
 
     template <typename T_Layer>
     void GetVisitedByLayerInterface(LayerInterface<T_Layer>* _interface){
-        _interface->AcceptVisitor(this);
+        _interface->AcceptVisitor<T_Layer>(this);
     }
     virtual void LayerProcess(Layer* _layer);
     virtual void Draw(Camera* _camera);
