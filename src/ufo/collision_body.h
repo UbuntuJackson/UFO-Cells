@@ -4,6 +4,9 @@
 #include "actor.h"
 #include <string>
 #include <vector>
+
+template<class T_Layer>
+class LayerInterface;
 class Game;
 class Camera;
 class Level;
