@@ -29,7 +29,7 @@ public:
     void GetVisitedByLayerInterface(LayerInterface<T_Layer>* _interface){
         _interface->AcceptVisitor(this);
         Console::Out(GetType(), "from GetVisitedByLayerInterface");
-        Console::Out(interface->layer->GetType(), "from GetVisitedByLayerInterface");
+        Console::Out(_interface->layer->GetType(), "from GetVisitedByLayerInterface");
     }
     virtual void LayerProcess(Layer* _layer);
     virtual void Draw(Camera* _camera);
