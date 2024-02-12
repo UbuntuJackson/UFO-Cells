@@ -1,9 +1,9 @@
 #ifndef LAYER_INTERFACE
 #define LAYER_INTERFACE
-class Actor;
-class CollisionBody;
-class LayerSolid;
-class Layer;
+#include "actor.h"
+#include "collision_body.h"
+#include "layer.h"
+#include "layer_solid.h"
 
 template<typename T_Layer>
 class LayerInterface{
