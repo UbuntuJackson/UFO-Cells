@@ -51,3 +51,5 @@ LayerSolid::Draw(Camera* _camera){
             level->level_decals[name]);
     }
 }
+
+template class LayerInterface<LayerSolid>;
