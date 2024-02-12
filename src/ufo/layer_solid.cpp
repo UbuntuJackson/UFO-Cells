@@ -26,8 +26,7 @@ LayerSolid::GetPixel(olc::vf2d _position){
 }*/
 void
 LayerSolid::AcceptVisitor(CollisionBody* _collision_body){
-    LayerInterface i;
-    i.AcceptVisitor(_collision_body ,this);
+    
 }
 
 void

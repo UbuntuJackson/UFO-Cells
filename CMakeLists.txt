@@ -47,7 +47,6 @@ set(
     src/ufo/ray_vs_ray_2.cpp
     src/ufo/ray2.cpp
     src/ufo/file.cpp
-    src/ufo/layer_interface.cpp
 )
 
 # Add the library

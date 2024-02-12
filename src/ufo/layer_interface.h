@@ -5,11 +5,20 @@ class CollisionBody;
 class LayerSolid;
 class Layer;
 
+template<typename T_Layer>
 class LayerInterface{
 public:
-    LayerInterface() = default;
-    virtual void AcceptVisitor(Actor *_actor, Layer* _layer);
-    virtual void AcceptVisitor(CollisionBody *_actor, LayerSolid* _layer);
+    T_Layer* layer;
+    LayerInterface(T_Layer* _layer) : layer{_layer}{}
+
+    void
+    AcceptVisitor(Actor *_actor){
+        //_actor->LayerProcess(_layer);
+    }
+    void
+    AcceptVisitor(CollisionBody *_actor){
+        _actor->LayerProcess(_layer);
+    }
 };
 
 #endif
