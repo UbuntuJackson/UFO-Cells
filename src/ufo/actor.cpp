@@ -17,7 +17,7 @@ Actor::Update(){}
 
 void
 Actor::LayerProcess(Layer* _layer){
-    
+    Console::Out("Actor", "LayerProcess");
 }
 
 void
