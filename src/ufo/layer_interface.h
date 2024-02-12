@@ -10,7 +10,9 @@ template<typename T_Layer>
 class LayerInterface{
 public:
     T_Layer* layer;
-    LayerInterface(T_Layer* _layer) : layer{_layer}{}
+    LayerInterface(T_Layer* _layer) : layer{_layer}{
+        Console::Out(layer.name);
+    }
 
     template<typename T_Actor>
     void
