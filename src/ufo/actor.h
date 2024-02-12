@@ -7,6 +7,7 @@
 #include <iostream>
 #include <ufo/fundamental.h>
 #include "layer_solid.h"
+#include "console.h"
 
 template<class T_Layer>
 class LayerInterface;
@@ -27,6 +28,7 @@ public:
     template <typename T_Layer>
     void GetVisitedByLayerInterface(LayerInterface<T_Layer>* _interface){
         _interface->AcceptVisitor(this);
+        Console::Out(GetType(), "from GetVisitedByLayerInterface");
     }
     virtual void LayerProcess(Layer* _layer);
     virtual void Draw(Camera* _camera);
