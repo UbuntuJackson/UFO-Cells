@@ -4,6 +4,7 @@
 #include "collision_body.h"
 #include "layer.h"
 #include "layer_solid.h"
+#include "console.h"
 
 template<typename T_Layer>
 class LayerInterface{
@@ -13,6 +14,7 @@ public:
 
     void
     AcceptVisitor(Actor *_actor){
+        Console::Out("actor.")
         //_actor->LayerProcess(_layer);
     }
     void
