@@ -6,7 +6,10 @@
 #include <functional>
 #include <iostream>
 #include <ufo/fundamental.h>
-#include "layer_interface.h"
+
+template<class T_Layer>
+class LayerInterface;
+
 class Layer;
 class Camera;
 class Actor : Fundamental{
