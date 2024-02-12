@@ -14,7 +14,7 @@ public:
 
     void
     AcceptVisitor(Actor *_actor){
-        Console::Out("actor.")
+        Console::Out("actor.");
         //_actor->LayerProcess(_layer);
     }
     void
