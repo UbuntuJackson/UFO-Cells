@@ -770,4 +770,4 @@ void CollisionBody::Update(){}
 void CollisionBody::Draw(Camera* _camera){}
 std::string CollisionBody::GetType(){return "CollisionBody";}
 
-template void Actor::GetVisitedByLayerInterface<LayerSolid>(LayerInterface<LayerSolid>* _interface);
+template void CollisionBody::GetVisitedByLayerInterface<LayerSolid>(LayerInterface<LayerSolid>* _interface);
