@@ -6,6 +6,7 @@
 #include <functional>
 #include <iostream>
 #include <ufo/fundamental.h>
+#include "layer_solid.h"
 
 template<class T_Layer>
 class LayerInterface;
@@ -34,5 +35,7 @@ public:
     void OnRemoval();
     virtual std::string GetType();
 };
+
+template void Actor::GetVisitedByLayerInterface<LayerSolid>(LayerInterface<LayerSolid>* _interface);
 
 #endif
