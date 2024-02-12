@@ -53,5 +53,7 @@ LayerSolid::Draw(Camera* _camera){
     }
 }
 
+std::string LayerSolid::GetType(){return "LayerSolid";}
+
 template class LayerInterface<LayerSolid>;
 template void Actor::GetVisitedByLayerInterface<LayerSolid>(LayerInterface<LayerSolid>* _interface);

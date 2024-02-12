@@ -23,6 +23,7 @@ public:
     virtual void AcceptVisitor(Actor* _actor);
     virtual void Update();
     virtual void Draw(Camera* _camera);
+    virtual std::string GetType();
 };
 
 #endif

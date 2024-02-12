@@ -20,3 +20,4 @@ void Layer::AcceptVisitor(Actor* _actor){
 }
 void Layer::Update(){}
 void Layer::Draw(Camera* _camera){}
+std::string Layer::GetType(){return "Layer";}

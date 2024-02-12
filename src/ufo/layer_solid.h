@@ -24,6 +24,7 @@ public:
     void AcceptVisitor(CollisionBody* _collision_body);
     void Update();
     void Draw(Camera* _camera);
+    std::string GetType();
 };
 
 #endif
