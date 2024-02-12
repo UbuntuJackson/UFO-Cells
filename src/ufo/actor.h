@@ -36,6 +36,4 @@ public:
     virtual std::string GetType();
 };
 
-template void Actor::GetVisitedByLayerInterface<LayerSolid>(LayerInterface<LayerSolid>* _interface);
-
 #endif
