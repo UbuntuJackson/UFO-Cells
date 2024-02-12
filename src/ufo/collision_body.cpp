@@ -769,5 +769,3 @@ CollisionBody::ApplyCollision(Level* _map){
 void CollisionBody::Update(){}
 void CollisionBody::Draw(Camera* _camera){}
 std::string CollisionBody::GetType(){return "CollisionBody";}
-
-template void CollisionBody::GetVisitedByLayerInterface<LayerSolid>(LayerInterface<LayerSolid>* _interface);
