@@ -18,7 +18,7 @@ public:
         //_actor->LayerProcess(_layer);
     }
     void
-    AcceptVisitor<T_Layer>(CollisionBody *_actor){
+    AcceptVisitor(CollisionBody *_actor){
         _actor->LayerProcess(layer);
     }
 };
