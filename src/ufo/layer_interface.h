@@ -14,9 +14,13 @@ public:
         Console::Out(layer->type);
     }
 
-    template<typename T_Actor>
     void
-    AcceptVisitor(T_Actor *_actor){
+    AcceptVisitor(Actor *_actor){
+        _actor->LayerProcess(layer);
+    }
+
+    void
+    AcceptVisitor(CollisionBody *_actor){
         _actor->LayerProcess(layer);
     }
 };

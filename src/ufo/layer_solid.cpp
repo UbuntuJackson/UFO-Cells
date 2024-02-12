@@ -6,6 +6,7 @@
 #include "level.h"
 #include "camera.h"
 #include <utility>
+#include "actor.h"
 #include <map>
 #include "collision_body.h"
 #include "layer_interface.h"
@@ -53,3 +54,4 @@ LayerSolid::Draw(Camera* _camera){
 }
 
 template class LayerInterface<LayerSolid>;
+template void Actor::GetVisitedByLayerInterface<LayerSolid>(LayerInterface<LayerSolid>* _interface);
