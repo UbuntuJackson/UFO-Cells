@@ -47,6 +47,13 @@ public:
 
     void LayerProcess(LayerSolid* _layer);
 
+    virtual void GetVisitedByLayerInterface(LayerInterface<LayerSolid>* _interface){
+        _interface->AcceptVisitor(this);
+        Console::Out(GetType(), "from GetVisitedByLayerInterface");
+        Console::Out(_interface->layer->GetType(), "from GetVisitedByLayerInterface");
+        LayerProcess(_interface->layer);
+    }
+
     bool IsOverlapping(Level* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);
     int IsOverlappingHeight(Level* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);
     int HeightUntilGround(Level* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);

@@ -25,8 +25,7 @@ public:
     Actor(int _id, olc::vf2d _position, std::string _layer_tag, std::function<void(int)> *_destruct_instance);
     virtual void Update();
 
-    template <typename T_Layer>
-    void GetVisitedByLayerInterface(LayerInterface<T_Layer>* _interface){
+    virtual void GetVisitedByLayerInterface(LayerInterface<Layer>* _interface){
         _interface->AcceptVisitor(this);
         Console::Out(GetType(), "from GetVisitedByLayerInterface");
         Console::Out(_interface->layer->GetType(), "from GetVisitedByLayerInterface");
