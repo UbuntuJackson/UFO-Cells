@@ -11,6 +11,7 @@
 #include "../program/ufo_global.h"
 #include "actor.h"
 #include "layer_solid.h"
+#include "layer_interface.h"
 
 CollisionBody::CollisionBody(int _id , olc::vf2d _position, Game *_game, std::string _layer_tag) :
 Actor(_id, _position, _layer_tag),
