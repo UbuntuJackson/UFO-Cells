@@ -20,6 +20,13 @@ Actor::LayerProcess(Layer* _layer){
     Console::Out("Actor", "LayerProcess");
 }
 
+void Actor::GetVisitedByLayerInterface(LayerInterface<Layer>* _interface){
+    _interface->AcceptVisitor(this);
+    Console::Out(GetType(), "from GetVisitedByLayerInterface");
+    Console::Out(_interface->layer->GetType(), "from GetVisitedByLayerInterface");
+    LayerProcess(_interface->layer);
+}
+
 void
 Actor::Draw(Camera* _camera){}
 

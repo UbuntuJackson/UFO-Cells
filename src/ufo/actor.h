@@ -25,12 +25,7 @@ public:
     Actor(int _id, olc::vf2d _position, std::string _layer_tag, std::function<void(int)> *_destruct_instance);
     virtual void Update();
 
-    virtual void GetVisitedByLayerInterface(LayerInterface<Layer>* _interface){
-        _interface->AcceptVisitor(this);
-        Console::Out(GetType(), "from GetVisitedByLayerInterface");
-        Console::Out(_interface->layer->GetType(), "from GetVisitedByLayerInterface");
-        LayerProcess(_interface->layer);
-    }
+    virtual void GetVisitedByLayerInterface(LayerInterface<Layer>* _interface);
     virtual void LayerProcess(Layer* _layer);
     virtual void Draw(Camera* _camera);
     virtual void Draw();

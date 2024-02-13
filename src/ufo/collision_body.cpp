@@ -40,6 +40,13 @@ CollisionBody::LayerProcess(LayerSolid* _layer){
     Console::Out("LayerProcess" , GetType());
 }
 
+void CollisionBody::GetVisitedByLayerInterface(LayerInterface<LayerSolid>* _interface){
+    _interface->AcceptVisitor(this);
+    Console::Out(GetType(), "from GetVisitedByLayerInterface");
+    Console::Out(_interface->layer->GetType(), "from GetVisitedByLayerInterface");
+    LayerProcess(_interface->layer);
+}
+
 bool
 CollisionBody::IsOverlapping(Level* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour){
 
