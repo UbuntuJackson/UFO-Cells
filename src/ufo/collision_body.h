@@ -8,6 +8,7 @@ class Game;
 class Camera;
 class Level;
 class LayerActor;
+class LayerSolid;
 
 class CollisionBody : public Actor{
 public:
@@ -40,6 +41,8 @@ public:
 
     CollisionBody(int _id, olc::vf2d _position, Game *_game, std::string _layer_tag);
     CollisionBody(int _id, olc::vf2d _position, Game *_game, std::string _mask, std::string _layer_tag);
+
+    void LayerProcess(LayerSolid* _layer);
 
     bool IsOverlapping(Level* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);
     int IsOverlappingHeight(Level* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour = olc::WHITE);

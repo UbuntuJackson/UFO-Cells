@@ -34,6 +34,16 @@ snap_up_range{16}
 {
 }
 
+void
+CollisionBody::Update(){
+    
+}
+
+void
+CollisionBody::LayerProcess(LayerSolid* _layer){
+
+}
+
 bool
 CollisionBody::IsOverlapping(Level* _map, olc::Decal *_decal, std::string _layer, olc::vf2d _position, olc::Pixel _colour){
 
