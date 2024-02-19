@@ -17,8 +17,8 @@ public:
 
     template <typename T_Actor>
     void
-    ApplyCollision(T_Actor &_actor){
-        ApplyCollision(_actor, _actor.shape);
+    ApplyCollision(T_Actor *_actor){
+        ApplyCollision(_actor, _actor->shape);
         
     }
 
@@ -30,13 +30,13 @@ public:
 
     template <typename T_Actor>
     void
-    ApplyCollision(T_Actor &_actor, Circle& _shape){
+    ApplyCollision(T_Actor *_actor, Circle* _shape){
 
     }
 
     template <typename T_Actor>
     void
-    ApplyCollision(T_Actor &_actor, Rect& _shape){
+    ApplyCollision(T_Actor *_actor, Rect* _shape){
         /*for(int l : _actor.layer_tags){
             for(Rect rect : geometry_layers[l].rectangles){
                 if(RectVsRect(_shape, rect)){
@@ -46,7 +46,7 @@ public:
         }*/
 
         for(Rect& rect : rectangles){
-            if(RectVsRect(_shape, rect)){
+            if(RectVsRect(*_shape, rect)){
                 Console::Out("RectVsRect!");
             }
         }
