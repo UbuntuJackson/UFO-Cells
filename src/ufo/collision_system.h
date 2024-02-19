@@ -51,7 +51,7 @@ public:
 
         for(Rect& rect : rectangles){
             if(RectVsRect(*_shape, rect)){
-                return RectVsRectCollisionData{true}
+                return RectVsRectCollisionData{true};
             }
         }
         return RectVsRectCollisionData{false};
