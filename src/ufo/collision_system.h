@@ -8,7 +8,8 @@
 #include "console.h"
 
 class CollisionSystem{
-
+public:
+    CollisionSystem() = default;
     //std::vector<TilemapLayer> tilemaps_layers;
     //std::vector<BitmapLayer> bitmap_layers;
     //std::vector<GeometryLayer> geometry_layers;
