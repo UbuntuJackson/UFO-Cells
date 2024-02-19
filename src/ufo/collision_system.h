@@ -9,9 +9,10 @@
 
 class CollisionSystem{
 
-    std::vector<TilemapLayer> tilemaps_layers;
-    std::vector<BitmapLayer> bitmap_layers;
-    std::vector<GeometryLayer> geometry_layers;
+    //std::vector<TilemapLayer> tilemaps_layers;
+    //std::vector<BitmapLayer> bitmap_layers;
+    //std::vector<GeometryLayer> geometry_layers;
+    std::vector<Rect> rectangles;
 
     template <typename T_Actor>
     void
@@ -35,14 +36,19 @@ class CollisionSystem{
     template <typename T_Actor>
     void
     ApplyCollision(T_Actor &_actor, Rect* _shape){
-        for(int l : _actor.layer_tags){
+        /*for(int l : _actor.layer_tags){
             for(Rect rect : geometry_layers[l].rectangles){
                 if(RectVsRect(_shape, rect)){
                     Console::Out("RectVsRect!");
                 }
             }
-        }
+        }*/
 
+        for(Rect rect : rectangles){
+            if(RectVsRect(_shape, rect)){
+                Console::Out("RectVsRect!");
+            }
+        }
     }
 };
 
