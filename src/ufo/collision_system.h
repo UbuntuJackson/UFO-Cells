@@ -29,13 +29,13 @@ class CollisionSystem{
 
     template <typename T_Actor>
     void
-    ApplyCollision(T_Actor &_actor, Circle* _shape){
+    ApplyCollision(T_Actor &_actor, Circle& _shape){
 
     }
 
     template <typename T_Actor>
     void
-    ApplyCollision(T_Actor &_actor, Rect* _shape){
+    ApplyCollision(T_Actor &_actor, Rect& _shape){
         /*for(int l : _actor.layer_tags){
             for(Rect rect : geometry_layers[l].rectangles){
                 if(RectVsRect(_shape, rect)){
@@ -44,7 +44,7 @@ class CollisionSystem{
             }
         }*/
 
-        for(Rect rect : rectangles){
+        for(Rect& rect : rectangles){
             if(RectVsRect(_shape, rect)){
                 Console::Out("RectVsRect!");
             }
