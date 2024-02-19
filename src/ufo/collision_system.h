@@ -7,6 +7,10 @@
 #include "collision_utils.h"
 #include "console.h"
 
+struct RectVsRectCollisionData{
+    bool is_overlapping;
+};
+
 class CollisionSystem{
 public:
     CollisionSystem() = default;
@@ -16,9 +20,9 @@ public:
     std::vector<Rect> rectangles;
 
     template <typename T_Actor>
-    void
+    RectVsRectCollisionData
     ApplyCollision(T_Actor *_actor){
-        ApplyCollision(_actor, &(_actor->shape));
+        return ApplyCollision(_actor, &(_actor->shape));
         
     }
 
@@ -35,7 +39,7 @@ public:
     }
 
     template <typename T_Actor>
-    void
+    RectVsRectCollisionData
     ApplyCollision(T_Actor *_actor, Rect* _shape){
         /*for(int l : _actor.layer_tags){
             for(Rect rect : geometry_layers[l].rectangles){
@@ -47,9 +51,10 @@ public:
 
         for(Rect& rect : rectangles){
             if(RectVsRect(*_shape, rect)){
-                Console::Out("RectVsRect!");
+                return RectVsRectCollisionData{true}
             }
         }
+        return RectVsRectCollisionData{false};
     }
 };
 
