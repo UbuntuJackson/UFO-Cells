@@ -18,7 +18,7 @@ public:
     template <typename T_Actor>
     void
     ApplyCollision(T_Actor *_actor){
-        ApplyCollision(_actor, _actor->shape);
+        ApplyCollision(_actor, &(_actor->shape));
         
     }
 
