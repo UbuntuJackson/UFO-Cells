@@ -4,11 +4,13 @@
 #include <string>
 #include "../../external/olcPixelGameEngine.h"
 #include "../ufo/assets.h"
+#include "scene_system.h"
 
 class Game : public olc::PixelGameEngine{
 public:
     std::string game_dir_name;
 
+    SceneSystem scene_system;
     bool record_input = true;
     bool play_input = false;
 
