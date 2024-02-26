@@ -5,6 +5,8 @@
 #include "console.h"
 #include <string>
 
+class Scene;
+
 class Component{
 public:
     Component* parent = nullptr;
