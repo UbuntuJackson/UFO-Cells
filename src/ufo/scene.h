@@ -3,8 +3,8 @@
 #include <vector>
 #include <memory>
 //#include "tilemap_layer.h"
+#include "json_interface.h"
 class Ray2;
-class ujson::JsonNode;
 class Button;
 class Component;
 
