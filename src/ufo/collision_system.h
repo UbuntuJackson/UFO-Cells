@@ -6,6 +6,7 @@
 #include "rect.h"
 #include "collision_utils.h"
 #include "console.h"
+#include "math_misc.h"
 
 struct RectVsRectCollisionData{
     bool is_overlapping;
@@ -19,23 +20,24 @@ public:
     //std::vector<GeometryLayer> geometry_layers;
     std::vector<Rect> rectangles;
 
-    template <typename T_Actor>
-    RectVsRectCollisionData
-    ApplyCollision(T_Actor *_actor){
-        return ApplyCollision(_actor, &(_actor->shape));
-        
+    std::vector<GeometryLayer*> geometry_layers;
+    std::vector<TilemapLayer*> tilemap_layers;
+
+    bool IsOverlapping(const Rect _a, const Rect _b){
+        if(RectVsRect(_a, _b)){
+            return true;
+        }
     }
 
-    /*template <typename T_Actor>
+    bool IsOverlapping(const Circle _a, const Circle _b){
+
+    }
+
     void
-    ApplyCollision(T_Actor &_actor, ufo::Decal* _shape){
-
-    }*/
-
-    template <typename T_Actor>
-    void
-    ApplyCollision(T_Actor *_actor, Circle* _shape){
-
+    ApplyCollision(olc::vf2d &_position, olc::vf2d &_collision, Rect &_shape){
+        for(Rect& rect : rectangles){
+            
+        }
     }
 
     template <typename T_Actor>
