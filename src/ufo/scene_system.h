@@ -1,9 +1,12 @@
 #ifndef SCENE_H
 #define SCENE_H
 #include <vector>
+#include <memory>
+class Scene;
+
 class SceneSystem{
 
-    std::vector<Scene*> scenes;
+    std::vector<std::unique_ptr<Scene>> scenes;
 
     template<typename tScene, typename ...tArgs>
     void NewScene(tArgs ... _args){
