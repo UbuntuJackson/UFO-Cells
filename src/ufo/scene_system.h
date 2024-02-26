@@ -10,7 +10,7 @@ class SceneSystem{
 
     template<typename tScene, typename ...tArgs>
     void NewScene(tArgs ... _args){
-        scenes.push_back(std::make_unique<tScene>(args...));
+        scenes.push_back(std::make_unique<tScene>(_args...));
     }
 
     template<typename tScene, typename ...tArgs>
