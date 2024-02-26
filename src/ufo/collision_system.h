@@ -20,7 +20,7 @@ public:
     //std::vector<GeometryLayer> geometry_layers;
     std::vector<Rect> rectangles;
 
-    std::vector<GeometryLayer*> geometry_layers;
+    //std::vector<GeometryLayer*> geometry_layers;
     std::vector<TilemapLayer*> tilemap_layers;
 
     bool IsOverlapping(const Rect _a, const Rect _b){

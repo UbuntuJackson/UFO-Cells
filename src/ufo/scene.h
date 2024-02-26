@@ -2,8 +2,8 @@
 #define SCENE_H
 #include <vector>
 #include <memory>
-#include "tilemap_layer.h"
-
+//#include "tilemap_layer.h"
+class Ray2;
 class ujson::JsonNode;
 class Button;
 class Component;
@@ -17,8 +17,9 @@ public:
     //std::vector<std::unique_ptr<PropertyRect>> property_rectangles;
     //std::vector<std::unique_ptr<PropertyCircle>> property_circles;
     //std::vector<std::unique_ptr<PropertyRay>> property_rays;
+    std::vector<std::unique_ptr<Ray2>> rays;
     std::vector<std::unique_ptr<Scene>> scene_bundle;
-    TilemapLayer tilemap;
+    //TilemapLayer tilemap;
     //std::vector<std::unique_ptr<ufo::Renderable>> renderables;
     std::vector<std::unique_ptr<Button>> buttons;
     //std::vector<std::unique_ptr<Menu>> menus;

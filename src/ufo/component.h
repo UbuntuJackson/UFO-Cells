@@ -4,7 +4,7 @@
 #include <utility>
 #include "console.h"
 #include <string>
-
+#include "../../external/olcPixelGameEngine.h"
 class Scene;
 
 class Component{
@@ -19,11 +19,10 @@ public:
     Component(){}
     Component(std::string _name);
 
-    template<typename tNode, typename ... Args>
-    tNode* Attach(Args ...args){
-        tNode* node = scene_ptr->NewActor<tNode>(args...);
-        node->parent = this;
-        nodes.push_back(node);
+    template<typename tNode>
+    tNode* Attach(tNode* _node){
+        _node->parent = this;
+        nodes.push_back(_node);
         return node;
     }
 
