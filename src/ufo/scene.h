@@ -3,21 +3,23 @@
 #include <vector>
 #include <memory>
 #include "component.h"
+#include "tilemap_layer.h"
+class Button;
 
 class Scene{
     int id_count; //This needs to be higher up the heirarchy, maybe mark this scene as the parent scene
 
     std::vector<std::unique_ptr<Component>> updatables;
-    std::vector<std::unique_ptr<PropertyRect>> property_rectangles;
-    std::vector<std::unique_ptr<PropertyCircle>> property_circles;
-    std::vector<std::unique_ptr<PropertyRay>> property_rays;
+    //std::vector<std::unique_ptr<PropertyRect>> property_rectangles;
+    //std::vector<std::unique_ptr<PropertyCircle>> property_circles;
+    //std::vector<std::unique_ptr<PropertyRay>> property_rays;
     std::vector<std::unique_ptr<Scene>> scene_bundle;
-    Tilemap tilemap;
+    TilemapLayer tilemap;
     std::vector<std::unique_ptr<ufo::Renderable>> renderables;
     std::vector<std::unique_ptr<Button>> buttons;
-    std::vector<std::unique_ptr<Menu>> menus;
-    std::vector<std::unique_ptr<Event>> deferred_events;
-    std::vector<std::unique_ptr<Event>> events;
+    //std::vector<std::unique_ptr<Menu>> menus;
+    //std::vector<std::unique_ptr<Event>> deferred_events;
+    //std::vector<std::unique_ptr<Event>> events;
 
     Scene() = default;
     Scene(std::string _name);
