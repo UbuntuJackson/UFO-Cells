@@ -16,7 +16,7 @@ class SceneSystem{
     template<typename tScene, typename ...tArgs>
     void LoadScene(std::string _path, tArgs ... _args){
         scenes.push_back(std::make_unique<tScene>(_args...));
-        scenes.back().Load(_path);
+        scenes.back()->Load(_path);
     }
 
     template<typename tScene, typename ...tArgs>
