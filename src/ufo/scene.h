@@ -2,13 +2,15 @@
 #define SCENE_H
 #include <vector>
 #include <memory>
-#include "component.h"
 #include "tilemap_layer.h"
 
+class ujson::JsonNode;
 class Button;
-class Scene;
+class Component;
 
 class Scene{
+public:
+    std::string name;
     int id_count; //This needs to be higher up the heirarchy, maybe mark this scene as the parent scene
 
     std::vector<std::unique_ptr<Component>> updatables;
@@ -17,14 +19,14 @@ class Scene{
     //std::vector<std::unique_ptr<PropertyRay>> property_rays;
     std::vector<std::unique_ptr<Scene>> scene_bundle;
     TilemapLayer tilemap;
-    std::vector<std::unique_ptr<ufo::Renderable>> renderables;
+    //std::vector<std::unique_ptr<ufo::Renderable>> renderables;
     std::vector<std::unique_ptr<Button>> buttons;
     //std::vector<std::unique_ptr<Menu>> menus;
     //std::vector<std::unique_ptr<Event>> deferred_events;
     //std::vector<std::unique_ptr<Event>> events;
 
     Scene() = default;
-    Scene(std::string _name);
+    Scene(std::string _name = "Un-named");
 
     virtual void OnReady();
     virtual void SuperOnReady();
@@ -47,7 +49,7 @@ class Scene{
     virtual void UpdateScene();
     virtual void DeferActorRemoval();
     virtual void Load(std::string _path);
-    virtual void CustomLoad();
+    virtual void CustomLoad(ujson::JsonNode _json);
 
 };
 

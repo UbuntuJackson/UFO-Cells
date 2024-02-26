@@ -1,7 +1,8 @@
 #include "scene.h"
 #include "json_interface.h"
+#include <string>
 
-Scene(std::string _name = "Un-named") : name{_name}{
+Scene::Scene(std::string _name) : name{_name}{
     //default scene
 }
 
@@ -36,9 +37,9 @@ Scene::DeferActorRemoval(){
 }
 
 void
-Scene::Load(){
-    CustomLoad();
+Scene::Load(std::string _path){
+    //CustomLoad(_json);
 }
 
 void
-Scene::CustomLoad(){}
+Scene::CustomLoad(ujson::JsonNode _json){}

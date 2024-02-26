@@ -9,5 +9,5 @@ SceneSystem::RemoveActiveScene(){}
 
 void
 SceneSystem::Update(){
-
+    scenes[scenes.size()-1]->UpdateScene();
 }
