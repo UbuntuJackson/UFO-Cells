@@ -4,7 +4,9 @@
 #include <memory>
 #include "component.h"
 #include "tilemap_layer.h"
+
 class Button;
+class Scene;
 
 class Scene{
     int id_count; //This needs to be higher up the heirarchy, maybe mark this scene as the parent scene
