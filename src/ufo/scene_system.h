@@ -1,5 +1,5 @@
-#ifndef SCENE_H
-#define SCENE_H
+#ifndef SCENE_SYSTEM_H
+#define SCENE_SYSTEM_H
 #include <vector>
 #include <memory>
 class Scene;
@@ -20,9 +20,9 @@ class SceneSystem{
     }
 
     template<typename tScene, typename ...tArgs>
-    void ReplaceScene(){
+    void ReplaceScene(tArgs ..._args){
         scenes.pop_back();
-        scenes.push_back(args...);
+        scenes.push_back(_args...);
     }
     
     void GotoScene(std::string _scene_name);
