@@ -2,7 +2,7 @@
 #define SCENE_SYSTEM_H
 #include <vector>
 #include <memory>
-class Scene;
+#include "scene.h"
 
 class SceneSystem{
 
