@@ -8,6 +8,7 @@
 class Component{
 public:
     Component* parent = nullptr;
+    Scene* scene_ptr;
     std::vector<Component*> nodes;
     olc::vf2d position;
     int id;
