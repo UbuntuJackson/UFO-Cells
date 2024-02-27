@@ -4,9 +4,9 @@
 #include <memory>
 //#include "tilemap_layer.h"
 #include "json_interface.h"
-class Ray2;
-class Button;
-class Component;
+#include "component.h"
+#include "ray2.h"
+#include "button.h"
 
 class Scene{
 public:
