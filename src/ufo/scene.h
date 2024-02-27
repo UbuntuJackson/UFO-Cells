@@ -45,7 +45,7 @@ public:
 
 private:
     template<typename tActor ,typename ...Args>
-    tActor* NewActor(Identity<tActor>, Args ...args){
+    tActor* NewActor(Identity<tActor> _, Args ...args){
 
         tActor* actor = new tActor(args...);
         actor->scene_ptr = this; //Can scene pointer be template class?
@@ -57,7 +57,7 @@ private:
     }
 
     template<typename ...Args>
-    Ray2* NewActor(Identity<Ray2>, Args ...args){
+    Ray2* NewActor(Identity<Ray2> _, Args ...args){
 
         Ray2* actor = new Ray2(args...);   
         rays.push_back(std::unique_ptr(actor)); 
