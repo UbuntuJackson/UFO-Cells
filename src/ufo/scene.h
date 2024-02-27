@@ -40,7 +40,7 @@ public:
 
     template<typename tActor ,typename ...Args>
     tActor* NewActor(Args ...args){
-        return NewActor<tActor*>(Identity<tActor>(), args...);
+        return NewActor(Identity<tActor>(), args...);
     }
 
 private:
