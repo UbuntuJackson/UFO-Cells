@@ -23,7 +23,7 @@ public:
     tNode* Attach(tNode* _node){
         _node->parent = this;
         nodes.push_back(_node);
-        return node;
+        return _node;
     }
 
     virtual void OnReady();
