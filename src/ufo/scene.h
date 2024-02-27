@@ -26,7 +26,6 @@ public:
     //std::vector<std::unique_ptr<Event>> deferred_events;
     //std::vector<std::unique_ptr<Event>> events;
 
-    Scene() = default;
     Scene(std::string _name = "Un-named");
 
     virtual void OnReady();
