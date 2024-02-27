@@ -25,7 +25,7 @@ set(
     src/ufo/dynamic_solid.cpp
     src/ufo/collision_utils.cpp
     src/ufo/colour_utils.cpp
-    src/ufo/misc_math.cpp
+    src/ufo/math_misc.cpp
     src/ufo/rect.cpp
     src/ufo/file_utils.cpp
     src/ufo/camera.cpp
@@ -47,6 +47,9 @@ set(
     src/ufo/ray_vs_ray_2.cpp
     src/ufo/ray2.cpp
     src/ufo/file.cpp
+    src/ufo/scene.cpp
+    src/ufo/scene_system.cpp
+    src/ufo/component.cpp
 )
 
 # Add the library
