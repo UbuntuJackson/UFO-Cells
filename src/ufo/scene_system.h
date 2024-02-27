@@ -31,6 +31,8 @@ public:
     void GotoScene(std::string _scene_name);
     void RemoveActiveScene();
 
+    Scene* GetActiveScene();
+
     void Update();
 };
 
