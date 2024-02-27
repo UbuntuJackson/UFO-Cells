@@ -22,7 +22,7 @@ void
 Component::Draw(){}
 
 void
-Component::PrintTree(int _depth = 0){
+Component::PrintTree(int _depth){
     std::string indent = "";
     for(int _ = 0; _ < _depth; _++) indent += std::string("    ");
     Console::Out(std::string(indent) + " " + name);
