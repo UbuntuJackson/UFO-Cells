@@ -40,7 +40,7 @@ public:
 
     template<typename tActor ,typename ...Args>
     tActor* NewActor(Args ...args){
-        return NewActor<tActor*>(Identity<tActor>, args...);
+        return NewActor<tActor*>(Identity<tActor>(), args...);
     }
 
 private:
@@ -53,7 +53,7 @@ private:
         actor->id = id;
         actor->SuperOnReady(args...); //hope this works thanks to virtual functions. if you don't declare it, then it will run the parent class's
         actor->OnReady(args...);     
-        return actor.get();
+        return actor->get();
     }
 
     template<typename ...Args>
@@ -61,9 +61,9 @@ private:
 
         Ray2* actor = new Ray2(args...);   
         rays.push_back(std::unique_ptr(actor)); 
-        return actor.get();
+        return actor->get();
     }
-
+public:
     virtual void UpdateSceneBundle();
     virtual void UpdateGeometry();
     virtual void UpdateTilemap();
