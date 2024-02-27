@@ -1,6 +1,7 @@
 #include "component.h"
+#include <string>
 
-Component(std::string _name) : name{_name}{}
+Component::Component(std::string _name) : name{_name}{}
 
 void
 Component::SuperOnReady(){}
