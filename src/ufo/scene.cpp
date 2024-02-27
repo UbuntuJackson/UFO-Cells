@@ -1,6 +1,9 @@
 #include "scene.h"
 #include "json_interface.h"
 #include <string>
+#include "scene_system.h"
+#include "ray2.h"
+#include "game.h"
 
 Scene::Scene(std::string _name) : name{_name}{
     //default scene
@@ -29,6 +32,13 @@ Scene::UpdateScene(){
     UpdateSceneBundle();
     UpdateGeometry();
     UpdateGeometry();
+}
+
+void
+Scene::DrawScene(){
+    for(auto &ray : rays){
+        scene_system_ptr->game->DrawLine(ray->Start(), ray->End());
+    }
 }
 
 void

@@ -8,8 +8,13 @@
 #include "ray2.h"
 #include "button.h"
 
+class SceneSystem;
+class Game;
+
 class Scene{
 public:
+    SceneSystem* scene_system_ptr;
+
     std::string name;
     int id_count; //This needs to be higher up the heirarchy, maybe mark this scene as the parent scene
 
@@ -30,9 +35,17 @@ public:
 
     virtual void OnReady();
     virtual void SuperOnReady();
+    template<typename T>
+    struct Identity{typedef T type;};
 
     template<typename tActor ,typename ...Args>
     tActor* NewActor(Args ...args){
+        return NewActor<tActor*>(Identity<tActor>, args...);
+    }
+
+private:
+    template<typename tActor ,typename ...Args>
+    tActor* NewActor(Identity<tActor>, Args ...args){
 
         tActor* actor = new tActor(args...);
         actor->scene_ptr = this; //Can scene pointer be template class?
@@ -43,10 +56,19 @@ public:
         return actor.get();
     }
 
+    template<typename ...Args>
+    Ray2* NewActor(Identity<Ray2>, Args ...args){
+
+        Ray2* actor = new Ray2(args...);   
+        rays.push_back(std::unique_ptr(actor)); 
+        return actor.get();
+    }
+
     virtual void UpdateSceneBundle();
     virtual void UpdateGeometry();
     virtual void UpdateTilemap();
     virtual void UpdateScene();
+    virtual void DrawScene();
     virtual void DeferActorRemoval();
     virtual void Load(std::string _path);
     virtual void CustomLoad(ujson::JsonNode _json);

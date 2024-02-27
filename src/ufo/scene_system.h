@@ -3,9 +3,11 @@
 #include <vector>
 #include <memory>
 #include "scene.h"
+class Game;
 
 class SceneSystem{
 public:
+    Game* game;
     SceneSystem() = default;
     std::vector<std::unique_ptr<Scene>> scenes;
 
