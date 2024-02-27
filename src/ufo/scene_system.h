@@ -5,7 +5,8 @@
 #include "scene.h"
 
 class SceneSystem{
-
+public:
+    SceneSystem() = default;
     std::vector<std::unique_ptr<Scene>> scenes;
 
     template<typename tScene, typename ...tArgs>
