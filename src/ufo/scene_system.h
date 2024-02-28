@@ -13,7 +13,7 @@ public:
 
     template<typename tScene, typename ...tArgs>
     void NewScene(tArgs ... _args){
-        tArgs* scene = new tArgs(..._args);
+        tArgs* scene = new tArgs(_args...);
         scene->scene_system = this;
         scenes.push_back(std::make_unique<tScene>(scene));
     }
