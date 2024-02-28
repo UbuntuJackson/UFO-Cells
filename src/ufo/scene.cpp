@@ -32,12 +32,18 @@ Scene::UpdateScene(){
     UpdateSceneBundle();
     UpdateGeometry();
     UpdateGeometry();
+    for(auto &updatable : updatables){
+        updatable->DrawCallbacks();
+    }
 }
 
 void
 Scene::DrawScene(){
     for(auto &ray : rays){
         scene_system->game->DrawLine(ray->Start(), ray->End());
+    }
+    for(auto &updatable : updatables){
+        updatable->DrawCallbacks();
     }
 }
 

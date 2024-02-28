@@ -7,6 +7,7 @@
 #include "component.h"
 #include "ray2.h"
 #include "button.h"
+#include "updatable.h"
 
 class SceneSystem;
 class Game;
@@ -60,6 +61,19 @@ private:
 
         Ray2* actor = new Ray2(args...);   
         rays.push_back(std::unique_ptr<Ray2>(actor)); 
+        return actor;
+    }
+
+    template<typename ...Args>
+    Updatable* NewActor(Identity<Updatable> _, Args ...args){
+
+        Updatable* actor = new Updatable(args...);
+        actor->scene_ptr = this; //Can scene pointer be template class?
+        int id = id_count++;
+        actor->id = id;
+        actor->SuperOnReady(args...); //hope this works thanks to virtual functions. if you don't declare it, then it will run the parent class's
+        actor->OnReady(args...);        
+        updatables.push_back(std::unique_ptr<Updatable>(actor)); 
         return actor;
     }
 public:
