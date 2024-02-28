@@ -20,7 +20,7 @@ public:
 
     template<typename tScene, typename ...tArgs>
     void LoadScene(std::string _path, tArgs ... _args){
-        scenes.push_back(std::make_unique<tScene>(_args...));
+        scenes.push_back(std::unique_ptr<tScene>(_args...));
         scenes.back()->Load(_path);
     }
 
