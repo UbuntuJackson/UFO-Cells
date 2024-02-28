@@ -51,8 +51,8 @@ private:
         actor->scene_ptr = this; //Can scene pointer be template class?
         int id = id_count++;
         actor->id = id;
-        actor->SuperOnReady(args...); //hope this works thanks to virtual functions. if you don't declare it, then it will run the parent class's
-        actor->OnReady(args...);     
+        //actor->SuperOnReady(args...); //hope this works thanks to virtual functions. if you don't declare it, then it will run the parent class's
+        //actor->OnReady(args...);     
         return actor;
     }
 
@@ -71,8 +71,8 @@ private:
         actor->scene_ptr = this; //Can scene pointer be template class?
         int id = id_count++;
         actor->id = id;
-        actor->SuperOnReady(args...); //hope this works thanks to virtual functions. if you don't declare it, then it will run the parent class's
-        actor->OnReady(args...);        
+        //actor->SuperOnReady(args...); //hope this works thanks to virtual functions. if you don't declare it, then it will run the parent class's
+        //actor->OnReady(args...);        
         updatables.push_back(std::unique_ptr<Updatable>(actor)); 
         return actor;
     }
