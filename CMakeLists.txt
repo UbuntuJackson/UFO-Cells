@@ -50,6 +50,7 @@ set(
     src/ufo/scene.cpp
     src/ufo/scene_system.cpp
     src/ufo/component.cpp
+    src/ufo/updatable.cpp
 )
 
 # Add the library
