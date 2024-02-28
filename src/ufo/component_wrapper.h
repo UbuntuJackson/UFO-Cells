@@ -6,10 +6,10 @@
 template<class tType>
 class ComponentWrapper : public Component{
 public:
-    tType component;
+    tType *component;
     template<typename ...Args>
-    ComponentWrapper(Args ..._args) : component{tType(_args...)}{
-        scene_ptr->NewActor<tType>(_args...);
+    ComponentWrapper(Args ..._args){
+        component = scene_ptr->NewActor<tType>(_args...);
     }
     tType& GetComponent(){return component;}
 };
