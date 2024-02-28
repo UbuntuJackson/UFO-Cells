@@ -11,7 +11,7 @@ public:
     ComponentWrapper(Args ..._args){
         component = scene_ptr->NewActor<tType>(_args...);
     }
-    tType& GetComponent(){return component;}
+    tType* GetComponent(){return component;}
 };
 
 #endif
