@@ -4,6 +4,7 @@
 Game::Game()
 {
     sAppName = "UFO-Cells";
+    scene_system.game = this;
 }
 
 Game::~Game(){
