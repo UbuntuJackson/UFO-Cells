@@ -32,8 +32,6 @@ public:
     void RemoveActiveScene();
 
     Scene* GetActiveScene();
-
-    void Update();
 };
 
 #endif
