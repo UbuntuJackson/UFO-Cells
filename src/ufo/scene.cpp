@@ -37,7 +37,7 @@ Scene::UpdateScene(){
 void
 Scene::DrawScene(){
     for(auto &ray : rays){
-        scene_system_ptr->game->DrawLine(ray->Start(), ray->End());
+        scene_system->game->DrawLine(ray->Start(), ray->End());
     }
 }
 

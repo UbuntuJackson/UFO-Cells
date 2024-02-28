@@ -13,7 +13,9 @@ public:
 
     template<typename tScene, typename ...tArgs>
     void NewScene(tArgs ... _args){
-        scenes.push_back(std::make_unique<tScene>(_args...));
+        tArgs* scene = new tArgs(..._args);
+        scene->scene_system = this;
+        scenes.push_back(std::make_unique<tScene>(scene));
     }
 
     template<typename tScene, typename ...tArgs>
@@ -32,6 +34,8 @@ public:
     void RemoveActiveScene();
 
     Scene* GetActiveScene();
+
+    void Update();
 };
 
 #endif

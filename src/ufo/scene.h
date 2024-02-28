@@ -13,7 +13,7 @@ class Game;
 
 class Scene{
 public:
-    SceneSystem* scene_system_ptr;
+    SceneSystem* scene_system;
 
     std::string name;
     int id_count; //This needs to be higher up the heirarchy, maybe mark this scene as the parent scene
@@ -46,7 +46,6 @@ public:
 private:
     template<typename tActor ,typename ...Args>
     tActor* NewActor(Identity<tActor> _, Args ...args){
-
         tActor* actor = new tActor(args...);
         actor->scene_ptr = this; //Can scene pointer be template class?
         int id = id_count++;
