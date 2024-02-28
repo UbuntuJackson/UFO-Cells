@@ -33,7 +33,7 @@ Scene::UpdateScene(){
     UpdateGeometry();
     UpdateGeometry();
     for(auto &updatable : updatables){
-        updatable->DrawCallbacks();
+        updatable->UpdateCallbacks();
     }
 }
 
