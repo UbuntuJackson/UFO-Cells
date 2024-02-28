@@ -4,10 +4,11 @@
 
 template<class tType>
 class ComponentWrapper : public Component{
+public:
     tType component;
     template<typename ...Args>
     ComponentWrapper(Args ..._args) : component{tType(_args...)}{}
-    tType& GetComponent(){return tType}
+    tType& GetComponent(){return component;}
 };
 
 #endif
