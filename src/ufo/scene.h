@@ -72,7 +72,7 @@ private:
         updatables.back()->scene_ptr = this; //Can scene pointer be template class?
         int id = id_count++;
         updatables.back()->id = id;
-        return actor;
+        return updatables.back().get(); //using .back() here can be deterimental if for example the previously made updatable here adds something to updatables too.
     }
 public:
     virtual void UpdateSceneBundle();
