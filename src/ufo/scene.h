@@ -58,21 +58,22 @@ private:
 
     template<typename ...Args>
     Ray2* NewActor(Identity<Ray2> _, Args ...args){
-
-        Ray2* actor = new Ray2(args...);   
-        rays.push_back(std::unique_ptr<Ray2>(actor)); 
-        return actor;
+  
+        rays.push_back(std::make_unique<Ray2>(args...)); 
+        return rays.back(); //how do I know for certain that this is the element I originally pushed?
     }
 
     template<typename ...Args>
     Updatable* NewActor(Identity<Updatable> _, Args ...args){
+
+        Updatable* actor = new Updatable(args...);
+        actor->scene_ptr = this; //Can scene pointer be template class?
+        int id = id_count++;
+        actor->id = id;
         //actor->SuperOnReady(args...); //hope this works thanks to virtual functions. if you don't declare it, then it will run the parent class's
         //actor->OnReady(args...);        
-        updatables.push_back(std::make_unique<Updatable>(args...)); 
-        updatables.back()->scene_ptr = this; //Can scene pointer be template class?
-        int id = id_count++;
-        updatables.back()->id = id;
-        return updatables.back()->get(); //using .back() here can be deterimental if for example the previously made updatable here adds something to updatables too.
+        updatables.push_back(std::unique_ptr<Updatable>(actor)); 
+        return actor;
     }
 public:
     virtual void UpdateSceneBundle();
