@@ -60,7 +60,7 @@ private:
     Ray2* NewActor(Identity<Ray2> _, Args ...args){
 
         Ray2* actor = new Ray2(args...);   
-        //rays.push_back(std::unique_ptr<Ray2>(actor)); 
+        rays.push_back(std::unique_ptr<Ray2>(actor)); 
         return actor;
     }
 
