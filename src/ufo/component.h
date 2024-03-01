@@ -5,7 +5,7 @@
 #include "console.h"
 #include <string>
 #include "../../external/olcPixelGameEngine.h"
-#include "component.h"
+#include "scene.h"
 
 class Component{
 public:
