@@ -48,7 +48,7 @@ public:
 private:
     template<typename tActor ,typename ...Args>
     tActor* NewActor(Identity<tActor> _, Args ...args){
-        tActor* actor = new tActor(args...);
+        tActor* actor = new tActor(args...); //depends on scene_ptr being valid. I feel so dumb.
         actor->scene_ptr = this; //Can scene pointer be template class?
         int id = id_count++;
         actor->id = id;
