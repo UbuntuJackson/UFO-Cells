@@ -8,6 +8,7 @@
 #include "ray2.h"
 #include "button.h"
 #include "updatable.h"
+#include "component_wrapper.h"
 
 class SceneSystem;
 class Game;
@@ -23,7 +24,7 @@ public:
     //std::vector<std::unique_ptr<PropertyRect>> property_rectangles;
     //std::vector<std::unique_ptr<PropertyCircle>> property_circles;
     //std::vector<std::unique_ptr<PropertyRay>> property_rays;
-    std::vector<std::unique_ptr<Ray2>> rays;
+    std::vector<std::unique_ptr<ComponentWrapper<Ray2>>> rays; //would need to be wrapped if I want to autodestruct. Push unique_ptr<ComponentWrapper<Ray>> instead.
     std::vector<std::unique_ptr<Scene>> scene_bundle;
     //TilemapLayer tilemap;
     //std::vector<std::unique_ptr<ufo::Renderable>> renderables;
@@ -59,7 +60,7 @@ private:
     template<typename ...Args>
     Ray2* NewActor(Identity<Ray2> _, Args ...args){
   
-        rays.push_back(std::make_unique<Ray2>(args...)); 
+        rays.push_back(std::make_unique<ComponentWrapper<Ray2>>(args...)); 
         return rays.back().get(); //how do I know for certain that this is the element I originally pushed?
     }
 
