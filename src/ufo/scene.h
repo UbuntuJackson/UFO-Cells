@@ -58,7 +58,7 @@ private:
     }
 
     template<typename tActor ,typename ...Args>
-    tActor* NewActor(Identity<ComponentWrapper<tActor>> _, Args ...args){
+    ComponentWrapper<tActor>* NewActor(Identity<ComponentWrapper<tActor>> _, Args ...args){
         ComponentWrapper<tActor>* actor = new ComponentWrapper<tActor>(args...);
         actor->scene_ptr = this; //Can scene pointer be template class?
         int id = id_count++;
@@ -70,7 +70,7 @@ private:
 
     template<typename ...Args>
     Ray2* NewActor(Identity<Ray2> _, Args ...args){
-  
+        
         rays.push_back(std::make_unique<ComponentWrapper<Ray2>>(NewActor<ComponentWrapper<Ray2>>(args...))); 
         return rays.back()->GetComponent(); //how do I know for certain that this is the element I originally pushed?
     }
