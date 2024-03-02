@@ -40,7 +40,7 @@ Scene::UpdateScene(){
 void
 Scene::DrawScene(){
     for(auto &ray : rays){
-        scene_system->game->DrawLine(ray->Start(), ray->End());
+        scene_system->game->DrawLine(ray->GetComponent()->Start(), ray->GetComponent()->End());
     }
     for(auto &updatable : updatables){
         updatable->DrawCallbacks();
