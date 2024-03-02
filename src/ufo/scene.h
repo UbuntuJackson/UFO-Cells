@@ -59,7 +59,7 @@ private:
 
     template<typename tActor ,typename ...Args>
     tActor* NewActor(Identity<ComponentWrapper<tActor>> _, Args ...args){
-        ComponentWrapper<tActor>* actor = new ComponentWrapper<tActor>(...args);
+        ComponentWrapper<tActor>* actor = new ComponentWrapper<tActor>(args...);
         actor->scene_ptr = this; //Can scene pointer be template class?
         int id = id_count++;
         actor->id = id;
