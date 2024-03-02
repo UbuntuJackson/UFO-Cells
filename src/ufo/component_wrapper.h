@@ -1,7 +1,7 @@
 #ifndef COMPONENT_WRAPPER_H
 #define COMPONENT_WRAPPER_H
-#include "component.h"
 #include "scene.h"
+#include "component.h"
 
 template<class tType>
 class ComponentWrapper : public Component{
