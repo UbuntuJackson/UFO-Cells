@@ -65,7 +65,7 @@ private:
         actor->id = id;
         //actor->SuperOnReady(args...); //hope this works thanks to virtual functions. if you don't declare it, then it will run the parent class's
         //actor->OnReady(args...);     
-        return actor;
+        return actor->GetComponent();
     }
 
     template<typename ...Args>
