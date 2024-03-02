@@ -71,7 +71,7 @@ private:
     template<typename ...Args>
     Ray2* NewActor(Identity<Ray2> _, Args ...args){
   
-        rays.push_back(NewActor<ComponentWrapper<Ray2>>(...args)); 
+        rays.push_back(std::make_unique<ComponentWrapper<Ray2>>(NewActor<ComponentWrapper<Ray2>>(args...))); 
         return rays.back()->GetComponent(); //how do I know for certain that this is the element I originally pushed?
     }
 
