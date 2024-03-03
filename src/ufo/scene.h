@@ -70,8 +70,11 @@ private:
 
     template<typename ...Args>
     ComponentWrapper<Ray2>* NewActor(Identity<ComponentWrapper<Ray2>> _, Args ...args){
-        ComponentWrapper<Ray2> *cwr = new ComponentWrapper(Ray2(args...));
-        rays.push_back(std::unique_ptr<ComponentWrapper<Ray2>>(cwr));
+        ComponentWrapper<Ray2> *actor = new ComponentWrapper(new Ray2(args...));
+        actor->scene_ptr = this; //Can scene pointer be template class?
+        int id = id_count++;
+        actor->id = id;
+        rays.push_back(std::unique_ptr<ComponentWrapper<Ray2>>(actor));
         return rays.back().get(); //how do I know for certain that this is the element I originally pushed?
     }
 
