@@ -57,7 +57,7 @@ private:
         return actor;
     }
 
-    template<typename tActor ,typename ...Args>
+    /*template<typename tActor ,typename ...Args>
     ComponentWrapper<tActor>* NewActor(Identity<ComponentWrapper<tActor>> _, Args ...args){
         ComponentWrapper<tActor>* actor = new ComponentWrapper<tActor>(args...);
         actor->scene_ptr = this; //Can scene pointer be template class?
@@ -66,13 +66,13 @@ private:
         //actor->SuperOnReady(args...); //hope this works thanks to virtual functions. if you don't declare it, then it will run the parent class's
         //actor->OnReady(args...);     
         return actor->GetComponent();
-    }
+    }*/
 
     template<typename ...Args>
-    Ray2* NewActor(Identity<Ray2> _, Args ...args){
-        
-        rays.push_back(std::make_unique<ComponentWrapper<Ray2>>(NewActor<ComponentWrapper<Ray2>>(args...))); 
-        return rays.back()->GetComponent(); //how do I know for certain that this is the element I originally pushed?
+    ComponentWrapper<Ray2>* NewActor(Identity<Ray2> _, Args ...args){
+        ComponentWrapper<Ray2> *cwr = new ComponentWrapper(Ray2(args...))
+        rays.push_back(std::unique_ptr<ComponentWrapper<Ray2>>(cwr));
+        return rays.back(); //how do I know for certain that this is the element I originally pushed?
     }
 
     template<typename ...Args>
