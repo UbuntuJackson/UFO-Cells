@@ -70,9 +70,9 @@ private:
 
     template<typename ...Args>
     ComponentWrapper<Ray2>* NewActor(Identity<Ray2> _, Args ...args){
-        ComponentWrapper<Ray2> *cwr = new ComponentWrapper(Ray2(args...))
+        ComponentWrapper<Ray2> *cwr = new ComponentWrapper(Ray2(args...));
         rays.push_back(std::unique_ptr<ComponentWrapper<Ray2>>(cwr));
-        return rays.back(); //how do I know for certain that this is the element I originally pushed?
+        return rays.back().get(); //how do I know for certain that this is the element I originally pushed?
     }
 
     template<typename ...Args>
